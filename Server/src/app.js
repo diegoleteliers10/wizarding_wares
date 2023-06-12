@@ -3,7 +3,7 @@ const server = express();
 const morgan = require("morgan");
 const { auth } = require("express-openid-connect");
 
-const { CLIENT_ID, ISSUER_BASE_URL, SECRET } = process.env;
+const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT } = process.env;
 
 const router = require("./routes/index");
 
@@ -11,7 +11,7 @@ const config = {
 	authRequired: false,
 	auth0Logout: true,
 	secret: SECRET,
-	baseURL: "http://localhost:3000",
+	baseURL: `http://localhost:${PORT}`,
 	clientID: CLIENT_ID,
 	issuerBaseURL: ISSUER_BASE_URL,
 };
@@ -30,14 +30,18 @@ server.use((req, res, next) => {
 // Middlewares
 server.use(express.json());
 server.use(morgan("dev"));
-// server.use(auth(config));
+server.use(auth(config));
 // server.use('/rickandmorty', router); --> NO EXISTE ESA RUTA, DA ERROR
 
 // Ruta Principal Provisoria
-server.get("/", (req, res) => {
-	res.status(200).json({
-		PF_name: "Merka Magica",
-	});
-});
+// server.get("/", (req, res) => {
+// 	res.status(200).json({
+// 		PF_name: "Merka Magica",
+// 	});
+// });  cambio de ruta provicional para mostrar si uno esta login o logout
+
+server.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+}); //nueva ruta principal
 
 module.exports = server;
