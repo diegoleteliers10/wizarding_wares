@@ -3,15 +3,17 @@ const server = express();
 const morgan = require("morgan");
 const { auth } = require('express-openid-connect');
 
+const {CLIENT_ID,ISSUER_BASE_URL,SECRET}= process.env
+
 const router = require("./routes/index");
 
 const config = {
   authRequired: false,
   auth0Logout: true,
-  secret: 'a long, randomly-generated string stored in env',
+  secret: SECRET,
   baseURL: 'http://localhost:3000',
-  clientID: 'D1XZMq2ldqwrVRQF5lHHrk5phLO2zTYz',
-  issuerBaseURL: 'https://wizarding-wares.us.auth0.com'
+  clientID: CLIENT_ID,
+  issuerBaseURL: ISSUER_BASE_URL
 };
 
 server.use((req, res, next) => {
