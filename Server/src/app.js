@@ -1,7 +1,7 @@
 const express = require("express");
 const server = express();
 const morgan = require("morgan");
-const { auth } = require("express-openid-connect");
+const { auth, requiresAuth } = require("express-openid-connect");
 
 const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT } = process.env;
 
@@ -43,5 +43,9 @@ server.use(auth(config));
 server.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 }); //nueva ruta principal
+
+server.get('/profile', requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
+}); // ruta para ver la informacion del usuario (preliminar)
 
 module.exports = server;
