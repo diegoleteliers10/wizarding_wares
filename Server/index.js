@@ -1,9 +1,9 @@
 require("dotenv").config();
 const { PORT } = process.env;
 const server = require("./src/app");
-// const { db } = require("./DB_connection");
+const sequelize = require("./src/db");
 
 server.listen(PORT, async () => {
 	console.log("Server raised in port: " + PORT);
-	// await db.sync({ force: true });
+	await sequelize.sync({ force: true });
 });
