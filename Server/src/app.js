@@ -2,11 +2,13 @@ const express = require("express");
 const server = express();
 const morgan = require("morgan");
 const { auth, requiresAuth } = require("express-openid-connect");
+const cloudinary = require('cloudinary').v2;
 
-const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT } = process.env;
+const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_CLOUD  } = process.env;
 
 const router = require("./routes/index");
 
+//Config de Auth0
 const config = {
 	authRequired: false,
 	auth0Logout: true,
@@ -14,11 +16,32 @@ const config = {
 	baseURL: `http://localhost:${PORT}`,
 	clientID: CLIENT_ID,
 	issuerBaseURL: ISSUER_BASE_URL,
-};
+}; 
+
+//Config de Cloudinary
+cloudinary.config({ 
+  cloud_name: CLOUD_NAME, 
+  api_key: KEY_CLOUD, 
+  api_secret: SECRET_CLOUD 
+});
+
+// server.get('/upload', (req, res) => {
+//   const filePath = path.join(__dirname, 'images', 'naruto.jpg');
+
+//   cloudinary.uploader.upload(filePath)
+//     .then(result => {
+//       console.log(result);
+//       res.send('Foto subida exitosamente');
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       res.status(500).send('Error al subir la foto');
+//     });
+// }); //sirve para subir fotos a cloudinary
 
 server.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", "true");
+	res.header("Access-Control-Allow-Credentials", "true")
 	res.header(
 		"Access-Control-Allow-Headers",
 		"Origin, X-Requested-With, Content-Type, Accept"
@@ -31,18 +54,11 @@ server.use((req, res, next) => {
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(auth(config));
-// server.use('/rickandmorty', router); --> NO EXISTE ESA RUTA, DA ERROR
 
 // Ruta Principal Provisoria
-// server.get("/", (req, res) => {
-// 	res.status(200).json({
-// 		PF_name: "Merka Magica",
-// 	});
-// });  cambio de ruta provicional para mostrar si uno esta login o logout
-
 server.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-}); //nueva ruta principal
+}); 
 
 server.get('/profile', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
