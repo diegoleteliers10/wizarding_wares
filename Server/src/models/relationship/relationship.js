@@ -5,6 +5,7 @@ const Role = require("../Roles.model");
 const User = require("../Users.model");
 
 
+
 // 2_ Haremos las relaciones entre ellos
 Categorie.hasMany(Product);
 Product.belongsTo(Categorie);
