@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db");
 
-const Categories = sequelize.define("categories", {
+const Categorie = sequelize.define("categorie", {
 	categoryId: {
 		type: DataTypes.UUID,
 		primaryKey: true,
@@ -14,4 +14,4 @@ const Categories = sequelize.define("categories", {
 	},
 });
 
-module.exports = Categories;
+module.exports = Categorie;

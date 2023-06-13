@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db");
 
-const Products = sequelize.define("products", {
+const Product = sequelize.define("product", {
 	productId: {
 		type: DataTypes.UUID,
 		primaryKey: true,
@@ -24,12 +24,6 @@ const Products = sequelize.define("products", {
 		type: DataTypes.FLOAT,
 		allowNull: false,
 	},
-	rating: {
-		type: DataTypes.ARRAY,
-	},
-	comments: {
-		type: DataTypes.ARRAY,
-	},
 	stock: {
 		type: DataTypes.INTEGER,
 		allowNull: false,
@@ -40,4 +34,4 @@ const Products = sequelize.define("products", {
 	},
 });
 
-module.exports = Products;
+module.exports = Product;
