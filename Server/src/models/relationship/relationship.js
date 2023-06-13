@@ -12,8 +12,9 @@ Categorie.hasMany(Product);
 Product.belongsTo(Categorie);
 Status.hasMany(Purchase);
 Purchase.belongsTo(Status);
-User.belongsTo(Role);
 Role.hasMany(User);
+User.belongsTo(Role);
+
 
 // 3_ Exportremos Los Modelos Con La Relacion Entre Estos Integrada
 module.exports = {
