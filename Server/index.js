@@ -1,4 +1,5 @@
 require("dotenv").config();
+require("./src/models/relationship/relationship");
 const { PORT } = process.env;
 const server = require("./src/app");
 const sequelize = require("./src/db");
