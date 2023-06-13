@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
 const Review = sequelize.define('review', {
-    productId: {
+    reviewId: {
         type: DataTypes.UUID,
         primaryKey: true,
         allowNull: false,
