@@ -2,6 +2,7 @@
 const Product = require("../Product.model");
 const Categorie = require("../Categorie.model");
 
+
 // 2_ Haremos las relaciones entre ellos
 Categorie.hasMany(Product);
 Product.belongsTo(Categorie);
