@@ -8,7 +8,7 @@ const User = require("../Users.model");
 // 2_ Haremos las relaciones entre ellos
 Categorie.hasMany(Product);
 Product.belongsTo(Categorie);
-User.hasOne(Role);
+User.belongsTo(Role);
 Role.hasMany(User);
 
 // 3_ Exportremos Los Modelos Con La Relacion Entre Estos Integrada
