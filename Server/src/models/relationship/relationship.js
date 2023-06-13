@@ -22,5 +22,7 @@ module.exports = {
 	Categorie,
 	Purchase,
 	Status,
+	Role,
+	User,
 };
 // Y sera desde aqui que tomaremos los modelos para hacer el trabajo con rutas y controllers
