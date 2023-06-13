@@ -1,4 +1,7 @@
-// app.get('/', (req, res) => {
-//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-// }); //ruta principal del auth
+const { Router } = require('express');
 
+const router = Router();
+
+
+
+module.exports = router;
