@@ -6,12 +6,17 @@ const Status = require("../Status.model");
 const Role = require("../Roles.model");
 const User = require("../Users.model");
 const Address = require("../Address.model");
+const Review = require("../Review.model");
 
 // 2_ Haremos las relaciones entre ellos
 Role.hasMany(User);
 User.belongsTo(Role);
 Categorie.hasMany(Product);
 Product.belongsTo(Categorie);
+User.hasMany(Review);
+Review.belongsTo(User);
+Product.hasMany(Review);
+Review.belongsTo(Product);
 Status.hasMany(Purchase);
 Purchase.belongsTo(Status);
 User.hasMany(Purchase);
@@ -32,5 +37,6 @@ module.exports = {
 	Role,
 	User,
 	Address,
+	Review,
 };
 // Y sera desde aqui que tomaremos los modelos para hacer el trabajo con rutas y controllers
