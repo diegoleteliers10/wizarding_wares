@@ -3,8 +3,10 @@ const server = express();
 const morgan = require("morgan");
 const { auth, requiresAuth } = require("express-openid-connect");
 const cloudinary = require('cloudinary').v2;
+const paymentRoutes = require('./routes/payment.routes')
+const mercadopago = require('mercadopago')
 
-const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_CLOUD  } = process.env;
+const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_CLOUD, ACCESS_TOKEN  } = process.env;
 
 const routes = require('./routes/index.js');
 
@@ -24,6 +26,15 @@ cloudinary.config({
   api_key: KEY_CLOUD, 
   api_secret: SECRET_CLOUD 
 });
+
+//Config Mercadopago
+mercadopago.configure({
+	access_token: ACCESS_TOKEN
+});
+
+//Config rutas de MercadoPago
+server.use(paymentRoutes)
+
 
 // server.get('/upload', (req, res) => {
 //   const filePath = path.join(__dirname, 'images', 'naruto.jpg');
