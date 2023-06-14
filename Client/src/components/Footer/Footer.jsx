@@ -24,7 +24,7 @@ const Footer = () => {
                 </div>
             </div>
             <div>
-                2023 - Wizarding Wares | All rights reserved
+               <p>2023 - Wizarding Wares | All rights reserved</p>
             </div>
         </div>
     )
