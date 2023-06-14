@@ -1,6 +1,6 @@
 [
     {
-       "productId" : "",
+       "productId" : 1,
        "name" : "Hermione Granger's Wand",
        "description": "Take home the wand of Hermione Granger, founding member of Dumbledore’s Army, best friend to Ron and Harry and often called the brightest witch of her age. Sculped from resin and measuring at approximately 15” in length, the unique wand is the perfect gift for any aspiring witch or wizard. The wand is available in a sleek, collectible wand box for you to display anywhere in your home. Please note this wand is a collectible replica, and not a toy.",
        "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Hermione2_Product_large.png?v=1639063444",
@@ -9,7 +9,7 @@
        "isActive" : true
     }, 
     {
-        "productId" : "",
+        "productId" : 2,
         "name" : "Harry Potter's Wand",
         "description": "The wand that chose Harry Potter, the Boy Who Lived, when he visited Ollivanders Wand shop at 11 years of age. Take home one of the most iconic and recognisable props from the Harry Potter film series, this high-quality replica of Harry Potter's wand.The unique wand is the perfect gift for any aspiring witch or wizard to add to their collection and is available in a sleek, collectible wand box for you to display anywhere in your home. The wand is sculped from resin and measures at approximately 35.5 cm (14”) in length. Please note, this wand is a collectible item and not a toy. Personalise your wand with bespoke engraving including your name, special dates, or even famous quotes from the beloved Harry Potter series, the perfect way to add a special touch to your wand, making it feel truly unique and personal. To select personalisation, enter up to 11 characters. Currently, we are only able to offer personalisation in the English alphabet. Please allow an additional 7 working days for personalised items to be dispatched.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/256320_2_large.png?v=1638955883",
@@ -18,7 +18,7 @@
         "isActive" : true
     },
     {
-        "productId" : "",
+        "productId" : 3,
         "name" : "Professor Dumbledore's Wand",
         "description": "Take home Professor Albus Dumbledore’s famous wand, also known as the Elder Wand. Stay loyal to one of Hogwarts’ most famous Headmaster’s with this replica wand.Measuring at approximately 40 cm (15 ¾”) in length and made from resin, this wand is presented in a sleek, collectible wand box and features the character name with decorative paper overlay. This authentic replica has been sculpted with a unique design to represent the same wand Professor Albus Dumbledore used in the Harry Potter series. Please note, this is a collectible wand and not intended for use as a toy. Personalise your wand with bespoke engraving including your name, special dates, or even famous quotes from the beloved Harry Potter series, the perfect way to add a special touch to your wand, making it feel truly unique and personal." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Picture12_large.png?v=1610553865",
@@ -27,7 +27,7 @@
         "isActive" : true
     }, 
     {
-        "productId" : "",
+        "productId" : 4,
         "name" : "Kids Personalised Gryffindor Robe",
         "description": "No wizarding wardrobe can be considered complete without a Hogwarts school uniform, making this kid's Gryffindor robe an essential accessory for any fan of the Harry Potter film Series. Our premium replica costume features film authentic colours within its lined hood, two outside pockets and a third inside for carrying your wand. An embroidered Gryffindor Crest patch completes the costume. All robes include optional, complimentary personalisation. To select personalisation, enter your first name up to 14 characters below. At this time, we are only able to offer personalisation in the English alphabet. Please allow an additional 7 working days for personalised items to be dispatched. Not a Gryffindor? Hogwarts house robes are available for each of the four houses. Click here for Slytherin, Ravenclaw or Hufflepuff. Sizes are approximate. Individual robes may vary slightly.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1296477_1_large.png?v=1616145395",
@@ -36,7 +36,7 @@
         "isActive" : true
     },
     {
-        "productId" : "",
+        "productId" : 5,
         "name" : "Hufflepuff Reversible Knit Scarf",
         "description": "Celebrate house pride and wrap up warm with this bespoke reversible Hufflepuff scarf. The scarf features traditional house colours, yellow on one side with black text and on the reverse, a black background with yellow text. The word ‘Hufflepuff' is embroidered along the length of the scarf and is complete with the iconic symbol of the Hufflepuff house, a badger. The scarf features tassels at each end and is perfect for aspiring witches and wizards to add to any outfit and their accessories collection.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/PL00011320_1_large.png?v=1614867724",
@@ -45,7 +45,7 @@
         "isActive" : true
     },
     {
-        "productId" : "",
+        "productId" : 6,
         "name" : "Hufflepuff Quidditch Knitted Adult Jumper",
         "description": "Represent your House team in comfort with this Hufflepuff Quidditch sweater. Perfect for the Quidditch pitch, at muggle school, or in the stands! Using 100% Scottish-spun lambswool and 20% polyamide, this Hufflepuff Quidditch Jumper is knitted and assembled in the Scottish Mill that made the costumes for the cast and extras in the Harry Potter film series. Featuring an embroidered house crest, this Hufflepuff jumper is a replica of the genuine costume worn by the actors and will be the pride of any fan’s Harry Potter wardrobe." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/256587_1_large.png?v=1613563471",
@@ -54,7 +54,7 @@
         "isActive" : true
     },
     {
-        "productId" : "",
+        "productId" : 7,
         "name" : "Personalised Hogwarts Acceptance Letter",
         "description": "You can now receive your very own personalised replica of the Hogwarts Acceptance Letter, complete with an exclusive supplies list. Your Hogwarts Acceptance Letter will arrive addressed specifically to the lucky individual, printed in the same shade of green as Harry Potter's own Acceptance Letter, inside an exclusive Hogwarts Presentation Wallet. The letter features the Hogwarts School of Witchcraft and Wizardry crest and is signed by Professor McGonagall, Professor at Hogwarts and Head of the Gryffindor House. Your Personalised Hogwarts Acceptance Letter contains the below: 1 x Personalised Hogwarts Acceptance Letter. 1 x Personalised Envelope. 1 x Supplies List. 1 x Adhesive Wax Seal. 1 x Presentation Wallet featuring the famous Hogwarts school crest. Please make sure you fill in your name exactly how you would like it to appear on your Hogwarts acceptance letter and envelope. Make sure to enter your full first name on the customisation form. Our Personalised Hogwarts Acceptance Letter is only able to be ordered using characters from the English alphabet. Please include your full first name when filling out your letter details." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/PL00010246_1_552dd515-d5e5-4dc7-9284-718e5f78a615_large.png?v=1624519722",
@@ -63,7 +63,7 @@
         "isActive" : true
     },
     {
-        "productId" : "",
+        "productId" : 8,
         "name" : "Marauder's Map Replica",
         "description": "You'll be sure to declare `I solemnly swear I am up to no good` with this detailed replica of the Marauder's Map. First seen in Harry Potter and the Prisoner of Azkaban, the map is printed on parchment effect paper and folds out to reveal many of your favorite locations from the corridors and classrooms of Hogwarts, just like the original in the Harry Potter film series. The map includes all secret passages that are hidden as well as the location of every person in the Hogwarts grounds. The folded map measures 47cm high and 22cm wide when closed, opening to a length of 183cm. Mischief managed!" ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/MaraudersMap_1_large.png?v=1679996481",
@@ -72,7 +72,7 @@
         "isActive" : true
     },
     {
-        "productId" : "",
+        "productId" : 9,
         "name" : "Hogwarts School Trunk",
         "description": "This Hogwarts School Trunk has been crafted to resemble those used by Hogwarts students for travel on the Hogwarts Express. This decorative collectable Harry Potter trunk is sure to delight any recipient! The Hogwarts Trunk measures 45cm x 30cm x 23cm and features a carry handle and clasp. The Hogwarts school crest is printed on the top of the trunk and features custom initials on the side. Trunk materials consist of 60% plywood, 20% PU, 10% metal, and 10% glues/lacquers. Please note this trunk is not a toy." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/PL00010398_1_6cb1f27a-b5dc-491c-a823-66c1059ba035_large.png?v=1624548504",
