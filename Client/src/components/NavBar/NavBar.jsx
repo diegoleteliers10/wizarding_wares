@@ -4,9 +4,10 @@ import SearchBar from "../SearchBar/SearchBar"
 const NavBar = () => {
     return(
          <div>
-         <button>Home</button>
+         <button className="btn btn--svg-small">Home</button>
          <SearchBar/>
-         <button>Login</button><button>Register</button>
+         <button className="btn btn--svg-small">Login</button>
+         <button className="btn btn--svg-small">Register</button>
         </div>
     )
 }
