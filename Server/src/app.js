@@ -25,20 +25,6 @@ cloudinary.config({
   api_secret: SECRET_CLOUD 
 });
 
-// server.get('/upload', (req, res) => {
-//   const filePath = path.join(__dirname, 'images', 'naruto.jpg');
-
-//   cloudinary.uploader.upload(filePath)
-//     .then(result => {
-//       console.log(result);
-//       res.send('Foto subida exitosamente');
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       res.status(500).send('Error al subir la foto');
-//     });
-// }); //sirve para subir fotos a cloudinary
-
 server.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Credentials", "true")
@@ -62,7 +48,13 @@ server.get('/', (req, res) => {
 }); 
 
 server.get('/profile', requiresAuth(), (req, res) => {
-  res.send(JSON.stringify(req.oidc.user));
-}); // ruta para ver la informacion del usuario (preliminar)
+	try {
+		const info= req.oidc.user;
+		console.log(info);
+		res.status(200).json({name:info.name,email:info.email})
+	} catch (error) {
+		res.status(401).json({message:error.message})
+	}
+}); // ruta para ver la informacion del usuario 
 
 module.exports = server;

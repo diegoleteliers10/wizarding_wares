@@ -1,8 +1,33 @@
 const { Router } = require('express');
-const getAllPics = require('../controllers/getAllpics');
+const getAllProducts = require('../controllers/getAllProducts.controller');
+const getAllUsers = require('../controllers/getAllUsers.controller');
+const createProduct = require('../controllers/createProduct.controller');
 const router = Router();
 
-router.get("/images",getAllPics)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//user routes
+
+
+//user and admin routes
+router.get('/allproducts', getAllProducts)
+
+//admins routes
+router.get('/allproducts', getAllUsers)
+router.post('/productCreated',createProduct)
+
 
 
 
