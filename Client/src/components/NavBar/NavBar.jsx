@@ -9,13 +9,12 @@ const NavBar = () => {
          <SearchBar/>
          <button className="btn btn--svg-small">Login</button>
          <button className="btn btn--svg-small">Register</button>
-        </div>
-=======
          <Navbar bg="light" expand="lg">
          <button>Home</button>
          <SearchBar/>
          <button>Login</button><button>Register</button>
          </Navbar>
+        </div>
     )
 }
 
