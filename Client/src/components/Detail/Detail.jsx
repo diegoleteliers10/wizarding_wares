@@ -32,11 +32,11 @@ const Detail = () => {
             <p>{product.description}</p>
             <label>
                 Cantidad: 
-                <button onClick={handleDecreaseQuantity} className="btn btn--svg-small">-</button>
+                <button onClick={handleDecreaseQuantity} className="btn1 btn--svg-small">-</button>
                 <span>{quantity}</span>
-                <button onClick={handleIncreaseQuantity} className="btn btn--svg-small">+</button>
+                <button onClick={handleIncreaseQuantity} className="btn1 btn--svg-small">+</button>
             </label>
-            <button onClick={handleAddToCart} className="btn btn--svg-small">Añadir al carrito</button>
+            <button onClick={handleAddToCart} className="btn1 btn--svg-small">Añadir al carrito</button>
         </div>
     )
 }

@@ -53,7 +53,7 @@ h1 {
   }
 }
 
-.btn {
+.btn1 {
   vertical-align: middle;
   text-align: center;
   text-decoration: none;
@@ -61,7 +61,7 @@ h1 {
   position: relative;
 }
 
-.btn:before {
+.btn1:before {
   content: "";
   position: absolute;
   top: 0;
@@ -69,7 +69,7 @@ h1 {
   right: 100%;
 }
 
-.btn:after {
+.btn1:after {
   content: "";
   position: absolute;
   top: 0;
@@ -97,7 +97,6 @@ h1 {
 
 .btn--svg-small:hover{
   background-image: url(./Images/btn_small_bg_hover.svg);
-  transform: scale(1.1);
 }
 
 .btn--svg-small:before {
