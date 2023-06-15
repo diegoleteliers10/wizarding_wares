@@ -3,8 +3,10 @@ const server = express();
 const morgan = require("morgan");
 const { auth, requiresAuth } = require("express-openid-connect");
 const cloudinary = require('cloudinary').v2;
+const paymentRoutes = require('./routes/payment.routes')
+const mercadopago = require('mercadopago')
 
-const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_CLOUD  } = process.env;
+const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_CLOUD, ACCESS_TOKEN  } = process.env;
 
 const routes = require("./routes/index");
 
@@ -25,19 +27,14 @@ cloudinary.config({
   api_secret: SECRET_CLOUD 
 });
 
-// server.get('/upload', (req, res) => {
-//   const filePath = path.join(__dirname, 'images', 'naruto.jpg');
+//Config Mercadopago
+mercadopago.configure({
+	access_token: ACCESS_TOKEN
+});
 
-//   cloudinary.uploader.upload(filePath)
-//     .then(result => {
-//       console.log(result);
-//       res.send('Foto subida exitosamente');
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       res.status(500).send('Error al subir la foto');
-//     });
-// }); //sirve para subir fotos a cloudinary
+//Config rutas de MercadoPago
+server.use(paymentRoutes)
+
 
 server.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -62,7 +59,13 @@ server.get('/', (req, res) => {
 }); 
 
 server.get('/profile', requiresAuth(), (req, res) => {
-  res.send(JSON.stringify(req.oidc.user));
-}); // ruta para ver la informacion del usuario (preliminar)
+	try {
+		const info= req.oidc.user;
+		console.log(info);
+		res.status(200).json({name:info.name,email:info.email})
+	} catch (error) {
+		res.status(401).json({message:error.message})
+	}
+}); // ruta para ver la informacion del usuario 
 
 module.exports = server;
