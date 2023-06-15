@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import data from "../../assets/data.json"
+import data from "../../../assets/data.json"
 import { useState } from "react";
 
 const Detail = () => {
