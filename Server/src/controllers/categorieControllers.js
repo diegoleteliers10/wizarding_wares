@@ -62,7 +62,7 @@ const updateACategory = async (name, modify) => {
   // Primero verificamos si tenemos o no categorias
   const exists = await Categorie.findAll();
 
-  // En el caso de no tener categorias a modificar lanzamos un error
+  // En el caso de no tener categorias en DB, lanzamos un error
   if(!exists.length){
     arrojarError("No Tienes Categorias Para Modificar");
   }
@@ -102,8 +102,53 @@ const updateACategory = async (name, modify) => {
   return `Modification Made Successfully`;
 };
 
+
+// ***************************************************************************************
+
+// *** ELIMINAR UNA CATEGORIA ***
+const deleteACategory = async (name) => {
+
+  // Primero verificamos si tenemos o no categorias
+  const exists = await Categorie.findAll();
+
+  // En el caso de no tener categorias en DB, lanzamos un error
+  !exists.length && arrojarError("No Tienes Categorias En DB. Para Eliminar");
+
+  // Verificamos si nos pasan argumentos o no
+  (!name) && arrojarError("Parametro Necesario Inexistente");
+
+  // Validamos si el argumento ingresado es de tipo String
+  const validName = validateString(name);
+
+  // Si los argumentos no cumplen la condicion de solo Letras Y Espacios. Lanzamos un error
+  (!validName) && arrojarError("Parametro; Debe De Ser Solo Letras Del ABC y Espacios");
+
+  // Buscamos la categoria que queremos eliminar
+  const deleteCategorie = await Categorie.findOne({
+    where: {
+      name: name
+    }
+  });
+
+  // Si no existe la categoria lanzamos un error
+  if(deleteCategorie == null){
+    arrojarError(`Categorie ${name}; No Existe En Tu DB`);
+  }
+
+  // Caso contrario nos disponemos a eliminar la categoria
+  await Categorie.destroy({
+    where:{
+      name: name
+    }
+  });
+
+  return `Categorie ${name}. Successfully Deleted`; 
+};
+
+
 module.exports = {
   crearCategoria,
   getAllCategories,
   updateACategory,
+  deleteACategory,
 };
