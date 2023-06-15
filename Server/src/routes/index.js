@@ -15,3 +15,5 @@ router.get('/allproducts', getAllProducts)
 router.get('/allproducts', getAllUsers)
 router.post('/productCreated',createProduct)
 router.use("/", categorieRouter);
+
+module.exports = router;
