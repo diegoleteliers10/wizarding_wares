@@ -2,6 +2,7 @@ const { Router } = require('express');
 const getAllProducts = require('../controllers/getAllProducts.controller');
 const getAllUsers = require('../controllers/getAllUsers.controller');
 const createProduct = require('../controllers/createProduct.controller');
+const categorieRouter = require("./categorieRouter");
 const router = Router();
 
 //user routes
@@ -13,8 +14,4 @@ router.get('/allproducts', getAllProducts)
 //admins routes
 router.get('/allproducts', getAllUsers)
 router.post('/productCreated',createProduct)
-
-
-
-
-module.exports = router;
+router.use("/", categorieRouter);
