@@ -4,20 +4,6 @@ const getAllUsers = require('../controllers/getAllUsers.controller');
 const createProduct = require('../controllers/createProduct.controller');
 const router = Router();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //user routes
 
 
