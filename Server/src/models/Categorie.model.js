@@ -7,6 +7,7 @@ const Categorie = sequelize.define("categorie", {
 		primaryKey: true,
 		allowNull: false,
 		defaultValue: DataTypes.UUIDV4,
+		foreignKey: true,
 	},
 	name: {
 		type: DataTypes.STRING,
