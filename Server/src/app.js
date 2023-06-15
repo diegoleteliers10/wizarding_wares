@@ -6,7 +6,7 @@ const cloudinary = require('cloudinary').v2;
 
 const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_CLOUD  } = process.env;
 
-const routes = require('./routes/index.js');
+const routes = require("./routes/index");
 
 //Config de Auth0
 const config = {
@@ -51,10 +51,10 @@ server.use((req, res, next) => {
 });
 
 // Middlewares
-server.use('/', routes);
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(auth(config));
+server.use("/", routes);
 
 // Ruta Principal Provisoria
 server.get('/', (req, res) => {

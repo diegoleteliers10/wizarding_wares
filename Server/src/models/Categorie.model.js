@@ -11,6 +11,7 @@ const Categorie = sequelize.define("categorie", {
 	name: {
 		type: DataTypes.STRING,
 		allowNull: false,
+		unique: true,
 	},
 });
 
