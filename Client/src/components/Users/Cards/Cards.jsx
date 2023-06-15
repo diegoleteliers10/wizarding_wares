@@ -1,5 +1,5 @@
 import Card from '../Card/Card';
-import data from '../../assets/data.json';
+import data from '../../../assets/data.json';
 import Row from 'react-bootstrap/Row';
 
 const Cards = () => {
