@@ -2,6 +2,21 @@ const { arrojarError, validateString } = require("../utils/utils");
 const {Categorie} = require("../models/relationship/relationship");
 
 
+// PEDIR TODAS LAS CATEGORIAS
+const getAllCategories = async () => {
+  // Primero validamos si tenemos datos en Categorie
+  const exists = await Categorie.findAll();
+
+  // Si no encuentra nada, nos devuelve un mensaje
+  if(exists.length == 0){
+    arrojarError("No Tienes Categorias En Base De Datos");
+  }
+
+  // Caso Contrario Las Traemos Todas
+  return exists;
+};
+
+
 // CREAR UNA CATEGORIA
 const crearCategoria = async (name) => {
   // Si no pasan un dato, se arroja un error
@@ -37,4 +52,5 @@ const crearCategoria = async (name) => {
 
 module.exports = {
   crearCategoria,
+  getAllCategories,
 };
