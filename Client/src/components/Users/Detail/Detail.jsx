@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import data from "../../../assets/data.json"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../storeStyles.css'; 
 
 const Detail = () => {
     const { id } = useParams();
+    const navigate = useNavigate()
     const product = data.find((product) => product.productId === parseInt(id));
     const [quantity, setQuantity] = useState(0);
 
@@ -23,8 +24,12 @@ const Detail = () => {
         window.alert("Se añadio al carrito:  " + quantity + " " + product.name)
     }
 
-    if(!product) return window.alert("No se encontro el producto")
- console.log(product.Category)
+    if(!product) return window.alert("No se encontró el producto")
+
+
+    useEffect(() => {
+        if(product.isActive === false) navigate('/')
+    }, [])
     return(
         <div className="flex storeComponent">
             <div className="w-1/3">
@@ -34,7 +39,7 @@ const Detail = () => {
                 <h2 className="titleDetail">{product.name}</h2>
                 <p className="bigPrice">{product.price}</p>
                 {
-                    product.Category === 'Indumentaria' && <div>
+                    product.categoryId === 1 && <div>
                         <fieldset>
                                 <div className="flex space-x-4 justify-center">
                                     <div>

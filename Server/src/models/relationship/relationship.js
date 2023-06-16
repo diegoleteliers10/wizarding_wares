@@ -1,6 +1,6 @@
 // 1_ Aqui importaremos nuestros modelos listos y conectados a sequelize
 const Product = require("../Product.model");
-const Categorie = require("../Categorie.model");
+const Category = require("../Category.model");
 const Purchase = require("../Purchase.model");
 const Status = require("../Status.model");
 const Role = require("../Roles.model");
@@ -11,8 +11,8 @@ const Review = require("../Review.model");
 // 2_ Haremos las relaciones entre ellos
 Role.hasMany(User);
 User.belongsTo(Role);
-Categorie.hasMany(Product);
-Product.belongsTo(Categorie, {
+Category.hasMany(Product);
+Product.belongsTo(Category, {
   foreignKey: "categoryId", // Clave externa en la tabla Product
   allowNull: false, // Indica que el producto debe tener una categoría asignada
 })
@@ -34,7 +34,7 @@ Address.belongsToMany(User, { through: "User_Address" });
 // 3_ Exportremos Los Modelos Con La Relacion Entre Estos Integrada
 module.exports = {
 	Product,
-	Categorie,
+	Category,
 	Purchase,
 	Status,
 	Role,

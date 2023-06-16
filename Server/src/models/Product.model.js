@@ -31,7 +31,12 @@ const Product = sequelize.define("product", {
 	isActive: {
 		type: DataTypes.BOOLEAN,
 		allowNull: false,
+		defaultValue: true,
 	},
+	categoryId:{
+		type: DataTypes.INTEGER,
+		allowNull: false,
+	}
 });
 
 module.exports = Product;

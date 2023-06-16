@@ -13,9 +13,11 @@ const Cards = () => {
             {data.map((product) => (
                 <Card
                     key={product.productId}
+                    id={product.productId}
                     image={product.image}
                     name={product.name}
                     price={product.price}
+                    isActive={product.isActive}
                 />
             ))}
         </Row>
