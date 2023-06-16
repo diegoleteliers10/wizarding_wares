@@ -23,7 +23,8 @@ const ProductList = () => {
               <td>{product.name}</td>
               <td>{product.isActive === true ? 'Active' : 'Inactive'}</td>
               <td>{product.price}</td>
-              <td>{product.Category}</td>
+              <td>{product.categoryId === 1 ? 'Clothing' : product.categoryId === 2? 'Wands' :  product.categoryId === 3? 'Quidditch'
+               : product.categoryId === 4 ? 'Candy' : product.categoryId === 5 ? 'Miscellaneous' : 'Books'}</td>
               <td>{product.stock}</td>
               <td>
                 <Link to='/editProduct'>
