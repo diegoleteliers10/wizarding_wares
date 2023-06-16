@@ -17,6 +17,7 @@ const Cards = () => {
                     image={product.image}
                     name={product.name}
                     price={product.price}
+                    isActive={product.isActive}
                 />
             ))}
         </Row>
