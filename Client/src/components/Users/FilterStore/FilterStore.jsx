@@ -35,11 +35,11 @@ function FilterStore(props) {
               <option value="" hidden>
                 Categoría
               </option>
-              <option value="Golosinas">Golosinas</option>
-              <option value="Indumentaria">Indumentaria</option>
-              <option value="Quidditch">Quidditch</option>
-              <option value="Varitas">Varitas</option>
-              <option value="Miscelaneas">Misceláneos</option>
+              <option value="golosinas">Golosinas</option>
+              <option value="indumentaria">Indumentaria</option>
+              <option value="quidditch">Quidditch</option>
+              <option value="varitas">Varitas</option>
+              <option value="miscelaneas">Misceláneos</option>
             </select>
           </div>
         )
