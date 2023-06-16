@@ -1,12 +1,12 @@
 import data from '../../../../assets/data.json';
 import { Link } from 'react-router-dom';
-import styles from './ProductList.module.css'; // Import the CSS module
+import styles from './ProductList.module.css';
 import { FiTrash2, FiEdit } from 'react-icons/fi';
 
 const ProductList = () => {
   return (
-    <div className={styles.productList}> {/* Use the CSS module class */}
-      <table className={styles.table}> {/* Use the CSS module class */}
+    <div className={`max-h-screen overflow-auto ${styles.productList}`}>
+      <table className={styles.table}>
         <thead>
           <tr>
             <th>Producto</th>
