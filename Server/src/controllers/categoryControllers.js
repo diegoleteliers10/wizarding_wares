@@ -1,11 +1,11 @@
 const { arrojarError, validateString } = require("../utils/utils");
-const {Categorie} = require("../models/relationship/relationship");
+const {Category} = require("../models/relationship/relationship");
 
 
 // *** PEDIR TODAS LAS CATEGORIAS ***
 const getAllCategories = async () => {
   // Primero validamos si tenemos datos en Categorie
-  const exists = await Categorie.findAll();
+  const exists = await Category.findAll();
 
   // Si no encuentra nada, nos devuelve un mensaje
   if(exists.length == 0){
@@ -36,7 +36,7 @@ const crearCategoria = async (name) => {
   }
   
   // Comprobamos si ya tenemos la categoria guardada en nuestra base de datos
-  const isRepeat = await Categorie.findAll({
+  const isRepeat = await Category.findAll({
     where: {
       name : name
     }
@@ -48,9 +48,9 @@ const crearCategoria = async (name) => {
   }
 
   // Caso Contrario La Creamos
-  const newCategorie = await Categorie.create({name});
+  const newCategorie = await Category.create({name});
   // return newCategorie;
-  return `Categorie ${name}. Created Successfully`;
+  return `Category ${name}. Created Successfully`;
 };
 
 
@@ -60,7 +60,7 @@ const crearCategoria = async (name) => {
 const updateACategory = async (name, modify) => {
 
   // Primero verificamos si tenemos o no categorias
-  const exists = await Categorie.findAll();
+  const exists = await Category.findAll();
 
   // En el caso de no tener categorias en DB, lanzamos un error
   if(!exists.length){
@@ -80,7 +80,7 @@ const updateACategory = async (name, modify) => {
   }
 
   // Buscamos la categoria que queremos modificar
-  const categorie = await Categorie.findOne({
+  const categorie = await Category.findOne({
     where: {
       name: name
     }
@@ -88,11 +88,11 @@ const updateACategory = async (name, modify) => {
 
   // Si no existe la categoria lanzamos un error
   if(categorie == null){
-    arrojarError(`Categorie ${name}; No Existe En Tu DB`);
+    arrojarError(`Category ${name}; No Existe En Tu DB`);
   }
 
   // Caso contrario modificamos el nombre de nuestra categoria
-  const newNameCategory = await Categorie.update({name: modify},{
+  const newNameCategory = await Category.update({name: modify},{
     where: {
       name: name
     }
@@ -109,7 +109,7 @@ const updateACategory = async (name, modify) => {
 const deleteACategory = async (name) => {
 
   // Primero verificamos si tenemos o no categorias
-  const exists = await Categorie.findAll();
+  const exists = await Category.findAll();
 
   // En el caso de no tener categorias en DB, lanzamos un error
   !exists.length && arrojarError("No Tienes Categorias En DB. Para Eliminar");
@@ -124,25 +124,25 @@ const deleteACategory = async (name) => {
   (!validName) && arrojarError("Parametro; Debe De Ser Solo Letras Del ABC y Espacios");
 
   // Buscamos la categoria que queremos eliminar
-  const deleteCategorie = await Categorie.findAll({
+  const deleteCategory = await Category.findAll({
     where: {
       name: name
     }
   });
 
   // Si no existe la categoria lanzamos un error
-  if(!deleteCategorie.length){
-    arrojarError(`Categorie ${name}; No Existe En Tu DB`);
+  if(!deleteCategory.length){
+    arrojarError(`Category ${name}; No Existe En Tu DB`);
   }
 
   // Caso contrario nos disponemos a eliminar la categoria
-  await Categorie.update({isActive: !deleteCategorie[0].isActive},{
+  await Category.update({isActive: !deleteCategory[0].isActive},{
     where:{
       name: name
     }
   });
 
-  return `Categorie ${name}. Successfully Deleted`; 
+  return `Category ${name}. Successfully Deleted`; 
 };
 
 
