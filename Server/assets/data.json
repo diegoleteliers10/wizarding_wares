@@ -1,10 +1,10 @@
 [
     {
        "productId" : 1,
-       "name" : "varita de Hermione Granger",
+       "name" : "Varita de Hermione Granger",
        "description": "Réplica exacta de la varita de Hermione Granger, miembro fundador del Ejército de Dumbledore, mejor amiga de Ron y Harry y a menudo llamada la bruja más brillante de su edad.",
        "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Hermione2_Product_large.png?v=1639063444",
-       "price" : "$12.000" ,
+       "price" : 12000 ,
        "stock": 150 ,
        "isActive" : true ,
        "Category" : "Varitas" 
@@ -14,7 +14,7 @@
         "name" : "Varita de Harry Potter",
         "description": "Réplica exacta de la varita que eligió Harry Potter, el niño que vivió, cuando visitó la tienda de varitas de Ollivanders a los 11 años.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/256320_2_large.png?v=1638955883",
-        "price" : "$12.000" ,
+        "price" : 12000 ,
         "stock": 700 ,
         "isActive" : true ,
         "Category" : "Varitas" 
@@ -24,7 +24,7 @@
         "name" : "Varita Professor Dumbledore",
         "description": "Réplica exacta de la famosa varita del profesor Albus Dumbledore, también conocida como la varita de saúco." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Picture12_large.png?v=1610553865",
-        "price" : "$12.000" ,
+        "price" : 12000 ,
         "stock": 100 ,
         "isActive" : true ,
         "Category" : "Varitas" 
@@ -34,7 +34,7 @@
         "name" : "Túnica de Gryffindor",
         "description": "Ningún guardarropa mágico puede considerarse completo sin un uniforme escolar de Hogwarts, lo que hace que la túnica de Gryffindor sea un accesorio esencial para cualquier fanático de la serie de películas de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1296477_1_large.png?v=1616145395",
-        "price" : "$20.000" ,
+        "price" : 20000 ,
         "stock": 70 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -44,7 +44,7 @@
         "name" : "Bufanda de Hufflepuff",
         "description": "Celebre el orgullo de la casa y abríguese con esta bufanda Hufflepuff reversible hecha a medida. La bufanda presenta los colores tradicionales de la casa.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/PL00011320_1_large.png?v=1614867724",
-        "price" : "$7.000" ,
+        "price" : 7000 ,
         "stock": 100 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -54,7 +54,7 @@
         "name" : "Jersey Quidditch de Hufflepuff",
         "description": "Representa al equipo de tu casa cómodamente con este suéter de Quidditch de Hufflepuff. ¡Perfecto para el campo de Quidditch, en la escuela muggle o en las gradas!" ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/256587_1_large.png?v=1613563471",
-        "price" : "$22.000" ,
+        "price" : 22000 ,
         "stock": 87 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -64,7 +64,7 @@
         "name" : "Carta de aceptación de Hogwarts",
         "description": "Ahora puede recibir su propia réplica personalizada de la Carta de aceptación de Hogwarts, completa con una lista de suministros exclusivos." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/PL00010246_1_552dd515-d5e5-4dc7-9284-718e5f78a615_large.png?v=1624519722",
-        "price" : "$4.000" ,
+        "price" : 4000 ,
         "stock": 500 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -74,7 +74,7 @@
         "name" : "Mapa del merodeador",
         "description": "Réplica detallada del Mapa del Merodeador. Visto por primera vez en Harry Potter y el Prisionero de Azkaban, el mapa está impreso en papel pergamino y se despliega para revelar muchos de sus lugares favoritos de los pasillos y aulas de Hogwarts." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/MaraudersMap_1_large.png?v=1679996481",
-        "price" : "$8.000" ,
+        "price" : 8000 ,
         "stock": 387 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -84,7 +84,7 @@
         "name" : "Baúl de la escuela Hogwarts",
         "description": "Este baúl de la escuela Hogwarts ha sido diseñado para parecerse a los que usan los estudiantes de Hogwarts para viajar en el Expreso de Hogwarts." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/PL00010398_1_6cb1f27a-b5dc-491c-a823-66c1059ba035_large.png?v=1624548504",
-        "price" : "$22.000" ,
+        "price" : 22000 ,
         "stock": 84 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -94,7 +94,7 @@
         "name" : "Snitch voladora",
         "description": "¡La snitch voladora de aspecto realista puede 'volar' sin pilas! Con una superficie ornamentada y alas fieles a las películas, viene en una caja de soplón de Harry Potter coleccionable." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Flying_Snitch_001.png?v=1610094306",
-        "price" : "$6.000" ,
+        "price" : 6000 ,
         "stock": 120 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -104,7 +104,7 @@
         "name" : "Cerveza de mantequilla",
         "description": "Deliciosa bebida no alcohólica con sabor a caramelo y mantequilla." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/butterbeer_1_800x.png?v=1613492511",
-        "price" : "$1.600" ,
+        "price" : 1600 ,
         "stock": 1200 ,
         "isActive" : true ,
         "Category" : "Golosinas" 
@@ -114,37 +114,37 @@
         "name" : "Varita de Lord Voldemort",
         "description": "Replica de la varita del Señor Oscuro, Lord Voldemort, es conocida por compartir su núcleo con la varita de Harry Potter." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Voldemort1_Product_800x.png?v=1639127048",
-        "price" : "$12.000" ,
+        "price" : 12000 ,
         "stock": 80 ,
         "isActive" : true ,
         "Category" : "Varitas" 
     },
     {
         "productId" : 13,
-        "name" : "La varita de Sirius Black",
+        "name" : "Varita de Sirius Black",
         "description": "Replicala de la varita de Sirius Black, padrino de Harry Potter, miembro de la Orden del Fénix y uno de los autores del Mapa de los Merodeadores." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/siriusblack1_800x.png?v=1641304045",
-        "price" : "$12.000" ,
+        "price" : 12000 ,
         "stock": 40 ,
         "isActive" : true ,
         "Category" : "Varitas" 
     },
     {
         "productId" : 14,
-        "name" : "La varita del profesor Snape",
+        "name" : "Varita del profesor Snape",
         "description": "Replicala de la varita del profesor Severus Snape, el famoso maestro de pociones y también el jefe de la casa Slytherin." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Snape1_Product.png?v=1639126161",
-        "price" : "$12.000" ,
+        "price" : 12000 ,
         "stock": 60 ,
         "isActive" : true ,
         "Category" : "Varitas" 
     },
     {
         "productId" : 15,
-        "name" : "La varita de Ron Weasley",
+        "name" : "Varita de Ron Weasley",
         "description": "Replicala de la varita de Ron Weasley, miembro fundador del Ejército de Dumbledore, Guardián de Gryffindor y mejor amigo de Harry Potter y Hermione Granger." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Snape1_Product.png?v=1639126161",
-        "price" : "$12.000" ,
+        "price" : 12000 ,
         "stock": 100 ,
         "isActive" : true ,
         "Category" : "Varitas" 
@@ -154,7 +154,7 @@
         "name" : "Túnica de Ravenclaw",
         "description": "Ningún guardarropa mágico puede considerarse completo sin un uniforme escolar de Ravenclaw, lo que hace que la túnica de Ravenclaw sea un accesorio esencial para cualquier fanático de la serie de películas de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1296491_1296657_0_800x.png?v=1613579776",
-        "price" : "$20.000" ,
+        "price" : 20000 ,
         "stock": 50 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -164,7 +164,7 @@
         "name" : "Túnica de Hufflepuff",
         "description": "Ningún guardarropa mágico puede considerarse completo sin un uniforme escolar de Hufflepuff, lo que hace que la túnica de Hufflepuff sea un accesorio esencial para cualquier fanático de la serie de películas de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1296498_1296661_0.png?v=1616145737",
-        "price" : "$20.000" ,
+        "price" : 20000 ,
         "stock": 50 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -174,7 +174,7 @@
         "name" : "Túnica de Slytherin",
         "description": "Ningún guardarropa mágico puede considerarse completo sin un uniforme escolar de Slytherin, lo que hace que la túnica de Slytherin sea un accesorio esencial para cualquier fanático de la serie de películas de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1296653_1_800x.png?v=1679995474",
-        "price" : "$20.000" ,
+        "price" : 20000 ,
         "stock": 50 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -184,7 +184,7 @@
         "name" : "Jersey Quidditch de Gryffindor",
         "description": "Representa al equipo de tu casa cómodamente con este suéter de Quidditch de Gryffindor. ¡Perfecto para el campo de Quidditch, en la escuela muggle o en las gradas!" ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/256633_1.png?v=1613564155",
-        "price" : "$22.000" ,
+        "price" : 22000 ,
         "stock": 87 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -194,7 +194,7 @@
         "name" : "Jersey Quidditch de Slytherin",
         "description": "Representa al equipo de tu casa cómodamente con este suéter de Quidditch de Slytherin. ¡Perfecto para el campo de Quidditch, en la escuela muggle o en las gradas!" ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/256634_1.png?v=1613564288",
-        "price" : "$22.000" ,
+        "price" : 22000 ,
         "stock": 87 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -204,7 +204,7 @@
         "name" : "Jersey Quidditch de Ravenclaw",
         "description": "Representa al equipo de tu casa cómodamente con este suéter de Quidditch de Ravenclaw. ¡Perfecto para el campo de Quidditch, en la escuela muggle o en las gradas!" ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/PL00010106_1.png?v=1679996165",
-        "price" : "$22.000" ,
+        "price" : 22000 ,
         "stock": 87 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -214,7 +214,7 @@
         "name" : "Bufanda de Ravenclaw",
         "description": "Celebre el orgullo de la casa y abríguese con esta bufanda Ravenclaw reversible hecha a medida. La bufanda presenta los colores tradicionales de la casa.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/PL00011319_1.png?v=1614867907",
-        "price" : "$7.000" ,
+        "price" : 7000 ,
         "stock": 100 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -224,7 +224,7 @@
         "name" : "Bufanda de Gryffindor",
         "description": "Celebre el orgullo de la casa y abríguese con esta bufanda Gryffindor reversible hecha a medida. La bufanda presenta los colores tradicionales de la casa.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1275281_grande_4569f02d-e27b-4230-9bb9-418a680023e2_800x.png?v=1679959878",
-        "price" : "$7.000" ,
+        "price" : 7000 ,
         "stock": 300 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -234,7 +234,7 @@
         "name" : "Bufanda de Slytherin",
         "description": "Celebre el orgullo de la casa y abríguese con esta bufanda Slytherin reversible hecha a medida. La bufanda presenta los colores tradicionales de la casa.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1275284_grande_4b12f7dc-71a9-4b85-851e-e80f5fc90168.png?v=1679959900",
-        "price" : "$7.000" ,
+        "price" : 7000 ,
         "stock": 100 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -244,7 +244,7 @@
         "name" : "Bufanda de Hogwarts",
         "description": "Mantente abrigado y completa tu look escolar de Hogwarts con esta bufanda bordada de Hogwarts.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1240558_1_1_800x.png?v=1679998715",
-        "price" : "$7.000" ,
+        "price" : 7000 ,
         "stock": 300 ,
         "isActive" : true ,
         "Category" : "Indumentaria" 
@@ -254,7 +254,7 @@
         "name" : "Lata de Grageas de Bertie Botts",
         "description": "Lata de Grageas que vienen en hasta 20 sabores misteriosos.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1338924_1_800x.png?v=1679956774",
-        "price" : "$5.000" ,
+        "price" : 5000 ,
         "stock": 700 ,
         "isActive" : true ,
         "Category" : "Golosinas" 
@@ -264,7 +264,7 @@
         "name" : "Lata de rana de chocolate",
         "description": "Esta lata pentagonal decorada con adornos es un recuerdo diseñado para parecerse a la caja de la rana de chocolate que se ve en la serie de películas de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1338923_1_grande_5181c2f5-acfe-4ce3-bc19-35fe399e92d3_800x.png?v=1679956772",
-        "price" : "$5.000" ,
+        "price" : 5000 ,
         "stock": 300 ,
         "isActive" : true ,
         "Category" : "Golosinas" 
@@ -274,7 +274,7 @@
         "name" : "Juego de regalo de dulces y golosinas de Honeydukes",
         "description": "Caja de coleccionista gigante con un toque de magia de Chocolate Frog, recibirás y probarás cinco deliciosos dulces favoritos de los fanáticos, empaquetados en obras de arte fieles a la serie de películas de Harry Potter. Es un regalo perfecto para aquellos que desean experimentar el deleite de una tienda Honeydukes en casa. Este set de regalo Honeydukes Sweets and Treats contiene: Grageas de todos los sabores de Bertie Bott, Chocolate Frog - con embalaje de película auténtico, Sapos de menta, Chocolate Efervescente Whizzbees y moscas de chocolate",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Frog_Gift_Box_c8f3df2a-8978-475e-8daa-e33d7f38dcf3_800x.png?v=1680250587",
-        "price" : "$11.000" ,
+        "price" : 11000 ,
         "stock": 200 ,
         "isActive" : true ,
         "Category" : "Golosinas" 
@@ -284,7 +284,7 @@
         "name" : "Baúl de regalo de Gryffindor",
         "description": "Celebre el orgullo de su casa con este baúl de Gryffindor hecho a medida, perfecto para que los fans de Harry Potter lo agreguen a su colección. Este baúl ha sido especialmente diseñado para parecerse al baúl que los estudiantes llevarían en sus viajes en el Expreso de Hogwarts. Explore los recuerdos exclusivos y los coleccionables únicos, la mejor experiencia de regalo para cada aspirante a bruja o mago.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/files/Large_Trunk_UK_Gryff_4367b051-420a-4ec8-ab92-805a78565d8c_800x.png?v=1682495840",
-        "price" : "$55.000" ,
+        "price" : 55000 ,
         "stock": 150 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -294,7 +294,7 @@
         "name" : "Baúl de regalo de Slytherin",
         "description": "Celebre el orgullo de su casa con este baúl de Slytherin hecho a medida, perfecto para que los fans de Harry Potter lo agreguen a su colección. Este baúl ha sido especialmente diseñado para parecerse al baúl que los estudiantes llevarían en sus viajes en el Expreso de Hogwarts. Explore los recuerdos exclusivos y los coleccionables únicos, la mejor experiencia de regalo para cada aspirante a bruja o mago.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/files/Large_Trunk_UK_Slyth_b97253a9-3226-4a10-90a0-98a710467864_800x.png?v=1685969355",
-        "price" : "$55.000" ,
+        "price" : 55000 ,
         "stock": 100 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -304,7 +304,7 @@
         "name" : "Baúl de regalo de Ravenclaw",
         "description": "Celebre el orgullo de su casa con este baúl de Ravenclaw hecho a medida, perfecto para que los fans de Harry Potter lo agreguen a su colección. Este baúl ha sido especialmente diseñado para parecerse al baúl que los estudiantes llevarían en sus viajes en el Expreso de Hogwarts. Explore los recuerdos exclusivos y los coleccionables únicos, la mejor experiencia de regalo para cada aspirante a bruja o mago.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Large_Trunk_UK_Rav.png?v=1677077224",
-        "price" : "$55.000" ,
+        "price" : 55000 ,
         "stock": 100 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -314,7 +314,7 @@
         "name" : "Baúl de regalo de Hufflepuff",
         "description": "Celebre el orgullo de su casa con este baúl de Hufflepuff hecho a medida, perfecto para que los fans de Harry Potter lo agreguen a su colección. Este baúl ha sido especialmente diseñado para parecerse al baúl que los estudiantes llevarían en sus viajes en el Expreso de Hogwarts. Explore los recuerdos exclusivos y los coleccionables únicos, la mejor experiencia de regalo para cada aspirante a bruja o mago.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/files/Large_Trunk_UK_Huff_f3b4999e-2c25-4d70-a076-46a6c61b14a7.png?v=1683200396",
-        "price" : "$55.000" ,
+        "price" : 55000 ,
         "stock": 100 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -324,7 +324,7 @@
         "name" : "Baúl de regalo de Hogwarts",
         "description": "Baúl de Hogwarts hecho a medida, perfecto para que los fans de Harry Potter lo agreguen a su colección. Este baúl ha sido especialmente diseñado para parecerse al baúl que los estudiantes llevarían en sus viajes en el Expreso de Hogwarts. Explore los recuerdos exclusivos y los coleccionables únicos, la mejor experiencia de regalo para cada aspirante a bruja o mago.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/HOGWARTS-_V1_401aea0d-a8ed-403c-9263-953de645d1ec_800x.png?v=1624548111",
-        "price" : "$50.000" ,
+        "price" : 50000 ,
         "stock": 150 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -334,7 +334,7 @@
         "name" : "Baúl de regalo de Harry Potter",
         "description": "Baúl de Harry Potter hecho a medida, perfecto para que los fans de Harry Potter lo agreguen a su colección. Este baúl ha sido especialmente diseñado para parecerse al baúl que los estudiantes llevarían en sus viajes en el Expreso de Hogwarts. Explore los recuerdos exclusivos y los coleccionables únicos, la mejor experiencia de regalo para cada aspirante a bruja o mago.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Harry_Trunk_UK_800x.png?v=1678288225",
-        "price" : "$57.000" ,
+        "price" : 57000 ,
         "stock": 100 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -344,7 +344,7 @@
         "name" : "Mini baúl de regalo de Hogwarts",
         "description": "Esta es la versión mini del baúl de la escuela de Hogwarts, diseñado para parecerse a los que usan los estudiantes de Hogwarts que viajan en el Expreso de Hogwarts.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/MiniTrunk_Hog_UK_800x.png?v=1676888094",
-        "price" : "$23.000" ,
+        "price" : 23000 ,
         "stock": 150 ,
         "isActive" : true ,
         "Category" : "Misceláneas" 
@@ -354,7 +354,7 @@
         "name" : "Quaffle Ball",
         "description": "Gana tu próximo partido de Quidditch con esta réplica de la pelota Quaffle. Una Quaffle es una de las tres pelotas que se usan en el mágico juego de Quidditch y cada gol con una Quaffle vale diez puntos.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1229902_b2f6690d-46f0-4920-8c6b-12bad97328ef_800x.png?v=1679956156",
-        "price" : "$6.000" ,
+        "price" : 6000 ,
         "stock": 50 ,
         "isActive" : true ,
         "Category" : "Quidditch" 
@@ -364,7 +364,7 @@
         "name" : "Camiseta personalizada de buscador de Gryffindor",
         "description": "Celebra tu lealtad a la casa de Hogwarts con esta camiseta de buscador de la casa de Gryffindor hecha a medida.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1231225_1_4ae45787-5e99-4b35-9683-ebee11457f33_800x.png?v=1617880903",
-        "price" : "$11.000" ,
+        "price" : 11000 ,
         "stock": 150 ,
         "isActive" : true ,
         "Category" : "Quidditch" 
@@ -374,7 +374,7 @@
         "name" : "Camiseta personalizada de buscador de Slytherin",
         "description": "Celebra tu lealtad a la casa de Hogwarts con esta camiseta de buscador de la casa de Slytherin hecha a medida.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1303165_1_7b5f6678-b477-4c6c-84b8-c022d238d1ac_800x.png?v=1618413788",
-        "price" : "$11.000" ,
+        "price" : 11000 ,
         "stock": 150 ,
         "isActive" : true ,
         "Category" : "Quidditch" 
@@ -384,7 +384,7 @@
         "name" : "Camiseta personalizada de buscador de Ravenclaw",
         "description": "Celebra tu lealtad a la casa de Hogwarts con esta camiseta de buscador de la casa de Ravenclaw hecha a medida.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1303158_1_3cf419b7-de52-47da-941e-fe92b0f5e602_800x.png?v=1618413603",
-        "price" : "$11.000" ,
+        "price" : 11000 ,
         "stock": 150 ,
         "isActive" : true ,
         "Category" : "Quidditch" 
@@ -394,7 +394,7 @@
         "name" : "Camiseta personalizada de buscador de Hufflepuff",
         "description": "Celebra tu lealtad a la casa de Hogwarts con esta camiseta de buscador de la casa de Hufflepuff hecha a medida.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1303148_1_625a2fb5-ba41-470d-bca3-9b8c8f6e92ae_800x.png?v=1618413343",
-        "price" : "$11.000" ,
+        "price" : 11000 ,
         "stock": 150 ,
         "isActive" : true ,
         "Category" : "Quidditch" 
@@ -404,7 +404,7 @@
         "name" : "Harry Potter y las reliquias de la muerte",
         "description": "Revive o adentrate por primera vez en la septima y ultima novela de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Deathly_Hallows_Paperback_800x.png?v=1610097999",
-        "price" : "$3.000" ,
+        "price" : 3000 ,
         "stock": 1500 ,
         "isActive" : true ,
         "Category" : "Libros" 
@@ -414,7 +414,7 @@
         "name" : "Harry Potter y el misterio del príncipe",
         "description": "Revive o adentrate por primera vez en la increible sexta novela de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Half_Blood_Prince_Paperback_800x.png?v=1610098493",
-        "price" : "$3.000" ,
+        "price" : 3000 ,
         "stock": 1500 ,
         "isActive" : true ,
         "Category" : "Libros" 
@@ -424,7 +424,7 @@
         "name" : "Harry Potter y la Orden del Fénix",
         "description": "Revive o adentrate por primera vez en la increible quinta novela de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Order_of_the_Phoenix_Paperback_800x.png?v=1610099445",
-        "price" : "$3.000" ,
+        "price" : 3000 ,
         "stock": 1500 ,
         "isActive" : true ,
         "Category" : "Libros" 
@@ -434,7 +434,7 @@
         "name" : "Harry Potter y el cáliz de fuego",
         "description": "Revive o adentrate por primera vez en la increible cuarta novela de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Goblet_of_Fire_Paperback_800x.png?v=1610098286",
-        "price" : "$3.000" ,
+        "price" : 3000 ,
         "stock": 1500 ,
         "isActive" : true ,
         "Category" : "Libros" 
@@ -444,7 +444,7 @@
         "name" : "Harry Potter y el Prisionero de Azkaban",
         "description": "Revive o adentrate por primera vez en la increible tercer novela de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Prisoner_of_Azkaban1.png?v=1626166383",
-        "price" : "$2.500" ,
+        "price" : 2500 ,
         "stock": 1500 ,
         "isActive" : true ,
         "Category" : "Libros" 
@@ -454,7 +454,7 @@
         "name" : "Harry Potter y la cámara secreta",
         "description": "Revive o adentrate por primera vez en la increible segunda novela de Harry Potter.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Chamber_of_Secrets_Paperback_800x.png?v=1610097244",
-        "price" : "$2.500" ,
+        "price" : 2500 ,
         "stock": 1500 ,
         "isActive" : true ,
         "Category" : "Libros" 
@@ -464,7 +464,7 @@
         "name" : "Harry Potter y la Piedra Filosofal",
         "description": "Revive o adentrate por primera vez en la increible primer novela de Harry Potter donde todo este magico mundo comenzo.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Philosophers_Stone_Paperback_800x.png?v=1610099834",
-        "price" : "$2.500" ,
+        "price" : 2500 ,
         "stock": 1500 ,
         "isActive" : true ,
         "Category" : "Libros" 
@@ -474,7 +474,7 @@
         "name" : "Libro de magia de la película de Harry Potter",
         "description": "Escrito y diseñado en colaboración con el elenco y el equipo que trajo a J.K. Las célebres novelas de Rowling a la pantalla, Harry Potter: Film Wizardry ofrece una experiencia interactiva encantadora, transportando a los lectores al mundo mágico al compartir secretos cinematográficos, fotografías y obras de arte inéditas e historias exclusivas de las estrellas.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Film_Wizardry_800x.png?v=1662972451",
-        "price" : "$9.500" ,
+        "price" : 9500 ,
         "stock": 500 ,
         "isActive" : true ,
         "Category" : "Libros" 
@@ -484,7 +484,7 @@
         "name" : "La Magia de MinaLima",
         "description": "Celebre el viaje de veinte años de Mira y Eduardo con este compendio mágico que relata su extraordinaria asociación en el diseño para el Mundo Mágico. Este libro inmersivo está repleto de imágenes, gráficos y bocetos invisibles, además de comentarios originales y elementos interactivos.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/220748-FC3D_800x.png?v=1666250683",
-        "price" : "$12.500" ,
+        "price" : 12500 ,
         "stock": 500 ,
         "isActive" : true ,
         "Category" : "Libros" 
@@ -494,7 +494,7 @@
         "name" : "El monstruoso libro de los monstruos",
         "description": "tomo increíblemente informativo sobre el cuidado de las criaturas mágicas, propiedad de Rubeus Hagrid. Esta información, sin embargo, sería guardada con saña por el propio libro cuando tomó la forma de su propio monstruo.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/1329266_88_800x.png?v=1679995718",
-        "price" : "$7.500" ,
+        "price" : 7500 ,
         "stock": 700 ,
         "isActive" : true ,
         "Category" : "Libros" 

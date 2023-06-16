@@ -17,7 +17,7 @@ router.get('/allproducts', getAllProducts)
 router.get('/allproducts', getAllUsers)
 router.post('/productCreated',createProduct)
 router.put('/editProduct/:id', editProduct)
-router.delete('deleteProduct/:id', deleteProduct)
+router.delete('/deleteProduct/:id', deleteProduct)
 router.use("/", categoryRouter);
 
 module.exports = router;

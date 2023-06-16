@@ -1,12 +1,13 @@
-import ProductList from "../../components/Admin/Products/ProductList/ProductList";
-
+import DataDisplay from "../../components/Admin/DataDisplay/DataDisplay";
+import SideBar from "../../components/Admin/SideBar/SideBar"
 
 const Admin = () => {
     return(
         <div>
-             <h1>WELCOME</h1>
-             <p>Sos el admin</p>
-             <ProductList/>
+             <div className="flex">
+             <SideBar/>
+             <DataDisplay/>
+             </div>
         </div>
     )
 }
