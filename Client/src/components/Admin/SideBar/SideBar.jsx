@@ -4,24 +4,24 @@ import { FiUser, FiGrid, FiGift } from "react-icons/fi";
 const SideBar = () => {
 
   return (
-    <div className="border rounded py-4 px-3 bg-gray-100 flex flex-col items-center justify-center h-full">
+    <div className="border rounded py-4 px-3 bg-gray-100 flex flex-col items-center justify-start h-screen w-1/6">
       <div className="mt-4">
-        <h4>Panel de Admin</h4>
+        <h4>Admin Panel</h4>
       </div>
       <div className="flex flex-col justify-center space-y-4 my-4">
         <button className="bg-gray-100 rounded-full hover:bg-gray-400">
           <div className="flex items-center justify-center py-2 px-4">
-            <FiUser className="mr-2" /> Usuarios
+            <FiUser className="mr-2" /> Users
           </div>
         </button>
         <button className="bg-gray-100 rounded-full hover:bg-gray-400">
           <div className="flex items-center justify-center py-2 px-4">
-            <FiGrid className="mr-2" /> Productos
+            <FiGrid className="mr-2" /> Products
           </div>
         </button>
         <button className="bg-gray-100 rounded-full hover:bg-gray-400">
           <div className="flex items-center justify-center py-2 px-4">
-            <FiGift className="mr-2" /> Pedidos
+            <FiGift className="mr-2" /> Orders
           </div>
         </button>
       </div>
