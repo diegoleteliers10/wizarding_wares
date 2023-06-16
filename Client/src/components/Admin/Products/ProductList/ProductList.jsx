@@ -12,7 +12,7 @@ const ProductList = () => {
             <th>Producto</th>
             <th>Estado</th>
             <th>Precio</th>
-            {/* <th>Categoria</th> */}
+            <th>Categoria</th> 
             <th>Stock</th>
             <th>Acciones</th>
           </tr>
@@ -23,7 +23,7 @@ const ProductList = () => {
               <td>{product.name}</td>
               <td>{product.isActive === true ? 'Activo' : 'Inhabilitado'}</td>
               <td>{product.price}</td>
-              {/* <td>{product.category}</td> */}
+              <td>{product.Category}</td>
               <td>{product.stock}</td>
               <td>
                 <Link to='/editProduct'>
