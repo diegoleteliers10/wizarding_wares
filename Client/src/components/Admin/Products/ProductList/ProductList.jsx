@@ -5,7 +5,7 @@ import './ProductList.css'
 const ProductList = () => {
 
   return (
-    <div className="product-list w-5/6">
+    <div className="product-list">
       <table >
         <thead>
           <tr>

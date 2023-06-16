@@ -1,4 +1,4 @@
-import ProductList from "../../components/Admin/Products/ProductList/ProductList";
+import DataDisplay from "../../components/Admin/DataDisplay/DataDisplay";
 import SideBar from "../../components/Admin/SideBar/SideBar"
 
 const Admin = () => {
@@ -6,7 +6,7 @@ const Admin = () => {
         <div>
              <div className="flex">
              <SideBar/>
-             <ProductList/>
+             <DataDisplay/>
              </div>
         </div>
     )
