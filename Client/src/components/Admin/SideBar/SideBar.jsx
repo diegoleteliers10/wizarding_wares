@@ -4,7 +4,7 @@ import { FiUser, FiGrid, FiGift } from "react-icons/fi";
 const SideBar = () => {
 
   return (
-    <div className="border rounded py-4 px-3 bg-gray-100 flex flex-col items-center justify-center h-screen w-1/4">
+    <div className="border rounded py-4 px-3 bg-gray-100 flex flex-col items-center justify-start h-screen w-1/6">
       <div className="mt-4">
         <h4>Panel de Admin</h4>
       </div>
