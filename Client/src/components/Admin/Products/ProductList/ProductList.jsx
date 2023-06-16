@@ -10,7 +10,7 @@ const ProductList = () => {
         <thead>
           <tr>
             <th>Product</th>
-            <th>State</th>
+            <th>Status</th>
             <th>Price</th>
             <th>Category</th> 
             <th>Stock</th>
