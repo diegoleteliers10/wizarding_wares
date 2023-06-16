@@ -59,6 +59,7 @@ h1 {
   text-decoration: none;
   display: inline-block;
   position: relative;
+  font-family: 'Marcellus', serif;
 }
 
 .btn1:before {

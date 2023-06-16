@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import data from "../../../assets/data.json"
 import { useState } from "react";
+import '../storeStyles.css'; 
 
 const Detail = () => {
     const { id } = useParams();
@@ -25,13 +26,13 @@ const Detail = () => {
     if(!product) return window.alert("No se encontro el producto")
  console.log(product.Category)
     return(
-        <div className="flex">
+        <div className="flex storeComponent">
             <div className="w-1/3">
                 <img src={product.image} alt={product.name}/>
             </div>
             <div className="w-2/3">
-                <h2>{product.name}</h2>
-                <p>{product.price}</p>
+                <h2 className="titleDetail">{product.name}</h2>
+                <p className="bigPrice">{product.price}</p>
                 {
                     product.Category === 'Indumentaria' && <div>
                         <fieldset>
@@ -65,7 +66,7 @@ const Detail = () => {
                         </fieldset>
                     </div>
                 }
-                <p>{product.description}</p>
+                <p className="descriptionDetail">{product.description}</p>
                 <label>
                     Cantidad: 
                     <button onClick={handleDecreaseQuantity} className="btn1 btn--svg-small">-</button>
