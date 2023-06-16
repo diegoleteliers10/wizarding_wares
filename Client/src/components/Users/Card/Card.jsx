@@ -1,17 +1,19 @@
 import Cardd from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom';
+import '../storeStyles.css'; 
 
 const Card = (props) => {
     return (
         props.isActive === true &&
-        
-            <Cardd style={{ width: '18rem' }}>
-                <Link to={`/${props.id}`} className='Link'>
+        <div className='storeComponentCard'>
+            <Cardd>
+                <Link to={`/${props.id}`} className='customLink'>
                 <img src={props.image} alt='{props.name}'/>
                 <h2>{props.name}</h2>
-                <h2>{props.price}</h2>
+                <h2>${props.price}</h2>
                 </Link>
             </Cardd>
+        </div>
 
     );
 }
