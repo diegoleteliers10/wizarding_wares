@@ -1,7 +1,7 @@
 [
     {
        "productId" : 1,
-       "name" : "varita de Hermione Granger",
+       "name" : "Varita de Hermione Granger",
        "description": "Réplica exacta de la varita de Hermione Granger, miembro fundador del Ejército de Dumbledore, mejor amiga de Ron y Harry y a menudo llamada la bruja más brillante de su edad.",
        "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Hermione2_Product_large.png?v=1639063444",
        "price" : 12000 ,
@@ -12,7 +12,7 @@
     {
         "productId" : 2,
         "name" : "Varita de Harry Potter",
-        "description": "Réplica exacta de la varita que eligió Harry Potter, el niño que vivió, cuando visitó la tienda de varitas de Ollivanders a los 11 años.",
+        "description": "Réplica exacta de la varita que eligió Harry Potter, cuando visitó la tienda de varitas de Ollivanders a los 11 años.",
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/256320_2_large.png?v=1638955883",
         "price" : 12000 ,
         "stock": 700 ,
@@ -97,7 +97,7 @@
         "price" : 6000 ,
         "stock": 120 ,
         "isActive" : true ,
-        "categoryId" : 5
+        "categoryId" : 3
     },
     {
         "productId" : 11,
@@ -121,7 +121,7 @@
     },
     {
         "productId" : 13,
-        "name" : "La varita de Sirius Black",
+        "name" : "Varita de Sirius Black",
         "description": "Replicala de la varita de Sirius Black, padrino de Harry Potter, miembro de la Orden del Fénix y uno de los autores del Mapa de los Merodeadores." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/siriusblack1_800x.png?v=1641304045",
         "price" : 12000 ,
@@ -131,7 +131,7 @@
     },
     {
         "productId" : 14,
-        "name" : "La varita del profesor Snape",
+        "name" : "Varita del profesor Snape",
         "description": "Replicala de la varita del profesor Severus Snape, el famoso maestro de pociones y también el jefe de la casa Slytherin." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Snape1_Product.png?v=1639126161",
         "price" : 12000 ,
@@ -141,7 +141,7 @@
     },
     {
         "productId" : 15,
-        "name" : "La varita de Ron Weasley",
+        "name" : "Varita de Ron Weasley",
         "description": "Replicala de la varita de Ron Weasley, miembro fundador del Ejército de Dumbledore, Guardián de Gryffindor y mejor amigo de Harry Potter y Hermione Granger." ,
         "image" : "https://cdn.shopify.com/s/files/1/0514/6332/3817/products/Snape1_Product.png?v=1639126161",
         "price" : 12000 ,
