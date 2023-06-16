@@ -13,6 +13,11 @@ const Categorie = sequelize.define("categorie", {
 		allowNull: false,
 		unique: true,
 	},
+	isActive: {
+		type: DataTypes.BOOLEAN,
+		allowNull: false,
+		defaultValue: true,
+	},
 });
 
 module.exports = Categorie;

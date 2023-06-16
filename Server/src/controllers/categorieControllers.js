@@ -124,19 +124,19 @@ const deleteACategory = async (name) => {
   (!validName) && arrojarError("Parametro; Debe De Ser Solo Letras Del ABC y Espacios");
 
   // Buscamos la categoria que queremos eliminar
-  const deleteCategorie = await Categorie.findOne({
+  const deleteCategorie = await Categorie.findAll({
     where: {
       name: name
     }
   });
 
   // Si no existe la categoria lanzamos un error
-  if(deleteCategorie == null){
+  if(!deleteCategorie.length){
     arrojarError(`Categorie ${name}; No Existe En Tu DB`);
   }
 
   // Caso contrario nos disponemos a eliminar la categoria
-  await Categorie.destroy({
+  await Categorie.update({isActive: !deleteCategorie[0].isActive},{
     where:{
       name: name
     }
