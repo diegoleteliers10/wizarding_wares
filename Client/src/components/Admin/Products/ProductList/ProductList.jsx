@@ -9,19 +9,19 @@ const ProductList = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Producto</th>
-            <th>Estado</th>
-            <th>Precio</th>
-            <th>Categoria</th> 
+            <th>Product</th>
+            <th>State</th>
+            <th>Price</th>
+            <th>Category</th> 
             <th>Stock</th>
-            <th>Acciones</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {data.map((product) => (
             <tr key={product.id}>
               <td>{product.name}</td>
-              <td>{product.isActive === true ? 'Activo' : 'Inhabilitado'}</td>
+              <td>{product.isActive === true ? 'Active' : 'Inactive'}</td>
               <td>{product.price}</td>
               <td>{product.Category}</td>
               <td>{product.stock}</td>
