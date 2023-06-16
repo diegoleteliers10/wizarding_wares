@@ -55,7 +55,7 @@ function FilterStore(props) {
             Precio
           </option>
           <option value="priceHighToLow">Mayor precio</option>
-          <option value="priceHighToLow">Menor precio</option>
+          <option value="priceLowToHigh">Menor precio</option>
         </select>
       </div>
       <div className={`inline-block ${styles.filterItem}`}>
