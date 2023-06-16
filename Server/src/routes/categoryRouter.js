@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const categorieRouter = Router();
-const { crearCategoria, getAllCategories, updateACategory, deleteACategory } = require("../controllers/categorieControllers");
+const categoryRouter = Router();
+const { crearCategoria, getAllCategories, updateACategory, deleteACategory } = require("../controllers/categoryControllers");
 
 // Ruta Para Pedir Todas Las Categorias
-categorieRouter.get("/categorie", async (req, res) => {
+categoryRouter.get("/category", async (req, res) => {
   try {
     const result = await getAllCategories();
     return res.status(200).json(result);
@@ -16,7 +16,7 @@ categorieRouter.get("/categorie", async (req, res) => {
 
 
 // Ruta para crear una categoria
-categorieRouter.post("/categorie", async (req, res) => {
+categoryRouter.post("/category", async (req, res) => {
   const { name } = req.body;
   try {
     const result = await crearCategoria(name);
@@ -32,7 +32,7 @@ categorieRouter.post("/categorie", async (req, res) => {
 
 
 // Ruta para modificar una categoria
-categorieRouter.put("/categorie", async (req, res) => {
+categoryRouter.put("/category", async (req, res) => {
   const { name, modify } = req.body;
   try {
     const result = await updateACategory(name, modify);
@@ -48,7 +48,7 @@ categorieRouter.put("/categorie", async (req, res) => {
 
 
 // Ruta para eliminar una categoria
-categorieRouter.delete("/categorie", async (req, res) => {
+categoryRouter.delete("/category", async (req, res) => {
   const { name } = req.body;
   try {
     const result = await deleteACategory(name);
@@ -63,4 +63,4 @@ categorieRouter.delete("/categorie", async (req, res) => {
 });
 
 
-module.exports = categorieRouter;
+module.exports = categoryRouter;
