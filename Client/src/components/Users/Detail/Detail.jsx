@@ -25,11 +25,11 @@ const Detail = () => {
     }
 
     if(!product) return window.alert("No se encontró el producto")
-    
+
+
     useEffect(() => {
         if(product.isActive === false) navigate('/')
     }, [])
-
     return(
         <div className="flex storeComponent">
             <div className="w-1/3">
@@ -39,7 +39,7 @@ const Detail = () => {
                 <h2 className="titleDetail">{product.name}</h2>
                 <p className="bigPrice">{product.price}</p>
                 {
-                    product.Category === 'Indumentaria' && <div>
+                    product.categoryId === 1 && <div>
                         <fieldset>
                                 <div className="flex space-x-4 justify-center">
                                     <div>
