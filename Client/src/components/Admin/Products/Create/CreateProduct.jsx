@@ -1,7 +1,7 @@
 import "./CreateProduct.module.css";
 import { useEffect, useState } from "react";
 import CurrencyInput from 'react-currency-input-field';
-import { createProd } from "../../../../redux/adminActions";
+import { createProd } from "../../../../redux/productSlice.js";
 import { useDispatch } from "react-redux"
 
 const CreateProduct = () => {
@@ -33,10 +33,17 @@ const CreateProduct = () => {
   });
 
   const handleChange = (event) => {
-    setInput({
-      ...input,
-      [event.target.name]: event.target.value
-    });
+    if (event.target.name === "image") {
+      setInput({
+        ...input,
+        [event.target.name]: event.target.files[0],
+      });
+    } else {
+      setInput({
+        ...input,
+        [event.target.name]: event.target.value,
+      });
+    }
 
     setErrors(validate({
       ...input,
@@ -77,31 +84,35 @@ const CreateProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-   
-    const formData = new FormData();
-    formData.append('name', input.name);
-    formData.append('description', input.description);
-    formData.append('image', input.image);
-    formData.append('price', input.price);
-    formData.append('stock', input.stock);
-    formData.append('category', input.category);
-    formData.append('isActive', input.isActive);
-    dispatch(createProd(input))
     console.log(input);
-
-    // Realizar la solicitud POST o PUT con el objeto formData
-    // Utiliza fetch, axios u otra biblioteca para enviar la solicitud
-
-    setInput({
-      name: "",
-      description: "",
-      image: "",
-      price: 0,
-      stock: 0,
-      category: "",
-      isActive: true
-    });
+    const formData = new FormData();
+    formData.append("name", input.name);
+    formData.append("description", input.description);
+    formData.append("image", new File([input.image], input.image.name)); // Agrega el archivo como un objeto File
+    formData.append("price", input.price);
+    formData.append("stock", input.stock);
+    formData.append("category", input.category);
+    formData.append("isActive", input.isActive);
+  
+    dispatch(createProd(formData))
+    .then(() => {
+      console.log(formData);
+      setInput({
+          name: "",
+          description: "",
+          image: "",
+          price: 0,
+          stock: 0,
+          category: "",
+          isActive: true
+        });
+      })
+      .catch((error) => {
+        console.log("Error al crear el producto:", error);
+      });
   };
+
+
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -109,7 +120,7 @@ const CreateProduct = () => {
         <h2>Acá se crean los productos</h2>
 
         <div className="">
-          <form onSubmit={handleSubmit} className="border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
+          <form onSubmit={handleSubmit} id="form" className="border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
 
             <div className="formBox">
 
@@ -227,7 +238,7 @@ const CreateProduct = () => {
 
             <div className="boton">
               <button
-                class="bg-violet-500 rounded hover:bg-violet-600 active:bg-violet-700 focus:outline-2 focus:ring focus:ring-violet-300 w-40 h-10 shadow"
+                className="bg-violet-500 rounded hover:bg-violet-600 active:bg-violet-700 focus:outline-2 focus:ring focus:ring-violet-300 w-40 h-10 shadow"
                 type="submit"
               >
                 Crear
