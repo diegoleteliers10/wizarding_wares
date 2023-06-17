@@ -10,6 +10,7 @@ const filteredProduct = require('../controllers/filteredProducts.controller')
 const getDetailProduct = require('../controllers/getDetailProduct.controller')
 
 const categoryRouter = require("./categoryRouter");
+const userRouter = require("./userRouter");
 const router = Router();
 
 //user routes
@@ -20,11 +21,12 @@ router.get('/allproducts', getAllProducts)
 router.get('/filteredProducts', filteredProduct)
 
 //admins routes
-router.get('/allproducts', getAllUsers)
+router.get('/allUsers', getAllUsers)
 router.get('/detailProduct/:id', getDetailProduct)
 router.post('/productCreated',createProduct)
 router.put('/editProduct/:id', editProduct)
 router.delete('/deleteProduct/:id', deleteProduct)
 router.use("/", categoryRouter);
+router.use("/", userRouter);
 
 module.exports = router;
