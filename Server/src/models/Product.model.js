@@ -33,10 +33,6 @@ const Product = sequelize.define("product", {
 		allowNull: false,
 		defaultValue: true,
 	},
-	categoryId:{
-		type: DataTypes.INTEGER,
-		allowNull: false,
-	}
 });
 
 module.exports = Product;
