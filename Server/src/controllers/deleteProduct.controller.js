@@ -1,4 +1,4 @@
-const { Product } = require('../models/relationship/relationship');
+const  Product  = require('../models/Product.model');
 
 const deleteProduct = async (req, res) => {
     const { id } = req.params;
@@ -11,7 +11,7 @@ const deleteProduct = async (req, res) => {
             }
         
             await Product.update(
-                { isActive: !product.isActive }, // Cambiar el valor de "isActive" al opuesto
+                { isActive: false},
                 { where: { productId: id } }
             );
             return res.status(200).send('Successful remove');

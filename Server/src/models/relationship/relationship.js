@@ -12,10 +12,7 @@ const Review = require("../Review.model");
 Role.hasMany(User);
 User.belongsTo(Role);
 Category.hasMany(Product);
-Product.belongsTo(Category, {
-  foreignKey: "categoryId", // Clave externa en la tabla Product
-  allowNull: false, // Indica que el producto debe tener una categoría asignada
-})
+Product.belongsTo(Category)
 User.hasMany(Review);
 Review.belongsTo(User);
 Product.hasMany(Review);
