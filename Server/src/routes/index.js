@@ -4,7 +4,11 @@ const getAllUsers = require('../controllers/getAllUsers.controller');
 const createProduct = require('../controllers/createProduct.controller');
 const editProduct = require('../controllers/editProduct.controller')
 const deleteProduct = require('../controllers/deleteProduct.controller')
+
+const filteredProduct = require('../controllers/filteredProducts.controller')
+
 const getDetailProduct = require('../controllers/getDetailProduct.controller')
+
 const categoryRouter = require("./categoryRouter");
 const router = Router();
 
@@ -13,6 +17,7 @@ const router = Router();
 
 //user and admin routes
 router.get('/allproducts', getAllProducts)
+router.get('/filteredProducts', filteredProduct)
 
 //admins routes
 router.get('/allproducts', getAllUsers)
