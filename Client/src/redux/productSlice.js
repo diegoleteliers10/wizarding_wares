@@ -5,7 +5,7 @@ import axios  from "axios";
 const initialState = {
   products: [],
   allProducts: [],
-  display: "",
+  display: "createProduct",
   loading: false,
     
 }
@@ -28,6 +28,32 @@ export const createProd = createAsyncThunk('admin/createProduct',
   }
 )
 
+export const getProducts = createAsyncThunk(
+  'admin/getProducts',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get('http://localhost:3001/allProducts');
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+      throw error;
+    }
+  }
+);
+
+export const displayCreate = createAsyncThunk(
+  'admin/displayCreate',
+  async (_, thunkAPI) => {
+    return 'createProduct';
+  }
+)
+export const displayProductList = createAsyncThunk(
+  'admin/displayProductList',
+  async (_, thunkAPI) => {
+    return 'productList';
+  }
+)
+
 export const adminSlice = createSlice({
   name: 'admin',
   initialState,
@@ -47,10 +73,35 @@ export const adminSlice = createSlice({
       state.loading = true
       console.log(action);
     })
+    .addCase(getProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.products = action.payload;
+    })
+    .addCase(getProducts.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error al obtener los productos:', action.error);
+    })
+    .addCase(getProducts.pending, (state, action) => {
+      state.loading = true
+      console.log(action);
+    })
+    .addCase(displayCreate.fulfilled, (state, action) => {
+      state.display = action.payload;
+    })
+    .addCase(displayCreate.pending, (state, action) => {
+      state.loading = true;
+    })
+    .addCase(displayProductList.fulfilled, (state, action) => {
+      state.display = action.payload;
+    })
+    .addCase(displayProductList.pending, (state, action) => {
+      state.loading = true;
+      console.log(state.display);
+    })
   },
 })
 
 
-export const { createProduct } = adminSlice.actions
+// export const { createProduct, getProducts } = adminSlice.actions
 
 export default adminSlice.reducer
