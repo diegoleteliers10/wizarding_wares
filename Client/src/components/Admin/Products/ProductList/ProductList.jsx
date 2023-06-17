@@ -1,8 +1,20 @@
 import Product from '../Product/Products';
 import styles from './ProductList.module.css';
 import data from '../../../../assets/data.json'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../../../redux/productSlice';
+
 
 const ProductListContainer = () => {
+
+  const dispatch = useDispatch()
+
+  useEffect(() =>{
+    dispatch(getProducts())
+  }, [])
+
+  const products = useSelector((state) => state.admin.products)
 
   return (
     <div className={`max-h-screen overflow-auto ${styles.productList}`}>
@@ -18,8 +30,8 @@ const ProductListContainer = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((product) => (
-            <Product key={product.id} product={product} />
+          {products?.map((product) => (
+            <Product key={product.productId} product={product} />
           ))}
         </tbody>
       </table>
