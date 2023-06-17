@@ -1,10 +1,19 @@
 import { useLocation } from "react-router-dom";
 import { RxCaretSort } from 'react-icons/rx';
-import styles from "./FilterStore.module.css"; // Import the module CSS file
+import styles from "./FilterStore.module.css";
+import { useDispatch } from "react-redux";
+import { filterCategory } from "../../../redux/userSlice";
 
 function FilterStore(props) {
   const { pathname } = useLocation();
-  console.log(pathname);
+  const dispatch = useDispatch();
+  //console.log(pathname);
+
+  function handleFilterChange(event){
+    const filter = event.target.value;
+    console.log(filter)
+    dispatch(filterCategory(filter))
+  }
 
   return (
     <div className={`mx-auto ${styles.filterContainer}`}>
@@ -24,22 +33,24 @@ function FilterStore(props) {
         </select>
       </div>
       {
-        (pathname === 'allProducts' || pathname === 'search') && (
+        (pathname === '/' || pathname === 'search') && (
           <div className={`inline-block ${styles.filterItem}`}>
             {/* Filtro categoria */}
             <select
               name="filterCategory"
               id="filterCategory"
-              className={`bg-white ${styles.customSelect}`} // Use the imported class name
+              className={`bg-white ${styles.customSelect}`}
+              onChange={handleFilterChange}
             >
               <option value="" hidden>
                 Categoría
               </option>
-              <option value="golosinas">Golosinas</option>
-              <option value="indumentaria">Indumentaria</option>
-              <option value="quidditch">Quidditch</option>
-              <option value="varitas">Varitas</option>
-              <option value="miscelaneas">Misceláneos</option>
+              <option value="Golosinas">Golosinas</option>
+              <option value="Indumentaria">Indumentaria</option>
+              <option value="Libros">Libros</option>
+              <option value="Quidditch">Quidditch</option>
+              <option value="Varitas">Varitas</option>
+              <option value="Misceláneas">Misceláneos</option>
             </select>
           </div>
         )
