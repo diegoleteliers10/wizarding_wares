@@ -4,7 +4,7 @@ const getDetailProduct = (req, res) => {
     const { id } = req.params;
     try {
         const product = Product.findByPk(id, {
-            attributes: ['name', 'description', 'image', 'price', ],
+            attributes: ['name', 'description', 'image', 'price', 'stock'],
             include: [{
                 model: Review,
                 attributes: ['rating', 'comment'],
