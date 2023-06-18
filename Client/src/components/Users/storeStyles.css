@@ -27,3 +27,7 @@ width: 25% !important;
     color: inherit;
     text-decoration: none;
 }
+
+.storeComponent .noProductos {
+    height: 70vh;
+}

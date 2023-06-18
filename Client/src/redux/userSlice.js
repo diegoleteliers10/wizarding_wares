@@ -7,7 +7,7 @@ const initialState = {
   detail: [],
   display: '',
   filterCategory: false,
-  filterPrice: false,    
+  filterPrice: [],    
 }
 
 export const getProducts = createAsyncThunk(
@@ -25,10 +25,18 @@ export const getProducts = createAsyncThunk(
 
 export const filterCategory = createAsyncThunk(
   'user/filterCategory',
-  async (filter) => {
+  async (filter, { getState }) => {
     try {
+      const state = getState();
+      //console.log(state.user.filterPrice);
+      if(state.user.filterPrice.length){
+        const minPrice = state.user.filterPrice[0];
+        const maxPrice = state.user.filterPrice[1];
+        const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
+        return [filter, response.data];
+      }
       const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}`);
-      console.log(response.data)
+      //console.log(response.data)
       return [filter, response.data];
     } catch (error) {
       console.error('Error obtaining filtered products', error);
@@ -39,13 +47,20 @@ export const filterCategory = createAsyncThunk(
 
 export const filterPrice = createAsyncThunk(
   'user/filterPrice',
-  async (prices) => {
+  async (prices, { getState }) => {
     try {
       const minPrice = prices[0]
-      const maxPrice = prices[1]
-      console.log(maxPrice);      
+      const maxPrice = prices[1] 
+      const state = getState();
+      if(state.user.filterCategory){
+        const category = state.user.filterCategory;
+        //console.log(category)
+        const response = await axios.get(`http://localhost:3001/filteredProducts?category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
+      //console.log(response.data);
+      return [minPrice, maxPrice, response.data];
+      }        
       const response = await axios.get(`http://localhost:3001/filteredProducts?minPrice=${minPrice}&maxPrice=${maxPrice}`);
-      console.log(response.data);
+      //console.log(response.data);
       return [minPrice, maxPrice, response.data];
     } catch (error) {
       console.error('Error obtaining filtered products', error);
@@ -66,6 +81,8 @@ export const userSlice = createSlice({
     .addCase(getProducts.fulfilled, (state, action) => {
       state.loading = false;
       state.products = action.payload;
+      state.filterCategory = false;
+      state.filterPrice = [];
     })
     .addCase(getProducts.rejected, (state, action) => {
       state.loading = false;
@@ -78,7 +95,7 @@ export const userSlice = createSlice({
     .addCase(filterCategory.fulfilled, (state,action) => {
       state.loading = false
       state.products = action.payload[1];
-      state.filterCategory = action.payload[2];
+      state.filterCategory = action.payload[0];
     })
     .addCase(filterCategory.rejected, (state,action) => {
       state.loading = false
@@ -90,9 +107,9 @@ export const userSlice = createSlice({
     })
     .addCase(filterPrice.fulfilled, (state, action) => {
       state.loading = false;
-      console.log(action.payload);
+      //console.log(action.payload);
       state.products = action.payload[2];
-      //state.filterPrice = [action.payload[0], action.payload[1]];
+      state.filterPrice = [action.payload[0], action.payload[1]];
     })
     .addCase(filterPrice.rejected, (state,action) => {
       state.loading = false

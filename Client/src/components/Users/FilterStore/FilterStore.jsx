@@ -4,6 +4,7 @@ import styles from "./FilterStore.module.css";
 import { useDispatch } from "react-redux";
 import { filterCategory, getProducts, filterPrice } from "../../../redux/userSlice";
 
+
 function FilterStore(props) {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -11,13 +12,17 @@ function FilterStore(props) {
 
   function handleFilterChange(event){
     const filter = event.target.value;
-    console.log(filter)
+    //console.log(filter)
     dispatch(filterCategory(filter))
   }
 
   function handlePriceFilter(){
     const minPrice = document.getElementById('minPrice').value;
     const maxPrice = document.getElementById('maxPrice').value;
+    if(parseInt(minPrice) >= parseInt(maxPrice) || parseInt(maxPrice) <= parseInt(minPrice) ) {
+      alert('Revise los valores')
+      return;
+    }
     dispatch(filterPrice([minPrice, maxPrice]))
   }
 
@@ -26,13 +31,18 @@ function FilterStore(props) {
     document.getElementById('filterCategory').value = "Categoría";
     document.getElementById('orderByPrice').value = "Precio";
     document.getElementById('orderByRating').value = "Calificación";
-    document.getElementById('orderByName').value = "Orden"    
+    document.getElementById('orderByName').value = "Orden";
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
   }
 
   
 
   return (
     <div className={`mx-auto flex justify-center ${styles.filterContainer}`}>
+      <div className={`inline-block ${styles.filterItem}`}>
+        <button className="bg-red-100 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-l" onClick={handleReset}>Reset</button>
+      </div>
       <div className={`inline-block ${styles.filterItem}`}>
         {/* Orden por calificacion */}
         {/* <RxCaretSort /> */}
@@ -100,11 +110,9 @@ function FilterStore(props) {
       <div className={`${styles.dInherit}`}>
         <input type="number" placeholder="Min" className="bg-white" id="minPrice"/>
         <input type="number" placeholder="Max" className="bg-white" id="maxPrice"/>
-        <button onClick={handlePriceFilter}>Buscar</button>
+        <button className="bg-gray-100 h-1/2" onClick={handlePriceFilter}>Buscar</button>
       </div>
-      <div className={`inline-block ${styles.filterItem}`}>
-        <button onClick={handleReset}>Borrar filtros</button>
-      </div>
+      
     </div>
   );
 }

@@ -4,19 +4,20 @@ import FilterStore from '../FilterStore/FilterStore';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getProducts } from '../../../redux/userSlice';
+import '../storeStyles.css'; 
 
 const Cards = () => {
-    const {allProducts, products} = useSelector(state => state.user)
+    const {allProducts, products, filterPrice, filterCategory} = useSelector(state => state.user)
     const dispatch = useDispatch();
 
     useEffect(()=>{
         //si el estado global de products no tiene nada aun, dispatch
         // de la accion que trae todos los productos
-        !products.length && dispatch(getProducts());
+        (!products.length && !filterPrice.length && !filterCategory) && dispatch(getProducts());
         //console.log(products)
     }, [products])
     return (
-        <div>
+        <div className='storeComponent'>
         <Row xs={1} md={2} className="g-4">
             <FilterStore/>
         </Row>
@@ -32,6 +33,12 @@ const Cards = () => {
                 />
             ))}
         </Row>
+        {
+        (!products.length && (filterPrice.length || filterCategory)) && 
+        <div className='noProductos flex items-center justify-center'>
+            <h1>No hay productos disponibles con esos criterios</h1>
+        </div>
+        }
         </div>
     );
 }
