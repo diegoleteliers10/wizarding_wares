@@ -7,12 +7,10 @@ const { createUserRegister } = require("../controllers/UserControllers");
 
 // Ruta Para Crear Un Usuario
 userRouter.post("/user", async (req, res) => {
-  const { } = req.body;
+  const { name, email, password } = req.body;
   try {
-    const result = await createUserRegister();
-    return res.status(201).json({
-      "Perfect": result
-    });
+    const result = await createUserRegister(name, email, password);
+    return res.status(201).json(result);
   } catch (error) {
     return res.status(404).json({
       "Error": error.message
