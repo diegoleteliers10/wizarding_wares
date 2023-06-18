@@ -11,6 +11,8 @@ const getDetailProduct = require('../controllers/getDetailProduct.controller')
 
 const categoryRouter = require("./categoryRouter");
 const router = Router();
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 //user routes
 
@@ -22,7 +24,7 @@ router.get('/detailProduct/:id', getDetailProduct)
 
 //admins routes
 router.get('/allproducts', getAllUsers)
-router.post('/productCreated',createProduct)
+router.post('/productCreated',upload.single('image'),createProduct)
 router.put('/editProduct/:id', editProduct)
 router.delete('/deleteProduct/:id', deleteProduct)
 router.use("/", categoryRouter);

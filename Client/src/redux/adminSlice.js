@@ -22,7 +22,7 @@ const initialState = {
 // } 
 
 export const createProd = createAsyncThunk('admin/createProduct',
-  async ({input}) => {
+  async (input) => {
     const response = await axios.post("http://localhost:3001/productCreated", input)
     return response; 
   }
