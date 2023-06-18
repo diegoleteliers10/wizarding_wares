@@ -19,7 +19,8 @@ const createProduct = async (req, res) => {
     const createdProduct = await Product.create({
     name: req.body.name,
     description: req.body.description,
-    image: imageUrl,
+    // image: imageUrl,
+    image: req.body.image,
     price: req.body.price,
     stock: req.body.stock,
     categoryCategoryId: id

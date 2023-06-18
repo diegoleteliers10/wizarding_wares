@@ -1,4 +1,4 @@
-const { User } = require("../models/relationship/relationship");
+const { User, Role } = require("../models/relationship/relationship");
 const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
 
 
@@ -33,13 +33,26 @@ const createUserRegister = async (name, email, password) => {
   // En caso de que el email ya se encuentre en DB... Lanzamos un error
   (isExistEmail !== null) && arrojarError(`El Email: ${email}. No esta disponible`);
 
+  // *** Esta parte se supone que no llegara al usuario ***
+  //------------------------------------------------------*
+  const roleId = 2; // Role por defecto entre (admin y user) es user;
+  const isExistsRole = await Role.findOne({
+    where: {
+      roleId: roleId
+    }
+  });
+
+  // Si el role no existe. Lanzamos un Error
+  (isExistsRole == null) && arrojarError("El role no existe");
+  //***************************************************** */
 
   // Caso contrario... Creamos un nuevo usuario
   const newUser = await User.create({name, email, password});
-  return newUser;
-  // return {
-  //   "Perfect": "User successfully created"
-  // }
+  newUser.setRole(isExistsRole);
+  // return newUser;
+  return {
+    "Perfect": "User successfully created"
+  }
 };
 
 
