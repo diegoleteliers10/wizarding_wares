@@ -8,6 +8,19 @@ const initialState = {
   display: ''    
 }
 
+export const getProducts = createAsyncThunk(
+  'user/getProducts',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get('http://localhost:3001/allProducts');
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+      throw error;
+    }
+  }
+);
+
 export const filterCategory = createAsyncThunk(
   'user/filterCategory',
   async (filter) => {
@@ -31,6 +44,18 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder
+    .addCase(getProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.products = action.payload;
+    })
+    .addCase(getProducts.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error al obtener los productos:', action.error);
+    })
+    .addCase(getProducts.pending, (state, action) => {
+      state.loading = true
+      console.log(action);
+    })
     .addCase(filterCategory.fulfilled, (state,action) => {
       state.loading = false
       state.products = action.payload;
