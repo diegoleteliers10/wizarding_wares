@@ -22,7 +22,7 @@ const createProduct = async (req, res) => {
     image: imageUrl,
     price: req.body.price,
     stock: req.body.stock,
-    categoryId: id
+    categoryCategoryId: id
   })
 
     res.status(200).send({product:createdProduct,message:'Product created'})
