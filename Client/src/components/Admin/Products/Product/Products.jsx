@@ -1,8 +1,23 @@
 import { Link } from 'react-router-dom';
 import styles from '../ProductList/ProductList.module.css';
 import { FiTrash2, FiEdit } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProduct, getProducts } from '../../../../redux/adminSlice';
 
 const Product = ({ product }) => {
+
+  const dispatch = useDispatch();
+
+  const products = useSelector((state) => state.admin.products)
+
+  const handleDelete = async () => {
+    const productId = product.productId
+    console.log(productId);
+    console.log(products);
+    await dispatch(deleteProduct(productId));
+    await dispatch(getProducts())
+  };
+
   return (
     <tr key={product.id}>
       <td>{product.name}</td>
@@ -23,12 +38,10 @@ const Product = ({ product }) => {
       </td>
       <td>{product.stock}</td>
       <td>
-        <Link to="/editProduct">
           <button className={styles.button}>
             <FiEdit />
           </button>
-        </Link>
-        <button className={styles.button}>
+        <button value={product.productId} onClick={handleDelete}className={styles.button}>
           <FiTrash2 />
         </button>
       </td>
