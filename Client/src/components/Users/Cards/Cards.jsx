@@ -1,5 +1,4 @@
 import Card from '../Card/Card';
-import data from '../../../assets/data.json';
 import Row from 'react-bootstrap/Row';
 import FilterStore from '../FilterStore/FilterStore';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,7 +13,7 @@ const Cards = () => {
         //si el estado global de products no tiene nada aun, dispatch
         // de la accion que trae todos los productos
         !products.length && dispatch(getProducts());
-        console.log(products)
+        //console.log(products)
     }, [products])
     return (
         <div>

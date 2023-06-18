@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { RxCaretSort } from 'react-icons/rx';
 import styles from "./FilterStore.module.css";
 import { useDispatch } from "react-redux";
-import { filterCategory } from "../../../redux/userSlice";
+import { filterCategory, getProducts, filterPrice } from "../../../redux/userSlice";
 
 function FilterStore(props) {
   const { pathname } = useLocation();
@@ -15,8 +15,24 @@ function FilterStore(props) {
     dispatch(filterCategory(filter))
   }
 
+  function handlePriceFilter(){
+    const minPrice = document.getElementById('minPrice').value;
+    const maxPrice = document.getElementById('maxPrice').value;
+    dispatch(filterPrice([minPrice, maxPrice]))
+  }
+
+  function handleReset(){
+    dispatch(getProducts())
+    document.getElementById('filterCategory').value = "Categoría";
+    document.getElementById('orderByPrice').value = "Precio";
+    document.getElementById('orderByRating').value = "Calificación";
+    document.getElementById('orderByName').value = "Orden"    
+  }
+
+  
+
   return (
-    <div className={`mx-auto ${styles.filterContainer}`}>
+    <div className={`mx-auto flex justify-center ${styles.filterContainer}`}>
       <div className={`inline-block ${styles.filterItem}`}>
         {/* Orden por calificacion */}
         {/* <RxCaretSort /> */}
@@ -25,7 +41,7 @@ function FilterStore(props) {
           id="orderByRating"
           className={`bg-white ${styles.customSelect}`} // Use the imported class name
         >
-          <option value="" hidden>
+          <option value="Calificación" hidden>
             Calificación
           </option>
           <option value="rateHighToLow">Mejor puntuación</option>
@@ -42,7 +58,7 @@ function FilterStore(props) {
               className={`bg-white ${styles.customSelect}`}
               onChange={handleFilterChange}
             >
-              <option value="" hidden>
+              <option value="Categoría" hidden>
                 Categoría
               </option>
               <option value="Golosinas">Golosinas</option>
@@ -62,7 +78,7 @@ function FilterStore(props) {
           id="orderByPrice"
           className={`bg-white ${styles.customSelect}`} // Use the imported class name
         >
-          <option value="" hidden>
+          <option value="Precio" hidden>
             Precio
           </option>
           <option value="priceHighToLow">Mayor precio</option>
@@ -76,15 +92,18 @@ function FilterStore(props) {
           id="orderByName"
           className={`bg-white ${styles.customSelect}`} // Use the imported class name
         >
-          <option value="" hidden>Orden</option>
+          <option value="Orden" hidden>Orden</option>
           <option value="nameAscending">Ascendente</option>
           <option value="nameDescending">Descendente</option>
         </select>
       </div>
+      <div className={`${styles.dInherit}`}>
+        <input type="number" placeholder="Min" className="bg-white" id="minPrice"/>
+        <input type="number" placeholder="Max" className="bg-white" id="maxPrice"/>
+        <button onClick={handlePriceFilter}>Buscar</button>
+      </div>
       <div className={`inline-block ${styles.filterItem}`}>
-        <p>Rango de precio</p>
-        <input type="number" placeholder="Min" className="bg-white" />
-        <input type="number" placeholder="Max" className="bg-white" />
+        <button onClick={handleReset}>Borrar filtros</button>
       </div>
     </div>
   );

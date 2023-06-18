@@ -14,3 +14,7 @@
   .filterItem {
     display: inline-block;
   }
+
+  .dInherit{
+    display: inherit;
+  }

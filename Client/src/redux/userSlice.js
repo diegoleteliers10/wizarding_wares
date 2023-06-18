@@ -5,7 +5,9 @@ const initialState = {
   products: [],
   allProducts: [],
   detail: [],
-  display: ''    
+  display: '',
+  filterCategory: false,
+  filterPrice: false,    
 }
 
 export const getProducts = createAsyncThunk(
@@ -27,13 +29,30 @@ export const filterCategory = createAsyncThunk(
     try {
       const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}`);
       console.log(response.data)
-      return response.data;
+      return [filter, response.data];
     } catch (error) {
       console.error('Error obtaining filtered products', error);
       throw error;      
     }
   }
 )
+
+export const filterPrice = createAsyncThunk(
+  'user/filterPrice',
+  async (prices) => {
+    try {
+      const minPrice = prices[0]
+      const maxPrice = prices[1]
+      console.log(maxPrice);      
+      const response = await axios.get(`http://localhost:3001/filteredProducts?minPrice=${minPrice}&maxPrice=${maxPrice}`);
+      console.log(response.data);
+      return [minPrice, maxPrice, response.data];
+    } catch (error) {
+      console.error('Error obtaining filtered products', error);
+      throw error;      
+    }
+  }
+);
 
 //MANEJO DE ESTADOS DE REQUEST Y PAYLOADS
 
@@ -58,7 +77,8 @@ export const userSlice = createSlice({
     })
     .addCase(filterCategory.fulfilled, (state,action) => {
       state.loading = false
-      state.products = action.payload;
+      state.products = action.payload[1];
+      state.filterCategory = action.payload[2];
     })
     .addCase(filterCategory.rejected, (state,action) => {
       state.loading = false
@@ -67,6 +87,16 @@ export const userSlice = createSlice({
     .addCase(filterCategory.pending, (state,action) => {
       state.loading = true
       console.log(action);
+    })
+    .addCase(filterPrice.fulfilled, (state, action) => {
+      state.loading = false;
+      console.log(action.payload);
+      state.products = action.payload[2];
+      //state.filterPrice = [action.payload[0], action.payload[1]];
+    })
+    .addCase(filterPrice.rejected, (state,action) => {
+      state.loading = false
+      console.error('Error obtaining filtered products ', action.error);
     })
 
   }
