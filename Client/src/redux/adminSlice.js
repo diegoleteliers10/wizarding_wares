@@ -7,7 +7,7 @@ const initialState = {
   allProducts: [],
   display: "productList",
   loading: false,
-    
+  edit: [],  
 }
 
 // export const createProd = (input) => {
@@ -54,6 +54,26 @@ export const displayProductList = createAsyncThunk(
   }
 )
 
+export const displayEditProduct = createAsyncThunk(
+  'admin/displayEditProduct',
+  async (_, thunkAPI) => {
+    return 'editProduct';
+  }
+)
+
+export const setEditState = createAsyncThunk('admin/setEditState',
+async (input) => {
+  return input; 
+}
+)
+
+export const editProduct = createAsyncThunk('admin/editProduct',
+async (input) => {
+  const response = await axios.put(`http://localhost:3001/editProduct/${input.id}`, input)
+  return response; 
+}
+)
+
 export const deleteProduct = createAsyncThunk(
   'admin/deleteProduct',
   async (productId) => {
@@ -87,6 +107,19 @@ export const adminSlice = createSlice({
       state.loading = true
       console.log(action);
     })
+    .addCase(editProduct.fulfilled, (state, action) => {
+      state.loading = false
+      alert('La actualización se realizó con éxito!')
+      console.log(action.payload);
+    })
+    .addCase(editProduct.rejected, (state, action) => {
+      state.loading = false
+      console.log(action);
+    })
+    .addCase(editProduct.pending, (state, action) => {
+      state.loading = true
+      console.log(action);
+    })
     .addCase(getProducts.fulfilled, (state, action) => {
       state.loading = false;
       state.products = action.payload;
@@ -106,6 +139,12 @@ export const adminSlice = createSlice({
     })
     .addCase(displayProductList.fulfilled, (state, action) => {
       state.display = action.payload;
+    })
+    .addCase(displayEditProduct.fulfilled, (state, action) => {
+      state.display = action.payload;
+    })
+    .addCase(setEditState.fulfilled, (state, action) => {
+      state.edit = action.payload
     })
     .addCase(displayProductList.pending, (state, action) => {
       state.loading = true;
