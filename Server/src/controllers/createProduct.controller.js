@@ -5,6 +5,7 @@ const fs = require('fs');
 const createProduct = async (req, res) => {
   //obtenemos el path del file
    const filePath = req.file.path;
+   const pathFileDel=`tempUploads/${req.file.filename}`
 
   // Subir la imagen a Cloudinary desde el archivo guardado en el disco
   const result = await cloudinary.uploader.upload(filePath);
@@ -26,7 +27,7 @@ const createProduct = async (req, res) => {
     categoryCategoryId: id
   })
 
-    fs.unlink(filePath, (error) => {
+    fs.unlink(pathFileDel, (error) => {
       if (error) {
         console.error('Error al borrar el archivo:', error);
       } else {
