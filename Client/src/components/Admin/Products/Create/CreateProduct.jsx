@@ -1,7 +1,7 @@
 import "./CreateProduct.module.css";
 import { useEffect, useState } from "react";
 import CurrencyInput from 'react-currency-input-field';
-import { createProd } from "../../../../redux/productSlice.js";
+import { createProd } from "../../../../redux/adminSlice";
 import { useDispatch } from "react-redux"
 
 const CreateProduct = () => {
@@ -88,12 +88,13 @@ const CreateProduct = () => {
     const formData = new FormData();
     formData.append("name", input.name);
     formData.append("description", input.description);
-    formData.append("image", new File([input.image], input.image.name)); // Agrega el archivo como un objeto File
+    formData.append("image", input.image); // Agrega el archivo como un objeto File
     formData.append("price", input.price);
     formData.append("stock", input.stock);
     formData.append("category", input.category);
     formData.append("isActive", input.isActive);
   
+    // new File([input.image], input.image.name)
     dispatch(createProd(formData))
     .then(() => {
       console.log(formData);

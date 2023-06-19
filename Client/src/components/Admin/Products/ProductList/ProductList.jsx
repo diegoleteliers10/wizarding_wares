@@ -3,7 +3,7 @@ import styles from './ProductList.module.css';
 import data from '../../../../assets/data.json'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../../../redux/productSlice';
+import { getProducts } from '../../../../redux/adminSlice';
 
 
 const ProductListContainer = () => {

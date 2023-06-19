@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiUser, FiGrid, FiGift } from "react-icons/fi";
 import { useDispatch } from 'react-redux';
-import { displayProductList, displayCreate } from '../../../redux/productSlice';
+import { displayProductList, displayCreate } from '../../../redux/adminSlice';
 
 const SideBar = () => {
 
