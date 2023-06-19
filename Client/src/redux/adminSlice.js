@@ -69,7 +69,7 @@ async (input) => {
 
 export const editProduct = createAsyncThunk('admin/editProduct',
 async (input) => {
-  const response = await axios.put(`http://localhost:3001/editProduct/${input.id}`, input)
+  const response = await axios.put(`http://localhost:3001/editProduct/${input.id}`, {name: input.name, price: input.price, description: input.description, stock: input.stock, categoryId:input.categoryId})
   return response; 
 }
 )
