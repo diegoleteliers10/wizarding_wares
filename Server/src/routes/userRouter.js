@@ -1,6 +1,6 @@
 const {Router} = require("express");
 const userRouter = Router();
-const { createUserRegister } = require("../controllers/UserControllers");
+const { createUserRegister } = require("../controllers/userControllers");
 
 // Ruta Para Pedir Todos Los Usuarios
 // userRouter.get("/user", (req, res) => {});
