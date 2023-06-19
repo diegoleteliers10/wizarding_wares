@@ -6,11 +6,11 @@ const searchProductByName = async (req, res) => {
         const { name } = req.query;
         const product = await Product.findAll({
             where: { name: {[Op.iLike]: `%${name}%`} },
-            include: [{
-                model: Review,
-                attributes: ['rating', 'comment'],
-                through: { attributes: [] }
-            }]
+            // include: [{
+            //     model: Review,
+            //     attributes: ['rating', 'comment'],
+            //     through: { attributes: [] }
+            // }]
         })
         res.status(200).json(product)
     } catch (error) {

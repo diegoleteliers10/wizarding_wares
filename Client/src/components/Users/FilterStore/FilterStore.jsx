@@ -20,6 +20,7 @@ function FilterStore(props) {
   const currCategory = useSelector(state => state.user.filterCategory)
   const currPrice = useSelector(state => state.user.filterPrice);
   const currSort = useSelector(state => state.user.sort)
+  const {search} = useSelector(state => state.user)
   //console.log(pathname);
 
   useEffect(()=> {
@@ -32,6 +33,16 @@ function FilterStore(props) {
     if(currSort[1] !== 'SortP') document.getElementById('orderByPrice').value = currSort[1];
     if(currSort[2] !== 'SortN') document.getElementById('orderByName').value = currSort[2];
   }, [])
+
+  useEffect(()=>{
+    // cuando se hace una search se resetean todos los filtros
+    document.getElementById('filterCategory').value = 'Categoría';
+    document.getElementById('orderByPrice').value = 'SortP';
+    document.getElementById('orderByRating').value = 'SortR';
+    document.getElementById('orderByName').value = 'SortN';
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
+  }, [search])
 
   function handleFilterChange(event) {
     const filter = event.target.value;
@@ -81,7 +92,7 @@ function FilterStore(props) {
           Reset
         </button>
       </div>
-      <div className={`inline-block ${styles.filterItem}`}>
+      <div className={`hidden ${styles.filterItem}`}>
         {/* Orden por calificacion */}
         {/* <RxCaretSort /> */}
         <select

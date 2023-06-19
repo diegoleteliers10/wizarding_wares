@@ -7,13 +7,13 @@ import { getProducts } from '../../../redux/userSlice';
 import '../storeStyles.css'; 
 
 const Cards = () => {
-    const {allProducts, products, filterPrice, filterCategory} = useSelector(state => state.user)
+    const {allProducts, products, filterPrice, filterCategory, search} = useSelector(state => state.user)
     const dispatch = useDispatch();
 
     useEffect(()=>{
         //si el estado global de products no tiene nada aun, dispatch
         // de la accion que trae todos los productos
-        (!products.length && !filterPrice.length && !filterCategory) && dispatch(getProducts());
+        (!products.length && !filterPrice.length && !filterCategory && !search) && dispatch(getProducts());
         //console.log(products)
     }, [products])
     return (
@@ -34,7 +34,7 @@ const Cards = () => {
             ))}
         </Row>
         {
-        (!products.length && (filterPrice.length || filterCategory)) && 
+        (!products.length && (filterPrice.length || filterCategory || search)) && 
         <div className='noProductos flex items-center justify-center'>
             <h1>No hay productos disponibles con esos criterios</h1>
         </div>
