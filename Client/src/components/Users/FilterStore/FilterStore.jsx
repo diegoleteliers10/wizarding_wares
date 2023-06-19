@@ -92,7 +92,7 @@ function FilterStore(props) {
           Reset
         </button>
       </div>
-      <div className={`inline-block ${styles.filterItem}`}>
+      <div className={`hidden ${styles.filterItem}`}>
         {/* Orden por calificacion */}
         {/* <RxCaretSort /> */}
         <select
