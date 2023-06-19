@@ -1,12 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
-import data from "../../../assets/data.json"
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import '../storeStyles.css'; 
 
 const Detail = () => {
+    const {products} = useSelector(state => state.user)
     const { id } = useParams();
     const navigate = useNavigate()
-    const product = data.find((product) => product.productId === parseInt(id));
+    const product = products.find((product) => product.productId === (id));
     const [quantity, setQuantity] = useState(0);
 
     const handleIncreaseQuantity = () => {
@@ -24,7 +25,9 @@ const Detail = () => {
         window.alert("Se añadio al carrito:  " + quantity + " " + product.name)
     }
 
-    if(!product) return window.alert("No se encontró el producto")
+    if(!product) {
+        return window.alert("No se encontró el producto")
+    }
 
 
     useEffect(() => {

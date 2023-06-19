@@ -8,7 +8,7 @@ const Card = (props) => {
         <div className='storeComponentCard'>
             <Cardd>
                 <Link to={`/${props.id}`} className='customLink'>
-                <img src={props.image} alt='{props.name}'/>
+                <img src={props.image} alt={props.name} title={props.name}/>
                 <h2>{props.name}</h2>
                 <h2>${props.price}</h2>
                 </Link>
