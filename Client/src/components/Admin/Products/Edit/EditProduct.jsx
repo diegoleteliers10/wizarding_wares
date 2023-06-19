@@ -14,7 +14,7 @@ const EditProduct = () => {
         image: product.image,
         price: product.price,
         stock: product.stock,
-        category: product.categoryCategoryId,
+        categoryId: product.categoryCategoryId,
         isActive: product.isActive
       });
 
@@ -48,9 +48,16 @@ const EditProduct = () => {
         };
       
         const handleSelect = (event) => {
+              let idCat=0
+              let value=event.target.value
+              const categorias=["Libros","Varitas","Indumentaria","Golosinas","Quidditch","Misceláneas"]
+              let i=0
+              for(i of categorias){
+              if(value===i) idCat=categorias.indexOf(i)+1
+              }
           setInput({
             ...input,
-            [event.target.name]: event.target.value
+            [event.target.name]: idCat
           });
         };
       
@@ -151,8 +158,8 @@ const EditProduct = () => {
                   <div className="mb-4 md:mt-6 lg:mt-8">
                     <label> Categoría
                       <select
-                        name="category"
-                        value={input.category}
+                        name="categoryId"
+                        value={input.categoryId}
                         onChange={handleSelect}
                         required
                         className="border rounded py-2 px-4 m-2 shadow w-full"
