@@ -1,13 +1,16 @@
 import { useLocation } from "react-router-dom";
+import { startTransition, useEffect } from "react";
 import { RxCaretSort } from 'react-icons/rx';
 import styles from "./FilterStore.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterCategory, getProducts, filterPrice } from "../../../redux/userSlice";
 
 
 function FilterStore(props) {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+  const currCategory = useSelector(state => state.user.filterCategory)
+  const currPrice = useSelector(state => state.user.filterPrice)
   //console.log(pathname);
 
   function handleFilterChange(event){
@@ -36,6 +39,17 @@ function FilterStore(props) {
     document.getElementById('maxPrice').value = '';
   }
 
+  useEffect(()=> {
+    console.log(currCategory)
+    if(currCategory) {
+      document.getElementById('filterCategory').value = currCategory;
+    }
+    if(currPrice.length){
+      console.log(currPrice)
+       document.getElementById('minPrice').value = currPrice[0];
+       document.getElementById('maxPrice').value = currPrice[1];
+    }
+  }, [])
   
 
   return (
