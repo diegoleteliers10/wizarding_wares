@@ -26,15 +26,15 @@ const createProduct = async (req, res) => {
     categoryCategoryId: id
   })
 
-  fs.unlink(filePath, (error) => {
-    if (error) {
-      console.error('Error al borrar el archivo:', error);
-    } else {
-      console.log('Archivo borrado exitosamente.');
-    }
-  });
+    fs.unlink(filePath, (error) => {
+      if (error) {
+        console.error('Error al borrar el archivo:', error);
+      } else {
+        console.log('Archivo borrado exitosamente.');
+      }
+    });
 
-    res.status(200).send({product:createdProduct,message:'Product created',image:req.file})
+    res.status(200).send({product:createdProduct,message:'Product created'})
 
   } catch (error) {
     res.status(404).send({message:error.message})
