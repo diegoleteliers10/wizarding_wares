@@ -7,16 +7,28 @@ const deleteProduct = require('../controllers/deleteProduct.controller')
 const searchProductByName = require('../controllers/getProductByName.controller')
 const filteredProduct = require('../controllers/filteredProducts.controller')
 const getDetailProduct = require('../controllers/getDetailProduct.controller')
+const { requiresAuth } = require("express-openid-connect");
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
 const roleRouter = require("./roleRouter"); 
 const router = Router();
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'tempUploads/' });
 
 //user routes
 router.use("/", userRouter);
+router.get('/userLogin', (req, res) => {
+  res.redirect('http://localhost:3001/login');
+});
+router.get('/userProfile', requiresAuth(), (req, res) => {
+	try {
+		const info= req.oidc.user;
+		res.status(200).json({name:info.name,email:info.email,role:info.role})
+	} catch (error) {
+		res.status(401).json({message:error.message})
+	}
+});
 
 //user and admin routes
 router.get('/searchProduct', searchProductByName)
