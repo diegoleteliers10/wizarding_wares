@@ -33,7 +33,7 @@
         "price" : 20000 ,
         "stock": 70 ,
         "isActive" : true ,
-        "categoryId" : 1
+        "categoryId" : 3
     },
     {
         "name" : "Bufanda de Hufflepuff",
@@ -42,7 +42,7 @@
         "price" : 7000 ,
         "stock": 100 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Jersey Quidditch de Hufflepuff",
@@ -51,7 +51,7 @@
         "price" : 22000 ,
         "stock": 87 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Carta de aceptación de Hogwarts",
@@ -60,7 +60,7 @@
         "price" : 4000 ,
         "stock": 500 ,
         "isActive" : true ,
-        "categoryId" : 5
+        "categoryId" : 6
     },
     {
         "name" : "Mapa del merodeador",
@@ -69,7 +69,7 @@
         "price" : 8000 ,
         "stock": 387 ,
         "isActive" : true ,
-        "categoryId" : 5
+        "categoryId" : 6
     },
     {
         "name" : "Baúl de la escuela Hogwarts",
@@ -78,7 +78,7 @@
         "price" : 22000 ,
         "stock": 84 ,
         "isActive" : true ,
-        "categoryId" : 5
+        "categoryId" : 6
     },
     {
         "name" : "Snitch voladora",
@@ -87,7 +87,7 @@
         "price" : 6000 ,
         "stock": 120 ,
         "isActive" : true ,
-        "categoryId" : 3
+        "categoryId" : 5
     },
     {
         "name" : "Cerveza de mantequilla",
@@ -141,7 +141,7 @@
         "price" : 20000 ,
         "stock": 50 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Túnica de Hufflepuff",
@@ -150,7 +150,7 @@
         "price" : 20000 ,
         "stock": 50 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Túnica de Slytherin",
@@ -159,7 +159,7 @@
         "price" : 20000 ,
         "stock": 50 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Jersey Quidditch de Gryffindor",
@@ -168,7 +168,7 @@
         "price" : 22000 ,
         "stock": 87 ,
         "isActive" : true ,
-        "categoryId" : 1
+        "categoryId" : 3
     },
     {
         "name" : "Jersey Quidditch de Slytherin",
@@ -177,7 +177,7 @@
         "price" : 22000 ,
         "stock": 87 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Jersey Quidditch de Ravenclaw",
@@ -186,7 +186,7 @@
         "price" : 22000 ,
         "stock": 87 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Bufanda de Ravenclaw",
@@ -195,7 +195,7 @@
         "price" : 7000 ,
         "stock": 100 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Bufanda de Gryffindor",
@@ -204,7 +204,7 @@
         "price" : 7000 ,
         "stock": 300 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Bufanda de Slytherin",
@@ -213,7 +213,7 @@
         "price" : 7000 ,
         "stock": 100 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Bufanda de Hogwarts",
@@ -222,7 +222,7 @@
         "price" : 7000 ,
         "stock": 300 ,
         "isActive" : true ,
-        "categoryId" : 1 
+        "categoryId" : 3 
     },
     {
         "name" : "Lata de Grageas de Bertie Botts",
@@ -258,7 +258,7 @@
         "price" : 55000 ,
         "stock": 150 ,
         "isActive" : true ,
-        "categoryId" : 5 
+        "categoryId" : 6 
     },
     {
         "name" : "Baúl de regalo de Slytherin",
@@ -267,7 +267,7 @@
         "price" : 55000 ,
         "stock": 100 ,
         "isActive" : true ,
-        "categoryId" : 5 
+        "categoryId" : 6 
     },
     {
         "name" : "Baúl de regalo de Ravenclaw",
@@ -276,7 +276,7 @@
         "price" : 55000 ,
         "stock": 100 ,
         "isActive" : true ,
-        "categoryId" : 5 
+        "categoryId" : 6 
     },
     {
         "name" : "Baúl de regalo de Hufflepuff",
@@ -285,7 +285,7 @@
         "price" : 55000 ,
         "stock": 100 ,
         "isActive" : true ,
-        "categoryId" : 5 
+        "categoryId" : 6 
     },
     {
         "name" : "Baúl de regalo de Hogwarts",
@@ -294,7 +294,7 @@
         "price" : 50000 ,
         "stock": 150 ,
         "isActive" : true ,
-        "categoryId" : 5 
+        "categoryId" : 6 
     },
     {
         "name" : "Baúl de regalo de Harry Potter",
@@ -303,7 +303,7 @@
         "price" : 57000 ,
         "stock": 100 ,
         "isActive" : true ,
-        "categoryId" : 5 
+        "categoryId" : 6 
     },
     {
         "name" : "Mini baúl de regalo de Hogwarts",
@@ -312,7 +312,7 @@
         "price" : 23000 ,
         "stock": 150 ,
         "isActive" : true ,
-        "categoryId" : 5 
+        "categoryId" : 6 
     },
     {
         "name" : "Quaffle Ball",
@@ -321,7 +321,7 @@
         "price" : 6000 ,
         "stock": 50 ,
         "isActive" : true ,
-        "categoryId" : 3 
+        "categoryId" : 5 
     },
     {
         "name" : "Camiseta personalizada de buscador de Gryffindor",
@@ -366,7 +366,7 @@
         "price" : 3000 ,
         "stock": 1500 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     },
     {
         "name" : "Harry Potter y el misterio del príncipe",
@@ -375,7 +375,7 @@
         "price" : 3000 ,
         "stock": 1500 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     },
     {
         "name" : "Harry Potter y la Orden del Fénix",
@@ -384,7 +384,7 @@
         "price" : 3000 ,
         "stock": 1500 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     },
     {
         "name" : "Harry Potter y el cáliz de fuego",
@@ -393,7 +393,7 @@
         "price" : 3000 ,
         "stock": 1500 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     },
     {
         "name" : "Harry Potter y el Prisionero de Azkaban",
@@ -402,7 +402,7 @@
         "price" : 2500 ,
         "stock": 1500 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     },
     {
         "name" : "Harry Potter y la cámara secreta",
@@ -411,7 +411,7 @@
         "price" : 2500 ,
         "stock": 1500 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     },
     {
         "name" : "Harry Potter y la Piedra Filosofal",
@@ -420,7 +420,7 @@
         "price" : 2500 ,
         "stock": 1500 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     },
     {
         "name" : "Libro de magia de la película de Harry Potter",
@@ -429,7 +429,7 @@
         "price" : 9500 ,
         "stock": 500 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     },
     {
         "name" : "La Magia de MinaLima",
@@ -438,7 +438,7 @@
         "price" : 12500 ,
         "stock": 500 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     },
     {
         "name" : "El monstruoso libro de los monstruos",
@@ -447,6 +447,6 @@
         "price" : 7500 ,
         "stock": 700 ,
         "isActive" : true ,
-        "categoryId" : 6 
+        "categoryId" : 1 
     }
 ]
