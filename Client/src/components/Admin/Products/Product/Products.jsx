@@ -2,13 +2,23 @@ import { Link } from 'react-router-dom';
 import styles from '../ProductList/ProductList.module.css';
 import { FiTrash2, FiEdit } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct, getProducts } from '../../../../redux/adminSlice';
+import { deleteProduct, displayEditProduct, getProducts, setEditState } from '../../../../redux/adminSlice';
+import { useState } from 'react';
 
 const Product = ({ product }) => {
 
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.admin.products)
+  const editState = useSelector((state) => state.admin.edit)
+
+  const [edit, setEdit] = useState(product)
+
+  const handleEdit = async (product) => {
+    await dispatch(setEditState(product))
+    await dispatch(displayEditProduct())
+  }
+
 
   const handleDelete = async () => {
     const productId = product.productId
@@ -41,7 +51,7 @@ const Product = ({ product }) => {
       <td>{category}</td>
       <td>{product.stock}</td>
       <td>
-        <button className={styles.button}>
+        <button className={styles.button} onClick={() => handleEdit(product)}>
           <FiEdit />
         </button>
         <button value={product.productId} onClick={handleDelete} className={styles.button}>
