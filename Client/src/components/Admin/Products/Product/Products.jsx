@@ -30,17 +30,17 @@ const Product = ({ product }) => {
 
   let category 
   if (product.categoryCategoryId === 1) {
-    category = 'Clothing';
+    category = 'Books';
   } else if (product.categoryCategoryId === 2) {
     category = 'Wands';
   } else if (product.categoryCategoryId === 3) {
-    category = 'Quidditch';
+    category = 'Clothing';
   } else if (product.categoryCategoryId === 4) {
     category = 'Candy';
   } else if (product.categoryCategoryId === 5) {
-    category = 'Miscellaneous';
+    category = 'Quidditch';
   } else if (product.categoryCategoryId === 6){
-    category = 'Books';
+    category = 'Miscellaneous';
   }
 
   return (

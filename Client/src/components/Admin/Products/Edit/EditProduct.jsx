@@ -48,16 +48,16 @@ const EditProduct = () => {
         };
       
         const handleSelect = (event) => {
-              let idCat=0
+            //   let idCat=0
               let value=event.target.value
-              const categorias=["Libros","Varitas","Indumentaria","Golosinas","Quidditch","Misceláneas"]
-              let i=0
-              for(i of categorias){
-              if(value===i) idCat=categorias.indexOf(i)+1
-              }
+            //   const categorias=["Libros","Varitas","Indumentaria","Golosinas","Quidditch","Misceláneas"]
+            //   let i=0
+            //   for(i of categorias){
+            //   if(value===i) idCat=categorias.indexOf(i)+1
+            //   }
           setInput({
             ...input,
-            [event.target.name]: idCat
+            [event.target.name]: value
           });
         };
       
@@ -164,12 +164,12 @@ const EditProduct = () => {
                         required
                         className="border rounded py-2 px-4 m-2 shadow w-full"
                       >
-                        <option value="Libros">Libros</option>
-                        <option value="Varitas">Varitas</option>
-                        <option value="Indumentaria">Indumentaria</option>
-                        <option value="Golosinas">Golosinas</option>
-                        <option value="Quidditch">Quidditch</option>
-                        <option value="Misceláneas">Misceláneas</option>
+                        <option value={1}>Libros</option>
+                        <option value={2}>Varitas</option>
+                        <option value={3}>Indumentaria</option>
+                        <option value={4}>Golosinas</option>
+                        <option value={5}>Quidditch</option>
+                        <option value={6}>Misceláneas</option>
                       </select>
                     </label>
                   </div>
@@ -203,7 +203,7 @@ const EditProduct = () => {
                       />
                     </label>
                   </div>
-    
+{/*     
                   <div className="mb-4 md:mt-6 lg:mt-8">
                     <label htmlFor="isActive">
                       <span>Estado</span>
@@ -219,7 +219,7 @@ const EditProduct = () => {
                       </select>
                     </label>
                   </div>
-    
+     */}
                 </div>
     
                 <div className="boton">
@@ -240,11 +240,3 @@ const EditProduct = () => {
 
 export default EditProduct;
 
-
-// const value = event.target.value
-//             const cat = ["Libros","Varitas","Indumentaria","Golosinas","Quidditch","Misceláneas"]
-//             const id = 0
-//             for (let i = 0; i < cat.length; i++) {
-//                 const element = cat[i];
-//                 if(value === cat[i]) id =  indexOf(cat[i]) +1
-//             }
