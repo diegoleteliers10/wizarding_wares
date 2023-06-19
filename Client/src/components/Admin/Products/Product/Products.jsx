@@ -18,35 +18,37 @@ const Product = ({ product }) => {
     await dispatch(getProducts())
   };
 
+  let category 
+  if (product.categoryCategoryId === 1) {
+    category = 'Clothing';
+  } else if (product.categoryCategoryId === 2) {
+    category = 'Wands';
+  } else if (product.categoryCategoryId === 3) {
+    category = 'Quidditch';
+  } else if (product.categoryCategoryId === 4) {
+    category = 'Candy';
+  } else if (product.categoryCategoryId === 5) {
+    category = 'Miscellaneous';
+  } else if (product.categoryCategoryId === 6){
+    category = 'Books';
+  }
+
   return (
     <tr key={product.id}>
       <td>{product.name}</td>
       <td>{product.isActive === true ? 'Active' : 'Inactive'}</td>
       <td>{product.price}</td>
-      <td>
-        {product.categoryId === 1
-          ? 'Clothing'
-          : product.categoryId === 2
-          ? 'Wands'
-          : product.categoryId === 3
-          ? 'Quidditch'
-          : product.categoryId === 4
-          ? 'Candy'
-          : product.categoryId === 5
-          ? 'Miscellaneous'
-          : 'Books'}
-      </td>
+      <td>{category}</td>
       <td>{product.stock}</td>
       <td>
-          <button className={styles.button}>
-            <FiEdit />
-          </button>
-        <button value={product.productId} onClick={handleDelete}className={styles.button}>
+        <button className={styles.button}>
+          <FiEdit />
+        </button>
+        <button value={product.productId} onClick={handleDelete} className={styles.button}>
           <FiTrash2 />
         </button>
       </td>
     </tr>
   );
 };
-
 export default Product;
