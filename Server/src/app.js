@@ -58,14 +58,5 @@ server.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 }); 
 
-server.get('/profile', requiresAuth(), (req, res) => {
-	try {
-		const info= req.oidc.user;
-		console.log(info);
-		res.status(200).json({name:info.name,email:info.email})
-	} catch (error) {
-		res.status(401).json({message:error.message})
-	}
-}); // ruta para ver la informacion del usuario 
 
 module.exports = server;
