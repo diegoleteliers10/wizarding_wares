@@ -5,7 +5,7 @@ import axios  from "axios";
 const initialState = {
   products: [],
   allProducts: [],
-  display: "createProduct",
+  display: "productList",
   loading: false,
     
 }
@@ -22,7 +22,7 @@ const initialState = {
 // } 
 
 export const createProd = createAsyncThunk('admin/createProduct',
-  async ({input}) => {
+  async (input) => {
     const response = await axios.post("http://localhost:3001/productCreated", input)
     return response; 
   }
@@ -54,6 +54,20 @@ export const displayProductList = createAsyncThunk(
   }
 )
 
+export const deleteProduct = createAsyncThunk(
+  'admin/deleteProduct',
+  async (productId) => {
+    try {
+      console.log(productId);
+      const response = await axios.delete(`http://localhost:3001/deleteProduct/${productId}`);
+      return response.data;
+    } catch (error) { 
+      console.error('Error al eliminar el producto:', error);
+      throw error;
+    }
+  }
+);
+
 export const adminSlice = createSlice({
   name: 'admin',
   initialState,
@@ -83,7 +97,6 @@ export const adminSlice = createSlice({
     })
     .addCase(getProducts.pending, (state, action) => {
       state.loading = true
-      console.log(action);
     })
     .addCase(displayCreate.fulfilled, (state, action) => {
       state.display = action.payload;
@@ -97,6 +110,11 @@ export const adminSlice = createSlice({
     .addCase(displayProductList.pending, (state, action) => {
       state.loading = true;
       console.log(state.display);
+    })
+    .addCase(deleteProduct.fulfilled, (state, action) => {
+      state.loading = false;
+      alert('Se ha eliminado el producto seleccionado')
+      // state.products = state.products.filter(product => product.id !== action.payload);
     })
   },
 })
