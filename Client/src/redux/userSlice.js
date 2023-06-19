@@ -8,6 +8,7 @@ const initialState = {
   display: '',
   filterCategory: false,
   filterPrice: [],
+  sort: ['SortR', 'SortP', 'SortN']
 };
 
 export const getProducts = createAsyncThunk(
@@ -82,6 +83,7 @@ export const userSlice = createSlice({
         state.products = action.payload;
         state.filterCategory = false;
         state.filterPrice = [];
+        state.sort = ['SortR', 'SortP', 'SortN'];
       })
       .addCase(getProducts.rejected, (state, action) => {
         state.loading = false;
@@ -115,15 +117,19 @@ export const userSlice = createSlice({
       })
       .addCase(sortByNameAscending, (state) => {
         state.products.sort((a, b) => a.name.localeCompare(b.name));
+        state.sort[2] = 'nameDescending'
       })
       .addCase(sortByNameDescending, (state) => {
         state.products.sort((a, b) => b.name.localeCompare(a.name));
+        state.sort[2] = 'nameAscending'
       })
       .addCase(sortByPriceAscending, (state) => {
         state.products.sort((a, b) => b.price-a.price);
+        state.sort[1] = 'priceLowToHigh'
       })
       .addCase(sortByPriceDescending, (state) => {
         state.products.sort((a, b) => a.price-b.price);
+        state.sort[1] = 'priceHighToLow'
       });
   },
 });

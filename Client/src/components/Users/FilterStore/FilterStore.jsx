@@ -1,7 +1,8 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import { startTransition, useEffect } from "react";
 import { RxCaretSort } from 'react-icons/rx';
-import styles from './FilterStore.module.css';
-import { useDispatch } from 'react-redux';
+import styles from "./FilterStore.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import {
   filterCategory,
   getProducts,
@@ -12,13 +13,32 @@ import {
   sortByPriceDescending,
 } from '../../../redux/userSlice';
 
+
 function FilterStore(props) {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+  const currCategory = useSelector(state => state.user.filterCategory)
+  const currPrice = useSelector(state => state.user.filterPrice);
+  const currSort = useSelector(state => state.user.sort)
+  //console.log(pathname);
+
+  useEffect(()=> {
+    if(currCategory) document.getElementById('filterCategory').value = currCategory;
+    if(currPrice.length){
+      console.log(currPrice)
+       document.getElementById('minPrice').value = currPrice[0];
+       document.getElementById('maxPrice').value = currPrice[1];
+    }
+    if(currSort[1] !== 'SortP') document.getElementById('orderByPrice').value = currSort[1];
+    if(currSort[2] !== 'SortN') document.getElementById('orderByName').value = currSort[2];
+  }, [])
 
   function handleFilterChange(event) {
     const filter = event.target.value;
       dispatch(filterCategory(filter));
+      document.getElementById('orderByPrice').value = 'SortP';
+    document.getElementById('orderByRating').value = 'SortR';
+    document.getElementById('orderByName').value = 'SortN';
   }
   function handleSortChange(event) {
     const sort = event.target.value;
@@ -47,9 +67,9 @@ function FilterStore(props) {
   function handleReset() {
     dispatch(getProducts());
     document.getElementById('filterCategory').value = 'Categoría';
-    document.getElementById('orderByPrice').value = 'Precio';
-    document.getElementById('orderByRating').value = 'Calificación';
-    document.getElementById('orderByName').value = 'Orden';
+    document.getElementById('orderByPrice').value = 'SortP';
+    document.getElementById('orderByRating').value = 'SortR';
+    document.getElementById('orderByName').value = 'SortN';
     document.getElementById('minPrice').value = '';
     document.getElementById('maxPrice').value = '';
   }
@@ -69,7 +89,7 @@ function FilterStore(props) {
           id="orderByRating"
           className={`bg-white ${styles.customSelect}`} // Use the imported class name
         >
-          <option value="Calificación" hidden>
+          <option value="SortR" hidden>
             Calificación
           </option>
           <option value="rateHighToLow">Mejor puntuación</option>
@@ -105,7 +125,7 @@ function FilterStore(props) {
           className={`bg-white ${styles.customSelect}`} // Use the imported class name
           onChange={handleSortChange}
         >
-          <option value="Sort" hidden>
+          <option value="SortP" hidden>
             Precio
           </option>
           <option value="priceHighToLow">Mayor precio</option>
@@ -120,7 +140,7 @@ function FilterStore(props) {
           className={`bg-white ${styles.customSelect}`} // Use the imported class name
           onChange={handleSortChange}
         >
-          <option value="Sort" hidden>
+          <option value="SortN" hidden>
             Orden
           </option>
           <option value="nameAscending">Nombre (A-Z)</option>
