@@ -7,13 +7,14 @@ const deleteProduct = require('../controllers/deleteProduct.controller')
 const searchProductByName = require('../controllers/getProductByName.controller')
 const filteredProduct = require('../controllers/filteredProducts.controller')
 const getDetailProduct = require('../controllers/getDetailProduct.controller')
+const { requiresAuth } = require("express-openid-connect");
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
 const roleRouter = require("./roleRouter"); 
 const router = Router();
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'tempUploads/' });
 
 //user routes
 router.use("/", userRouter);

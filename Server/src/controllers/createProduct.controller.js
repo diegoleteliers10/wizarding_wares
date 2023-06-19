@@ -1,5 +1,6 @@
 const Product = require("../models/Product.model");
 const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
 
 const createProduct = async (req, res) => {
   //obtenemos el path del file
@@ -25,7 +26,15 @@ const createProduct = async (req, res) => {
     categoryCategoryId: id
   })
 
-    res.status(200).send({product:createdProduct,message:'Product created'})
+  fs.unlink(filePath, (error) => {
+    if (error) {
+      console.error('Error al borrar el archivo:', error);
+    } else {
+      console.log('Archivo borrado exitosamente.');
+    }
+  });
+
+    res.status(200).send({product:createdProduct,message:'Product created',image:req.file})
 
   } catch (error) {
     res.status(404).send({message:error.message})
