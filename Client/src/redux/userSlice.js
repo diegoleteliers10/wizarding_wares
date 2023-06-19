@@ -8,7 +8,8 @@ const initialState = {
   display: '',
   filterCategory: false,
   filterPrice: [],
-  sort: ['SortR', 'SortP', 'SortN']
+  sort: ['SortR', 'SortP', 'SortN'],
+  search: '',
 };
 
 export const getProducts = createAsyncThunk(
@@ -67,6 +68,20 @@ export const filterPrice = createAsyncThunk(
   }
 });
 
+export const searchByName = createAsyncThunk(
+  'user/searchByName',
+  async (searchQuery) => {
+    try {
+      //console.log(searchQuery)
+      const response = await axios.get(`http://localhost:3001/searchProduct?name=${searchQuery}`);
+      return [searchQuery, response.data];
+    } catch (error) {
+      console.error('Error obtaining filtered products', error);
+      throw error;
+    }
+  }
+)
+
 export const sortByNameAscending = createAction('user/sortByNameAscending');
 export const sortByNameDescending = createAction('user/sortByNameDescending');
 export const sortByPriceAscending = createAction('user/sortByPriceAscending');
@@ -84,6 +99,7 @@ export const userSlice = createSlice({
         state.filterCategory = false;
         state.filterPrice = [];
         state.sort = ['SortR', 'SortP', 'SortN'];
+        state.search = ''
       })
       .addCase(getProducts.rejected, (state, action) => {
         state.loading = false;
@@ -130,7 +146,21 @@ export const userSlice = createSlice({
       .addCase(sortByPriceDescending, (state) => {
         state.products.sort((a, b) => a.price-b.price);
         state.sort[1] = 'priceHighToLow'
-      });
+      })
+      .addCase(searchByName.fulfilled, (state, action) => {
+        state.loading = false;
+        state.search = action.payload[0]
+        state.products = action.payload[1];
+      })
+      .addCase(searchByName.rejected, (state, action) => {
+        state.loading = false;
+        console.error('Error obtaining searched products ', action.error);
+      })
+      .addCase(searchByName.pending, (state, action) => {
+        state.loading = true;
+        console.log(action);
+      })
+
   },
 });
 
