@@ -20,22 +20,10 @@ const User = sequelize.define("user", {
       isEmail: true,
     }
   },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      len: [6, 20],
-      isAlphanumeric: true,
-    }
+  isActive: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
   },
-  deletedAt: {
-    type: DataTypes.DATE,
-    allowNull: true,
-    defaultValue: null,
-  },
-}, {
-  timestamps: true,
-  paranoid: true, // habilita el borrado lógico
 });
 
 module.exports = User;
