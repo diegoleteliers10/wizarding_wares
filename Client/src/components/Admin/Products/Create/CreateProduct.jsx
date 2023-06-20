@@ -84,14 +84,13 @@ const CreateProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(input);
     const formData = new FormData();
     formData.append("name", input.name);
     formData.append("description", input.description);
     formData.append("image", input.image); // Agrega el archivo como un objeto File
     formData.append("price", input.price);
     formData.append("stock", input.stock);
-    formData.append("category", input.category);
+    formData.append("categoryId", input.category);
     formData.append("isActive", input.isActive);
   
     // new File([input.image], input.image.name)
