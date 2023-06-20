@@ -12,6 +12,7 @@ import {
   sortByPriceAscending,
   sortByPriceDescending,
 } from '../../../redux/userSlice';
+import '../storeStyles.css'; 
 
 
 function FilterStore(props) {
@@ -86,7 +87,7 @@ function FilterStore(props) {
   }
 
   return (
-    <div className={`mx-auto flex justify-center ${styles.filterContainer}`}>
+    <div className={`mx-auto flex justify-center gap-1 storeComponent ${styles.filterContainer}`}>
       <div className={`inline-block ${styles.filterItem}`}>
         <button className="bg-red-100 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-l" onClick={handleReset}>
           Reset

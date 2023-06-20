@@ -78,7 +78,6 @@ export const deleteProduct = createAsyncThunk(
   'admin/deleteProduct',
   async (productId) => {
     try {
-      console.log(productId);
       const response = await axios.delete(`http://localhost:3001/deleteProduct/${productId}`);
       return response.data;
     } catch (error) { 
@@ -148,7 +147,7 @@ export const adminSlice = createSlice({
     })
     .addCase(displayProductList.pending, (state, action) => {
       state.loading = true;
-      console.log(state.display);
+      //console.log(state.display);
     })
     .addCase(deleteProduct.fulfilled, (state, action) => {
       state.loading = false;

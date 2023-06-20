@@ -6,6 +6,13 @@ export default {
       '@layer utilities': {
         '.display-inherit': { 'display': 'inherit' },
       },
+      colors: {
+        wwwhite: '#EAE0D5',     
+        wwbrown: '#5E503F',    
+        wwblack: '#0A0908',
+        wwmaroon: '#692323',
+        wwbeige: '#C6AC8F',      
+      },
     },
   },
   plugins: [],

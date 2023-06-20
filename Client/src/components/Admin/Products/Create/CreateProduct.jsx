@@ -8,9 +8,9 @@ const CreateProduct = () => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  })
+  // })
 
   const [input, setInput] = useState({
     name: "",
@@ -32,6 +32,14 @@ const CreateProduct = () => {
     isActive: true
   });
 
+  function convertBase64(file, callback) {
+    var lector = new FileReader();
+    lector.onloadend = function () {
+      callback(lector.result);
+    };
+    lector.readAsDataURL(file);
+  }
+
   const handleChange = (event) => {
     if (event.target.name === "image") {
       setInput({
@@ -49,6 +57,11 @@ const CreateProduct = () => {
       ...input,
       [event.target.name]: event.target.value
     }));
+    const file = event.target.files[0];
+    convertBase64(file, function (base64) {
+      // base 64 es el valor formateado que obtengo para pasarle al atributo src de una imagen
+      document.imgProduct.src = base64;
+    })
   };
 
   const handleSelect = (event) => {
@@ -71,6 +84,7 @@ const CreateProduct = () => {
 
   };
 
+
   const validate = (input) => {
     let errors = {};
     const { name, description, image, price, stock } = input;
@@ -91,7 +105,7 @@ const CreateProduct = () => {
     formData.append("image", input.image); // Agrega el archivo como un objeto File
     formData.append("price", input.price);
     formData.append("stock", input.stock);
-    formData.append("category", input.category);
+    formData.append("categoryId", input.category);
     formData.append("isActive", input.isActive);
   
     // new File([input.image], input.image.name)
@@ -116,54 +130,54 @@ const CreateProduct = () => {
 
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div>
-        <h2>Acá se crean los productos</h2>
+    <div className="flex justify-center items-center h-screen formContainer">
+      <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
 
-        <div className="">
-          <form onSubmit={handleSubmit} id="form" className="border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
+        <div className="text-left flex">
+          <form onSubmit={handleSubmit} id="form" className="w-3/4">
+        <h2>Product Creation</h2>
 
             <div className="formBox">
 
               <div className="mb-4 md:mt-6 lg:mt-8">
                 <label htmlFor="name">
-                  <span>Nombre</span>
+                  <span>Name</span>
                   <input
                     type="text"
                     name="name"
-                    placeholder="Nombre del producto"
+                    placeholder="Product name"
                     onChange={handleChange}
                     value={input.name}
-                    className="border rounded py-2 px-4 m-2 shadow w-full"
+                    className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
                     required
                   />
 
-                  {errors.name && (<span>{errors.name}</span>)}
                 </label>
+                  {errors.name && (<span className="flex text-red-600">{errors.name}</span>)}
               </div>
 
               <div className="mb-4 md:mt-6 lg:mt-8 ">
-                <label htmlFor="description">
-                  <span>Descripción</span>
+                <label htmlFor="description" className="w-2/3">
+                  <span>Description</span>
                   <textarea
                     type="text"
                     value={input.description}
                     onChange={handleChange}
                     name="description"
-                    className="border rounded py-2 px-4 m-2 w-full shadow"
+                    className="border rounded py-2 px-4 m-2 w-full shadow bg-white"
                     rows="3"
-                    placeholder="Escriba una descripción del producto"
+                    placeholder="Describe the product"
                   />
                 </label>
               </div>
 
               <div className="mb-4 md:mt-6 lg:mt-8">
-                <label htmlFor="image">
-                  <span>Imágen</span>
+                <label htmlFor="image" className="">
+                  <span className="flex mb-2">Image</span>
                   <input
                     type="file"
                     name="image"
-                    className="border rounded py-2 px-4 m-2 shadow w-full"
+                    className=""
                     accept="image/*"
                     onChange={handleChange}
                     
@@ -172,27 +186,27 @@ const CreateProduct = () => {
               </div>
 
               <div className="mb-4 md:mt-6 lg:mt-8">
-                <label> Categoría
+                <label> Category
                   <select
                     name="category"
                     value={input.category}
                     onChange={handleSelect}
                     required
-                    className="border rounded py-2 px-4 m-2 shadow w-full"
+                    className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
                   >
-                    <option value="Libros">Libros</option>
-                    <option value="Varitas">Varitas</option>
-                    <option value="Indumentaria">Indumentaria</option>
-                    <option value="Golosinas">Golosinas</option>
+                    <option value="Libros">Books</option>
+                    <option value="Varitas">Wands</option>
+                    <option value="Indumentaria">Clothing</option>
+                    <option value="Golosinas">Candy</option>
                     <option value="Quidditch">Quidditch</option>
-                    <option value="Misceláneas">Misceláneas</option>
+                    <option value="Misceláneas">Miscellaneous</option>
                   </select>
                 </label>
               </div>
 
               <div className="mb-4 md:mt-6 lg:mt-8 ">
                 <label htmlFor="price">
-                  <span>Precio</span>
+                  <span>Price</span>
                   <CurrencyInput
                     id="validation-example-2-field"
                     placeholder="$0"
@@ -200,7 +214,7 @@ const CreateProduct = () => {
                     allowDecimals={2}
                     step={10}
                     required
-                    className="border rounded py-2 px-4 m-2 shadow w-2/4"
+                    className="border rounded py-2 px-4 m-2 shadow w-2/4 bg-white"
                     onChange={handleCurrencyChange}
                   />
                 </label>
@@ -209,7 +223,7 @@ const CreateProduct = () => {
                   <span>Stock</span>
                   <input
                     type="number"
-                    className="border rounded py-2 px-4 m-2 shadow w-2/4"
+                    className="border rounded py-2 px-4 m-2 shadow w-2/4 bg-white"
                     value={input.stock}
                     onChange={handleChange}
                     name="stock"
@@ -221,10 +235,10 @@ const CreateProduct = () => {
 
               <div className="mb-4 md:mt-6 lg:mt-8">
                 <label htmlFor="isActive">
-                  <span>Estado</span>
+                  <span>State</span>
                   <select
                     name="isActive"
-                    className="border rounded py-2 px-4 m-2 shadow"
+                    className="border rounded py-2 px-4 m-2 shadow bg-white"
                     value={input.value}
                     onChange={handleSelect}
                     required
@@ -239,14 +253,18 @@ const CreateProduct = () => {
 
             <div className="boton">
               <button
-                className="bg-violet-500 rounded hover:bg-violet-600 active:bg-violet-700 focus:outline-2 focus:ring focus:ring-violet-300 w-40 h-10 shadow"
+                className="bg-purple-600 rounded hover:bg-purple-700 active:bg-purple-700 focus:outline-2 focus:ring focus:ring-purple-300 w-40 h-10 shadow text-white"
                 type="submit"
               >
-                Crear
+                Create
               </button>
             </div>
 
           </form>
+          <div className="w-1/4 block my-auto">
+          <p className="flex text-center w-full">Image Preview:</p>
+          <img name='imgProduct' src="https://images2.imgbox.com/e9/37/ASLxULJL_o.png" alt="Preview Image" className="w-72 shadow" />
+          </div>
         </div>
       </div>
     </div>

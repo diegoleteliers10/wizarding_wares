@@ -22,11 +22,11 @@ const ProductListContainer = () => {
         <thead>
           <tr>
             <th>Product</th>
-            <th>Status</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Stock</th>
-            <th>Action</th>
+            <th className='text-center'>Status</th>
+            <th className='text-center'>Price</th>
+            <th className='text-center'>Category</th>
+            <th className='text-center'>Stock</th>
+            <th className='text-center'>Action</th>
           </tr>
         </thead>
         <tbody>

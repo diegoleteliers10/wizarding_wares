@@ -20,7 +20,7 @@
 }
 
 .storeComponentCard {
-width: 25% !important;
+width: 20% !important;
 }
 
 .storeComponentCard .customLink{
@@ -30,4 +30,18 @@ width: 25% !important;
 
 .storeComponent .noProductos {
     height: 70vh;
+}
+
+.storeComponent .navBar{
+    background-color: #692323;
+}
+
+.storeComponent .buttons button{
+    font-family: 'EB Garamond', serif;
+    font-size: 1em;
+}
+
+.storeComponent select {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2em;
 }

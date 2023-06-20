@@ -101,11 +101,11 @@ const EditProduct = () => {
 
     return (
         <div className="flex justify-center items-center h-screen">
-          <div>
-            <h2>Editar "{product.name}"</h2>
+          <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
     
-            <div className="">
-              <form onSubmit={handleSubmit} id="form" className="border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
+            <div className="text-left">
+            <h2>Edit <span className="">"{product.name}"</span></h2>
+              <form onSubmit={handleSubmit} id="form">
     
                 <div className="formBox">
     
@@ -118,7 +118,7 @@ const EditProduct = () => {
                         placeholder="Nombre del producto"
                         onChange={handleChange}
                         value={input.name}
-                        className="border rounded py-2 px-4 m-2 shadow w-full"
+                        className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
                         required
                       />
     
@@ -127,16 +127,16 @@ const EditProduct = () => {
                   </div>
     
                   <div className="mb-4 md:mt-6 lg:mt-8 ">
-                    <label htmlFor="description">
-                      <span>Descripción</span>
+                    <label htmlFor="description" className="w-2/3">
+                      <span>Description</span>
                       <textarea
                         type="text"
                         value={input.description}
                         onChange={handleChange}
                         name="description"
-                        className="border rounded py-2 px-4 m-2 w-full shadow"
+                        className="border rounded py-2 px-4 m-2 w-full shadow bg-white"
                         rows="3"
-                        placeholder="Escriba una descripción del producto"
+                        placeholder="Describe the product"
                       />
                     </label>
                   </div>
@@ -156,27 +156,27 @@ const EditProduct = () => {
                   </div> */}
     
                   <div className="mb-4 md:mt-6 lg:mt-8">
-                    <label> Categoría
+                    <label> Category
                       <select
                         name="categoryId"
                         value={input.categoryId}
                         onChange={handleSelect}
                         required
-                        className="border rounded py-2 px-4 m-2 shadow w-full"
+                        className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
                       >
-                        <option value={1}>Libros</option>
-                        <option value={2}>Varitas</option>
-                        <option value={3}>Indumentaria</option>
-                        <option value={4}>Golosinas</option>
+                        <option value={1}>Books</option>
+                        <option value={2}>Wands</option>
+                        <option value={3}>Clothing</option>
+                        <option value={4}>Candy</option>
                         <option value={5}>Quidditch</option>
-                        <option value={6}>Misceláneas</option>
+                        <option value={6}>Miscellaneous</option>
                       </select>
                     </label>
                   </div>
     
                   <div className="mb-4 md:mt-6 lg:mt-8 ">
                     <label htmlFor="price">
-                      <span>Precio</span>
+                      <span>Price</span>
                       <CurrencyInput
                         id="validation-example-2-field"
                         placeholder="$0"
@@ -185,7 +185,7 @@ const EditProduct = () => {
                         value={input.price}
                         step={10}
                         required
-                        className="border rounded py-2 px-4 m-2 shadow w-2/4"
+                        className="border rounded py-2 px-4 m-2 shadow w-2/4 bg-white"
                         onChange={handleCurrencyChange}
                       />
                     </label>
@@ -194,7 +194,7 @@ const EditProduct = () => {
                       <span>Stock</span>
                       <input
                         type="number"
-                        className="border rounded py-2 px-4 m-2 shadow w-2/4"
+                        className="border rounded py-2 px-4 m-2 shadow w-2/4 bg-white"
                         value={input.stock}
                         onChange={handleChange}
                         name="stock"
@@ -224,10 +224,10 @@ const EditProduct = () => {
     
                 <div className="boton">
                   <button
-                    className="bg-violet-500 rounded hover:bg-violet-600 active:bg-violet-700 focus:outline-2 focus:ring focus:ring-violet-300 w-40 h-10 shadow"
+                    className="bg-purple-600 rounded hover:bg-purple-700 active:bg-purple-700 focus:outline-2 focus:ring focus:ring-purple-300 w-40 h-10 shadow text-white"
                     type="submit"
                   >
-                    Editar
+                    Edit product
                   </button>
                 </div>
     
