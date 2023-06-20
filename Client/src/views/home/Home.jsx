@@ -8,13 +8,14 @@ import Col from 'react-bootstrap/Col';
 
 const Home = () => {
     return(
-        <Container>
+        <div>
             <NavBar />
 
             < Cards />
             
             < Footer />
-        </Container>
+        </div>
+
     )
 }
 
