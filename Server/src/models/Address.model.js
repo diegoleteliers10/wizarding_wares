@@ -10,11 +10,17 @@ const Address = sequelize.define('address', {
     },
     street: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isAlphanumeric: true
+        }
     },
     number: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isNumeric: true
+        }
     },
     zipCode: {
         type: DataTypes.INTEGER,
@@ -26,7 +32,11 @@ const Address = sequelize.define('address', {
     },
     phoneNumber: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isNumeric: true,
+            max: 23
+        }
     }
 });
 
