@@ -44,7 +44,7 @@ const createUserRegister = async (name, email) => {
 
   // Si el role no existe. Lanzamos un Error
   (isExistsRole == null) && arrojarError("El role no existe");
-  //***************************************************** */
+  //---------------------------------------------------------*
 
   // Caso contrario... Creamos un nuevo usuario
   const newUser = await User.create({name, email});
@@ -55,6 +55,47 @@ const createUserRegister = async (name, email) => {
   // }
 };
 
+
+
+// *************************************************************************************************
+
+
+// *** EDITAR UN USUARIO ***
+const updateUser = async (name, email, userId) => {
+
+  // Verificamos si nos pasan name y email. Si no... lanzamos un Error
+  (!name && !email) && arrojarError("Campos name y email son requeridos");
+
+  // Si recibimos name
+  if(name){
+    // Verificamos si name es de tipo de dato string y si solo contenga Letras del ABC... y Espacios. Si no... Lanzamos un Error
+    const validName = (typeof name == "string" && validateString(name));
+    (!validName) && arrojarError("Campo name, debe estar conformado solo por letras y espacios");
+  } 
+
+  // Si recibimos email
+  if(email){
+    // Verificamos si email es de tipo de dato string y con formato Correo Electronico. Si no... Lanzamos un Error
+    const validEmail = (typeof email == "string" && validadorDeEmails(email));
+    (!validEmail) && arrojarError("'email' debe tener el formato: 'example@example.com");
+  }
+
+  // Verificamos si el usuario existe. Si no... Lanzamos un Error
+  const isExistsUser = await User.findAll({
+    where: {
+      userId: userId
+    }
+  });
+
+  (!isExistsUser.length) && arrojarError("Cuenta no existe");  
+
+  // Caso contrario se actualiza el usuario
+  if(name){await User.update({name: name},{where:{userId:userId}})};
+  if(email){await User.update({email: email},{where:{userId:userId}})};
+
+  return isExistsUser;
+  // return `User ${isExistsUser[0].name}; Successfully Updated`;
+};
 
 
 // *************************************************************************************************
@@ -95,5 +136,6 @@ const logicalUserDeletion = async (userId) => {
 
 module.exports = {
   createUserRegister,
+  updateUser,
   logicalUserDeletion,
 };
