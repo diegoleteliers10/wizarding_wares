@@ -2,11 +2,12 @@ const { Router } = require('express');
 const getAllProducts = require('../controllers/getAllProducts.controller');
 const getAllUsers = require('../controllers/getAllUsers.controller');
 const createProduct = require('../controllers/createProduct.controller');
-const editProduct = require('../controllers/editProduct.controller')
-const deleteProduct = require('../controllers/deleteProduct.controller')
-const searchProductByName = require('../controllers/getProductByName.controller')
-const filteredProduct = require('../controllers/filteredProducts.controller')
-const getDetailProduct = require('../controllers/getDetailProduct.controller')
+const editProduct = require('../controllers/editProduct.controller');
+const deleteProduct = require('../controllers/deleteProduct.controller');
+const searchProductByName = require('../controllers/getProductByName.controller');
+const filteredProduct = require('../controllers/filteredProducts.controller');
+const getDetailProduct = require('../controllers/getDetailProduct.controller');
+const postUserAddress = require('../controllers/userAddress.controller');
 const { requiresAuth } = require("express-openid-connect");
 
 const categoryRouter = require("./categoryRouter");
@@ -17,6 +18,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'tempUploads/' });
 
 //user routes
+router.post('/userAddress', postUserAddress)
 router.use("/", userRouter);
 router.get('/userLogin', (req, res) => {
   res.redirect('http://localhost:3001/login');
