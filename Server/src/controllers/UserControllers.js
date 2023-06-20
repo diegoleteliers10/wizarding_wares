@@ -1,5 +1,5 @@
 const { User, Role } = require("../models/relationship/relationship");
-const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
+const { arrojarError, validadorDeEmails, validateString } = require("../utils/utils");
 
 
 // *** CREAR UN USUARIO **
@@ -44,7 +44,7 @@ const createUserRegister = async (name, email) => {
 
   // Si el role no existe. Lanzamos un Error
   (isExistsRole == null) && arrojarError("El role no existe");
-  //***************************************************** */
+  //---------------------------------------------------------*
 
   // Caso contrario... Creamos un nuevo usuario
   const newUser = await User.create({name, email});
@@ -55,6 +55,54 @@ const createUserRegister = async (name, email) => {
   // }
 };
 
+
+
+// *************************************************************************************************
+
+
+// *** EDITAR UN USUARIO ***
+const updateUser = async (name, email, userId) => {
+  let updateUser;
+
+  // Verificamos si el usuario existe. Si no... Lanzamos un Error
+  const isExistsUser = await User.findAll({
+    where: {
+      userId: userId
+    }
+  });
+
+  (!isExistsUser.length) && arrojarError("Cuenta no existe");  
+
+  // Verificamos si nos pasan name y email. Si no... lanzamos un Error
+  (!name && !email) && arrojarError("Campos name y email son requeridos");
+
+  // Si recibimos name
+  if(name){
+    // Verificamos si name es de tipo de dato string y si solo contenga Letras del ABC... y Espacios. Si no... Lanzamos un Error
+    const validName = (typeof name == "string" && validateString(name));
+    (!validName) && arrojarError("Campo name, debe estar conformado solo por letras y espacios");
+
+    // Actualizamos name
+    (name) && (await User.update({name: name},{where:{userId:userId}}));
+  } 
+
+  // Si recibimos email
+  if(email){
+    // Verificamos si email es de tipo de dato string y con formato Correo Electronico. Si no... Lanzamos un Error
+    const validEmail = (typeof email == "string" && validadorDeEmails(email));
+    (!validEmail) && arrojarError("'email' debe tener el formato: 'example@example.com");
+
+    // Actualizamos email
+    (email) && (await User.update({email: email},{where:{userId:userId}}));
+  }
+
+  // Buscamos el usuario actualizado
+  updateUser = await User.findAll({where:{userId:userId}});
+
+  return updateUser[0];
+  // return {"Perfect" : `User ${updateUser[0].name}; Successfully Updated`};
+  // return;
+};
 
 
 // *************************************************************************************************
@@ -95,5 +143,6 @@ const logicalUserDeletion = async (userId) => {
 
 module.exports = {
   createUserRegister,
+  updateUser,
   logicalUserDeletion,
 };
