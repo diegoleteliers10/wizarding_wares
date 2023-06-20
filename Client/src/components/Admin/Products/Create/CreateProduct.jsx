@@ -72,16 +72,17 @@ const CreateProduct = () => {
   };
 
   const handleCurrencyChange = (event) => {
+    let value = event.target.value.replace(/\$/g, '')
+    value = value.replace(/\./g, '')
+    value = value.replace(/\,/g, '')
     setInput({
       ...input,
-      price: (event.target.value).replace(/\$/g, '')
+      price: value
     });
-
     setErrors(validate({
       ...input,
       price: event.target.value
     }));
-
   };
 
 
@@ -120,6 +121,7 @@ const CreateProduct = () => {
           category: "",
           isActive: true
         });
+        document.imgProduct.src = 'https://images2.imgbox.com/e9/37/ASLxULJL_o.png';
       })
       .catch((error) => {
         console.log("Error al crear el producto:", error);

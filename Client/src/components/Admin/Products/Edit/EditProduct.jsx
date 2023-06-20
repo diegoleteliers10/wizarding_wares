@@ -62,16 +62,17 @@ const EditProduct = () => {
         };
       
         const handleCurrencyChange = (event) => {
+          let value = event.target.value.replace(/\$/g, '')
+          value = value.replace(/\./g, '')
+          value = value.replace(/\,/g, '')
           setInput({
             ...input,
-            price: (event.target.value).replace(/\$/g, '')
+            price: value
           });
-      
           setErrors(validate({
             ...input,
             price: event.target.value
           }));
-      
         };
 
       const validate = (input) => {
