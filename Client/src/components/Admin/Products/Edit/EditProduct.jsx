@@ -2,10 +2,16 @@ import { useState } from "react";
 import CurrencyInput from "react-currency-input-field";
 import { useDispatch, useSelector } from "react-redux";
 import { displayProductList, editProduct } from "../../../../redux/adminSlice";
+import PopUp from "../../PopUp/PopUp";
+import { BiArrowBack } from "react-icons/bi";
 
 const EditProduct = () => {
     const dispatch = useDispatch()
     const product = useSelector((state) => state.admin.edit)
+
+    function handleDisplay(){
+      dispatch(displayProductList())
+    }
 
     const [input, setInput] = useState({
         id: product.productId,
@@ -26,7 +32,10 @@ const EditProduct = () => {
         stock: 0,
         category: "",
         isActive: true
-      })
+      });
+
+      const [popUp, setPopUp] = useState(false);
+      const [popUpMessage, setPopUpMessage] = useState('');
 
       const handleChange = (event) => {
         if (event.target.name === "image") {
@@ -62,16 +71,17 @@ const EditProduct = () => {
         };
       
         const handleCurrencyChange = (event) => {
+          let value = event.target.value.replace(/\$/g, '')
+          value = value.replace(/\./g, '')
+          value = value.replace(/\,/g, '')
           setInput({
             ...input,
-            price: (event.target.value).replace(/\$/g, '')
+            price: value
           });
-      
           setErrors(validate({
             ...input,
             price: event.target.value
           }));
-      
         };
 
       const validate = (input) => {
@@ -86,23 +96,34 @@ const EditProduct = () => {
       };
 
       const handleSubmit = async (event) => {
-        
         event.preventDefault();
-        console.log(input);
-        await dispatch(editProduct(input))
-
-        .then(() => {
-          dispatch(displayProductList())
-          })
-          .catch((error) => {
-            console.log("Error al actualizar el producto:", error);
-          });
+        try {
+          await dispatch(editProduct(input));
+          setPopUpMessage('Product edited successfully');
+          setPopUp(true);
+          setTimeout(() => {
+            dispatch(displayProductList());
+          }, 2000); // Delay the execution for 2 seconds
+        } catch (error) {
+          console.log("Error al actualizar el producto:", error);
+        }
       };
 
     return (
+      <div>
+        {
+            popUp === true && (
+              <PopUp trigger={popUp} setTrigger={setPopUp}>
+                <h3>{popUpMessage}</h3>
+              </PopUp>
+        )}
         <div className="flex justify-center items-center h-screen">
           <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
-    
+          <div className="flex">
+              <button className="flex text-purple-600 items-center font-medium mb-2 hover:text-purple-700" onClick={handleDisplay}>
+                <BiArrowBack className="mr-2"/>Back 
+              </button>
+            </div>
             <div className="text-left">
             <h2>Edit <span className="">"{product.name}"</span></h2>
               <form onSubmit={handleSubmit} id="form">
@@ -164,12 +185,12 @@ const EditProduct = () => {
                         required
                         className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
                       >
-                        <option value={1}>Books</option>
-                        <option value={2}>Wands</option>
-                        <option value={3}>Clothing</option>
-                        <option value={4}>Candy</option>
+                        <option value={1}>Libros</option>
+                        <option value={2}>Varitas</option>
+                        <option value={3}>Indumentaria</option>
+                        <option value={4}>Golosinas</option>
                         <option value={5}>Quidditch</option>
-                        <option value={6}>Miscellaneous</option>
+                        <option value={6}>Misceláneas</option>
                       </select>
                     </label>
                   </div>
@@ -209,7 +230,7 @@ const EditProduct = () => {
                       <span>Estado</span>
                       <select
                         name="isActive"
-                        className="border rounded py-2 px-4 m-2 shadow"
+                        className="border rounded py-2 px-4 m-2 shadow bg-white"
                         value={input.value}
                         onChange={handleSelect}
                         required
@@ -235,6 +256,7 @@ const EditProduct = () => {
             </div>
           </div>
         </div>
+      </div>
       );
 }
 

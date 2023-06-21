@@ -17,7 +17,7 @@ const Cards = () => {
         //console.log(products)
     }, [products])
     return (
-        <div className='storeComponent'>
+        <div className='storeComponent p-8'>
         <Row xs={1} md={2} className="g-4 my-4">
             <FilterStore/>
         </Row>
