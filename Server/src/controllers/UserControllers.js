@@ -31,7 +31,7 @@ const createUserRegister = async (name, email, password) => {
   });
 
   // En caso de que el email ya se encuentre en DB... Lanzamos un error
-  (isExistEmail !== null) && arrojarError(`El Email: ${email}. No esta disponible`);
+  (isExistEmail !== null)&& arrojarError(`El Email: ${email}. No esta disponible`);
 
   // *** Esta parte se supone que no llegara al usuario ***
   //------------------------------------------------------*
@@ -61,7 +61,7 @@ const createUserRegister = async (name, email, password) => {
 
 
 // *** EDITAR UN USUARIO ***
-const updateUser = async (name, email, userId) => {
+const updateUser = async (name, email, password, userId) => {
   let updateUser;
 
   // Verificamos si nos pasan userId. Si no... Lanzamos un Error
@@ -77,7 +77,7 @@ const updateUser = async (name, email, userId) => {
   (!isExistsUser.length) && arrojarError("Cuenta no existe");  
 
   // Verificamos si nos pasan name y email. Si no... lanzamos un Error
-  (!name && !email) && arrojarError("Campos name y email son requeridos");
+  (!name && !email && !password) && arrojarError("Campos name, email y password Son Requeridos");
 
   // Si recibimos name
   if(name){
@@ -99,11 +99,22 @@ const updateUser = async (name, email, userId) => {
     (email) && (await User.update({email: email},{where:{userId:userId}}));
   }
 
+  // Si recibimos password
+  if(password){
+    // Verificamos si password es de tipo de dato string y cumpla con los requisitos
+    // Sea alfanumerica ( Letras y Numeros ), tenga entre 6 y 20 caracteres y como minimo tenga una letra en Mayuscula
+    const validPassword = (typeof password == "string" && validadorDePassword(password));
+    (!validPassword) && arrojarError("password de ser alfanumerica ( Letras y Numeros ), tener entre 6 y 20 caracteres y como minimo una letra en Mayuscula"); 
+
+    // Actualizamos password
+    (password) && await User.update({password: password},{where:{userId:userId}});
+  }
+
   // Buscamos el usuario actualizado
   updateUser = await User.findAll({where:{userId:userId}});
 
-  return updateUser[0];
-  // return {"Perfect" : `User ${updateUser[0].name}; Successfully Updated`};
+  // return updateUser[0];
+  return {"Perfect" : `User ${updateUser[0].name}; Successfully Updated`};
   // return;
 };
 

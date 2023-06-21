@@ -17,13 +17,13 @@ userRouter.post("/user", async (req, res) => {
 
 // Ruta Para Editar Un Usuario
 userRouter.put("/user/:userId", async (req, res) => {
-  const {name, email} = req.body;
+  const {name, email, password} = req.body;
   const { userId } = req.params;
   try {
-    const result = await updateUser(name, email, userId);
+    const result = await updateUser(name, email, password, userId);
     return res.status(200).json(result);
   } catch (error) {
-    return res.status(200).json({
+    return res.status(404).json({
       "Error": error.message
     });
   }
