@@ -9,6 +9,7 @@ const filteredProduct = require('../controllers/filteredProducts.controller');
 const getDetailProduct = require('../controllers/getDetailProduct.controller');
 const postUserAddress = require('../controllers/userAddress.controller');
 const userFinalDelete = require('../controllers/userFinalDelete.controller')
+const deleteAddress = require('../controllers/userDeleteAddress.controller')
 const createReview = require('../controllers/createReview.controller')
 
 const categoryRouter = require("./categoryRouter");
@@ -24,6 +25,8 @@ const upload = multer({ dest: 'tempUploads/' });
 router.post('/userAddress', postUserAddress)
 router.use("/", userRouter);
 router.post('/createReview',createReview)
+router.delete('/deleteAddress/:id', deleteAddress)
+
 //user and admin routes
 router.get('/searchProduct', searchProductByName)
 router.get('/allproducts', getAllProducts)
