@@ -20,6 +20,14 @@ const User = sequelize.define("user", {
       isEmail: true,
     }
   },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate:{
+      len: [6, 20],
+      isAlphanumeric: true,
+    }
+  },
   isActive: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
