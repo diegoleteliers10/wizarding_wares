@@ -12,7 +12,9 @@ const { requiresAuth } = require("express-openid-connect");
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
-const roleRouter = require("./roleRouter"); 
+const roleRouter = require("./roleRouter");
+const userRouterAdmin = require("./userRouterAdmin"); 
+
 const router = Router();
 const multer = require('multer');
 const upload = multer({ dest: 'tempUploads/' });
@@ -47,6 +49,7 @@ router.put('/editProduct/:id', editProduct)
 router.delete('/deleteProduct/:id', deleteProduct)
 router.use("/", categoryRouter);
 router.use("/", roleRouter);
+router.use("/", userRouterAdmin);
 
 
 module.exports = router;
