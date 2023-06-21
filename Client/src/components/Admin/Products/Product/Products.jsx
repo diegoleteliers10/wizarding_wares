@@ -10,6 +10,7 @@ const Product = ({ product }) => {
 
   const products = useSelector((state) => state.admin.products)
   const editState = useSelector((state) => state.admin.edit)
+  const [refresh, setRefresh] = useState(false)
 
   const [edit, setEdit] = useState(product)
 
@@ -28,16 +29,21 @@ const Product = ({ product }) => {
     setPopUp(true);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirm = async () => {
     const productId = product.productId;
-    dispatch(deleteProduct(productId));
-    dispatch(getProducts());
+    await dispatch(deleteProduct(productId));
     setPopUp(false);
+    await dispatch(getProducts());
+    
   };
 
   useEffect(()=>{
-    //cuando se despacha una accion actualizo componente
-  }, [dispatch])
+      //cuando se despacha la accion getProducts se actualiza el componente
+      if (refresh) {
+        dispatch(getProducts());
+        setRefresh(false);
+      }
+  }, [refresh, dispatch]);
 
   let category;
   let categoryClass = ''; 
@@ -63,15 +69,14 @@ const Product = ({ product }) => {
   }
 
   return (
-    <tr key={product.id}>
-      {
-        popUp === true && (
-          <PopUp trigger={popUp} setTrigger={setPopUp} handleConfirm={handleConfirmDelete}>
-            <h3>{popUpMessage}</h3>
-            <p className='font-xl'>The item will no longer be visible in the store but can be re-activated in the future</p>
-          </PopUp>
-        )
-      }
+    <>
+    {popUp === true && (
+      <PopUp trigger={popUp} setTrigger={setPopUp} handleConfirm={handleConfirm}>
+        <h3>{popUpMessage}</h3>
+        <p className='font-xl'>The item will no longer be visible in the store but can be re-activated in the future</p>
+      </PopUp>
+    )}
+    <tr key={product.id} className={product.isActive === false ? 'text-gray-400' : ''}>
       <td>{product.name}</td>
       <td className='text-center'>{product.isActive === true ? 'Active' : 'Inactive'}</td>
       <td className='text-center'>$ {product.price}</td>
@@ -90,6 +95,7 @@ const Product = ({ product }) => {
         </button>
       </td>
     </tr>
+  </>
   );
 };
 

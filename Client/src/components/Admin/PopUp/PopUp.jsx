@@ -1,5 +1,6 @@
 import React from "react";
 import { GrClose } from "react-icons/gr";
+import { NavLink } from "react-router-dom";
 
 function PopUp(props) {
   return props.trigger ? (
