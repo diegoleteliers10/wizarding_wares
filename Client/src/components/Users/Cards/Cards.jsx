@@ -29,6 +29,7 @@ const Cards = () => {
                     image={product.image}
                     name={product.name}
                     price={product.price}
+                    stock={product.stock}
                     isActive={product.isActive}
                 />
             ))}

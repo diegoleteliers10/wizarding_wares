@@ -74,9 +74,9 @@ const Product = ({ product }) => {
       }
       <td>{product.name}</td>
       <td className='text-center'>{product.isActive === true ? 'Active' : 'Inactive'}</td>
-      <td className='text-center'>${product.price}</td>
+      <td className='text-center'>$ {product.price}</td>
       <td className='text-center'>
-        <span className={`inline-flex px-2 text-xs font-medium leading-5 rounded-full ${categoryClass}`}>
+        <span className={product.isActive === false ? '' :`inline-flex px-2 text-xs font-medium leading-5 rounded-full ${categoryClass}`}>
           {category}
         </span>
       </td>
