@@ -8,6 +8,7 @@ import { BiArrowBack } from "react-icons/bi";
 const EditProduct = () => {
     const dispatch = useDispatch()
     const product = useSelector((state) => state.admin.edit)
+  
 
     function handleDisplay(){
       dispatch(displayProductList())
@@ -23,6 +24,7 @@ const EditProduct = () => {
         categoryId: product.categoryCategoryId,
         isActive: product.isActive
       });
+      console.log(input)
 
       const [errors, setErrors] =useState({
         name: "",
@@ -143,8 +145,8 @@ const EditProduct = () => {
                         required
                       />
     
-                      {errors.name && (<span>{errors.name}</span>)}
                     </label>
+                      {errors.name && (<span className="flex text-red-600">{errors.name}</span>)}
                   </div>
     
                   <div className="mb-4 md:mt-6 lg:mt-8 ">

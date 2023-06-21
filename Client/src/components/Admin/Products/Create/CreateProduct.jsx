@@ -63,6 +63,25 @@ const CreateProduct = () => {
       ...input,
       [event.target.name]: event.target.value
     }));
+  };
+
+  const handleImageChange = (event) => {
+    if (event.target.name === "image") {
+      setInput({
+        ...input,
+        [event.target.name]: event.target.files[0],
+      });
+    } else {
+      setInput({
+        ...input,
+        [event.target.name]: event.target.value,
+      });
+    }
+
+    setErrors(validate({
+      ...input,
+      [event.target.name]: event.target.value
+    }));
     const file = event.target.files[0];
     convertBase64(file, function (base64) {
       // base 64 es el valor formateado que obtengo para pasarle al atributo src de una imagen
@@ -200,7 +219,7 @@ const CreateProduct = () => {
                       name="image"
                       className=""
                       accept="image/*"
-                      onChange={handleChange}
+                      onChange={handleImageChange}
                       
                     />
                   </label>

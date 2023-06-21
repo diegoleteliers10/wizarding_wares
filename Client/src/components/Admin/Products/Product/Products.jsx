@@ -90,7 +90,7 @@ const Product = ({ product }) => {
         <button className='button' onClick={() => handleEdit(product)}>
           <FiEdit />
         </button>
-        <button value={product.productId} onClick={product.isActive === true && handleDelete} className={product.isActive === false ? 'pointer-events-none opacity-30' : 'button'}>
+        <button value={product.productId} onClick={product.isActive === true ? handleDelete : undefined} className={product.isActive === false ? 'pointer-events-none opacity-30' : 'button'}>
           <FiTrash2 />
         </button>
       </td>
