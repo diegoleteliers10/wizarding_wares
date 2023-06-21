@@ -108,7 +108,7 @@ export const adminSlice = createSlice({
     })
     .addCase(editProduct.fulfilled, (state, action) => {
       state.loading = false
-      alert('La actualización se realizó con éxito!')
+      //alert('La actualización se realizó con éxito!')
       console.log(action.payload);
     })
     .addCase(editProduct.rejected, (state, action) => {
@@ -151,7 +151,7 @@ export const adminSlice = createSlice({
     })
     .addCase(deleteProduct.fulfilled, (state, action) => {
       state.loading = false;
-      state.products = state.products;
+      //state.products = state.products;
     })
   },
 })

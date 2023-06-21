@@ -1,16 +1,19 @@
 import "./CreateProduct.module.css";
 import { useEffect, useState } from "react";
 import CurrencyInput from 'react-currency-input-field';
-import { createProd } from "../../../../redux/adminSlice";
+import { createProd, displayProductList } from "../../../../redux/adminSlice";
 import { useDispatch } from "react-redux"
+import PopUp from "../../PopUp/PopUp";
+import { BiArrowBack } from "react-icons/bi";
+
 
 const CreateProduct = () => {
 
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-
-  // })
+  function handleDisplay(){
+    dispatch(displayProductList())
+  }
 
   const [input, setInput] = useState({
     name: "",
@@ -31,6 +34,9 @@ const CreateProduct = () => {
     category: "",
     isActive: true
   });
+
+  const [popUp, setPopUp] = useState(false);
+  const [popUpMessage, setPopUpMessage] = useState('');
 
   function convertBase64(file, callback) {
     var lector = new FileReader();
@@ -122,6 +128,8 @@ const CreateProduct = () => {
           isActive: true
         });
         document.imgProduct.src = 'https://images2.imgbox.com/e9/37/ASLxULJL_o.png';
+        setPopUpMessage('Product created successfully');
+          setPopUp(true);
       })
       .catch((error) => {
         console.log("Error al crear el producto:", error);
@@ -131,140 +139,153 @@ const CreateProduct = () => {
 
 
   return (
-    <div className="flex justify-center items-center h-screen formContainer">
-      <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
+    <div>
+        {
+            popUp === true && (
+              <PopUp trigger={popUp} setTrigger={setPopUp} display='productList'>
+                <h3>{popUpMessage}</h3>
+              </PopUp>
+        )}
+      <div className="flex justify-center items-center h-screen formContainer">
+        <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
 
-        <div className="text-left flex">
-          <form onSubmit={handleSubmit} id="form" className="w-3/4">
-        <h2>Product Creation</h2>
-
-            <div className="formBox">
-
-              <div className="mb-4 md:mt-6 lg:mt-8">
-                <label htmlFor="name">
-                  <span>Name</span>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Product name"
-                    onChange={handleChange}
-                    value={input.name}
-                    className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                    required
-                  />
-
-                </label>
-                  {errors.name && (<span className="flex text-red-600">{errors.name}</span>)}
-              </div>
-
-              <div className="mb-4 md:mt-6 lg:mt-8 ">
-                <label htmlFor="description" className="w-2/3">
-                  <span>Description</span>
-                  <textarea
-                    type="text"
-                    value={input.description}
-                    onChange={handleChange}
-                    name="description"
-                    className="border rounded py-2 px-4 m-2 w-full shadow bg-white"
-                    rows="3"
-                    placeholder="Describe the product"
-                  />
-                </label>
-              </div>
-
-              <div className="mb-4 md:mt-6 lg:mt-8">
-                <label htmlFor="image" className="">
-                  <span className="flex mb-2">Image</span>
-                  <input
-                    type="file"
-                    name="image"
-                    className=""
-                    accept="image/*"
-                    onChange={handleChange}
-                    
-                  />
-                </label>
-              </div>
-
-              <div className="mb-4 md:mt-6 lg:mt-8">
-                <label> Category
-                  <select
-                    name="category"
-                    value={input.category}
-                    onChange={handleSelect}
-                    required
-                    className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                  >
-                    <option value="Libros">Books</option>
-                    <option value="Varitas">Wands</option>
-                    <option value="Indumentaria">Clothing</option>
-                    <option value="Golosinas">Candy</option>
-                    <option value="Quidditch">Quidditch</option>
-                    <option value="Misceláneas">Miscellaneous</option>
-                  </select>
-                </label>
-              </div>
-
-              <div className="mb-4 md:mt-6 lg:mt-8 ">
-                <label htmlFor="price">
-                  <span>Price</span>
-                  <CurrencyInput
-                    id="validation-example-2-field"
-                    placeholder="$0"
-                    prefix="$"
-                    allowDecimals={2}
-                    step={10}
-                    required
-                    className="border rounded py-2 px-4 m-2 shadow w-2/4 bg-white"
-                    onChange={handleCurrencyChange}
-                  />
-                </label>
-
-                <label htmlFor="stock">
-                  <span>Stock</span>
-                  <input
-                    type="number"
-                    className="border rounded py-2 px-4 m-2 shadow w-2/4 bg-white"
-                    value={input.stock}
-                    onChange={handleChange}
-                    name="stock"
-                    min="0"
-                    required
-                  />
-                </label>
-              </div>
-
-              <div className="mb-4 md:mt-6 lg:mt-8">
-                <label htmlFor="isActive">
-                  <span>State</span>
-                  <select
-                    name="isActive"
-                    className="border rounded py-2 px-4 m-2 shadow bg-white"
-                    value={input.value}
-                    onChange={handleSelect}
-                    required
-                  >
-                    <option value={true}>Activado</option>
-                    <option value={false}>En pausa</option>
-                  </select>
-                </label>
-              </div>
-
-            </div>
-
-            <div className="boton">
-              <button
-                className="bg-purple-600 rounded hover:bg-purple-700 active:bg-purple-700 focus:outline-2 focus:ring focus:ring-purple-300 w-40 h-10 shadow text-white"
-                type="submit"
-              >
-                Create
+            <div className="flex">
+              <button className="flex text-purple-600 items-center font-medium mb-2 hover:bg-purple-700" onClick={handleDisplay}>
+                <BiArrowBack className="mr-2"/>Back 
               </button>
             </div>
+          <div className="text-left flex">
+            <form onSubmit={handleSubmit} id="form" className="w-3/4">
+          <h2>Product Creation</h2>
 
-          </form>
-          <div className="w-1/4 block my-auto">
-          <p className="flex text-center w-full">Image Preview:</p>
-          <img name='imgProduct' src="https://images2.imgbox.com/e9/37/ASLxULJL_o.png" alt="Preview Image" className="w-72 shadow" />
+              <div className="formBox">
+
+                <div className="mb-4 md:mt-6 lg:mt-8">
+                  <label htmlFor="name">
+                    <span>Name</span>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Product name"
+                      onChange={handleChange}
+                      value={input.name}
+                      className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                      required
+                    />
+
+                  </label>
+                    {errors.name && (<span className="flex text-red-600">{errors.name}</span>)}
+                </div>
+
+                <div className="mb-4 md:mt-6 lg:mt-8 ">
+                  <label htmlFor="description" className="w-2/3">
+                    <span>Description</span>
+                    <textarea
+                      type="text"
+                      value={input.description}
+                      onChange={handleChange}
+                      name="description"
+                      className="border rounded py-2 px-4 m-2 w-full shadow bg-white"
+                      rows="3"
+                      placeholder="Describe the product"
+                    />
+                  </label>
+                </div>
+
+                <div className="mb-4 md:mt-6 lg:mt-8">
+                  <label htmlFor="image" className="">
+                    <span className="flex mb-2">Image</span>
+                    <input
+                      type="file"
+                      name="image"
+                      className=""
+                      accept="image/*"
+                      onChange={handleChange}
+                      
+                    />
+                  </label>
+                </div>
+
+                <div className="mb-4 md:mt-6 lg:mt-8">
+                  <label> Category
+                    <select
+                      name="category"
+                      value={input.category}
+                      onChange={handleSelect}
+                      required
+                      className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                    >
+                      <option value="Libros">Books</option>
+                      <option value="Varitas">Wands</option>
+                      <option value="Indumentaria">Clothing</option>
+                      <option value="Golosinas">Candy</option>
+                      <option value="Quidditch">Quidditch</option>
+                      <option value="Misceláneas">Miscellaneous</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div className="mb-4 md:mt-6 lg:mt-8 ">
+                  <label htmlFor="price">
+                    <span>Price</span>
+                    <CurrencyInput
+                      id="validation-example-2-field"
+                      placeholder="$0"
+                      prefix="$"
+                      allowDecimals={2}
+                      step={10}
+                      required
+                      className="border rounded py-2 px-4 m-2 shadow w-2/4 bg-white"
+                      onChange={handleCurrencyChange}
+                    />
+                  </label>
+
+                  <label htmlFor="stock">
+                    <span>Stock</span>
+                    <input
+                      type="number"
+                      className="border rounded py-2 px-4 m-2 shadow w-2/4 bg-white"
+                      value={input.stock}
+                      onChange={handleChange}
+                      name="stock"
+                      min="0"
+                      required
+                    />
+                  </label>
+                </div>
+
+                <div className="mb-4 md:mt-6 lg:mt-8">
+                  <label htmlFor="isActive">
+                    <span>State</span>
+                    <select
+                      name="isActive"
+                      className="border rounded py-2 px-4 m-2 shadow bg-white"
+                      value={input.value}
+                      onChange={handleSelect}
+                      required
+                    >
+                      <option value={true}>Activado</option>
+                      <option value={false}>En pausa</option>
+                    </select>
+                  </label>
+                </div>
+
+              </div>
+
+              <div className="boton">
+                <button
+                  className="bg-purple-600 rounded hover:bg-purple-700 active:bg-purple-700 focus:outline-2 focus:ring focus:ring-purple-300 w-40 h-10 shadow text-white"
+                  type="submit"
+                >
+                  Create
+                </button>
+              </div>
+
+            </form>
+            <div className="w-1/4 block my-auto">
+            <p className="flex text-center w-full">Image Preview:</p>
+            <img name='imgProduct' src="https://images2.imgbox.com/e9/37/ASLxULJL_o.png" alt="Preview Image" className="w-72 shadow" />
+            </div>
           </div>
         </div>
       </div>
