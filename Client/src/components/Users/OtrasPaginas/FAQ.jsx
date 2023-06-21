@@ -2,13 +2,13 @@ import React from "react";
 import Accordion from 'react-bootstrap/Accordion';
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
+import BackButton from "../BackButton/BackButton";
 import "./buttonBack.css"
-import { Link } from "react-router-dom"
 
 const Faq = () => {
     return(
         <Container>
-        <Link to="/" className="btn btn-primary">Volver a Home</Link>
+          <BackButton/>
          <Row className="justify-content-center">
          <h1 className="text-center mb-5">FAQ</h1>
          </Row>

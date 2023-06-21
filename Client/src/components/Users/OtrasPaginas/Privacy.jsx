@@ -2,12 +2,12 @@ import React from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import "./buttonBack.css"
-import { Link } from "react-router-dom"
+import BackButton from "../BackButton/BackButton";
 
 const Privacy = () => {
   return (
     <Container>
-        <Link to="/" className="btn btn-primary">Volver a Home</Link>
+        <BackButton/>
       <Row className="justify-content-center">
         <h1 className="text-center mb-5">Política de Privacidad</h1>
       </Row>

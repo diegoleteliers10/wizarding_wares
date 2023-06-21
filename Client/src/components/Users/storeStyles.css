@@ -68,3 +68,33 @@ opacity: 0.5;
     font-family: 'EB Garamond', serif;
     font-size: 1.2em;
 }
+
+.buttonContainer {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .buttonContainer button {
+    background-color: #a88654;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buttonContainer button:hover {
+    background-color: #5e503f;
+  }
+  
+  .square {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 50px;
+    height: 50px;
+    background-color: #a88654;
+    z-index: -1;
+  }
