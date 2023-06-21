@@ -64,6 +64,9 @@ const createUserRegister = async (name, email) => {
 const updateUser = async (name, email, userId) => {
   let updateUser;
 
+  // Verificamos si nos pasan userId. Si no... Lanzamos un Error
+  (!userId) && arrojarError("userId es requerido");  
+
   // Verificamos si el usuario existe. Si no... Lanzamos un Error
   const isExistsUser = await User.findAll({
     where: {

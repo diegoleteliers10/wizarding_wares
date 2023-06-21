@@ -2,9 +2,6 @@ const {Router} = require("express");
 const userRouter = Router();
 const { createUserRegister, updateUser, logicalUserDeletion } = require("../controllers/userControllers");
 
-// Ruta Para Pedir Todos Los Usuarios
-// userRouter.get("/user", (req, res) => {});
-
 // Ruta Para Crear Un Usuario
 userRouter.post("/user", async (req, res) => {
   const { name, email } = req.body;
