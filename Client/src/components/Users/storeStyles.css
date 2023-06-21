@@ -43,6 +43,14 @@ opacity: 0.5;
     height: 70vh;
 }
 
+.storeComponent h2{
+    font-family: 'Marcellus', serif;
+}
+
+.storeComponent h3 {
+    font-family: 'EB Garamond', serif;
+}
+
 .storeComponent .navBar{
     background-color: #692323;
 }
