@@ -87,12 +87,16 @@ export const sortByPriceDescending = createAction('user/sortByPriceDescending');
 export const addToCart = createAsyncThunk(
   'user/addToCart',
   async (product) => {
-    console.log(product);
     return product
   }
 )
 // export const addToCart = createAction('user/addToCart')
-export const removeFromCart = createAction('user/removeFromCart');
+export const removeFromCart = createAsyncThunk(
+  'user/removeFromCart',
+  (id) => {
+    return id
+  }
+  );
 export const clearCart = createAction('user/clearCart');
 
 export const userSlice = createSlice({
@@ -115,7 +119,6 @@ export const userSlice = createSlice({
       })
       .addCase(getProducts.pending, (state, action) => {
         state.loading = true;
-        console.log(action);
       })
       .addCase(filterCategory.fulfilled, (state, action) => {
         state.loading = false;
@@ -174,7 +177,6 @@ export const userSlice = createSlice({
           state.cartProducts = []; // Asigna una matriz vacía si es null
         }
         state.cartProducts = [...state.cartProducts, product];
-        console.log(state.cartProducts)
       })
       // .addCase(addToCart.fulfilled, (state, action) => {
         // const productcart = action.payload;
@@ -196,9 +198,10 @@ export const userSlice = createSlice({
       //   state.cartProducts = [...state.cartProducts, product];
       //  console.log(state.cartProducts)
       // })
-      .addCase(removeFromCart, (state, action) => {
-        const productId = action.payload;
-        state.cartProducts = state.cartProducts.filter(p => p.productId !== productId);
+      .addCase(removeFromCart.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.cartProducts = state.cartProducts.filter(p => p.productId !== action.payload);
+        console.log(state.products);
       })
       .addCase(clearCart, (state) => {
         state.cartProducts = [];
