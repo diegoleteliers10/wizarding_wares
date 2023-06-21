@@ -203,7 +203,7 @@ const EditProduct = () => {
                       />
                     </label>
                   </div>
-{/*     
+    
                   <div className="mb-4 md:mt-6 lg:mt-8">
                     <label htmlFor="isActive">
                       <span>Estado</span>
@@ -219,7 +219,7 @@ const EditProduct = () => {
                       </select>
                     </label>
                   </div>
-     */}
+    
                 </div>
     
                 <div className="boton">
