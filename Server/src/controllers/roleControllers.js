@@ -1,6 +1,24 @@
 const { Role } = require("../models/relationship/relationship");
 const {arrojarError, validateString} = require("../utils/utils");
 
+
+// *** PEDIR TODOS LOS ROLES ***
+const getAllRoles = async () => {
+  
+  // Verificamos si tenemos roles en base de datos. 
+  const isExistsRoles = await Role.findAll(); 
+
+  // Si no tenemos roles... Lanzamos un Error
+  (!isExistsRoles.length) && arrojarError("No Tienes Roles En Tu Base De Datos");
+
+  // Caso contrario los traemos todos
+  return isExistsRoles;
+};
+
+
+// **************************************************************************************************
+
+
 // *** CREAR NUEVO ROLE ***
 const createNewRole = async (name) => {
   
@@ -36,5 +54,6 @@ const createNewRole = async (name) => {
 
 
 module.exports = {
+  getAllRoles,
   createNewRole,
 };
