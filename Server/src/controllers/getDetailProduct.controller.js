@@ -1,15 +1,17 @@
-const { Product, Review } = require('../models/relationship/relationship');
+const Product = require('../models/Product.model');
+const Review = require('../models/Review.model');
 
 const getDetailProduct = async (req, res) => {
     const { id } = req.params;
     try {
         const product = await Product.findByPk(id, {
-            attributes: ['name', 'description', 'image', 'price', 'stock'],
-            include: [{
-                model: Review,
-                attributes: ['rating', 'comment'],
-                through: { attributes: [] }
-            }]
+        attributes: ['name', 'description', 'image', 'price', 'stock'],
+        include: [
+            {
+            model: Review,
+            attributes: ['rating', 'comment']
+            }
+        ]
         });
         res.status(200).json(product)
     } catch (error) {
