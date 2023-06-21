@@ -1,11 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import  {addToCart}  from "../../../redux/userSlice";
 import '../storeStyles.css'; 
 
 const Detail = () => {
     const {products} = useSelector(state => state.user)
     const { id } = useParams();
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const product = products.find((product) => product.productId === (id));
     const [quantity, setQuantity] = useState(0);
@@ -21,8 +23,10 @@ const Detail = () => {
     } 
 
     const handleAddToCart = () => {
-        //funcion para agregar al carrito
-        window.alert("Se añadio al carrito:  " + quantity + " " + product.name)
+        dispatch(addToCart(product));
+    }
+    const handleGoToCart = () => {
+        navigate('/cart')
     }
 
     if(!product) {
@@ -82,6 +86,7 @@ const Detail = () => {
                     <button onClick={handleIncreaseQuantity} className="btn1 btn--svg-small">+</button>
                 </label>
                 <button onClick={handleAddToCart} className="btn1 btn--svg-small">Añadir al carrito</button>
+                <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
             </div>
         </div>
     )

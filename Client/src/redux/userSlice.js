@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
+  cartProducts: null,
   products: [],
   allProducts: [],
   detail: [],
@@ -15,35 +16,35 @@ const initialState = {
 export const getProducts = createAsyncThunk(
   'user/getProducts', 
   async (_, thunkAPI) => {
-  try {
-    const response = await axios.get('http://localhost:3001/allProducts');
-    return response.data;
-  } catch (error) {
-    console.error('Error al obtener los productos:', error);
-    throw error;
+    try {
+      const response = await axios.get('http://localhost:3001/allProducts');
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+      throw error;
+    }
   }
-});
+);
 
 export const filterCategory = createAsyncThunk(
   'user/filterCategory', 
   async (filter, { getState }) => {
-  try {
-    const state = getState();
-    //console.log(state.user.filterPrice);
-    if(state.user.filterPrice.length){
-      const minPrice = state.user.filterPrice[0];
-      const maxPrice = state.user.filterPrice[1];
-      const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
+    try {
+      const state = getState();
+      if (state.user.filterPrice.length) {
+        const minPrice = state.user.filterPrice[0];
+        const maxPrice = state.user.filterPrice[1];
+        const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
+        return [filter, response.data];
+      }
+      const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}`);
       return [filter, response.data];
+    } catch (error) {
+      console.error('Error obtaining filtered products', error);
+      throw error;
     }
-    const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}`);
-    //console.log(response.data)
-    return [filter, response.data];
-  } catch (error) {
-    console.error('Error obtaining filtered products', error);
-    throw error;
   }
-});
+);
 
 export const filterPrice = createAsyncThunk(
   'user/filterPrice',
@@ -54,13 +55,10 @@ export const filterPrice = createAsyncThunk(
     const state = getState();
     if(state.user.filterCategory){
       const category = state.user.filterCategory;
-      //console.log(category)
       const response = await axios.get(`http://localhost:3001/filteredProducts?category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
-    //console.log(response.data);
-    return [minPrice, maxPrice, response.data];
+      return [minPrice, maxPrice, response.data];
     }        
     const response = await axios.get(`http://localhost:3001/filteredProducts?minPrice=${minPrice}&maxPrice=${maxPrice}`);
-    //console.log(response.data);
     return [minPrice, maxPrice, response.data];
   } catch (error) {
     console.error('Error obtaining filtered products', error);
@@ -72,7 +70,6 @@ export const searchByName = createAsyncThunk(
   'user/searchByName',
   async (searchQuery) => {
     try {
-      //console.log(searchQuery)
       const response = await axios.get(`http://localhost:3001/searchProduct?name=${searchQuery}`);
       return [searchQuery, response.data];
     } catch (error) {
@@ -86,6 +83,17 @@ export const sortByNameAscending = createAction('user/sortByNameAscending');
 export const sortByNameDescending = createAction('user/sortByNameDescending');
 export const sortByPriceAscending = createAction('user/sortByPriceAscending');
 export const sortByPriceDescending = createAction('user/sortByPriceDescending');
+
+export const addToCart = createAsyncThunk(
+  'user/addToCart',
+  async (product) => {
+    console.log(product);
+    return product
+  }
+)
+// export const addToCart = createAction('user/addToCart')
+export const removeFromCart = createAction('user/removeFromCart');
+export const clearCart = createAction('user/clearCart');
 
 export const userSlice = createSlice({
   name: 'user',
@@ -160,6 +168,41 @@ export const userSlice = createSlice({
         state.loading = true;
         console.log(action);
       })
+      .addCase(addToCart.fulfilled, (state, action) => {
+        const product = action.payload;
+        if (state.cartProducts === null) {
+          state.cartProducts = []; // Asigna una matriz vacía si es null
+        }
+        state.cartProducts = [...state.cartProducts, product];
+        console.log(state.cartProducts)
+      })
+      // .addCase(addToCart.fulfilled, (state, action) => {
+        // const productcart = action.payload;
+        //  console.log(productcart);
+        // // const productsCopy = [...state.products]
+        // // console.log(productsCopy);
+        // // const product = productsCopy.filter(p => Number(p.productId) === Number(productcart.productId))
+        // if (productcart) {
+        //   state.cartProducts.push(productcart);
+        //   const copyCart = [...state.cartProducts]
+        //   console.log(copyCart);
+        // }
+        // console.log(action.payload);
+        // state.cartProducts = action.payload
+
+        
+      //    const product = action.payload;
+      //    console.log(product)
+      //   state.cartProducts = [...state.cartProducts, product];
+      //  console.log(state.cartProducts)
+      // })
+      .addCase(removeFromCart, (state, action) => {
+        const productId = action.payload;
+        state.cartProducts = state.cartProducts.filter(p => p.productId !== productId);
+      })
+      .addCase(clearCart, (state) => {
+        state.cartProducts = [];
+      });
 
   },
 });
