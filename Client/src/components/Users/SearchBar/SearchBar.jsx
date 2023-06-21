@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SlMagicWand } from 'react-icons/sl';
 import { searchByName } from "../../../redux/userSlice";
 import { useDispatch } from "react-redux";
@@ -6,6 +7,8 @@ import { useDispatch } from "react-redux";
 const SearchBar = () => {
     const dispatch = useDispatch();
     const [search, setSearch] = useState('');
+
+    const navigate = useNavigate();
 
     const onChangeHandler = (event) => {
         const value = event.target.value;
@@ -16,6 +19,7 @@ const SearchBar = () => {
         event.preventDefault();
         dispatch(searchByName(search));
         setSearch('');
+        navigate('/');
     }
 
     const handleKeyPress = (event) => {
@@ -23,6 +27,7 @@ const SearchBar = () => {
             event.preventDefault();
             dispatch(searchByName(search));
             setSearch('');
+            navigate('/')
         }
     }
 
