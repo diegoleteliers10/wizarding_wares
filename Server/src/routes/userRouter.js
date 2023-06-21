@@ -1,12 +1,12 @@
 const {Router} = require("express");
 const userRouter = Router();
-const { createUserRegister, updateUser, logicalUserDeletion } = require("../controllers/userControllers");
+const { createUserRegister, updateUser, logicalUserDeletion } = require("../controllers/UserControllers");
 
 // Ruta Para Crear Un Usuario
 userRouter.post("/user", async (req, res) => {
-  const { name, email } = req.body;
+  const { name, email, password } = req.body;
   try {
-    const result = await createUserRegister(name, email);
+    const result = await createUserRegister(name, email, password);
     return res.status(201).json(result);
   } catch (error) {
     return res.status(404).json({

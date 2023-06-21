@@ -1,13 +1,13 @@
 const { User, Role } = require("../models/relationship/relationship");
-const { arrojarError, validadorDeEmails, validateString } = require("../utils/utils");
+const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
 
 
 // *** CREAR UN USUARIO **
-const createUserRegister = async (name, email) => {
+const createUserRegister = async (name, email, password) => {
 
   // Verificamos si nos pasan argumentos. Si no... Lanzamos un error
-  if(!name || !email){
-    arrojarError("Parametros Necesarios Inexistentes");
+  if(!name || !email || !password){
+    arrojarError("Campos name, email y password; Son Requeridos");
   }
 
   // Verificamos si name es de tipo string. Si no... Lanzamos un Error
@@ -20,8 +20,8 @@ const createUserRegister = async (name, email) => {
 
   // Verificamos si password, es de tipo de dato string, contenga entre 6 y 20  caracteres, 
   // sea alfanumerico Y Una Letra este En Mayuscula
-  // const validPassword = validadorDePassword(password);
-  // (!validPassword) && arrojarError("'password', debe ser alfanumerica... tener 'letras y numero', una letra en mayuscula, y tener entre 6 y 20 caracteres");
+  const validPassword = validadorDePassword(password);
+  (!validPassword) && arrojarError("'password', debe ser alfanumerica... tener 'letras y numero', una letra en mayuscula, y tener entre 6 y 20 caracteres");
 
   // Verificamos si el email ingresado se encuentre en nuestra base de datos.
   const isExistEmail = await User.findOne({
@@ -47,12 +47,12 @@ const createUserRegister = async (name, email) => {
   //---------------------------------------------------------*
 
   // Caso contrario... Creamos un nuevo usuario
-  const newUser = await User.create({name, email});
+  const newUser = await User.create({name, email, password});
   newUser.setRole(isExistsRole);
-  return newUser;
-  // return {
-  //   "Perfect": "User successfully created"
-  // }
+  // return newUser;
+  return {
+    "Perfect": "User successfully created"
+  }
 };
 
 
