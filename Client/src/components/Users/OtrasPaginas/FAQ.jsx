@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 const Faq = () => {
     return(
         <Container>
-        <Link to="/" className="btn btn-primary btn-back">Volver a Home</Link>
+        <Link to="/" className="btn btn-primary">Volver a Home</Link>
          <Row className="justify-content-center">
          <h1 className="text-center mb-5">FAQ</h1>
          </Row>

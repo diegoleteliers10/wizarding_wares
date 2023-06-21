@@ -11,7 +11,8 @@ export default {
         wwbrown: '#5E503F',    
         wwblack: '#0A0908',
         wwmaroon: '#692323',
-        wwbeige: '#C6AC8F',      
+        wwbeige: '#C6AC8F',
+        wwoffwhite: '#F8F0E3'      
       },
     },
   },

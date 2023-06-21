@@ -1,4 +1,3 @@
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
@@ -6,7 +5,7 @@ import "./Footer.css"
 
 const Footer = () => {
   return (
-    <Container>
+    <div className='bg-wwbrown w-screen footerWw text-wwwhite'>
       <Row>
         <Col>
           Aca va el logo
@@ -27,7 +26,7 @@ const Footer = () => {
       <div>
         <p>2023 - Wizarding Wares | All rights reserved</p>
       </div>
-    </Container>
+    </div>
   );
 };
 

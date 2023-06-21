@@ -38,13 +38,13 @@ const Detail = () => {
         if(product.isActive === false) navigate('/')
     }, [])
     return(
-        <div className="flex storeComponent">
+        <div className="flex storeComponent h-screen items-center p-8">
             <div className="w-1/3">
                 <img src={product.image} alt={product.name}/>
             </div>
             <div className="w-2/3">
                 <h2 className="titleDetail">{product.name}</h2>
-                <p className="bigPrice">{product.price}</p>
+                <p className="bigPrice">${product.price}</p>
                 {
                     product.categoryId === 1 && <div>
                         <fieldset>
