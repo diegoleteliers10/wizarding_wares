@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import  {addToCart}  from "../../../redux/userSlice";
+import BackButton from "../BackButton/BackButton";
 import '../storeStyles.css'; 
 
 const Detail = () => {
@@ -40,6 +41,7 @@ const Detail = () => {
     return(
         <div className="flex storeComponent h-screen items-center p-8">
             <div className="w-1/3">
+                <BackButton/>
                 <img src={product.image} alt={product.name}/>
             </div>
             <div className="w-2/3">

@@ -14,7 +14,6 @@ import { useLocation } from 'react-router-dom'
 
 function App() {
   const { pathname } = useLocation()
-  console.log(pathname);
   return (
     <div className='App flex flex-col min-h-screen bg-wwwhite'>
       {
