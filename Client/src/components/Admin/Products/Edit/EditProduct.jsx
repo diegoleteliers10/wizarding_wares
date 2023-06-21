@@ -185,12 +185,12 @@ const EditProduct = () => {
                         required
                         className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
                       >
-                        <option value={1}>Books</option>
-                        <option value={2}>Wands</option>
-                        <option value={3}>Clothing</option>
-                        <option value={4}>Candy</option>
+                        <option value={1}>Libros</option>
+                        <option value={2}>Varitas</option>
+                        <option value={3}>Indumentaria</option>
+                        <option value={4}>Golosinas</option>
                         <option value={5}>Quidditch</option>
-                        <option value={6}>Miscellaneous</option>
+                        <option value={6}>Misceláneas</option>
                       </select>
                     </label>
                   </div>

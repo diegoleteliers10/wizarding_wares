@@ -215,12 +215,12 @@ const CreateProduct = () => {
                       required
                       className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
                     >
-                      <option value="Libros">Books</option>
-                      <option value="Varitas">Wands</option>
-                      <option value="Indumentaria">Clothing</option>
-                      <option value="Golosinas">Candy</option>
+                      <option value="Libros">Libros</option>
+                      <option value="Varitas">Varitas</option>
+                      <option value="Indumentaria">Indumentaria</option>
+                      <option value="Golosinas">Golosinas</option>
                       <option value="Quidditch">Quidditch</option>
-                      <option value="Misceláneas">Miscellaneous</option>
+                      <option value="Misceláneas">Misceláneas</option>
                     </select>
                   </label>
                 </div>

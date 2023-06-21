@@ -49,22 +49,22 @@ const Product = ({ product }) => {
   let categoryClass = ''; 
   
   if (product.categoryCategoryId === 1) {
-    category = 'Books';
+    category = 'Libros';
     categoryClass = 'text-blue-700 bg-blue-100';
   } else if (product.categoryCategoryId === 2) {
-    category = 'Wands';
+    category = 'Varitas';
     categoryClass = 'text-red-700 bg-red-100';
   } else if (product.categoryCategoryId === 3) {
-    category = 'Clothing';
+    category = 'Indumentaria';
     categoryClass = 'text-purple-700 bg-purple-100';
   } else if (product.categoryCategoryId === 4) {
-    category = 'Candy';
+    category = 'Golosinas';
     categoryClass = 'text-yellow-700 bg-yellow-100';
   } else if (product.categoryCategoryId === 5) {
     category = 'Quidditch';
     categoryClass = 'text-orange-700 bg-orange-100';
   } else if (product.categoryCategoryId === 6) {
-    category = 'Miscellaneous';
+    category = 'Misceláneas';
     categoryClass = 'text-gray-700 bg-gray-100';
   }
 
