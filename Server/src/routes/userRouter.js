@@ -1,9 +1,6 @@
 const {Router} = require("express");
 const userRouter = Router();
-const { createUserRegister } = require("../controllers/userControllers");
-
-// Ruta Para Pedir Todos Los Usuarios
-// userRouter.get("/user", (req, res) => {});
+const { createUserRegister, updateUser, logicalUserDeletion } = require("../controllers/UserControllers");
 
 // Ruta Para Crear Un Usuario
 userRouter.post("/user", async (req, res) => {
@@ -19,9 +16,30 @@ userRouter.post("/user", async (req, res) => {
 });
 
 // Ruta Para Editar Un Usuario
-// userRouter.put("/user", (req, res) => {});
+userRouter.put("/user/:userId", async (req, res) => {
+  const {name, email} = req.body;
+  const { userId } = req.params;
+  try {
+    const result = await updateUser(name, email, userId);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(200).json({
+      "Error": error.message
+    });
+  }
+});
 
-// Ruta Para Elimar Un Usuario
-// userRouter.delete("/user", (req, res) => {});
+// Ruta Para Elimar Un Usuario ( Borrado Logico )
+userRouter.put("/user_delete/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const result = await logicalUserDeletion(userId);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(404).json({
+      "Error": res.message
+    });
+  }
+});
 
 module.exports = userRouter;

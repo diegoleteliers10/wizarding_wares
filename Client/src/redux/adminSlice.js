@@ -108,7 +108,7 @@ export const adminSlice = createSlice({
     })
     .addCase(editProduct.fulfilled, (state, action) => {
       state.loading = false
-      alert('La actualización se realizó con éxito!')
+      //alert('La actualización se realizó con éxito!')
       console.log(action.payload);
     })
     .addCase(editProduct.rejected, (state, action) => {
@@ -151,8 +151,7 @@ export const adminSlice = createSlice({
     })
     .addCase(deleteProduct.fulfilled, (state, action) => {
       state.loading = false;
-      alert('Se ha eliminado el producto seleccionado')
-      // state.products = state.products.filter(product => product.id !== action.payload);
+      //state.products = state.products;
     })
   },
 })

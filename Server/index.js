@@ -6,5 +6,5 @@ const sequelize = require("./src/db");
 
 server.listen(PORT, async () => {
 	console.log("Server raised in port: " + PORT);
-	await sequelize.sync({ force: false });
+	await sequelize.sync({ force: false});
 });
