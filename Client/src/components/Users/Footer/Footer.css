@@ -6,3 +6,9 @@
   .footer-link:hover {
     text-decoration: underline;
   }
+
+  .footerWw{
+    background-image: url('https://t4.ftcdn.net/jpg/04/75/46/65/360_F_475466521_gxMuzd4517K96Q8aEPlZK2DFBlopvH8w.jpg');
+    background-color: #5E503F;
+    background-blend-mode: soft-light;
+  }
