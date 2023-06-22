@@ -1,7 +1,7 @@
 import Cardd from 'react-bootstrap/Card';
 import { FiTrash2 } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-import { decreaseQuantity, increaseQuantity, removeFromCart } from '../../../redux/userSlice';
+import { removeFromCart, decreaseQuantity, increaseQuantity, removeFromCart } from '../../../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 const Cart = (props) => {
