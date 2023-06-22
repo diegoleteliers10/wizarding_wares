@@ -7,7 +7,9 @@ const initialState = {
   allProducts: [],
   display: "productList",
   loading: false,
-  edit: [],  
+  edit: [],
+  filterCategory: false,
+  filterStock:'yes', 
 }
 
 // export const createProd = (input) => {
@@ -33,6 +35,7 @@ export const getProducts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get('http://localhost:3001/allProducts');
+      //console.log(response.data)
       return response.data;
     } catch (error) {
       console.error('Error al obtener los productos:', error);
@@ -51,6 +54,69 @@ export const displayProductList = createAsyncThunk(
   'admin/displayProductList',
   async (_, thunkAPI) => {
     return 'productList';
+  }
+)
+
+export const filterProductCategory = createAsyncThunk(
+  'admin/filterProductCategory',
+  async (filter, { getState }) => {
+    try {
+      const state = getState();
+      if(state.admin.filterStock !== ''){
+        //si ademas de categoria, hay stock
+        const stock = state.admin.filterStock
+        //console.log('hay stock y categoria',stock)
+        if(filter === 'All'){
+          //si el filtro es all en category es como solo hacer el de stock
+          const response = await axios.get(`http://localhost:3001/filteredProducts?stock=${stock}`);
+          return [false, response.data];
+        }
+        const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}&stock=${stock}`);
+        return [filter, response.data]
+      }
+      if(filter === 'All'){
+        const response = await axios.get('http://localhost:3001/allProducts');
+        return [false, response.data];
+      }
+      //console.log('hay category', filter)
+      const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}`);
+      return [filter, response.data];
+    } catch (error) {
+      console.error('Error obtaining filtered products', error);
+      throw error;
+    }
+  }
+)
+
+export const filterStock = createAsyncThunk(
+  'admin/filterStock',
+  async (stock, {getState}) =>{
+    try {
+      const state = getState();
+      if(state.admin.filterCategory){
+        //si hay categoria ademas de stock
+        const category = state.admin.filterCategory;
+        //console.log('hay categoria y tmb stock', category, stock);
+        if(stock === 'All'){
+          //si me pide todos los de stock es lo mismo que traer solo category
+          const response = await axios.get(`http://localhost:3001/filteredProducts?category=${category}`);
+          return ['', response.data]
+        }
+        const response = await axios.get(`http://localhost:3001/filteredProducts?category=${category}&stock=${stock}`);
+        return [stock, response.data]
+      }
+      //console.log('hay stock pero no categoria', stock);
+      if(stock === 'All'){
+        //si me pide todos los de stock y no hay categoria trae todos los productos
+        const response = await axios.get(`http://localhost:3001/allProducts`);
+        return ['', response.data]
+      }
+      const response = await axios.get(`http://localhost:3001/filteredProducts?stock=${stock}`);
+      return [stock, response.data];
+    } catch (error) {
+      console.error('Error obtaining filtered products', error);
+      throw error;
+    }
   }
 )
 
@@ -100,12 +166,13 @@ export const adminSlice = createSlice({
     })
     .addCase(createProd.rejected, (state, action) => {
       state.loading = false
-      console.log(action);
+      //console.log(action);
     })
     .addCase(createProd.pending, (state, action) => {
       state.loading = true
-      console.log(action);
+      //console.log(action);
     })
+    //EDIT PRODUCTS
     .addCase(editProduct.fulfilled, (state, action) => {
       state.loading = false
       //alert('La actualización se realizó con éxito!')
@@ -113,14 +180,16 @@ export const adminSlice = createSlice({
     })
     .addCase(editProduct.rejected, (state, action) => {
       state.loading = false
-      console.log(action);
+      //console.log(action);
     })
     .addCase(editProduct.pending, (state, action) => {
       state.loading = true
-      console.log(action);
+      //console.log(action);
     })
+    //GET PRODUCTS
     .addCase(getProducts.fulfilled, (state, action) => {
       state.loading = false;
+      //console.log(action.payload)
       state.products = action.payload;
     })
     .addCase(getProducts.rejected, (state, action) => {
@@ -130,6 +199,7 @@ export const adminSlice = createSlice({
     .addCase(getProducts.pending, (state, action) => {
       state.loading = true
     })
+    //DISPLAYS
     .addCase(displayCreate.fulfilled, (state, action) => {
       state.display = action.payload;
     })
@@ -138,6 +208,34 @@ export const adminSlice = createSlice({
     })
     .addCase(displayProductList.fulfilled, (state, action) => {
       state.display = action.payload;
+    })
+    //FILTER PRODUCT CATEGORY
+    .addCase(filterProductCategory.fulfilled, (state, action) => {
+      state.loading = false;
+      state.products = action.payload[1];
+      state.filterCategory = action.payload[0];
+    })
+    .addCase(filterProductCategory.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error obtaining filtered products ', action.error);
+    })
+    .addCase(filterProductCategory.pending, (state, action) => {
+      state.loading = true;
+      //console.log(action);
+    })
+    //FILTER STOCK
+    .addCase(filterStock.fulfilled, (state, action) => {
+      state.loading = false;
+      state.products = action.payload[1];
+      state.filterStock = action.payload[0];
+    })
+    .addCase(filterStock.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error obtaining filtered products ', action.error);
+    })
+    .addCase(filterStock.pending, (state, action) => {
+      state.loading = true;
+      //console.log(action);
     })
     .addCase(displayEditProduct.fulfilled, (state, action) => {
       state.display = action.payload;

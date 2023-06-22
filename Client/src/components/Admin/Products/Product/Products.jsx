@@ -10,6 +10,7 @@ const Product = ({ product }) => {
 
   const products = useSelector((state) => state.admin.products)
   const editState = useSelector((state) => state.admin.edit)
+  const {filterCategory, filterStock} = useSelector((state) => state.admin)
   const [refresh, setRefresh] = useState(false)
 
   const [edit, setEdit] = useState(product)
@@ -17,7 +18,6 @@ const Product = ({ product }) => {
   //ESTADOS POP UP
   const [popUp, setPopUp] = useState(false)
   const [popUpMessage, setPopUpMessage] = useState('')
-
 
   const handleEdit = async (product) => {
     await dispatch(setEditState(product))
@@ -45,25 +45,32 @@ const Product = ({ product }) => {
       }
   }, [refresh, dispatch]);
 
+  
   let category;
   let categoryClass = ''; 
+
+  useEffect(() =>{
+    //console.log(filterCategory)
+    
+  }, [filterCategory])
   
-  if (product.categoryCategoryId === 1) {
+  //console.log(product.categoryCategoryId)
+  if (product.categoryCategoryId === 1 || product.category === "Libros") {
     category = 'Libros';
     categoryClass = 'text-blue-700 bg-blue-100';
-  } else if (product.categoryCategoryId === 2) {
+  } else if (product.categoryCategoryId === 2 || product.category === "Varitas") {
     category = 'Varitas';
     categoryClass = 'text-red-700 bg-red-100';
-  } else if (product.categoryCategoryId === 3) {
+  } else if (product.categoryCategoryId === 3 || product.category === "Indumentaria") {
     category = 'Indumentaria';
     categoryClass = 'text-purple-700 bg-purple-100';
-  } else if (product.categoryCategoryId === 4) {
+  } else if (product.categoryCategoryId === 4 || product.category === "Golosinas") {
     category = 'Golosinas';
     categoryClass = 'text-yellow-700 bg-yellow-100';
-  } else if (product.categoryCategoryId === 5) {
+  } else if (product.categoryCategoryId === 5 || product.category === "Quidditch") {
     category = 'Quidditch';
     categoryClass = 'text-orange-700 bg-orange-100';
-  } else if (product.categoryCategoryId === 6) {
+  } else if (product.categoryCategoryId === 6 || product.category === "Misceláneas") {
     category = 'Misceláneas';
     categoryClass = 'text-gray-700 bg-gray-100';
   }
@@ -82,10 +89,10 @@ const Product = ({ product }) => {
       <td className='text-center'>$ {product.price}</td>
       <td className='text-center'>
         <span className={product.isActive === false ? '' :`inline-flex px-2 text-xs font-medium leading-5 rounded-full ${categoryClass}`}>
-          {category}
+          {filterCategory ? filterCategory : category}
         </span>
       </td>
-      <td className='text-center'>{product.stock}</td>
+      <td className={product.stock === 0 ? 'text-red-600 text-center' : 'text-center'}>{product.stock}</td>
       <td className='flex-center'>
         <button className='button' onClick={() => handleEdit(product)}>
           <FiEdit />

@@ -11,11 +11,13 @@ const postUserAddress = require('../controllers/userAddress.controller');
 const userFinalDelete = require('../controllers/userFinalDelete.controller')
 const deleteAddress = require('../controllers/userDeleteAddress.controller')
 const createReview = require('../controllers/createReview.controller')
+const createPurchase= require('../controllers/createPurchase.controller')
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
 const roleRouter = require("./roleRouter");
 const userRouterAdmin = require("./userRouterAdmin"); 
+const statusRoutes = require('./status.routes');
 
 const router = Router();
 const multer = require('multer');
@@ -26,6 +28,7 @@ router.post('/userAddress', postUserAddress)
 router.use("/", userRouter);
 router.post('/createReview',createReview)
 router.delete('/deleteAddress/:id', deleteAddress)
+router.post('/createPurchase',createPurchase)
 
 //user and admin routes
 router.get('/searchProduct', searchProductByName)
@@ -43,6 +46,7 @@ router.delete('/deleteProduct/:id', deleteProduct)
 router.use("/", categoryRouter);
 router.use("/", roleRouter);
 router.use("/", userRouterAdmin);
+router.use('/', statusRoutes);
 
 
 module.exports = router;

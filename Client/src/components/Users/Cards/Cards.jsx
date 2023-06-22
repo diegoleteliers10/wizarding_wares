@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getProducts } from '../../../redux/userSlice';
 import '../storeStyles.css'; 
+import Paginate from '../Paginate/Paginate';
 
 const Cards = () => {
     const {allProducts, products, filterPrice, filterCategory, search} = useSelector(state => state.user)
@@ -16,13 +17,21 @@ const Cards = () => {
         (!products.length && !filterPrice.length && !filterCategory && !search) && dispatch(getProducts());
         //console.log(products)
     }, [products])
+
+    const page = useSelector((state) => state.user.page);
+    console.log(page)
+    const itemsPerPage = 10;
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const pageItems = products.slice(start ,end)
+
     return (
         <div className='storeComponent p-8'>
         <Row xs={1} md={2} className="g-4 my-4">
             <FilterStore/>
         </Row>
         <Row xs={1} md={2} className="g-4 justify-center">
-            {products.map((product) => (
+            {pageItems.map((product) => (
                 <Card
                     key={product.productId}
                     id={product.productId}
@@ -34,6 +43,9 @@ const Cards = () => {
                 />
             ))}
         </Row>
+        <div>
+            <Paginate/>
+        </div>
         {
         (!products.length && (filterPrice.length || filterCategory || search)) && 
         <div className='noProductos flex items-center justify-center'>
