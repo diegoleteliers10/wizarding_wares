@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import axios  from "axios";
 
 
@@ -9,7 +9,8 @@ const initialState = {
   loading: false,
   edit: [],
   filterCategory: false,
-  filterStock:'yes', 
+  filterStock:'',
+  sort: '',
 }
 
 // export const createProd = (input) => {
@@ -153,6 +154,11 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
+export const sortByNameAscending = createAction('admin/sortByNameAscending');
+export const sortByNameDescending = createAction('admin/sortByNameDescending');
+export const sortByPriceAscending = createAction('admin/sortByPriceAscending');
+export const sortByPriceDescending = createAction('admin/sortByPriceDescending');
+
 export const adminSlice = createSlice({
   name: 'admin',
   initialState,
@@ -191,6 +197,9 @@ export const adminSlice = createSlice({
       state.loading = false;
       //console.log(action.payload)
       state.products = action.payload;
+      state.filterCategory = false;
+      state.filterStock = '';
+      state.sort = '';
     })
     .addCase(getProducts.rejected, (state, action) => {
       state.loading = false;
@@ -236,6 +245,25 @@ export const adminSlice = createSlice({
     .addCase(filterStock.pending, (state, action) => {
       state.loading = true;
       //console.log(action);
+    })
+    //ORDENAMIENTOS
+    //NOMBRE
+    .addCase(sortByNameAscending, (state) => {
+      state.products.sort((a, b) => a.name.localeCompare(b.name));
+      state.sort = 'nameDescending'
+    })
+    .addCase(sortByNameDescending, (state) => {
+      state.products.sort((a, b) => b.name.localeCompare(a.name));
+      state.sort = 'nameAscending'
+    })
+    //PRECIO
+    .addCase(sortByPriceAscending, (state) => {
+      state.products.sort((a, b) => b.price-a.price);
+      state.sort = 'priceHighToLow'
+    })
+    .addCase(sortByPriceDescending, (state) => {
+      state.products.sort((a, b) => a.price-b.price);
+      state.sort = 'priceLowToHigh'
     })
     .addCase(displayEditProduct.fulfilled, (state, action) => {
       state.display = action.payload;
