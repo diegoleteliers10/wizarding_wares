@@ -11,6 +11,7 @@ const initialState = {
   filterPrice: [],
   sort: ['SortR', 'SortP', 'SortN'],
   search: '',
+  page: 1,
 };
 
 export const getProducts = createAsyncThunk(
@@ -79,6 +80,7 @@ export const searchByName = createAsyncThunk(
   }
 )
 
+export const changePage = createAction('user/changePage');
 export const sortByNameAscending = createAction('user/sortByNameAscending');
 export const sortByNameDescending = createAction('user/sortByNameDescending');
 export const sortByPriceAscending = createAction('user/sortByPriceAscending');
@@ -205,8 +207,10 @@ export const userSlice = createSlice({
       })
       .addCase(clearCart, (state) => {
         state.cartProducts = [];
+      })
+      .addCase(changePage, (state, action) => {
+        state.page = action.payload;
       });
-
   },
 });
 
