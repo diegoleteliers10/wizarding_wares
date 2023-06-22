@@ -24,8 +24,13 @@ const Detail = () => {
     } 
 
     const handleAddToCart = () => {
-        dispatch(addToCart(product));
+        const productAndQuantity = {
+            ...product,
+            quantity: quantity
+        }
+        dispatch(addToCart(productAndQuantity));
     }
+    
     const handleGoToCart = () => {
         navigate('/cart')
     }
