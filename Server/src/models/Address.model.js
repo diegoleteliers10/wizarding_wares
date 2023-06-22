@@ -34,7 +34,7 @@ const Address = sequelize.define('address', {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [13, 23]
+            len: [8, 23]
         }
     }
 });
