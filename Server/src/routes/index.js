@@ -16,6 +16,7 @@ const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
 const roleRouter = require("./roleRouter");
 const userRouterAdmin = require("./userRouterAdmin"); 
+const statusRoutes = require('./status.routes');
 
 const router = Router();
 const multer = require('multer');
@@ -43,6 +44,7 @@ router.delete('/deleteProduct/:id', deleteProduct)
 router.use("/", categoryRouter);
 router.use("/", roleRouter);
 router.use("/", userRouterAdmin);
+router.use('/', statusRoutes);
 
 
 module.exports = router;
