@@ -31,11 +31,10 @@ const Address = sequelize.define('address', {
         allowNull: false
     },
     phoneNumber: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            isNumeric: true,
-            max: 23
+            len: [8, 23]
         }
     }
 });

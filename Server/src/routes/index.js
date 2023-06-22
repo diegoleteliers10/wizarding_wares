@@ -11,6 +11,7 @@ const postUserAddress = require('../controllers/userAddress.controller');
 const userFinalDelete = require('../controllers/userFinalDelete.controller')
 const deleteAddress = require('../controllers/userDeleteAddress.controller')
 const createReview = require('../controllers/createReview.controller')
+const createPurchase= require('../controllers/createPurchase.controller')
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
@@ -26,6 +27,7 @@ router.post('/userAddress', postUserAddress)
 router.use("/", userRouter);
 router.post('/createReview',createReview)
 router.delete('/deleteAddress/:id', deleteAddress)
+router.post('/createPurchase',createPurchase)
 
 //user and admin routes
 router.get('/searchProduct', searchProductByName)
