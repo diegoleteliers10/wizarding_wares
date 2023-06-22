@@ -13,6 +13,7 @@ const deleteAddress = require('../controllers/userDeleteAddress.controller')
 const createReview = require('../controllers/createReview.controller')
 const createPurchase= require('../controllers/createPurchase.controller')
 const getAllPurchase = require('../controllers/getAllPurchases.controller')
+const getPurchase = require('../controllers/getPurchase.controller')
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
@@ -30,6 +31,7 @@ router.use("/", userRouter);
 router.post('/createReview',createReview)
 router.delete('/deleteAddress/:id', deleteAddress)
 router.post('/createPurchase',createPurchase)
+router.get('/getPurchase/:userId', getPurchase)
 
 //user and admin routes
 router.get('/searchProduct', searchProductByName)
