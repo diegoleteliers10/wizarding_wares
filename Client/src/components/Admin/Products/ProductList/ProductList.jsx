@@ -4,6 +4,7 @@ import data from '../../../../assets/data.json'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../../../redux/adminSlice';
+import { filterCategory } from '../../../../redux/userSlice';
 
 
 const ProductListContainer = () => {
@@ -15,9 +16,15 @@ const ProductListContainer = () => {
   }, [])
 
   const products = useSelector((state) => state.admin.products)
+  
+  useEffect(() =>{
+    if(filterCategory){
+      //console.log(products)
+    }
+  }, [filterCategory])
 
   return (
-    <div className={`max-h-screen overflow-auto ${styles.productList}`}>
+    <div className={`max-h-screen overflow-auto bg-white ${styles.productList}`}>
       <table className={styles.table}>
         <thead>
           <tr>

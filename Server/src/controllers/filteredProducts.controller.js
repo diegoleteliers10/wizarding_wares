@@ -33,16 +33,28 @@ const filteredProduct = async (req, res) =>{
 
     //si solo hay stock
     if(stock && !category && !minPrice && !maxPrice){
-    const response = await Product.findAll({
+      let response;
+      if(stock === 'yes'){
+        response = await Product.findAll({
+              where: {
+                stock: {
+                  [Op.gt]: 0
+                }
+              },
+              include: {
+              model: Category,
+              }
+        });
+      } else if (stock === 'no'){
+        response = await Product.findAll({
           where: {
-            stock: {
-              [Op.gt]: 0
-            }
+            stock: 0
           },
           include: {
           model: Category,
           }
-    });
+        });
+      }
 
       const products = response.map(product => ({
         productId: product.productId,
@@ -87,19 +99,35 @@ const filteredProduct = async (req, res) =>{
 
     //Si hay categorias y stock
     if(category && stock && !minPrice && !maxPrice){
-      const response = await Product.findAll({
-        include: {
-          model: Category,
+      let response;
+      if(stock === 'yes'){
+        response = await Product.findAll({
+          include: {
+            model: Category,
+            where: {
+              name: category
+            }
+          },
           where: {
-            name: category
+            stock: {
+              [Op.gt]: 0
+            }
           }
-        },
-        where: {
-          stock: {
-            [Op.gt]: 0
+        });
+      } else if (stock === 'no'){
+        response = await Product.findAll({
+          include: {
+            model: Category,
+            where: {
+              name: category
+            }
+          },
+          where: {
+            stock: 0
           }
-        }
-      });
+        });
+      }
+      
 
       const products = response.map(product => ({
         productId: product.productId,
