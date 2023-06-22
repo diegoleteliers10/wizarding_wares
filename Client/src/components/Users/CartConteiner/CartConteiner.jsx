@@ -5,7 +5,7 @@ import Cart from '../Cart/Cart';
  const CartConteiner = () => {
     // const dispatch = useDispatch();
     const cartProducts = useSelector((state) => state.user.cartProducts);
-    console.log(cartProducts)
+    console.log(cartProducts);
     // const handleRemoveFromCart = (productId) => {
     //     dispatch(removeFromCart(productId));
     //   };
@@ -24,6 +24,8 @@ import Cart from '../Cart/Cart';
         image={product.image}
         name={product.name}
         price={product.price}
+        quantity={product.quantity}
+        product={product}
     />
       ))}
 

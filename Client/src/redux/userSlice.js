@@ -99,6 +99,20 @@ export const removeFromCart = createAsyncThunk(
     return id
   }
   );
+
+export const increaseQuantity = createAsyncThunk(
+  'user/increaseQuantity',
+  (product) => {
+    return product
+  }
+)
+export const decreaseQuantity = createAsyncThunk(
+  'user/decreaseQuantity',
+  (product) => {
+    return product
+  }
+)
+
 export const clearCart = createAction('user/clearCart');
 
 export const userSlice = createSlice({
@@ -180,26 +194,6 @@ export const userSlice = createSlice({
         }
         state.cartProducts = [...state.cartProducts, product];
       })
-      // .addCase(addToCart.fulfilled, (state, action) => {
-        // const productcart = action.payload;
-        //  console.log(productcart);
-        // // const productsCopy = [...state.products]
-        // // console.log(productsCopy);
-        // // const product = productsCopy.filter(p => Number(p.productId) === Number(productcart.productId))
-        // if (productcart) {
-        //   state.cartProducts.push(productcart);
-        //   const copyCart = [...state.cartProducts]
-        //   console.log(copyCart);
-        // }
-        // console.log(action.payload);
-        // state.cartProducts = action.payload
-
-        
-      //    const product = action.payload;
-      //    console.log(product)
-      //   state.cartProducts = [...state.cartProducts, product];
-      //  console.log(state.cartProducts)
-      // })
       .addCase(removeFromCart.fulfilled, (state, action) => {
         console.log(action.payload);
         state.cartProducts = state.cartProducts.filter(p => p.productId !== action.payload);
@@ -207,6 +201,20 @@ export const userSlice = createSlice({
       })
       .addCase(clearCart, (state) => {
         state.cartProducts = [];
+      })
+      .addCase(increaseQuantity.fulfilled, (state, action) => {
+        state.loading = false
+        const index = state.cartProducts.findIndex(
+          (p) => p.productId === action.payload.productId
+        );
+          state.cartProducts[index].quantity += 1
+      })
+      .addCase(decreaseQuantity.fulfilled, (state, action) => {
+        state.loading = false
+        const index = state.cartProducts.findIndex(
+          (p) => p.productId === action.payload.productId
+        );
+          state.cartProducts[index].quantity -= 1
       })
       .addCase(changePage, (state, action) => {
         state.page = action.payload;
