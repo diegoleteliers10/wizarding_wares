@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiUser, FiGrid, FiGift, FiPlus } from "react-icons/fi";
 import { useDispatch } from 'react-redux';
-import { displayProductList, displayCreate } from '../../../redux/adminSlice';
+import { displayProductList, displayCreate, displayUsers } from '../../../redux/adminSlice';
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,10 @@ const SideBar = () => {
     const id = event.currentTarget.id;
     //console.log(id)
     setActiveButton(id);
+  };
+  const userListHandler = (event) => {
+    dispatch(displayUsers());
+
   };
 
   const createProductHandler = (event) => {
@@ -29,7 +33,7 @@ const SideBar = () => {
           className={`bg-gray-100 rounded-full hover:bg-gray-400 ${
             activeButton === 'users' ? 'underline' : ''
           }`}
-          onClick={(event) => listHandler(event)}
+          onClick={(event) => userListHandler(event)}
           id='users'
           >
           <div className="flex items-center justify-center py-2 px-4">
