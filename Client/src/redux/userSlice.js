@@ -12,6 +12,7 @@ const initialState = {
   sort: ['SortR', 'SortP', 'SortN'],
   search: '',
   page: 1,
+  price: 0,
 };
 
 export const getProducts = createAsyncThunk(
@@ -114,6 +115,8 @@ export const decreaseQuantity = createAsyncThunk(
 )
 
 export const clearCart = createAction('user/clearCart');
+
+export const updateTotalPrice = createAction('user/updateTotalPrice');
 
 export const userSlice = createSlice({
   name: 'user',
@@ -218,6 +221,9 @@ export const userSlice = createSlice({
           (p) => p.productId === action.payload.productId
         );
           state.cartProducts[index].quantity -= 1
+      })
+      .addCase(updateTotalPrice, (state) => {
+        state.price++
       })
       .addCase(changePage, (state, action) => {
         state.page = action.payload;

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import  {addToCart}  from "../../../redux/userSlice";
 import BackButton from "../BackButton/BackButton";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import '../storeStyles.css'; 
 
 const Detail = () => {
@@ -11,7 +12,10 @@ const Detail = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const product = products.find((product) => product.productId === (id));
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
+
+    //LOCALSTORAGE
+    const [addCart, setAddCart] = useLocalStorage('shoppingCart', []);
 
     const handleIncreaseQuantity = () => {
         setQuantity(quantity + 1)
@@ -25,11 +29,14 @@ const Detail = () => {
 
     const handleAddToCart = () => {
         const productAndQuantity = {
-            ...product,
-            quantity: quantity
-        }
+          ...product,
+          quantity: quantity
+        };
         dispatch(addToCart(productAndQuantity));
-    }
+        //product.quantity = quantity;
+        //console.log(product);
+        setAddCart([...addCart, productAndQuantity]);
+      };
     
     const handleGoToCart = () => {
         navigate('/cart')
@@ -53,7 +60,7 @@ const Detail = () => {
                 <h2 className="titleDetail">{product.name}</h2>
                 <p className="bigPrice">${product.price}</p>
                 {
-                    product.categoryId === 1 && <div>
+                    product.categoryCategoryId === 3 && <div>
                         <fieldset>
                                 <div className="flex space-x-4 justify-center">
                                     <div>

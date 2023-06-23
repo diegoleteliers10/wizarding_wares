@@ -3,7 +3,6 @@ import jwt_decode from "jwt-decode";
 import { useEffect, useState } from 'react';
 import { getAllUsers, login } from '../../../redux/accountSlice';
 import { useDispatch } from 'react-redux';
-import "./Login.module.css"
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
