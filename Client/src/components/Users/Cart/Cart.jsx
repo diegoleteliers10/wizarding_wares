@@ -27,7 +27,8 @@ const Cart = (props) => {
                 jsonCart.splice(productIndex, 1);
                 localStorage.setItem('shoppingCart', JSON.stringify(jsonCart));
             }
-        navigate('/cart')
+        navigate('/cart');
+        dispatch(updateTotalPrice());
         }
     }
     

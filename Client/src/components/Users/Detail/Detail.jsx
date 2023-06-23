@@ -34,7 +34,7 @@ const Detail = () => {
         };
         dispatch(addToCart(productAndQuantity));
         //product.quantity = quantity;
-        console.log(product);
+        //console.log(product);
         setAddCart([...addCart, productAndQuantity]);
       };
     
@@ -60,7 +60,7 @@ const Detail = () => {
                 <h2 className="titleDetail">{product.name}</h2>
                 <p className="bigPrice">${product.price}</p>
                 {
-                    product.categoryId === 1 && <div>
+                    product.categoryCategoryId === 3 && <div>
                         <fieldset>
                                 <div className="flex space-x-4 justify-center">
                                     <div>

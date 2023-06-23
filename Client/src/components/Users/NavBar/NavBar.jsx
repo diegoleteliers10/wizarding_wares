@@ -1,21 +1,37 @@
 import SearchBar from "../SearchBar/SearchBar"
 import Navbar from 'react-bootstrap/Navbar';
-import '../storeStyles.css'; 
+import '../storeStyles.css';
+import { useState, useEffect } from "react"; 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../../redux/accountSlice";
-
+import {RiLuggageCartLine} from "react-icons/ri";
 
 const NavBar = () => {
 
-    const user = useSelector(state => state.account.user)
-
+    const user = useSelector(state => state.account.user);
+    const {cartProducts, price} = useSelector(state=> state.user)
+    const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+    const [cartItemCount, setCartItemCount] = useState(0);
+  
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate(); 
+    
+  
+    // actualizar cantidad de carrito
+    useEffect(() => {
+        const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+    
+        if (shoppingCart) {
+          const uniqueItemCount = shoppingCart.length;
+          setCartItemCount(uniqueItemCount);
+        }
+      }, [cartProducts, price]);
 
     const handleGoToCart = () => {
-        navigate('/cart')
-    }
+        navigate('/cart');
+      };
+
     const handleGoHome = ()=> {
         navigate('/')
     }
@@ -43,7 +59,6 @@ const NavBar = () => {
                 <button onClick={handleGoHome} className="mx-auto w-14"><img src="https://images2.imgbox.com/41/5c/UX8ZYgxS_o.png" alt="Wizarding Wares" /></button>
             </div>
             <div className="ml-auto buttons">
-                <button onClick={handleGoToCart} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Carrito</button>
                 
                 {user.length === 0 ? 
                 <div>
@@ -59,6 +74,12 @@ const NavBar = () => {
                 </div>
                 }
                 
+            </div>
+            <div>
+                <button onClick={handleGoToCart} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">
+                <RiLuggageCartLine className="text-3xl" />
+                {cartItemCount > 0 && <span className="cart-item-count">{cartItemCount}</span>}
+                </button>
             </div>
         </Navbar>
         </div>
