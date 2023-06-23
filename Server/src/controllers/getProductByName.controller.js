@@ -4,8 +4,9 @@ const { Op } = require('sequelize');
 const searchProductByName = async (req, res) => {
     try {
         const { name } = req.query;
+        const productName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         const product = await Product.findAll({
-            where: { name: {[Op.iLike]: `%${name.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}%`} },
+            where: { name: {[Op.iLike]: `%${productName}%`} },
             include: [{
                 model: Review,
                 attributes: ['rating', 'comment']

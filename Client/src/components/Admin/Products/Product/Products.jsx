@@ -1,6 +1,6 @@
 import { FiTrash2, FiEdit } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct, displayEditProduct, getProducts, setEditState } from '../../../../redux/adminSlice';
+import { deleteProduct, displayEditProduct, filterProductCategory, getProducts, setEditState } from '../../../../redux/adminSlice';
 import { useState, useEffect } from 'react';
 import PopUp from '../../PopUp/PopUp';
 
@@ -51,8 +51,10 @@ const Product = ({ product }) => {
 
   useEffect(() =>{
     //console.log(filterCategory)
-    
-  }, [filterCategory])
+    if(filterCategory){
+      dispatch(filterProductCategory(filterCategory))
+    }
+  }, [])
   
   //console.log(product.categoryCategoryId)
   if (product.categoryCategoryId === 1 || product.category === "Libros") {

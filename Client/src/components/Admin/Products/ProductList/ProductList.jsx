@@ -1,22 +1,25 @@
 import Product from '../Product/Products';
 import styles from './ProductList.module.css';
-import data from '../../../../assets/data.json'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../../../redux/adminSlice';
-import { filterCategory } from '../../../../redux/userSlice';
-
 
 const ProductListContainer = () => {
 
   const dispatch = useDispatch()
 
   useEffect(() =>{
-    dispatch(getProducts())
+    if(!filterCategory && filterStock === '' && sort === ''){
+      // si no hay filtro, pide todos los productos
+      dispatch(getProducts())
+    }
   }, [])
 
-  const products = useSelector((state) => state.admin.products)
+
   const search = useSelector((state) => state.admin.search)
+
+  const {products, filterCategory, filterStock, sort} = useSelector((state) => state.admin)
+
   
   useEffect(() =>{
     if(filterCategory){
