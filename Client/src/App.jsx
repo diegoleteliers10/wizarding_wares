@@ -11,6 +11,8 @@ import Faq from './components/Users/OtrasPaginas/FAQ'
 import Terms from './components/Users/OtrasPaginas/Terms'
 import Privacy from './components/Users/OtrasPaginas/Privacy'
 import { useLocation } from 'react-router-dom'
+import Login from './components/Users/Login/Login'
+import Register from './components/Users/Register/Register'
 
 function App() {
   const { pathname } = useLocation()
@@ -23,6 +25,8 @@ function App() {
       <div className="flex-grow">
         <Routes>
           <Route path='/' element={<Home/>} />
+          <Route path='/login' element={<Login/>} />
+          <Route path='/register' element={<Register/>} />
           <Route path='/cart' element={<CartConteiner/>}/>
           <Route path='/:id' element={<Detail/>} />
           <Route path='/admin' element={<Admin/>} />
