@@ -7,6 +7,7 @@ const initialState = {
   allProducts: [],
   display: "productList",
   loading: false,
+  search: '',
   edit: [],
   filterCategory: false,
   filterStock:'',
@@ -44,6 +45,19 @@ export const getProducts = createAsyncThunk(
     }
   }
 );
+
+export const searchByName = createAsyncThunk(
+  'admin/searchByName',
+  async (searchQuery) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/searchProduct?name=${searchQuery}`);
+      return [searchQuery, response.data];
+    } catch (error) {
+      console.error('Error obtaining filtered products', error);
+      throw error;
+    }
+  }
+)
 
 export const displayCreate = createAsyncThunk(
   'admin/displayCreate',
@@ -274,6 +288,20 @@ export const adminSlice = createSlice({
     .addCase(displayProductList.pending, (state, action) => {
       state.loading = true;
       //console.log(state.display);
+    })
+    .addCase(searchByName.fulfilled, (state, action) => {
+      state.loading = false;
+      state.filterCategory = false
+      state.search = action.payload[0]
+      state.products = action.payload[1];
+    })
+    .addCase(searchByName.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error obtaining searched products ', action.error);
+    })
+    .addCase(searchByName.pending, (state, action) => {
+      state.loading = true;
+      console.log(action);
     })
     .addCase(deleteProduct.fulfilled, (state, action) => {
       state.loading = false;
