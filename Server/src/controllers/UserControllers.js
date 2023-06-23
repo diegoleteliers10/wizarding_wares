@@ -1,5 +1,8 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { User, Role } = require("../models/relationship/relationship");
 const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
+const {CLAVE_SECRETA} = process.env;
 
 
 // *** CREAR UN USUARIO **
@@ -46,12 +49,23 @@ const createUserRegister = async (name, email, password) => {
   (isExistsRole == null) && arrojarError("El role no existe");
   //---------------------------------------------------------*
 
+  // Encriptamos la password
+  const salt = await bcrypt.genSalt(10);
+  const passEncrypt = await bcrypt.hash(password, salt);
+
   // Caso contrario... Creamos un nuevo usuario
-  const newUser = await User.create({name, email, password});
+  const newUser = await User.create({name, email, password: passEncrypt});
   newUser.setRole(isExistsRole);
+
+  // Generamos el token
+  const token = jwt.sign({userId: newUser.userId, name, email, roleId}, CLAVE_SECRETA);
+
   // return newUser;
+  // return {
+  //   token: token
+  // };
   return {
-    "Perfect": "User successfully created"
+    "Perfect": `User ${newUser.name}; successfully created`
   }
 };
 
