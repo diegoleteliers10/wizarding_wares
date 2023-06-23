@@ -16,6 +16,7 @@ const ProductListContainer = () => {
   }, [])
 
   const products = useSelector((state) => state.admin.products)
+  const search = useSelector((state) => state.admin.search)
   
   useEffect(() =>{
     if(filterCategory){
@@ -42,6 +43,12 @@ const ProductListContainer = () => {
           ))}
         </tbody>
       </table>
+      {
+        (!products.length && (filterCategory || search)) && 
+        <div className='noProductos flex items-center justify-center'>
+            <h1>No hay productos disponibles con esos criterios</h1>
+        </div>
+        }
     </div>
   );
 };
