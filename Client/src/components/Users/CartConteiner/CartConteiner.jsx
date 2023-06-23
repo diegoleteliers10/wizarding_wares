@@ -21,7 +21,7 @@ import TotalPrice from '../TotalPrice/TotalPrice';
       useEffect(()=>{
 
       }, [JSON.parse(shoppingCartProducts)])
-
+      let key = 1;
     return (
         <div className='p-8 flex'>
           <div className='w-2/3'>
@@ -30,7 +30,7 @@ import TotalPrice from '../TotalPrice/TotalPrice';
                 {/* Renderiza los productos en el carrito */}
                 {JSON.parse(shoppingCartProducts)?.map(product => (
                   <Cart
-                  key={product.productId}
+                  key={key++}
                   id={product.productId}
                   image={product.image}
                   name={product.name}

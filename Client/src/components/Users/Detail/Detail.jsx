@@ -16,6 +16,8 @@ const Detail = () => {
 
     //LOCALSTORAGE
     const [addCart, setAddCart] = useLocalStorage('shoppingCart', []);
+    const [size, setSize] = useState('');
+    const [error, setError] = useState('')
 
     const handleIncreaseQuantity = () => {
         setQuantity(quantity + 1)
@@ -28,18 +30,34 @@ const Detail = () => {
     } 
 
     const handleAddToCart = () => {
-        const productAndQuantity = {
-          ...product,
-          quantity: quantity
-        };
-        dispatch(addToCart(productAndQuantity));
-        //product.quantity = quantity;
-        //console.log(product);
-        setAddCart([...addCart, productAndQuantity]);
+        if(product.categoryCategoryId !== 3){
+            const productAndAssets = {
+                ...product,
+                quantity: quantity,
+              };
+              dispatch(addToCart(productAndAssets));
+              setAddCart([...addCart, productAndAssets]);
+        }
+        if(size === ''){
+            setError('¡Seleccione un talle antes de agregar al carrito!')
+        } else{
+            const productAndAssets = {
+              ...product,
+              quantity: quantity,
+              size: size 
+            };
+            dispatch(addToCart(productAndAssets));
+            setAddCart([...addCart, productAndAssets]);
+        }
       };
     
     const handleGoToCart = () => {
         navigate('/cart')
+    }
+
+    const handleSizeChange= (event)=>{
+        setSize(event.target.value)
+        setError('')
     }
 
     if(!product) {
@@ -61,7 +79,7 @@ const Detail = () => {
                 <p className="bigPrice">${product.price}</p>
                 {
                     product.categoryCategoryId === 3 && <div>
-                        <fieldset>
+                        <fieldset onChange={handleSizeChange}>
                                 <div className="flex space-x-4 justify-center">
                                     <div>
                                         <input type="radio" id="size1" name="contact" value="XS" />
@@ -90,6 +108,11 @@ const Detail = () => {
                                     </div>
                                 </div>
                         </fieldset>
+                        { error !== '' &&
+                        <div>
+                            <p className="text-wwmaroon font-medium">{error}</p>
+                        </div>
+                        }
                     </div>
                 }
                 <p className="descriptionDetail">{product.description}</p>
@@ -99,7 +122,13 @@ const Detail = () => {
                     <span>{quantity}</span>
                     <button onClick={handleIncreaseQuantity} className="btn1 btn--svg-small">+</button>
                 </label>
-                <button onClick={handleAddToCart} className="btn1 btn--svg-small">Añadir al carrito</button>
+                <button
+                    onClick={handleAddToCart}
+                    className={`btn1 btn--svg-small ${size === '' && product.categoryCategoryId === 3 ? ' disabled opacity-50 pointer-events-none' : ''}`}
+                    disabled={quantity === 0}
+                    >
+                    Añadir al carrito
+                </button>
                 <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
             </div>
         </div>
