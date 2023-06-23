@@ -1,7 +1,7 @@
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import { useEffect, useState } from 'react';
-import { getAllUsers, login } from '../../../redux/accountSlice';
+import { getAllUsers, login, loginGoogle } from '../../../redux/accountSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,6 +36,13 @@ const Login = () => {
         navigate('/')
     };
 
+    
+    const handleGoogleLogin = (credentialResponse) => {
+        const decoded = jwt_decode(credentialResponse.credential);
+        dispatch(loginGoogle(decoded));
+        navigate('/')
+      };
+
     return (
         <>
         <div>
@@ -58,11 +65,7 @@ const Login = () => {
             <div>
                 <GoogleLogin
                     className="flex justify-center"
-                    onSuccess={credentialResponse => {
-                    console.log(credentialResponse.credential);
-                    var decoded = jwt_decode(credentialResponse.credential);
-                    console.log(decoded);
-                    }}
+                    onSuccess={handleGoogleLogin}
                     onError={() => {
                         console.log('Login Failed');
                     }}
@@ -74,5 +77,6 @@ const Login = () => {
         </>
     )
 }
+
 
 export default Login;

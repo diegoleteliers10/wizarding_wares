@@ -26,12 +26,19 @@ export const createUser = createAsyncThunk('account/createUser',
     return response; 
   }
 )
+export const loginGoogle = createAsyncThunk('account/loginGoogle', 
+  async (decoded) => {
+    console.log(decoded);
+    return decoded;
+
+});
 
 export const login = createAsyncThunk('account/login',
   async (input) => {
     return input
   }
 )
+
 
 export const logOut = createAsyncThunk('account/logOut',
  () => {
@@ -73,6 +80,12 @@ export const accountSlice = createSlice({
         if(user.password === action.payload.password){
             state.user = user
         }
+        console.log(`Welcome back, ${state.user.name}!`);
+        state.loading = false
+      })
+      .addCase(loginGoogle.fulfilled, (state, action) => {
+        const user = state.allUsers.find(user => user.email === action.payload.email)
+        state.user = user
         console.log(`Welcome back, ${state.user.name}!`);
         state.loading = false
       })

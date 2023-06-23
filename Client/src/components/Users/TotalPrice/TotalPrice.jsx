@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 useSelector
 function TotalPrice() {
 
-    const{price} = useSelector((state)=> state.user)
+    const {price} = useSelector((state)=> state.user)
     
   const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
 
