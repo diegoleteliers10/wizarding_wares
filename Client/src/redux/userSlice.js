@@ -138,6 +138,7 @@ export const userSlice = createSlice({
       })
       .addCase(filterCategory.fulfilled, (state, action) => {
         state.loading = false;
+        state.page = 1;
         state.products = action.payload[1];
         state.filterCategory = action.payload[0];
       })
@@ -151,6 +152,7 @@ export const userSlice = createSlice({
       })
       .addCase(filterPrice.fulfilled, (state, action) => {
         state.loading = false;
+        state.page = 1;
         state.products = action.payload[2];
         state.filterPrice = [action.payload[0], action.payload[1]];
       })
@@ -176,6 +178,7 @@ export const userSlice = createSlice({
       })
       .addCase(searchByName.fulfilled, (state, action) => {
         state.loading = false;
+        state.page = 1;
         state.search = action.payload[0]
         state.products = action.payload[1];
       })
