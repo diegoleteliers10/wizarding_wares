@@ -1,12 +1,11 @@
 const { Product, Review } = require('../models/relationship/relationship');
-const { Op } = require('sequelize');
+const sequelize = require('sequelize');
 
 const searchProductByName = async (req, res) => {
     try {
         const { name } = req.query;
-        const productName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         const product = await Product.findAll({
-            where: { name: {[Op.iLike]: `%${productName}%`} },
+            where: sequelize.literal(`unaccent("name") ILIKE unaccent('%${name}%')`),
             include: [{
                 model: Review,
                 attributes: ['rating', 'comment']
