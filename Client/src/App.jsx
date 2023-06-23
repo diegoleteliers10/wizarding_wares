@@ -13,6 +13,7 @@ import Privacy from './components/Users/OtrasPaginas/Privacy'
 import { useLocation } from 'react-router-dom'
 import Login from './components/Users/Login/Login'
 import Register from './components/Users/Register/Register'
+import Checkout from './components/Users/Checkout/Checkout'
 
 function App() {
   const { pathname } = useLocation()
@@ -28,6 +29,7 @@ function App() {
           <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} />
           <Route path='/cart' element={<CartConteiner/>}/>
+          <Route path='/checkout' element={<Checkout/>}/>
           <Route path='/:id' element={<Detail/>} />
           <Route path='/admin' element={<Admin/>} />
           <Route path='/nosotros' element={<Nosotros/>} />
