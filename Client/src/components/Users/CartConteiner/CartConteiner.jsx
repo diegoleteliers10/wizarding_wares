@@ -13,7 +13,7 @@ import TotalPrice from '../TotalPrice/TotalPrice';
     //traigo productos de localstorage
     const shoppingCartProducts = localStorage.getItem('shoppingCart')
 
-    const totalPrice = JSON.parse(shoppingCartProducts).reduce(
+    const totalPrice = JSON.parse(shoppingCartProducts)?.reduce(
       (accumulator, product) => accumulator + product.price * product.quantity,
       0
     );
