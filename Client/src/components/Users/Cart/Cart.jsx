@@ -14,12 +14,8 @@ const Cart = (props) => {
     const shoppingCartProducts = localStorage.getItem('shoppingCart')
     const jsonCart = JSON.parse(shoppingCartProducts);
     const productFound = jsonCart.find((element) => element.name === props.name)
-    //console.log(productFound);
-
-    // const handleDelete = async () => {
-    //     await dispatch(removeFromCart(props.id))
-    //     navigate('/cart')
-    // }
+    
+    console.log(productFound.size)
     function handleDelete(){
         if (window.confirm('Seguro quieres eliminar este producto del carrito?')){
             const productIndex = jsonCart.findIndex((element) => element.name === props.name);
@@ -90,7 +86,10 @@ const Cart = (props) => {
                         <FiTrash2 />
                     </button>
                     <img src={props.image} alt={props.name} title={props.name} className='w-32'/>
+                    <div>
                     <h5>{props.name}</h5>
+                    <p>{productFound.size && `Talle: ${productFound.size}`}</p>
+                    </div>
                     <div>
                         Cantidad:
                         <button onClick={handleDecreaseQuantity} className="btn">-</button>
