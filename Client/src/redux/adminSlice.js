@@ -12,6 +12,8 @@ const initialState = {
   filterCategory: false,
   filterStock:'',
   sort: '',
+  editUser: [],
+  allUsers: []
 }
 
 // export const createProd = (input) => {
@@ -45,6 +47,18 @@ export const getProducts = createAsyncThunk(
     }
   }
 );
+
+export const getAllUsers = createAsyncThunk('admin/getAllUsers',
+    async (_, thunkAPI) => {
+      try {
+        const response = await axios.get('http://localhost:3001/allUsers');
+        return response.data;
+      } catch (error) {
+        console.error('Error al obtener los productos:', error);
+        throw error;
+      }
+    }
+)
 
 export const searchByName = createAsyncThunk(
   'admin/searchByName',
@@ -141,6 +155,19 @@ export const displayEditProduct = createAsyncThunk(
     return 'editProduct';
   }
 )
+export const displayUsers = createAsyncThunk(
+  'admin/displayUsers',
+  async (_, thunkAPI) => {
+    return 'users';
+  }
+)
+
+export const displayEditUser = createAsyncThunk(
+  'admin/displayEditUsers',
+  async (_, thunkAPI) => {
+    return 'editUser';
+  }
+)
 
 export const setEditState = createAsyncThunk('admin/setEditState',
 async (input) => {
@@ -180,6 +207,7 @@ export const adminSlice = createSlice({
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder
+    //CREATE PRODUCT
     .addCase(createProd.fulfilled, (state, action) => {
       state.loading = false
       console.log(action.payload);
@@ -192,6 +220,7 @@ export const adminSlice = createSlice({
       state.loading = true
       //console.log(action);
     })
+
     //EDIT PRODUCTS
     .addCase(editProduct.fulfilled, (state, action) => {
       state.loading = false
@@ -206,6 +235,7 @@ export const adminSlice = createSlice({
       state.loading = true
       //console.log(action);
     })
+
     //GET PRODUCTS
     .addCase(getProducts.fulfilled, (state, action) => {
       state.loading = false;
@@ -222,6 +252,20 @@ export const adminSlice = createSlice({
     .addCase(getProducts.pending, (state, action) => {
       state.loading = true
     })
+
+    //OBTENER USUARIOS
+    .addCase(getAllUsers.fulfilled, (state, action) => {
+      state.loading = false;
+      state.allUsers = action.payload;
+    })
+    .addCase(getAllUsers.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error al obtener los usuarios:', action.error);
+    })
+    .addCase(getAllUsers.pending, (state, action) => {
+      state.loading = true
+    })
+
     //DISPLAYS
     .addCase(displayCreate.fulfilled, (state, action) => {
       state.display = action.payload;
@@ -232,6 +276,13 @@ export const adminSlice = createSlice({
     .addCase(displayProductList.fulfilled, (state, action) => {
       state.display = action.payload;
     })
+    .addCase(displayUsers.fulfilled, (state, action) => {
+      state.display = action.payload;
+    })
+    .addCase(displayEditUser.fulfilled, (state, action) => {
+      state.display = action.payload;
+    })
+
     //FILTER PRODUCT CATEGORY
     .addCase(filterProductCategory.fulfilled, (state, action) => {
       state.loading = false;
@@ -246,6 +297,7 @@ export const adminSlice = createSlice({
       state.loading = true;
       //console.log(action);
     })
+
     //FILTER STOCK
     .addCase(filterStock.fulfilled, (state, action) => {
       state.loading = false;
@@ -260,6 +312,7 @@ export const adminSlice = createSlice({
       state.loading = true;
       //console.log(action);
     })
+
     //ORDENAMIENTOS
     //NOMBRE
     .addCase(sortByNameAscending, (state) => {
@@ -303,6 +356,7 @@ export const adminSlice = createSlice({
       state.loading = true;
       console.log(action);
     })
+    //DELETE PRODUCT
     .addCase(deleteProduct.fulfilled, (state, action) => {
       state.loading = false;
       //state.products = state.products;

@@ -3,6 +3,8 @@ import ProductList from "../Products/ProductList/ProductList";
 import CreateProduct from "../Products/Create/CreateProduct";
 import EditProduct from "../Products/Edit/EditProduct";
 import NavBar from "../NavBar/NavBar";
+import UserList from "../Users/UsersList/UsersList";
+import EditUser from "../Users/Edit/EditUser";
 
 const DataDisplay = ()=> {
 
@@ -14,6 +16,8 @@ return(
         {display === "productList" && <ProductList/>}
         {display === "createProduct" && <CreateProduct/>}
         {display === "editProduct" && <EditProduct/>}
+        {display === "users" && <UserList/>}
+        {display === "editUser" && <EditUser/>}
     </div>
 )
 }
