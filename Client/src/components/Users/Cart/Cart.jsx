@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { updateTotalPrice } from '../../../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import PopUpStore from '../PopUpStore/PopUpStore';
+
 const Cart = (props) => {
 
     const dispatch = useDispatch();
@@ -13,22 +15,31 @@ const Cart = (props) => {
 
     const shoppingCartProducts = localStorage.getItem('shoppingCart')
     const jsonCart = JSON.parse(shoppingCartProducts);
-    const productFound = jsonCart.find((element) => element.name === props.name)
+
+    const productFound = jsonCart.find((element) => element.name === props.name);
+
+    //ESTADOS POP UP
+  const [popUp, setPopUp] = useState(false)
+  const [popUpMessage, setPopUpMessage] = useState('')
+
+  const handleConfirm = async () => {
+    const productIndex = jsonCart.findIndex((element) => element.name === props.name);
+      if (productIndex !== -1) {
+          jsonCart.splice(productIndex, 1);
+          localStorage.setItem('shoppingCart', JSON.stringify(jsonCart));
+      }
+    setPopUp(false);
+    await dispatch(updateTotalPrice());
     
-    console.log(productFound.size)
+    
+  };
+  
     function handleDelete(){
-        if (window.confirm('Seguro quieres eliminar este producto del carrito?')){
-            const productIndex = jsonCart.findIndex((element) => element.name === props.name);
-            if (productIndex !== -1) {
-                jsonCart.splice(productIndex, 1);
-                localStorage.setItem('shoppingCart', JSON.stringify(jsonCart));
-            }
-        navigate('/cart');
-        dispatch(updateTotalPrice());
-        }
+        setPopUpMessage('Seguro quieres eliminar este producto del carrito?')
+        setPopUp(true)
     }
     
-    const [quantity, setQuantity] = useState(productFound.quantity);
+    const [quantity, setQuantity] = useState(productFound && productFound.quantity);
 
     // const handleIncreaseQuantity = async () => {
     //     setQuantity(quantity + 1)
@@ -81,6 +92,15 @@ const Cart = (props) => {
     return(
 
         <div className='flex justify-between'>
+          {
+            popUp === true && (
+              <PopUpStore trigger={popUp} setTrigger={setPopUp} handleConfirm={handleConfirm}>
+                <h3 className='w-1/2 mx-auto text-3xl'>{popUpMessage}</h3>
+              </PopUpStore>
+            )
+          }
+          {
+            productFound &&
                 <div className='flex h-1/2 gap-8 items-center'>
                     <button value={props.productId} onClick={handleDelete} className='button'>
                         <FiTrash2 />
@@ -94,11 +114,12 @@ const Cart = (props) => {
                         Cantidad:
                         <button onClick={handleDecreaseQuantity} className="btn">-</button>
                         {/* <span>{props.quantity}</span> */}
-                        <span>{productFound.quantity}</span>
+                        <span>{productFound && productFound.quantity}</span>
                         <button onClick={() => handleIncreaseQuantity(product)} className="btn">+</button>
                     </div>          
                     <p>${props.price}</p>
                 </div>
+          }
                 {/* <span>Total: $ {{...props.price}*props.quantity}</span> */}
                 
 

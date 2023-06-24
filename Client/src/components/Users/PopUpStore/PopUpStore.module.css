@@ -1,0 +1,9 @@
+.parchmentbackground{
+    background-image: url('https://t4.ftcdn.net/jpg/04/75/46/65/360_F_475466521_gxMuzd4517K96Q8aEPlZK2DFBlopvH8w.jpg');
+    font-family: 'Marcellus', serif;
+}
+
+.parchmentbackground button{
+    font-family: 'EB Garamond', serif;
+    scale: 1.2;
+}
