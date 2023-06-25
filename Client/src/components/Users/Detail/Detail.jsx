@@ -24,7 +24,7 @@ const Detail = () => {
   };
 
   const handleDecreaseQuantity = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
@@ -84,7 +84,7 @@ const Detail = () => {
       <div className="w-2/3">
         <h2 className="titleDetail">{product.name}</h2>
         <p className="bigPrice">${product.price}</p>
-        {product.categoryCategoryId === 3 && (
+        {product.categoryCategoryId === 3 || product.category === 'Indumentaria'? (
           <div>
             <fieldset onChange={handleSizeChange}>
               <div className="flex space-x-4 justify-center">
@@ -121,7 +121,7 @@ const Detail = () => {
               </div>
             )}
           </div>
-        )}
+        ) : null}
         <p className="descriptionDetail">{product.description}</p>
         <label>
           Cantidad:

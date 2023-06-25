@@ -80,7 +80,7 @@ const NavBar = () => {
                 </div>
                 :
                 <div>
-                <span className="text-wwwhite">Welcome back, {userName} </span>
+                <span className="text-wwwhite">Hola de nuevo, {userName} </span>
                 <span className="text-wwwhite">|</span>
                 <button onClick={handleLogout} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Cerrar sesión</button>
                 </div>
