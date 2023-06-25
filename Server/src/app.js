@@ -6,10 +6,12 @@ const cloudinary = require('cloudinary').v2;
 const paymentRoutes = require('./routes/payment.routes');
 const mercadopago = require('mercadopago');
 const cors = require('cors');
+const bodyParser = require('body-parser')
 
 const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_CLOUD, ACCESS_TOKEN  } = process.env;
 
 const routes = require("./routes/index");
+
 
 //Config de Auth0
 const config = {
@@ -23,9 +25,9 @@ const config = {
 
 //Config de Cloudinary
 cloudinary.config({ 
-  cloud_name: CLOUD_NAME, 
-  api_key: KEY_CLOUD, 
-  api_secret: SECRET_CLOUD 
+	cloud_name: CLOUD_NAME, 
+	api_key: KEY_CLOUD, 
+	api_secret: SECRET_CLOUD 
 });
 
 //Config Mercadopago
@@ -34,6 +36,8 @@ mercadopago.configure({
 });
 
 //Config rutas de MercadoPago
+server.use(bodyParser.json());
+server.use(cors());
 server.use(paymentRoutes)
 
 
@@ -49,7 +53,6 @@ server.use((req, res, next) => {
 });
 
 // Middlewares
-server.use(cors());
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(auth(config));
@@ -57,7 +60,7 @@ server.use("/", routes);
 
 // Ruta Principal Provisoria
 server.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+	res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 }); 
 
 
