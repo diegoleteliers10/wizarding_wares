@@ -182,6 +182,19 @@ async (input) => {
 }
 )
 
+export const editUserRole = createAsyncThunk(
+  'admin/editUserRole',
+  async (input) => {
+    const response = await axios.put(`http://localhost:3001/user_role/${input.userId}`, {roleId: Number(input.roleId), userId: input.userId})
+  }
+  )
+export const editUserData = createAsyncThunk(
+  'admin/editUserData',
+  async (input) => {
+    const response = await axios.put(`http://localhost:3001/user/${input.userId}`, {name: input.name, email: input.email, password: input.password})
+  }
+  )
+
 export const deleteProduct = createAsyncThunk(
   'admin/deleteProduct',
   async (productId) => {
@@ -263,6 +276,28 @@ export const adminSlice = createSlice({
       console.error('Error al obtener los usuarios:', action.error);
     })
     .addCase(getAllUsers.pending, (state, action) => {
+      state.loading = true
+    })
+
+    //EDITAR USUARIOS
+    .addCase(editUserRole.fulfilled, (state, action) => {
+      state.loading = false
+    })
+    .addCase(editUserRole.rejected, (state, action) => {
+      state.loading = false
+      console.log(('error al editar el rol del usuario'));
+    })
+    .addCase(editUserRole.pending, (state, action) => {
+      state.loading = true
+    })
+    .addCase(editUserData.fulfilled, (state, action) => {
+      state.loading = false
+    })
+    .addCase(editUserData.rejected, (state, action) => {
+      state.loading = false
+      console.log(('error al editar el rol del usuario'));
+    })
+    .addCase(editUserData.pending, (state, action) => {
       state.loading = true
     })
 
