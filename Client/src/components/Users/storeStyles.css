@@ -57,6 +57,7 @@ opacity: 0.5;
 
 .storeComponent .card{
     background-color: #EAE0D5;
+    border: none;
 }
 
 .storeComponent .buttons button{
@@ -67,6 +68,15 @@ opacity: 0.5;
 .storeComponent select {
     font-family: 'EB Garamond', serif;
     font-size: 1.2em;
+}
+
+.storeComponent .fotoFondo{
+    background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    scale: 1.4;
+    margin-bottom: 30%;
 }
 
 .buttonContainer {
