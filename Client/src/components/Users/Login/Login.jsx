@@ -82,7 +82,7 @@ const Login = () => {
                     >
                         Login
                     </button>
-                    <p className='mt-4'>Aún no tienes cuenta? <span><NavLink to='/register' className='no-underline'>Registrarse</NavLink></span></p>                
+                    <p className='mt-4'>¿Aún no tienes cuenta? <span><NavLink to='/register' className='no-underline'>Registrarse</NavLink></span></p>                
                 </form> 
 
                 <div className='flex justify-center'>

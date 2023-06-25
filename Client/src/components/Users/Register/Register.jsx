@@ -122,7 +122,7 @@ const Register = () => {
                     <h2>Crear usuario</h2>
                     <div className="formBox">
 
-                        <div className="mb-4 md:mt-6 lg:mt-8">
+                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
                             <label htmlFor="name">
                                 <span>Nombre</span>
                                 <input 
@@ -141,7 +141,7 @@ const Register = () => {
                             {errors.name && (<span className="flex text-brown-600">{errors.name}</span>)}
                         </div>
                         
-                        <div className="mb-4 md:mt-6 lg:mt-8">
+                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
                             <label htmlFor="email">
                                 <span>Email</span>
                                 <input 
@@ -159,7 +159,7 @@ const Register = () => {
                             {errors.email && (<span className="flex text-brown-600">{errors.email}</span>)}
                         </div>
                         
-                        <div className="mb-4 md:mt-6 lg:mt-8">
+                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
                             <label htmlFor="password">
                                 <span>Contraseña</span>
                                 <input 
@@ -177,7 +177,7 @@ const Register = () => {
                             {errors.password && (<span className="flex text-brown-600">{errors.password}</span>)}
                         </div>
                         
-                        <div className="mb-4 md:mt-6 lg:mt-8">
+                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
                             <label htmlFor="confirmPassword">
                                 <span>Confirmar Contraseña</span>
                                 <input 
@@ -205,6 +205,7 @@ const Register = () => {
                     >
                     Registrarse
                     </button>
+                    <p className='mt-4'>¿Ya tienes cuenta? <span><NavLink to='/login' className='no-underline'>Iniciar Sesión</NavLink></span></p>
                 </div>
 
                 </form>
