@@ -5,6 +5,7 @@ const { auth, requiresAuth } = require("express-openid-connect");
 const cloudinary = require('cloudinary').v2;
 const paymentRoutes = require('./routes/payment.routes')
 const mercadopago = require('mercadopago')
+const cors = require('cors')
 
 const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_CLOUD, ACCESS_TOKEN  } = process.env;
 
@@ -35,19 +36,19 @@ mercadopago.configure({
 //Config rutas de MercadoPago
 server.use(paymentRoutes)
 
-
 server.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Credentials", "true")
 	res.header(
 		"Access-Control-Allow-Headers",
 		"Origin, X-Requested-With, Content-Type, Accept"
-	);
+		);
 	res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
 	next();
 });
 
 // Middlewares
+server.use(cors());
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(auth(config));
