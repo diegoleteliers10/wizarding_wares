@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { displayUsers, editUserData, editUserRole } from "../../../../redux/adminSlice";
+import PopUp from "../../PopUp/PopUp";
 
 const EditUser = () => {
 
@@ -16,6 +17,10 @@ const EditUser = () => {
       roleId: user.roleRoleId,
     }); 
 
+
+    const [popUp, setPopUp] = useState(false);
+    const [popUpMessage, setPopUpMessage] = useState('');
+
     const handleChange = (event) => {
       setInput({
            ...input, [event.target.name]: event.target.value 
@@ -29,16 +34,25 @@ const EditUser = () => {
         await dispatch(editUserData(input));
         setPopUpMessage('User edited successfully');
         setPopUp(true);
-        dispatch(displayUsers());
         setTimeout(() => { 
+          dispatch(displayUsers());
         }, 2000); // Delay the execution for 2 seconds
       } catch (error) {
         console.log("Error al actualizar el usuario:", error);
       }
     };  
+
+    console.log("popUp state:", popUp);
+
     return (
       <div>
-        Aca entra el form para editar
+         {
+      
+            popUp === true && (
+              <PopUp trigger={popUp} setTrigger={setPopUp}>
+                <h3>{popUpMessage}</h3>
+              </PopUp>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="formBox flex">
             <div className="mb-4 md:mt-6  lg:mt-8 flex-grow">
