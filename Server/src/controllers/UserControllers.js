@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, Role } = require("../models/relationship/relationship");
 const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
-const {CLAVE_SECRETA} = process.env;
+const {SECRET} = process.env;
 
 
 // *** CREAR UN USUARIO **
@@ -58,7 +58,7 @@ const createUserRegister = async (name, email, password) => {
   newUser.setRole(isExistsRole);
 
   // Generamos el token
-  const token = jwt.sign({userId: newUser.userId, name, email, roleId}, CLAVE_SECRETA);
+  const token = jwt.sign({userId: newUser.userId, name, email, roleId}, SECRET);
 
   // return newUser;
   // return {

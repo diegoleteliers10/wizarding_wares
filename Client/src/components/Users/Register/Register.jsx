@@ -5,6 +5,8 @@ import { createUser, getAllUsers } from "../../../redux/accountSlice";
 import { useSelector } from "react-redux";
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
+import '../storeStyles.css';
+import { NavLink } from 'react-router-dom';
 
 const Register = () => {
 
@@ -114,95 +116,108 @@ const Register = () => {
 
     return(
         <>
-            <h2>Crear usuario</h2>
-           <div>
-            <form onSubmit={handleSubmit}>
-                <div className="formBox">
+           <div className="w-1/2 mx-auto flex items-center justify-center m-8 storeLoginForm">
+            <div>
+                <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md">
+                    <h2>Crear usuario</h2>
+                    <div className="formBox">
 
-                    <div className="mb-4 md:mt-6 lg:mt-8">
-                        <label htmlFor="name">
-                            <span>Nombre</span>
-                            <input 
-                            type="text" 
-                            name="name"
-                            placeholder="Nombre completo"
-                            onChange={handleChange}
-                            value={input.name}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                            required
-                            />
-                        </label>
-                        {errors.name && (<span className="flex text-brown-600">{errors.name}</span>)}
+                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                            <label htmlFor="name">
+                                <span>Nombre</span>
+                                <input 
+                                type="text" 
+                                name="name"
+                                placeholder="Nombre completo"
+                                onChange={handleChange}
+                                value={input.name}
+                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                required
+                                />
+                            </label>
+                            
+                        </div>
+                        <div>
+                            {errors.name && (<span className="flex text-brown-600">{errors.name}</span>)}
+                        </div>
+                        
+                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                            <label htmlFor="email">
+                                <span>Email</span>
+                                <input 
+                                type="email"
+                                name="email" 
+                                placeholder="Ingrese un email..."
+                                value={input.email}
+                                onChange={handleChange}
+                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                required
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            {errors.email && (<span className="flex text-brown-600">{errors.email}</span>)}
+                        </div>
+                        
+                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                            <label htmlFor="password">
+                                <span>Contraseña</span>
+                                <input 
+                                type="password" 
+                                name="password"
+                                placeholder="Contraseña"
+                                onChange={handleChange}
+                                value={input.password}
+                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                required
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            {errors.password && (<span className="flex text-brown-600">{errors.password}</span>)}
+                        </div>
+                        
+                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                            <label htmlFor="confirmPassword">
+                                <span>Confirmar Contraseña</span>
+                                <input 
+                                type="password" 
+                                name="confirmPassword"
+                                placeholder="Confirme su contraseña"
+                                onChange={handleChange}
+                                value={input.confirmPassword}
+                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                required
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            {errors.confirmPassword && (<span className="flex text-brown-600">{errors.confirmPassword}</span>)}
+                        </div>
+                        
                     </div>
-                    
-                    <div className="mb-4 md:mt-6 lg:mt-8">
-                        <label htmlFor="email">
-                            <span>Email</span>
-                            <input 
-                            type="email"
-                            name="email" 
-                            placeholder="Ingrese un email..."
-                            value={input.email}
-                            onChange={handleChange}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                            required
-                            />
-                        </label>
-                        {errors.email && (<span className="flex text-brown-600">{errors.email}</span>)}
-                    </div>
-                    
-                    <div className="mb-4 md:mt-6 lg:mt-8">
-                        <label htmlFor="password">
-                            <span>Contraseña</span>
-                            <input 
-                            type="password" 
-                            name="password"
-                            placeholder="Contraseña"
-                            onChange={handleChange}
-                            value={input.password}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                            required
-                            />
-                        </label>
-                        {errors.password && (<span className="flex text-brown-600">{errors.password}</span>)}
-                    </div>
-                    
-                    <div className="mb-4 md:mt-6 lg:mt-8">
-                        <label htmlFor="confirmPassword">
-                            <span>Confirmar Contraseña</span>
-                            <input 
-                            type="password" 
-                            name="confirmPassword"
-                            placeholder="Confirme su contraseña"
-                            onChange={handleChange}
-                            value={input.confirmPassword}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                            required
-                            />
-                        </label>
-                        {errors.confirmPassword && (<span className="flex text-brown-600">{errors.confirmPassword}</span>)}
-                    </div>
-                    
+
+                    <div className="boton">
+                    <button
+                    className="bg-wwbrown rounded hover:bg-wwmaroon active:bg-brown-800 focus:outline-2 focus:ring focus:ring-purple-300 w-40 h-10 shadow text-white"
+                    type="submit"
+                    disabled={!input.name || errors.name || !input.email || errors.email || !input.password || errors.password || !input.confirmPassword || errors.confirmPassword}
+                    >
+                    Registrarse
+                    </button>
+                    <p className='mt-4'>¿Ya tienes cuenta? <span><NavLink to='/login' className='no-underline'>Iniciar Sesión</NavLink></span></p>
                 </div>
 
-                <div className="boton">
-                <button
-                  className="bg-#692323-600 rounded hover:bg-beige-700 active:bg-brown-800 focus:outline-2 focus:ring focus:ring-purple-300 w-40 h-10 shadow text-white"
-                  type="submit"
-                  disabled={!input.name || errors.name || !input.email || errors.email || !input.password || errors.password || !input.confirmPassword || errors.confirmPassword}
-                >
-                  Registrarse
-                </button>
-              </div>
+                </form>
+                <div className="flex justify-center">
+                    <GoogleLogin
+                    onSuccess={handleGoogleRegister}
+                    onError={() => {
+                        console.log('Register Failed');
+                    }}
+                    />                
+                </div>
 
-            </form>
-            <div className="flex justify-center">
-                <GoogleLogin
-                onSuccess={handleGoogleRegister}
-                onError={() => {
-                    console.log('Register Failed');
-                }}
-                />                
             </div>
            </div>
 
