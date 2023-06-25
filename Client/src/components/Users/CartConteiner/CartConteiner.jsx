@@ -4,12 +4,18 @@ import Cart from '../Cart/Cart';
 import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import TotalPrice from '../TotalPrice/TotalPrice';
+import { useNavigate } from "react-router-dom";
 
  const CartConteiner = () => {
     // const dispatch = useDispatch();
     const cartProducts = useSelector((state) => state.user.cartProducts);
     //console.log(cartProducts);
     
+    const navigate = useNavigate();
+    
+    const handleGoCheckout = ()=> {
+      navigate('/checkout')
+  }
     //traigo productos de localstorage
     const shoppingCartProducts = localStorage.getItem('shoppingCart')
 
@@ -43,6 +49,7 @@ import TotalPrice from '../TotalPrice/TotalPrice';
             <h5>Total</h5>
             <p>{<TotalPrice/>}</p>
           </div>
+          <button onClick={handleGoCheckout}>Pagar</button>
           </div>
 
       {/* Botón para limpiar el carrito */}

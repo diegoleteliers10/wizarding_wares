@@ -19,6 +19,7 @@ const Users = ({ user }) => {
   const [popUpMessage, setPopUpMessage] = useState('')
 
   const handleEdit = async () => {
+    dispatch(setEditState(user))
     dispatch(displayEditUser())
   }
 
