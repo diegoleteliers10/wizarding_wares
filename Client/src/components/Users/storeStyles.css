@@ -98,3 +98,7 @@ opacity: 0.5;
     background-color: #a88654;
     z-index: -1;
   }
+
+  .storeLoginForm{
+    height: 75vh;
+  }

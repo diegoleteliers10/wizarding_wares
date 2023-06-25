@@ -5,6 +5,7 @@ import axios from 'axios';
 const initialState ={
     allUsers: [],
     user: [],
+    message: ''
 }
 
 export const getAllUsers = createAsyncThunk('account/getAllUsers',
@@ -27,15 +28,16 @@ export const createUser = createAsyncThunk('account/createUser',
   }
 )
 export const loginGoogle = createAsyncThunk('account/loginGoogle', 
-  async (decoded) => {
-    console.log(decoded);
-    return decoded;
+  async (googleInfoLogin) => {
+    const response = await axios.post("http://localhost:3001/userLogin", googleInfoLogin)
+    return response.data;
 
 });
 
 export const login = createAsyncThunk('account/login',
   async (input) => {
-    return input
+    const response = await axios.post("http://localhost:3001/userLogin", input)
+    return response.data;
   }
 )
 
@@ -75,18 +77,26 @@ export const accountSlice = createSlice({
       .addCase(createUser.pending, (state, action) => {
         state.loading = true
       })
+      //login
       .addCase(login.fulfilled, (state, action) => {
-        const user = state.allUsers.find(user => user.email === action.payload.email)
-        if(user.password === action.payload.password){
-            state.user = user
-        }
-        console.log(`Welcome back, ${state.user.name}!`);
+        console.log(action.payload)
+        state.user = action.payload.userInfo
         state.loading = false
       })
+      .addCase(login.rejected, (state, action) => {
+        console.log(action)
+        state.message= 'Las credenciales provistas no son válidas'
+        state.loading = false
+      })
+      //LOGIN GOOGLE
       .addCase(loginGoogle.fulfilled, (state, action) => {
-        const user = state.allUsers.find(user => user.email === action.payload.email)
-        state.user = user
-        console.log(`Welcome back, ${state.user.name}!`);
+        console.log(action.payload)
+        state.user = action.payload.userInfo
+        state.loading = false
+      })
+      .addCase(loginGoogle.rejected, (state, action) => {
+        console.log(action)
+        state.message= 'No hay una cuenta de Wizarding Wares con ese email'
         state.loading = false
       })
       .addCase(logOut.fulfilled, (state, action) => {
