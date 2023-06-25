@@ -1,6 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import getCookie from '../hooks/getCookie';
+import setCookie from '../hooks/setCookie';
+import removeCookie from '../hooks/removeCookie';
 
 const initialState ={
     allUsers: [],
@@ -79,8 +82,9 @@ export const accountSlice = createSlice({
       })
       //login
       .addCase(login.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.user = action.payload.userInfo
+        removeCookie('userInfo');
+        setCookie('userInfo', JSON.stringify(action.payload.userInfo))
         state.loading = false
       })
       .addCase(login.rejected, (state, action) => {
@@ -101,7 +105,8 @@ export const accountSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state, action) => {
         state.loading = false 
-        state.user = []
+        removeCookie('userInfo');
+        state.user = ''
         console.log('Nos vemos pronto!');
       })
       .addCase(logOut.rejected, (state, action) => {

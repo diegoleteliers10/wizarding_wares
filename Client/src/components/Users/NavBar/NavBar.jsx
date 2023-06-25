@@ -6,16 +6,28 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../../redux/accountSlice";
 import {RiLuggageCartLine} from "react-icons/ri";
+import getCookie from "../../../hooks/getCookie";
 
 const NavBar = () => {
 
-    const user = useSelector(state => state.account.user);
+    const {user} = useSelector(state => state.account);
     const {cartProducts, price} = useSelector(state=> state.user)
     const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     const [cartItemCount, setCartItemCount] = useState(0);
-  
+    const [userName, setUserName] = useState('')
+    
     const dispatch = useDispatch();
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+    
+    useEffect(()=>{
+        const userInfo = getCookie('userInfo'); 
+        if(userInfo){
+            const {name} = JSON.parse(userInfo)
+            setUserName(name)        
+        } else{
+            setUserName('')
+        }
+    }, [user])
     
   
     // actualizar cantidad de carrito
@@ -60,7 +72,7 @@ const NavBar = () => {
             </div>
             <div className="ml-auto buttons">
                 
-                {user.length === 0 ? 
+                {userName === '' ? 
                 <div>
                 <button onClick={handleLogin} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Login</button>
                 <span className="text-wwwhite">|</span>
@@ -68,7 +80,7 @@ const NavBar = () => {
                 </div>
                 :
                 <div>
-                <span className="text-wwwhite">Welcome back, {user.name} </span>
+                <span className="text-wwwhite">Welcome back, {userName} </span>
                 <span className="text-wwwhite">|</span>
                 <button onClick={handleLogout} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Cerrar sesión</button>
                 </div>
