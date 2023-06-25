@@ -3,8 +3,9 @@ const server = express();
 const morgan = require("morgan");
 const { auth, requiresAuth } = require("express-openid-connect");
 const cloudinary = require('cloudinary').v2;
-const paymentRoutes = require('./routes/payment.routes')
-const mercadopago = require('mercadopago')
+const paymentRoutes = require('./routes/payment.routes');
+const mercadopago = require('mercadopago');
+const cors = require('cors');
 
 const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_CLOUD, ACCESS_TOKEN  } = process.env;
 
@@ -48,6 +49,7 @@ server.use((req, res, next) => {
 });
 
 // Middlewares
+server.use(cors());
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(auth(config));
