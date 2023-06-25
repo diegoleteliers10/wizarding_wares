@@ -1,18 +1,21 @@
 const mercadopago = require('mercadopago');
 
 const createOrder = async (req, res) => {
+    const arrayProducts = req.body;
     try {
         const result = await mercadopago.preferences.create({
-            items: [
-                {
-                    //aca irian los productos del carrito de compras que vendria por req.body
-                    id: '',
-                    title: 'compra de prueba',
-                    unit_price: 1000,
-                    currency_id: 'ARS',
-                    quantity: 1
-                }
-            ],
+            items: 
+            // [
+            //     {
+            //         //aca irian los productos del carrito de compras que vendria por req.body
+            //         id: '',
+            //         title: 'compra de prueba',
+            //         unit_price: 1000,
+            //         currency_id: 'ARS',
+            //         quantity: 1
+            //     }
+            // ]
+            arrayProducts,
             back_urls: {
                 //aca las URLS que redireccionan dependiendo como haya salido la transaccion
                 success: 'http://localhost:3001/success',
