@@ -1,13 +1,13 @@
 const Products=require('../models/Product.model')
 const Purchases = require('../models/Purchase.model')
 
-const getPurchase= async (req,res)=>{
+const getAllPurchById= async (req,res)=>{
   
-  const {purchaseId}=req.params; //o req.query
+  const {userId}=req.params; //o req.query
   try {
-    const purchase= await Purchases.findOne({
+    const purchase= await Purchases.findAll({
       where:{
-        purchaseId:purchaseId
+        userUserId:userId
       },
       include: {
         model: Products,
@@ -24,4 +24,4 @@ const getPurchase= async (req,res)=>{
 
 }
 
-module.exports=getPurchase;
+module.exports=getAllPurchById;
