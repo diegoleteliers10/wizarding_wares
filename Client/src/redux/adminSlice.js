@@ -1,11 +1,15 @@
 import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import axios  from "axios";
+import setCookie from '../hooks/setCookie';
+import removeCookie from '../hooks/removeCookie';
+import getCookie from '../hooks/getCookie';
 
+const currDisplay = getCookie('adminDisplay');
 
 const initialState = {
   products: [],
   allProducts: [],
-  display: "productList",
+  display: currDisplay ? JSON.parse(currDisplay) : "productList",
   loading: false,
   search: '',
   edit: [],
@@ -304,18 +308,25 @@ export const adminSlice = createSlice({
     //DISPLAYS
     .addCase(displayCreate.fulfilled, (state, action) => {
       state.display = action.payload;
+      removeCookie('adminDisplay')
+      setCookie('adminDisplay', JSON.stringify(action.payload))
     })
     .addCase(displayCreate.pending, (state, action) => {
       state.loading = true;
     })
     .addCase(displayProductList.fulfilled, (state, action) => {
       state.display = action.payload;
+      removeCookie('adminDisplay')
+      setCookie('adminDisplay', JSON.stringify(action.payload))
     })
     .addCase(displayUsers.fulfilled, (state, action) => {
       state.display = action.payload;
+      removeCookie('adminDisplay')
+      setCookie('adminDisplay', JSON.stringify(action.payload))
     })
     .addCase(displayEditUser.fulfilled, (state, action) => {
       state.display = action.payload;
+      console.log(action.payload)
     })
 
     //FILTER PRODUCT CATEGORY
