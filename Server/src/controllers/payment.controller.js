@@ -1,26 +1,24 @@
 const mercadopago = require('mercadopago');
 
 const createOrder = async (req, res) => {
-    const arrayProducts = req.body;
+    const { products } = req.body.products;
     try {
+        const items = products.map(product => ({
+            title: product.title,
+            description: product.description,
+            unit_price: Number(product.unit_price),
+            quantity: Number(product.quantity)
+        }))
         const result = await mercadopago.preferences.create({
-            items: 
-            // [
-            //     {
-            //         //aca irian los productos del carrito de compras que vendria por req.body
-            //         id: '',
-            //         title: 'compra de prueba',
-            //         unit_price: 1000,
-            //         currency_id: 'ARS',
-            //         quantity: 1
-            //     }
-            // ]
-            arrayProducts,
+
+            items: items,
+
+            // auto_return: 'http://localhost:3001/success', 
+     
             back_urls: {
                 //aca las URLS que redireccionan dependiendo como haya salido la transaccion
                 success: 'http://localhost:3001/success',
                 failure: 'http://localhost:3001/failure',
-                pending: ''
             },
             //URL del webhook, donde recibe las notificaciones del back de MP(debe ser una url HTTPS por lo que MP va a tirar un error al pagar)
             notification_url: 'http://localhost:3001/webhook'
