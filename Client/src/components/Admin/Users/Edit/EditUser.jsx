@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { displayUsers, editUserData, editUserRole } from "../../../../redux/adminSlice";
 import PopUp from "../../PopUp/PopUp";
+import { BiArrowBack } from "react-icons/bi";
 
 const EditUser = () => {
 
     const dispatch = useDispatch();
 
     const user = useSelector((state) => state.admin.edit);
-    console.log(user);  
+    //console.log(user);  
 
     const [input, setInput] = useState({
       userId: user.userId,
@@ -27,6 +28,10 @@ const EditUser = () => {
           });
     };  
 
+    function handleDisplay(){
+      dispatch(displayUsers())
+    }
+
     const handleSubmit = async (event) => {
       event.preventDefault();
       try {
@@ -42,7 +47,7 @@ const EditUser = () => {
       }
     };  
 
-    console.log("popUp state:", popUp);
+    //console.log("popUp state:", popUp);
 
     return (
       <div>
@@ -53,54 +58,68 @@ const EditUser = () => {
                 <h3>{popUpMessage}</h3>
               </PopUp>
         )}
-        <form onSubmit={handleSubmit}>
-          <div className="formBox flex">
-            <div className="mb-4 md:mt-6  lg:mt-8 flex-grow">
-              <label>
-                <span>Name</span>
-                <input
-                  className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                  name="name"
-                  type="text"
-                  onChange={handleChange}
-                  value={input.name}
-                  required
-                />
-              </label>
-            </div>  
-            <div className="mb-4 md:mt-6 lg:mt-8 flex-grow">
-              <label>
-                <span>Email</span>
-                <input
-                  className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                  name="email"
-                  type="text"
-                  onChange={handleChange}
-                  value={input.email}
-                  required
-                />
-              </label>
-            </div>  
-            <div className="mb-4 md:mt-6 lg:mt-8 flex-grow">
-              <label>
-                <span>Role Id</span>
-                <input
-                  className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                  name="roleId"
-                  type="number"
-                  min={1}
-                  max={2}
-                  onChange={handleChange}
-                  value={input.roleId}
-                  required
-                />
-              </label>
-            </div>
+        <div className="flex justify-center items-center h-screen">
+          <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
+          <div className="flex">
+              <button className="flex text-purple-600 items-center font-medium mb-2 hover:text-purple-700" onClick={handleDisplay}>
+                <BiArrowBack className="mr-2"/>Back 
+              </button>
           </div>
-          <button
-          type="submit"
-          >Confirm edit</button>
-        </form>
+          <div className="text-left">
+          <h2>Edit <span className="">"{user.name}"</span></h2>
+            <form onSubmit={handleSubmit}>
+              <div className="formBox">
+                <div className="mb-4 md:mt-6  lg:mt-8 flex-grow">
+                  <label>
+                    <span>Name</span>
+                    <input
+                      className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                      name="name"
+                      type="text"
+                      onChange={handleChange}
+                      value={input.name}
+                      required
+                    />
+                  </label>
+                </div>  
+                <div className="mb-4 md:mt-6 lg:mt-8 flex-grow">
+                  <label>
+                    <span>Email</span>
+                    <input
+                      className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                      name="email"
+                      type="text"
+                      onChange={handleChange}
+                      value={input.email}
+                      required
+                    />
+                  </label>
+                </div>  
+                <div className="mb-4 md:mt-6 lg:mt-8 flex-grow">
+                  <label>
+                    <span>Role Id</span>
+                    <input
+                      className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                      name="roleId"
+                      type="number"
+                      min={1}
+                      max={2}
+                      onChange={handleChange}
+                      value={input.roleId}
+                      required
+                    />
+                  </label>
+                </div>
+              </div>
+              <button
+              type="submit"
+              className="bg-purple-600 rounded hover:bg-purple-700 active:bg-purple-700 focus:outline-2 focus:ring focus:ring-purple-300 w-40 h-10 shadow text-white"
+              >Confirm edit</button>
+            </form>
+
+          </div>
+          </div>
+        </div>
       </div>
     );
 };

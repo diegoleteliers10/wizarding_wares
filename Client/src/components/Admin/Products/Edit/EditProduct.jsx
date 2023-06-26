@@ -125,7 +125,7 @@ const EditProduct = () => {
               <button className="flex text-purple-600 items-center font-medium mb-2 hover:text-purple-700" onClick={handleDisplay}>
                 <BiArrowBack className="mr-2"/>Back 
               </button>
-            </div>
+          </div>
             <div className="text-left">
             <h2>Edit <span className="">"{product.name}"</span></h2>
               <form onSubmit={handleSubmit} id="form">
