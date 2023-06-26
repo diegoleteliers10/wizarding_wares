@@ -85,6 +85,10 @@ export const accountSlice = createSlice({
         state.user = action.payload.userInfo
         removeCookie('userInfo');
         setCookie('userInfo', JSON.stringify(action.payload.userInfo))
+        if(action.payload.userInfo.role === 1){
+          removeCookie('admin')
+          setCookie('admin', JSON.stringify(true))
+        }
         state.loading = false
       })
       .addCase(login.rejected, (state, action) => {
@@ -94,8 +98,13 @@ export const accountSlice = createSlice({
       })
       //LOGIN GOOGLE
       .addCase(loginGoogle.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.user = action.payload.userInfo
+        removeCookie('userInfo');
+        setCookie('userInfo', JSON.stringify(action.payload.userInfo))
+        if(action.payload.userInfo.role === 1){
+          removeCookie('admin')
+          setCookie('admin', JSON.stringify(true))
+        }
         state.loading = false
       })
       .addCase(loginGoogle.rejected, (state, action) => {
@@ -106,8 +115,9 @@ export const accountSlice = createSlice({
       .addCase(logOut.fulfilled, (state, action) => {
         state.loading = false 
         removeCookie('userInfo');
+        removeCookie('admin')
         state.user = ''
-        console.log('Nos vemos pronto!');
+        //console.log('Nos vemos pronto!');
       })
       .addCase(logOut.rejected, (state, action) => {
         state.loading = false
@@ -120,4 +130,3 @@ export const accountSlice = createSlice({
   });
   
   export default accountSlice.reducer;
-  

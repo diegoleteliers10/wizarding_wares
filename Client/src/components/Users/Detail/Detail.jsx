@@ -131,7 +131,7 @@ const Detail = () => {
         </label>
         <button
           onClick={handleAddToCart}
-          className={`btn1 btn--svg-small ${size === '' && product.categoryCategoryId === 3 ? ' disabled opacity-50 pointer-events-none' : ''}`}
+          className={`btn1 btn--svg-small ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') ? ' disabled opacity-50 pointer-events-none' : ''}`}
           disabled={quantity === 0}
         >
           Añadir al carrito
