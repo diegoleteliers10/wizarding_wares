@@ -5,10 +5,12 @@ import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import TotalPrice from '../TotalPrice/TotalPrice';
 import { useNavigate } from "react-router-dom";
+import '../storeStyles.css';
+
 
  const CartConteiner = () => {
     // const dispatch = useDispatch();
-    const cartProducts = useSelector((state) => state.user.cartProducts);
+    const price = useSelector((state) => state.user.price);
     //console.log(cartProducts);
     
     const navigate = useNavigate();
@@ -18,15 +20,17 @@ import { useNavigate } from "react-router-dom";
   }
     //traigo productos de localstorage
     const shoppingCartProducts = localStorage.getItem('shoppingCart')
+    let parsedProducts = []
+    if(shoppingCartProducts !== ''){
+      // si hay productos los parseo
+      parsedProducts = JSON.parse(shoppingCartProducts);
+      
+    }    
 
-    const totalPrice = JSON.parse(shoppingCartProducts)?.reduce(
-      (accumulator, product) => accumulator + product.price * product.quantity,
-      0
-    );
+    useEffect(()=>{
+        //cuando se actualiza el precio actualizo componente y ve si mantener el boton de pago activo o no
+      }, [price])
 
-      useEffect(()=>{
-
-      }, [JSON.parse(shoppingCartProducts)])
       let key = 1;
     return (
         <div className='p-8 flex'>
@@ -34,7 +38,7 @@ import { useNavigate } from "react-router-dom";
                 <h2>Carrito de compras</h2>
                 <p>Aún no quieres finalizar tu compra <span className='font-bold'><NavLink to='/'>Sigue explorando</NavLink></span></p>
                 {/* Renderiza los productos en el carrito */}
-                {JSON.parse(shoppingCartProducts)?.map(product => (
+                {parsedProducts?.map(product => (
                   <Cart
                   key={key++}
                   id={product.productId}
@@ -45,11 +49,15 @@ import { useNavigate } from "react-router-dom";
                   product={product}
                 />
                 ))}
-          <div className=''>
-            <h5>Total</h5>
-            <p>{<TotalPrice/>}</p>
-          </div>
-          <button onClick={handleGoCheckout}>Pagar</button>
+            {
+              parsedProducts.length < 1 ?
+              <h4>El carrito está vacío</h4> :
+              <div className=''>
+                <h5>Total</h5>
+                <p>{<TotalPrice/>}</p>
+                <button onClick={handleGoCheckout} className={parsedProducts.length >= 1 ? 'bg-wwbrown text-wwwhite p-2 fontMarcellus hover:bg-wwmaroon' : 'bg-wwbrown text-wwwhite p-2 fontMarcellus opacity-50 disabled pointer-events-none'}>Pagar</button>
+              </div>
+            }
           </div>
 
       {/* Botón para limpiar el carrito */}

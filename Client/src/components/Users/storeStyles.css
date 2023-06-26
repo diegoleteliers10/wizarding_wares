@@ -79,6 +79,14 @@ opacity: 0.5;
     margin-bottom: 30%;
 }
 
+.fontEB{
+    font-family: 'EB Garamond', serif;
+}
+
+.fontMarcellus {
+    font-family: 'Marcellus', serif;
+}
+
 .buttonContainer {
     display: inline-block;
     position: relative;

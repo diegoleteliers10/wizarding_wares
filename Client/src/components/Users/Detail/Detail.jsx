@@ -1,9 +1,10 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/userSlice";
 import BackButton from "../BackButton/BackButton";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import getCookie from "../../../hooks/getCookie";
 import '../storeStyles.css';
 
 const Detail = () => {
@@ -12,6 +13,7 @@ const Detail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+  const loggedIn = getCookie('userInfo')
 
   // LOCALSTORAGE
   const [addCart, setAddCart] = useLocalStorage('shoppingCart', []);
@@ -131,12 +133,23 @@ const Detail = () => {
         </label>
         <button
           onClick={handleAddToCart}
-          className={`btn1 btn--svg-small ${size === '' && product.categoryCategoryId === 3 ? ' disabled opacity-50 pointer-events-none' : ''}`}
+          className={`btn1 btn--svg-small ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn ? ' disabled opacity-50 pointer-events-none' : ''}`}
           disabled={quantity === 0}
         >
           Añadir al carrito
         </button>
         <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
+        <div className="mt-8">
+          {
+            !loggedIn && 
+            <div>
+              <h5 className="font-medium text-wwmaroon">
+                ¡Debes iniciar sesión para poder agregar artículos al carrito!
+              </h5>
+              <p><NavLink to='/register'>Regístrate</NavLink></p>
+            </div>
+          }
+        </div>
       </div>
     </div>
   );
