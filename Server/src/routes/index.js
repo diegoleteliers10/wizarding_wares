@@ -32,7 +32,7 @@ const upload = multer({ dest: 'tempUploads/' });
 //user routes
 router.post('/userAddress', postUserAddress)
 router.use("/", userRouter);
-router.post('/createReview',createReview)
+router.post('/createReview/:productId',createReview)
 router.delete('/deleteAddress/:id', deleteAddress)
 router.post('/createPurchase',createPurchase)
 router.get('/getPurchase/:purchaseId', getPurchase)
