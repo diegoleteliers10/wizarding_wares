@@ -116,6 +116,7 @@ export const accountSlice = createSlice({
         state.loading = false 
         removeCookie('userInfo');
         removeCookie('admin')
+        removeCookie('adminDisplay')
         state.user = ''
         //console.log('Nos vemos pronto!');
       })
