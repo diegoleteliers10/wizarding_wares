@@ -60,7 +60,7 @@ const Login = () => {
 
     return (
         <>
-        <div className='w-1/2 mx-auto flex items-center storeLoginForm'>
+        <div className='w-1/2 mx-auto flex items-center justify-center storeLoginForm'>
             <div>
                 <div>
                     {
