@@ -13,6 +13,9 @@ const loginUser = async (req, res) => {
       //si no lo encuentro retorno error
       return res.status(404).json({ message: 'User not found' });
     }
+    if(userFound.isActive === false){
+      return res.status(401).json({ message: 'User no longer active' });
+    }
     //si encuentra usuario y ademas recibe propiedad email verified en true, permito acceso
     if (email_verified === true) {
       return res.status(200).json({
