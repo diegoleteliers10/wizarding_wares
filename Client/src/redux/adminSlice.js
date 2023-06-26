@@ -17,7 +17,8 @@ const initialState = {
   filterStock:'',
   sort: '',
   editUser: [],
-  allUsers: []
+  allUsers: [],
+  refresh: 0,
 }
 
 // export const createProd = (input) => {
@@ -204,6 +205,19 @@ export const deleteProduct = createAsyncThunk(
   async (productId) => {
     try {
       const response = await axios.delete(`http://localhost:3001/deleteProduct/${productId}`);
+      return response.data;
+    } catch (error) { 
+      console.error('Error al eliminar el producto:', error);
+      throw error;
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  'admin/deleteUser',
+  async (userId) => {
+    try {
+      const response = await axios.put(`http://localhost:3001/user_deleteA/${userId}`);
       return response.data;
     } catch (error) { 
       console.error('Error al eliminar el producto:', error);
@@ -405,6 +419,13 @@ export const adminSlice = createSlice({
     //DELETE PRODUCT
     .addCase(deleteProduct.fulfilled, (state, action) => {
       state.loading = false;
+      //state.products = state.products;
+    })
+    //DELETE USER (borrado logico)
+    .addCase(deleteUser.fulfilled, (state, action) => {
+      state.loading = false;
+      console.log(action.payload)
+      state.refresh= state.refresh+1
       //state.products = state.products;
     })
   },
