@@ -2,25 +2,28 @@ import { useSelector } from "react-redux";
 function TotalPrice() {
 
     const {price} = useSelector((state)=> state.user)
-    
-    const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+    const cartItems = localStorage.getItem('shoppingCart')
+    let shoppingCart =[];
+    if(cartItems){
+      shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+    }
 
-  // Calculate the total price
+  // Calcular precio total
   let totalPrice = 0;
   for (const item of shoppingCart) {
     totalPrice += item.price * item.quantity;
   }
 
-  // Update the total price in the shopping cart
+  // actualizar precio total en carrito
   const updatedShoppingCart = shoppingCart.map((item) => ({
     ...item,
     totalPrice: item.price * item.quantity,
   }));
 
-  // Update the shopping cart in local storage
+  // actualizar carrito en localstorage
   localStorage.setItem('shoppingCart', JSON.stringify(updatedShoppingCart));
 
-  // Return the total price
+  // Return del precio total
   return totalPrice;
 }
 

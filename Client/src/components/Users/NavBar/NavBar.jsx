@@ -79,7 +79,7 @@ const NavBar = () => {
     const handleLogout = () => {
         dispatch(logOut())
         navigate("/")
-        localStorage.setItem('shoppingCart', []);
+        localStorage.setItem('shoppingCart', ['']);
     }
 
     return(
