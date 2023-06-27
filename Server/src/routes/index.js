@@ -16,6 +16,7 @@ const getAllPurchase = require('../controllers/getAllPurchases.controller')
 const getPurchase = require('../controllers/getPurchase.controller')
 const editStatePurchase = require('../controllers/editStatePurchase.controller')
 const loginUser = require('../controllers/loginUser.controller')
+const getAllPurchById = require('../controllers/getAllPurchById.controller')
 
 
 const categoryRouter = require("./categoryRouter");
@@ -31,10 +32,11 @@ const upload = multer({ dest: 'tempUploads/' });
 //user routes
 router.post('/userAddress', postUserAddress)
 router.use("/", userRouter);
-router.post('/createReview',createReview)
+router.post('/createReview/:productId',createReview)
 router.delete('/deleteAddress/:id', deleteAddress)
 router.post('/createPurchase',createPurchase)
-router.get('/getPurchase/:userId', getPurchase)
+router.get('/getPurchase/:purchaseId', getPurchase)
+router.get('/getAllPurchById/:userId', getAllPurchById)
 router.post('/userLogin', loginUser)
 
 //user and admin routes

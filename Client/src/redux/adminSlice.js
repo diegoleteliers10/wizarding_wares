@@ -303,7 +303,7 @@ export const adminSlice = createSlice({
     })
     .addCase(editUserRole.rejected, (state, action) => {
       state.loading = false
-      console.log(('error al editar el rol del usuario'));
+      // console.log(('error al editar el rol del usuario'));
     })
     .addCase(editUserRole.pending, (state, action) => {
       state.loading = true
@@ -313,7 +313,7 @@ export const adminSlice = createSlice({
     })
     .addCase(editUserData.rejected, (state, action) => {
       state.loading = false
-      console.log(('error al editar el rol del usuario'));
+      // console.log(('error al editar el rol del usuario'));
     })
     .addCase(editUserData.pending, (state, action) => {
       state.loading = true
