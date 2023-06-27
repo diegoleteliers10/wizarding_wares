@@ -151,7 +151,7 @@ const CreateProduct = () => {
           setPopUp(true);
       })
       .catch((error) => {
-        console.log("Error al crear el producto:", error);
+        console.log("Product creation failed:", error);
       });
   };
 

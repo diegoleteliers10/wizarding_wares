@@ -72,7 +72,7 @@ export const accountSlice = createSlice({
       //CREAR USUARIOS
       .addCase(createUser.fulfilled, (state, action) => {
         state.loading = false 
-        alert('Su usuario se ha creado correctamente!')
+        //alert('Su usuario se ha creado correctamente!')
       })
       .addCase(createUser.rejected, (state, action) => {
         state.loading = false
