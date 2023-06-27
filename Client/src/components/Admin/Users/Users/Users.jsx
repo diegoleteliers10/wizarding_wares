@@ -54,7 +54,7 @@ const Users = ({ user }) => {
       <td className='text-center '>{user.role.name}
       </td>
       <td className={user.isActive === false ? 'text-center' :`inline-flex px-2 text-xs font-medium leading-5 rounded-full`}>{user.isActive === true ? 'Active' : 'Inactive'}</td>
-      <td className='flex-center'>
+      <td className='revert'>
         <button className='button' onClick={() => handleEdit(user)}>
           <FiEdit />
         </button>

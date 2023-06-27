@@ -26,6 +26,7 @@ const UserList = () => {
             <th className='text-center'>Email</th>
             <th className='text-center'>Role</th>
             <th className='text-center'>Status</th>
+            <th className=''>Actions</th>
           </tr>
         </thead>
         <tbody>
