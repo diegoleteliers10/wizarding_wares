@@ -14,6 +14,7 @@ import { useLocation } from 'react-router-dom'
 import Login from './components/Users/Login/Login'
 import Register from './components/Users/Register/Register'
 import Checkout from './components/Users/Checkout/Checkout'
+import Purchases from './components/Users/Purchases/Purchases'
 
 function App() {
   const { pathname } = useLocation()
@@ -26,6 +27,7 @@ function App() {
       <div className="flex-grow">
         <Routes>
           <Route path='/' element={<Home/>} />
+          <Route path='/purchases' element={<Purchases/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} />
           <Route path='/cart' element={<CartConteiner/>}/>

@@ -12,6 +12,15 @@ const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_
 
 const routes = require("./routes/index");
 
+const Status = require("./models/Status.model")
+
+const estados = ["en preparacion", "en camino", "entregado"]
+
+for(let i=0; i<estados.length; i++){
+	const estado = Status.create({
+		name:estados[i]
+	})
+}
 
 //Config de Auth0
 const config = {

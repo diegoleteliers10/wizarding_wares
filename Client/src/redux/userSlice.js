@@ -13,6 +13,7 @@ const initialState = {
   search: '',
   page: 1,
   price: 0,
+  purchases: [],
 };
 
 export const getProducts = createAsyncThunk(
@@ -117,6 +118,17 @@ export const decreaseQuantity = createAsyncThunk(
 export const clearCart = createAction('user/clearCart');
 
 export const updateTotalPrice = createAction('user/updateTotalPrice');
+
+export const getPurchases = createAsyncThunk(
+  'user/getPurchases', 
+  async(_, thunkAPI) => {
+    try {
+      const response = await axios.get("/getPurchase/:userId")
+    } catch (error) {
+      
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: 'user',
