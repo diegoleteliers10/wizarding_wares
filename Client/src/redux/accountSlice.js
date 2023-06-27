@@ -14,7 +14,7 @@ const initialState ={
 export const getAllUsers = createAsyncThunk('account/getAllUsers',
     async (_, thunkAPI) => {
       try {
-        const response = await axios.get('http://localhost:3001/allUsers');
+        const response = await axios.get('/allUsers');
         //console.log(response.data)
         return response.data;
       } catch (error) {
@@ -26,20 +26,20 @@ export const getAllUsers = createAsyncThunk('account/getAllUsers',
 
 export const createUser = createAsyncThunk('account/createUser',
   async (input) => {
-    const response = await axios.post("http://localhost:3001/user", input)
+    const response = await axios.post("/user", input)
     return response; 
   }
 )
 export const loginGoogle = createAsyncThunk('account/loginGoogle', 
   async (googleInfoLogin) => {
-    const response = await axios.post("http://localhost:3001/userLogin", googleInfoLogin)
+    const response = await axios.post("/userLogin", googleInfoLogin)
     return response.data;
 
 });
 
 export const login = createAsyncThunk('account/login',
   async (input) => {
-    const response = await axios.post("http://localhost:3001/userLogin", input)
+    const response = await axios.post("/userLogin", input)
     return response.data;
   }
 )
