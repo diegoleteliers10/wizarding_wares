@@ -31,13 +31,13 @@ const Checkout = () => {
 
     const [preferenceId, setPreferenceId] = useState(null)
 
-    initMercadoPago(import.meta.env.PUBLIC_KEY);
+    initMercadoPago("TEST-df383afa-303e-4bbe-aa65-ca3ad2c76fca");
 
     const createPreference = async () => {
         try {
             const response = await axios.post("http://localhost:3001/create-order", {items});
-        const { preferenceId } = response.data; // Obtener el ID de la preferencia
-        return preferenceId;
+        const { id } = response.data; // Obtener el ID de la preferencia
+        return id;
         } catch (error) {
             console.log(error);
         }
