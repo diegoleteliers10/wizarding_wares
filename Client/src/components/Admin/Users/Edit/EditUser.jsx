@@ -18,6 +18,11 @@ const EditUser = () => {
       roleId: user.roleRoleId,
     }); 
 
+    const [errors, setErrors] = useState ({
+      name: "",
+      email: "",
+  })
+
 
     const [popUp, setPopUp] = useState(false);
     const [popUpMessage, setPopUpMessage] = useState('');
@@ -26,7 +31,26 @@ const EditUser = () => {
       setInput({
            ...input, [event.target.name]: event.target.value 
           });
+      setErrors(validate({
+            ...input,
+            [event.target.name]: event.target.value
+          }));
+        console.log(errors)
     };  
+
+    const validate = (input) => {
+      let errors = {};
+      const { name, email } = input;
+      if (!/^[a-zA-Z áéíóúÁÉÍÓÚñÑ\s]*$/.test(name)) {
+        errors.name = 'El nombre no puede contener carácteres especiales';
+      } else if (name.length < 3) {
+        errors.name = 'El nombre debe tener al menos tres letras de longitud!';
+      } else if(!email.trim() || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+          errors.email = 'La dirección de email es incorrecta'
+      } 
+      return errors;
+    };
+
 
     function handleDisplay(){
       dispatch(displayUsers())
@@ -34,18 +58,20 @@ const EditUser = () => {
 
     const handleSubmit = async (event) => {
       event.preventDefault();
-      try {
-        await dispatch(editUserRole(input));
-        await dispatch(editUserData(input));
-        setPopUpMessage('User edited successfully');
-        setPopUp(true);
-        setTimeout(() => { 
-          dispatch(displayUsers());
-        }, 2000); // Delay the execution for 2 seconds
-      } catch (error) {
-        console.log("Error al actualizar el usuario:", error);
+      if (Object.keys(errors).length === 0) {
+        try {
+          await dispatch(editUserRole(input));
+          await dispatch(editUserData(input));
+          setPopUpMessage('User edited successfully');
+          setPopUp(true);
+          setTimeout(() => { 
+            dispatch(displayUsers());
+          }, 2000); // Delay the execution for 2 seconds
+        } catch (error) {
+          console.log("Error al actualizar el usuario:", error);
+        }
       }
-    };  
+    };
 
     //console.log("popUp state:", popUp);
 
@@ -82,6 +108,11 @@ const EditUser = () => {
                     />
                   </label>
                 </div>  
+                <div>
+                  {
+                    errors.name && <p className="text-red-600">{errors.name}</p>
+                  }
+                </div>
                 <div className="mb-4 md:mt-6 lg:mt-8 flex-grow">
                   <label>
                     <span>Email</span>
@@ -94,11 +125,17 @@ const EditUser = () => {
                       required
                     />
                   </label>
+                  <div>
+                  {
+                    errors.email && <p className="text-red-600">{errors.email}</p>
+                  }
+                </div>
                 </div>  
-                <div className="mb-4 md:mt-6 lg:mt-8 flex-grow">
+                <div className="mb-4 md:mt-6 lg:mt-8 grid">
                   <label>
                     <span>Role Id</span>
-                    <input
+                  </label>
+                    {/* <input
                       className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
                       name="roleId"
                       type="number"
@@ -107,8 +144,11 @@ const EditUser = () => {
                       onChange={handleChange}
                       value={input.roleId}
                       required
-                    />
-                  </label>
+                    /> */}
+                    <select name="roleId" id="role" defaultValue={input.roleId} className="appearance-none bg-white border rounded py-2 px-4 m-2 shadow w-1/5" onChange={handleChange}>
+                      <option value={1} className="w-1/5">Admin</option>
+                      <option value={2} className="w-1/5">User</option>
+                    </select>
                 </div>
               </div>
               <button

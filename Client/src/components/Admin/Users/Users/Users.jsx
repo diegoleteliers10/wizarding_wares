@@ -37,7 +37,6 @@ const Users = ({ user }) => {
   };
 
   useEffect(()=>{
-    console.log('refresh')
     dispatch(getAllUsers());
   }, [refresh]);
 
