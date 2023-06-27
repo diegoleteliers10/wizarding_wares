@@ -1,6 +1,8 @@
 import TotalPrice from '../TotalPrice/TotalPrice';
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import axios from 'axios';
 
 const Checkout = () => {
     
@@ -8,6 +10,45 @@ const Checkout = () => {
 
     const user = useSelector(state => state.account.user)
     const cart = useSelector(state => state.user.cartProducts)
+    
+
+    const shoppingCartProducts = localStorage.getItem('shoppingCart')
+    console.log(shoppingCartProducts);
+    let parsedProducts = []
+    if(shoppingCartProducts !== ''){
+      // si hay productos los parseo
+      parsedProducts = JSON.parse(shoppingCartProducts);
+      
+    }   
+
+    const items = parsedProducts.map(product => ({
+        title: product.name,
+        description: product.description,
+        unit_price: Number(product.price),
+        quantity: Number(product.quantity)
+    }))
+    console.log(items);
+
+    const [preferenceId, setPreferenceId] = useState(null)
+
+    initMercadoPago("TEST-df383afa-303e-4bbe-aa65-ca3ad2c76fca");
+
+    const createPreference = async () => {
+        try {
+            const response = await axios.post("http://localhost:3001/create-order", {items});
+        const { id } = response.data; // Obtener el ID de la preferencia
+        return id;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleBuy = async () => {
+        const id = await createPreference()
+        if (id) {
+            setPreferenceId(id)
+        }
+    }
 
     // console.log(cart);
 
@@ -201,9 +242,10 @@ const Checkout = () => {
                 </div>
 
                 <div>
-                    <button type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button onClick={handleBuy} type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Pagar con Mercado Pago    
-                    </button>                    
+                    </button>
+                    {preferenceId && <Wallet initialization={{ preferenceId }} />}                   
                 </div>
             </div>
         </div>

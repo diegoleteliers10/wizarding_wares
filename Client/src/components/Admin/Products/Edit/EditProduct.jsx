@@ -120,7 +120,7 @@ const EditProduct = () => {
               </PopUp>
         )}
         <div className="flex justify-center items-center h-screen">
-          <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
+          <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow overflow-y-scroll">
           <div className="flex">
               <button className="flex text-purple-600 items-center font-medium mb-2 hover:text-purple-700" onClick={handleDisplay}>
                 <BiArrowBack className="mr-2"/>Back 
@@ -134,7 +134,7 @@ const EditProduct = () => {
     
                   <div className="mb-4 md:mt-6 lg:mt-8">
                     <label htmlFor="name">
-                      <span>Nombre</span>
+                      <span>Name</span>
                       <input
                         type="text"
                         name="name"
@@ -229,7 +229,7 @@ const EditProduct = () => {
     
                   <div className="mb-4 md:mt-6 lg:mt-8">
                     <label htmlFor="isActive">
-                      <span>Estado</span>
+                      <span>Status</span>
                       <select
                         name="isActive"
                         className="border rounded py-2 px-4 m-2 shadow bg-white"

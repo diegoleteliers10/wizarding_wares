@@ -1,11 +1,16 @@
 const Purchase= require('../models/Purchase.model')
 const Product = require('../models/Product.model')
+const Status= require('../models/Status.model')
 
 const createPurchase = async(req,res)=> {
-  const {purchaseItems, userId, addressId,statusId}=req.body
+  const {purchaseItems, userId, addressId}=req.body
   try {
+
+    const defaultStatus=await Status.findAll()
+    ;
+
     const purchase= await Purchase.create({
-      statusStatusId:statusId,
+      statusStatusId:defaultStatus[0].statusId,
       userUserId:userId,
       addressAddressId: addressId
     })

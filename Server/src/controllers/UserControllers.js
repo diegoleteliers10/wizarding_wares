@@ -120,8 +120,13 @@ const updateUser = async (name, email, password, userId) => {
     const validPassword = (typeof password == "string" && validadorDePassword(password));
     (!validPassword) && arrojarError("password de ser alfanumerica ( Letras y Numeros ), tener entre 6 y 20 caracteres y como minimo una letra en Mayuscula"); 
 
+
+    // Encriptamos la concreseña nueva
+    const salt = await bcrypt.genSalt(10);
+    const passEncrypt = await bcrypt.hash(password, salt);
+
     // Actualizamos password
-    (password) && await User.update({password: password},{where:{userId:userId}});
+    (password) && await User.update({password: passEncrypt},{where:{userId:userId}});
   }
 
   // Buscamos el usuario actualizado

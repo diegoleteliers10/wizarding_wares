@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FiUser, FiGrid, FiGift, FiPlus } from "react-icons/fi";
-import { IoStorefrontSharp } from "react-icons/io5";
+import { FiUser, FiGrid, FiGift, FiPlus, FiUserPlus } from "react-icons/fi";
+import { IoStorefrontOutline } from "react-icons/io5";
 import { useDispatch } from 'react-redux';
-import { displayProductList, displayCreate, displayUsers } from '../../../redux/adminSlice';
+import { displayProductList, displayCreate, displayUsers, displayCreateUser } from '../../../redux/adminSlice';
 import { Link } from 'react-router-dom';
 
 
@@ -11,18 +11,21 @@ const SideBar = () => {
   const [activeButton, setActiveButton] = useState('products');
 
   const listHandler = (event) => {
-    dispatch(displayProductList());
+    
     const id = event.currentTarget.id;
+    if(id === 'products') dispatch(displayProductList());
+    if(id === 'users') dispatch(displayUsers());
+    //if(id === 'purchases') dispatch(displayPurchases());
     setActiveButton(id);
-  };
-  const userListHandler = (event) => {
-    dispatch(displayUsers());
-
   };
 
   const createProductHandler = (event) => {
-    dispatch(displayCreate());
-    setActiveButton('create');
+    const id = event.currentTarget.id;
+    if(id=== 'createProduct') dispatch(displayCreate());
+    if(id=== 'createUser') dispatch(displayCreateUser());
+
+    
+    //setActiveButton('create');
   };
 
   return (
@@ -35,7 +38,7 @@ const SideBar = () => {
           className={`bg-gray-100 rounded-full hover:bg-gray-400 ${
             activeButton === 'users' ? 'underline' : ''
           }`}
-          onClick={(event) => userListHandler(event)}
+          onClick={(event) => listHandler(event)}
           id='users'
           >
           <div className="flex items-center justify-center py-2 px-4">
@@ -55,26 +58,36 @@ const SideBar = () => {
         </button>
         <button 
           className={`bg-gray-100 rounded-full hover:bg-gray-400 ${
-            activeButton === 'orders' ? 'underline' : ''
+            activeButton === 'purchases' ? 'underline' : ''
           }`}
           onClick={(event) => listHandler(event)}
-          id='orders'
+          id='purchases'
           >
           <div className="flex items-center justify-center py-2 px-4">
-            <FiGift className="mr-2" /> Orders
+            <FiGift className="mr-2" /> Purchases
           </div>
         </button>
         <button
           className='text-white bg-purple-600 border border-transparent active:bg-purple-600 hover:bg-purple-700 focus:shadow-outline-purple rounded-full'
           onClick={(event) => createProductHandler(event)}
+          id='createProduct'
         >
           <div className="flex items-center justify-center py-2 px-4">
             <FiPlus className="mr-2" /> Create product
           </div>
         </button>
+        <button
+          className='text-white bg-purple-600 border border-transparent active:bg-purple-600 hover:bg-purple-700 focus:shadow-outline-purple rounded-full'
+          onClick={(event) => createProductHandler(event)}
+          id='createUser'
+        >
+          <div className="flex items-center justify-center py-2 px-4">
+            <FiUserPlus className="mr-2" /> Create User
+          </div>
+        </button>
         <Link to="/" className='text-white bg-blue-600 border border-transparent active:bg-blue-600 hover:bg-blue-700 focus:shadow-outline-blue rounded-full no-underline'>
           <div className="flex items-center justify-center py-2 px-4">
-            <IoStorefrontSharp className="mr-2" /> Go To Store
+            <IoStorefrontOutline className="mr-2" /> Go To Store
           </div>
         </Link>
       </div>

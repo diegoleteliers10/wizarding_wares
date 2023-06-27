@@ -47,9 +47,9 @@ const ProductListContainer = () => {
         </tbody>
       </table>
       {
-        (!products.length && (filterCategory || search)) && 
+        (!products.length && (filterCategory || search || filterStock)) && 
         <div className='noProductos flex items-center justify-center'>
-            <h1>No hay productos disponibles con esos criterios</h1>
+            <h3 className='my-8'>No hay productos disponibles con esos criterios</h3>
         </div>
         }
     </div>

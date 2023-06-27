@@ -1,4 +1,3 @@
-import User from '../Users/Users';
 import styles from './UsersList.module.css'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +25,7 @@ const UserList = () => {
             <th className='text-center'>Email</th>
             <th className='text-center'>Role</th>
             <th className='text-center'>Status</th>
+            <th className=''>Actions</th>
           </tr>
         </thead>
         <tbody>

@@ -20,7 +20,7 @@ export const getProducts = createAsyncThunk(
   'user/getProducts', 
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('http://localhost:3001/allProducts');
+      const response = await axios.get('/allProducts');
       return response.data;
     } catch (error) {
       console.error('Error al obtener los productos:', error);
@@ -37,10 +37,10 @@ export const filterCategory = createAsyncThunk(
       if (state.user.filterPrice.length) {
         const minPrice = state.user.filterPrice[0];
         const maxPrice = state.user.filterPrice[1];
-        const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
+        const response = await axios.get(`/filteredProducts?category=${filter}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
         return [filter, response.data];
       }
-      const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}`);
+      const response = await axios.get(`/filteredProducts?category=${filter}`);
       return [filter, response.data];
     } catch (error) {
       console.error('Error obtaining filtered products', error);
@@ -58,10 +58,10 @@ export const filterPrice = createAsyncThunk(
     const state = getState();
     if(state.user.filterCategory){
       const category = state.user.filterCategory;
-      const response = await axios.get(`http://localhost:3001/filteredProducts?category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
+      const response = await axios.get(`/filteredProducts?category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
       return [minPrice, maxPrice, response.data];
     }        
-    const response = await axios.get(`http://localhost:3001/filteredProducts?minPrice=${minPrice}&maxPrice=${maxPrice}`);
+    const response = await axios.get(`/filteredProducts?minPrice=${minPrice}&maxPrice=${maxPrice}`);
     return [minPrice, maxPrice, response.data];
   } catch (error) {
     console.error('Error obtaining filtered products', error);
@@ -73,7 +73,7 @@ export const searchByName = createAsyncThunk(
   'user/searchByName',
   async (searchQuery) => {
     try {
-      const response = await axios.get(`http://localhost:3001/searchProduct?name=${searchQuery}`);
+      const response = await axios.get(`/searchProduct?name=${searchQuery}`);
       return [searchQuery, response.data];
     } catch (error) {
       console.error('Error obtaining filtered products', error);
