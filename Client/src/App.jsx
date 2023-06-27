@@ -14,6 +14,8 @@ import { useLocation } from 'react-router-dom'
 import Login from './components/Users/Login/Login'
 import Register from './components/Users/Register/Register'
 import Checkout from './components/Users/Checkout/Checkout'
+import axios from "axios";
+axios.defaults.baseURL = `http://wizardingwares-production.up.railway.app/`
 
 function App() {
   const { pathname } = useLocation()
