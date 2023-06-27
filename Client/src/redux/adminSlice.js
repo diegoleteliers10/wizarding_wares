@@ -84,6 +84,14 @@ export const displayCreate = createAsyncThunk(
     return 'createProduct';
   }
 )
+
+export const displayCreateUser = createAsyncThunk(
+  'admin/displayCreateUser',
+  async (_, thunkAPI) => {
+    return 'createUser';
+  }
+)
+
 export const displayProductList = createAsyncThunk(
   'admin/displayProductList',
   async (_, thunkAPI) => {
@@ -327,6 +335,11 @@ export const adminSlice = createSlice({
     })
     .addCase(displayCreate.pending, (state, action) => {
       state.loading = true;
+    })
+    .addCase(displayCreateUser.fulfilled, (state, action) => {
+      state.display = action.payload;
+      removeCookie('adminDisplay')
+      setCookie('adminDisplay', JSON.stringify(action.payload))
     })
     .addCase(displayProductList.fulfilled, (state, action) => {
       state.display = action.payload;

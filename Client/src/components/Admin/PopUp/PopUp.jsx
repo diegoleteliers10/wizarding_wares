@@ -2,13 +2,14 @@ import React from "react";
 import { GrClose } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { displayProductList } from "../../../redux/adminSlice";
+import { displayProductList, displayUsers } from "../../../redux/adminSlice";
 
 function PopUp(props) {
     const dispatch = useDispatch();
 
     function handleDispatchDisplay(){
-        dispatch(displayProductList())
+      if(props.display === 'productList') dispatch(displayProductList());
+      if(props.display === 'users') dispatch(displayUsers())
     }
   return props.trigger ? (
     <div className="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-50 flex justify-center items-center">
