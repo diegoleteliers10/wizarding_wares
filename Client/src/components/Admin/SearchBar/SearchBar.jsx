@@ -38,7 +38,7 @@ const SearchBar = () => {
                 type="text"
                 name="search"
                 value={search}
-                placeholder="Buscar..."
+                placeholder="Search..."
                 onChange={event => onChangeHandler(event)}
                 onKeyPress={event => handleKeyPress(event)}
                 className="bg-white pr-12 pl-4 py-2 rounded"

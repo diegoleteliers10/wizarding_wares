@@ -1,4 +1,3 @@
-import User from '../Users/Users';
 import styles from './UsersList.module.css'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
