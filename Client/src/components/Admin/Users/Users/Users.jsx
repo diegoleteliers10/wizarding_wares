@@ -36,6 +36,14 @@ const Users = ({ user }) => {
     
   };
 
+  let roleClass = ''; 
+
+  if (user.role.name === 'admin') {
+    roleClass = 'text-blue-700 bg-blue-100';
+  } else if (user.role.name === 'user') {
+    roleClass = 'text-red-700 bg-red-100';
+  }
+
   useEffect(()=>{
     dispatch(getAllUsers());
   }, [refresh]);
@@ -51,9 +59,12 @@ const Users = ({ user }) => {
     <tr key={user.userId} className={user.isActive === false ? 'text-gray-400' : ''}>
       <td>{user.name}</td>
       <td className='text-center'> {user.email}</td>
-      <td className='text-center '>{user.role.name}
+      <td className='text-center'>
+      <span className={user.isActive === false ? '' : `inline-flex px-2 text-xs font-medium leading-5 rounded-full ${roleClass}`}>
+        {user.role.name}
+      </span>
       </td>
-      <td className={user.isActive === false ? 'text-center' :`inline-flex px-2 text-xs font-medium leading-5 rounded-full`}>{user.isActive === true ? 'Active' : 'Inactive'}</td>
+      <td className={user.isActive === false ? 'text-center' :`text-center font-medium`}>{user.isActive === true ? 'Active' : 'Inactive'}</td>
       <td className='revert'>
         <button className='button' onClick={() => handleEdit(user)}>
           <FiEdit />
