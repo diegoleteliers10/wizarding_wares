@@ -120,7 +120,7 @@ const EditProduct = () => {
               </PopUp>
         )}
         <div className="flex justify-center items-center h-screen">
-          <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow">
+          <div className="h-screen ml-2 border-2 border-gray-300 rounded py-4 px-20 w-full shadow overflow-y-scroll">
           <div className="flex">
               <button className="flex text-purple-600 items-center font-medium mb-2 hover:text-purple-700" onClick={handleDisplay}>
                 <BiArrowBack className="mr-2"/>Back 
