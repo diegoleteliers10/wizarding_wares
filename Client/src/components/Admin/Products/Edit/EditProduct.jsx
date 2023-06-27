@@ -134,7 +134,7 @@ const EditProduct = () => {
     
                   <div className="mb-4 md:mt-6 lg:mt-8">
                     <label htmlFor="name">
-                      <span>Nombre</span>
+                      <span>Name</span>
                       <input
                         type="text"
                         name="name"
@@ -229,7 +229,7 @@ const EditProduct = () => {
     
                   <div className="mb-4 md:mt-6 lg:mt-8">
                     <label htmlFor="isActive">
-                      <span>Estado</span>
+                      <span>Status</span>
                       <select
                         name="isActive"
                         className="border rounded py-2 px-4 m-2 shadow bg-white"

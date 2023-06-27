@@ -75,7 +75,7 @@ function FilterProducts() {
           className={`appearance-none bg-white`}
           onChange={handleFilterChange}
         >
-          <option value="All">Todas las categorías</option>
+          <option value="All">All categories</option>
           <option value="Golosinas">Golosinas</option>
           <option value="Indumentaria">Indumentaria</option>
           <option value="Libros">Libros</option>
@@ -92,9 +92,9 @@ function FilterProducts() {
           onChange={handleStockChange}
         >
         <option value="Stock" hidden>Stock</option>
-          <option value="All">Todos</option>
-          <option value="yes">Con stock</option>
-          <option value="no">Sin stock</option>
+          <option value="All">All</option>
+          <option value="yes">Stocked</option>
+          <option value="no">No stock</option>
         </select>
       </div>
       <div className="inline-block">
@@ -108,8 +108,8 @@ function FilterProducts() {
           <option value="SortP" hidden>
             Precio
           </option>
-          <option value="priceHighToLow">Mayor precio</option>
-          <option value="priceLowToHigh">Menor precio</option>
+          <option value="priceHighToLow">Higher price</option>
+          <option value="priceLowToHigh">Lower price</option>
         </select>
       </div>
       <div className={`inline-block`}>
@@ -123,8 +123,8 @@ function FilterProducts() {
           <option value="SortN" hidden>
             Orden
           </option>
-          <option value="nameAscending">Nombre (A-Z)</option>
-          <option value="nameDescending">Nombre (Z-A)</option>
+          <option value="nameAscending">Name (A-Z)</option>
+          <option value="nameDescending">Name (Z-A)</option>
         </select>
       </div>
       <div className="inline-block">
