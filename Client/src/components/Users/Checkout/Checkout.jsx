@@ -31,7 +31,7 @@ const Checkout = () => {
 
     const [preferenceId, setPreferenceId] = useState(null)
 
-    initMercadoPago("TEST-df383afa-303e-4bbe-aa65-ca3ad2c76fca");
+    initMercadoPago(import.meta.env.VITE_PUBLIC_KEY);
 
     const createPreference = async () => {
         try {
