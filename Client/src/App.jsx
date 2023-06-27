@@ -14,6 +14,8 @@ import { useLocation } from 'react-router-dom'
 import Login from './components/Users/Login/Login'
 import Register from './components/Users/Register/Register'
 import Checkout from './components/Users/Checkout/Checkout'
+import Success from './components/Users/BackUrls/Success/Success/Success'
+import Failure from './components/Users/BackUrls/Failure'
 
 function App() {
   const { pathname } = useLocation()
@@ -36,6 +38,8 @@ function App() {
           <Route path='/faq' element={<Faq/>} />
           <Route path='/terminosYCondiciones' element={<Terms/>} />
           <Route path='/politicaDePrivacidad' element={<Privacy/>} />
+          <Route path='/success' element={<Success/>} />
+          <Route path='/failure' element={<Failure/>} />
         </Routes>
       </div>
       {
