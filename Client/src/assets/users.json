@@ -1,0 +1,44 @@
+[
+    {
+        "userId": "",
+        "name": "Juan Schcolnik",
+        "email" : "schcolnikj@gmail.com",
+        "password" : "Sanlorenzo138!",
+        "role" : 1
+    },
+    {
+        "userId": "",
+        "name": "Marcos Morrone",
+        "email" : "marcosmorrone99@gmail.com",
+        "password" : "MarquiCapo1()",
+        "role" : 2
+    },
+    {
+        "userId": "",
+        "name": "Emi Ferrari",
+        "email" : "emiferrari@gmail.com",
+        "password" : "Pullrequest90%",
+        "role" : 1
+    },
+    {
+        "userId": "",
+        "name": "Ima Suarez",
+        "email" : "suarezima@gmail.com",
+        "password" : "meCansedeInventar2",
+        "role" : 2
+    },
+    {
+        "userId": "",
+        "name": "Valen Suarez",
+        "email" : "valensuarez@gmail.com",
+        "password" : "yaNoSE56",
+        "role" : 1
+    },
+    {
+        "userId": "",
+        "name": "Gaston Haro",
+        "email" : "hargaston@gmail.com",
+        "password" : "haroHaro20$$$",
+        "role" : 2
+    }
+]

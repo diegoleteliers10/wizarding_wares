@@ -1,0 +1,9 @@
+
+En esta carpeta iran los archivos js
+Que contengan utilidades que se pueda ocupar en controllers en routes etc
+
+ejemplo:
+
+export const arrojarError = (mensaje) => {
+	throw new Error(mensaje);
+};

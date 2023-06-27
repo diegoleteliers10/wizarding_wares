@@ -1,0 +1,122 @@
+.storeComponent .title{
+    font-family: 'Marcellus', serif;
+}
+
+.storeComponent .titleDetail{
+    font-family: 'Marcellus', serif;
+    font-size: 3em;
+}
+
+.storeComponent .bigPrice{
+    font-family: 'EB Garamond', serif;
+    color: #5E503F;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.storeComponent .descriptionDetail {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.3em;
+}
+
+.storeComponentCard {
+width: 20% !important;
+}
+
+.storeComponentOutOfStock{   
+width: 20% !important;
+filter: grayscale(100%);
+opacity: 0.5;
+}
+
+.storeComponentOutOfStock .customLink{
+    color: inherit;
+    text-decoration: none;
+}
+
+.storeComponentCard .customLink{
+    color: inherit;
+    text-decoration: none;
+}
+
+.storeComponent .noProductos {
+    height: 70vh;
+}
+
+.storeComponent h2{
+    font-family: 'Marcellus', serif;
+}
+
+.storeComponent h3 {
+    font-family: 'EB Garamond', serif;
+}
+
+.storeComponent .navBar{
+    background-color: #692323;
+}
+
+.storeComponent .card{
+    background-color: #EAE0D5;
+    border: none;
+}
+
+.storeComponent .buttons button{
+    font-family: 'EB Garamond', serif;
+    font-size: 1em;
+}
+
+.storeComponent select {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2em;
+}
+
+.storeComponent .fotoFondo{
+    background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    scale: 1.4;
+    margin-bottom: 30%;
+}
+
+.fontEB{
+    font-family: 'EB Garamond', serif;
+}
+
+.fontMarcellus {
+    font-family: 'Marcellus', serif;
+}
+
+.buttonContainer {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .buttonContainer button {
+    background-color: #a88654;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buttonContainer button:hover {
+    background-color: #5e503f;
+  }
+  
+  .square {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 50px;
+    height: 50px;
+    background-color: #a88654;
+    z-index: -1;
+  }
+
+  .storeLoginForm{
+    height: 75vh;
+  }

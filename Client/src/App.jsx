@@ -1,34 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import Home from './views/home/Home'
+import NavBar from './components/Users/NavBar/NavBar'
+import Footer from './components/Users/Footer/Footer'
+import Detail from './components/Users/Detail/Detail'
+import Admin from './views/Admin/Admin'
+import CartConteiner from './components/Users/CartConteiner/CartConteiner'
+import Nosotros from './components/Users/OtrasPaginas/Nosotros'
+import Faq from './components/Users/OtrasPaginas/FAQ'
+import Terms from './components/Users/OtrasPaginas/Terms'
+import Privacy from './components/Users/OtrasPaginas/Privacy'
+import { useLocation } from 'react-router-dom'
+import Login from './components/Users/Login/Login'
+import Register from './components/Users/Register/Register'
+import Checkout from './components/Users/Checkout/Checkout'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const { pathname } = useLocation()
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='App flex flex-col min-h-screen bg-wwwhite'>
+      {
+        pathname !== '/admin' &&
+        <NavBar className='fixed top-0 w-screen z-50'/>
+      }
+      <div className="flex-grow">
+        <Routes>
+          <Route path='/' element={<Home/>} />
+          <Route path='/login' element={<Login/>} />
+          <Route path='/register' element={<Register/>} />
+          <Route path='/cart' element={<CartConteiner/>}/>
+          <Route path='/checkout' element={<Checkout/>}/>
+          <Route path='/:id' element={<Detail/>} />
+          <Route path='/admin' element={<Admin/>} />
+          <Route path='/nosotros' element={<Nosotros/>} />
+          <Route path='/faq' element={<Faq/>} />
+          <Route path='/terminosYCondiciones' element={<Terms/>} />
+          <Route path='/politicaDePrivacidad' element={<Privacy/>} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      {
+        pathname !== '/admin' &&
+        <Footer className='mt-auto' />
+      }
+    </div>
   )
 }
 
