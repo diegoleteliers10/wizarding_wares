@@ -11,13 +11,12 @@ const SideBar = () => {
   const [activeButton, setActiveButton] = useState('products');
 
   const listHandler = (event) => {
-    dispatch(displayProductList());
+    
     const id = event.currentTarget.id;
+    if(id === 'products') dispatch(displayProductList());
+    if(id === 'users') dispatch(displayUsers());
+    //if(id === 'purchases') dispatch(displayPurchases());
     setActiveButton(id);
-  };
-  const userListHandler = (event) => {
-    dispatch(displayUsers());
-
   };
 
   const createProductHandler = (event) => {
@@ -35,7 +34,7 @@ const SideBar = () => {
           className={`bg-gray-100 rounded-full hover:bg-gray-400 ${
             activeButton === 'users' ? 'underline' : ''
           }`}
-          onClick={(event) => userListHandler(event)}
+          onClick={(event) => listHandler(event)}
           id='users'
           >
           <div className="flex items-center justify-center py-2 px-4">
@@ -55,13 +54,13 @@ const SideBar = () => {
         </button>
         <button 
           className={`bg-gray-100 rounded-full hover:bg-gray-400 ${
-            activeButton === 'orders' ? 'underline' : ''
+            activeButton === 'purchases' ? 'underline' : ''
           }`}
           onClick={(event) => listHandler(event)}
-          id='orders'
+          id='purchases'
           >
           <div className="flex items-center justify-center py-2 px-4">
-            <FiGift className="mr-2" /> Orders
+            <FiGift className="mr-2" /> Purchases
           </div>
         </button>
         <button
