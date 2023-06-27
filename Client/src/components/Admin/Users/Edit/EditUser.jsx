@@ -42,11 +42,11 @@ const EditUser = () => {
       let errors = {};
       const { name, email } = input;
       if (!/^[a-zA-Z áéíóúÁÉÍÓÚñÑ\s]*$/.test(name)) {
-        errors.name = 'El nombre no puede contener carácteres especiales';
+        errors.name = 'Name cannot contain special characters';
       } else if (name.length < 3) {
-        errors.name = 'El nombre debe tener al menos tres letras de longitud!';
+        errors.name = 'The name must be at least 3 characters long';
       } else if(!email.trim() || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
-          errors.email = 'La dirección de email es incorrecta'
+          errors.email = 'Please enter a valid email address'
       } 
       return errors;
     };
