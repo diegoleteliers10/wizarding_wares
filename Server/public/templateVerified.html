@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Account verification</title>
+  <style>
+    * {
+        box-sizing: border-box;
+    }
+    .header {
+      padding: 20px;
+      border: solid 3px silver;
+      background-color: chocolate;
+      color: white;
+    }
+    .containerDatos {
+      font-size: 1.1rem;
+      font-weight: bolder;
+    }
+    .containerVerificacion {
+      border:solid 1px transparent;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1 class="h1">Account verification</h1>
+  </header>
+  <div class="containerDatos">
+    <p>{email}</p>
+    <p>{fechaActual}</p>
+  </div>
+  <hr />
+  <div class="containerVerificacion">
+    <h2>{verificacion}</h2>
+  </div>
+</body>
+</html>
