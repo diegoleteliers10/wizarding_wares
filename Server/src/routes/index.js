@@ -17,7 +17,7 @@ const getPurchase = require('../controllers/getPurchase.controller')
 const editStatePurchase = require('../controllers/editStatePurchase.controller')
 const loginUser = require('../controllers/loginUser.controller')
 const getAllPurchById = require('../controllers/getAllPurchById.controller')
-
+const getAllStatuses = require('../controllers/getAllStatuses.controller')
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
@@ -48,6 +48,7 @@ router.get('/detailProduct/:id', getDetailProduct)
 //admins routes
 router.get('/allUsers', getAllUsers)
 router.get('/detailProduct/:id', getDetailProduct)
+router.get('/allStatuses', getAllStatuses)
 router.delete('/userDelete/:id', userFinalDelete)
 router.post('/productCreated',upload.single('image'),createProduct)
 router.put('/editProduct/:id', editProduct)
