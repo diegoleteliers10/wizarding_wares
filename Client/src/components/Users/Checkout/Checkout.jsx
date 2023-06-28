@@ -99,7 +99,7 @@ const Checkout = () => {
     return(
 
         <div className="flex mt-10">
-            <div className="w-2/3 border border-gray-500">
+            <div className="w-2/3">
                 <h2>Datos de envío</h2>
 
                 <form>
@@ -213,7 +213,7 @@ const Checkout = () => {
                 </form>
             </div>
 
-            <div className="w-1/3 bg-white shadow-md">
+            <div className={parsedProducts.length >= 1 ? "w-1/3 bg-white shadow-md" : "hidden"}>
                 <label>Resumen de la compra</label>
                 <div className='mb-4'>
                     <span>({cart?.length}) Items:</span>
@@ -233,16 +233,16 @@ const Checkout = () => {
 
                 <div className='mb-4'>
                     <span>(Correo Argentino):</span>
-                    <span> $ 900 </span>
+                    <span> $ </span>
                 </div>
 
                 <div className='mb-4'>
                     <span>TOTAL: </span>
-                    <span>$ {84000    +900}</span>
+                    <span>$ {}</span>
                 </div>
 
                 <div>
-                    <button onClick={handleBuy} type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button onClick={handleBuy} type='submit' className={parsedProducts.length >= 1 ? "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded disabled pointer-events-none" }>
                         Pagar con Mercado Pago    
                     </button>
                     {preferenceId && <Wallet initialization={{ preferenceId }} />}                   
