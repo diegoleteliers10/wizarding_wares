@@ -22,7 +22,7 @@ const PurchasesList = ()=>{
             <th className='p-4 text-center'>User</th>
             <th className='p-4 text-center'>Status</th>
             <th className='p-4 text-center'>Address</th>
-            <th className='p-4'>Actions</th>
+            
           </tr>
         </thead>
         <tbody>
