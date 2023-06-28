@@ -1,7 +1,9 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 const { User, Role } = require("../models/relationship/relationship");
 const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
+const {enviarCorreo} = require("../utils/notificaciones");
 const {SECRET} = process.env;
 
 
@@ -60,6 +62,12 @@ const createUserRegister = async (name, email, password) => {
   // Generamos el token
   const token = jwt.sign({userId: newUser.userId, name, email, roleId}, SECRET);
 
+  // Enviamos el correo de verificacion
+  const destinatario = newUser.email;
+  const asunto = 'Verificacion de Cuenta';
+  const mensaje = `Bienvenido a nuestra plataforma. Por favor haz clic en el siguiente enlace para verificar tu cuenta: http://localhost:3001/verificar-cuenta?token=${token}`;
+  enviarCorreo(destinatario, asunto, mensaje);
+
   // return newUser;
   // return {
   //   token: token
@@ -67,6 +75,73 @@ const createUserRegister = async (name, email, password) => {
   return {
     "Perfect": `User ${newUser.name}; successfully created`
   }
+};
+
+
+
+// *************************************************************************************************
+
+
+// *** VERIFICAR CUENTA EN EL CORREO ELECTRONICO ***
+const verificarCuenta = async (token) => {
+
+  // Verificamos si recibimos token. Si no... Lanzamos Un Error
+  (!token) && arrojarError("Token not found");
+
+  // Verificamos el token
+  const tokenDecodificado = jwt.verify(token, SECRET);
+
+  // Si no tenemos token. Lanzamos un Error
+  (!tokenDecodificado) && arrojarError("token invalid");
+
+  // Consultamos el id de usuario
+  const userId = tokenDecodificado.userId;
+
+  // Consultamos si el id del usuario existe en base de datos
+  const usuario =await User.findByPk(userId);
+
+  // Si usuario no existe. Lanzamos un Error
+  (!usuario) && arrojarError("usuario inexistente");
+
+  let template = fs.readFileSync("public/templateVerified.html", "utf-8");
+
+
+  // *************************************************************
+  //  Seccion de complete del temple                           ***
+  // ----------------------------------------------------------***
+  let fechaActual;
+  let verificacion;
+  // ----------------------------------------------------------***
+
+
+  // Consultamos si el usuario a verificado su cuenta de Email. Si ya esta verificada.. Enviamos un mensaje acorde al momento
+  if(usuario.verified == true){
+    fechaActual = new Date();
+    verificacion = `Account verification link has expired`;
+
+    template = template.replace("{fechaActual}", fechaActual);
+    template = template.replace("{email}", usuario.email);
+    template = template.replace("{verificacion}", verificacion);
+
+    return template;
+  }
+
+  // Caso contrario verificamos el usuario a true
+  const updateUser = await User.update({verified: true},{
+    where:{
+      userId:userId
+    }
+  });
+
+  // fechaActual = new Date().toLocaleDateString();
+  fechaActual = new Date();
+  verificacion = "Account successfully verified 🚀";
+
+  template = template.replace("{fechaActual}", fechaActual);
+  template = template.replace("{email}", usuario.email);
+  template = template.replace("{verificacion}", verificacion);
+
+  return template;
 };
 
 
@@ -178,4 +253,5 @@ module.exports = {
   createUserRegister,
   updateUser,
   logicalUserDeletion,
+  verificarCuenta,
 };
