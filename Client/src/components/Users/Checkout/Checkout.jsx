@@ -31,22 +31,41 @@ const Checkout = () => {
 
     const [preferenceId, setPreferenceId] = useState(null)
 
-    initMercadoPago("TEST-df383afa-303e-4bbe-aa65-ca3ad2c76fca");
+    initMercadoPago(import.meta.env.VITE_PUBLIC_KEY);
 
+    // const createPreference = async () => {
+    //     try {
+    //         const response = await axios.post("http://localhost:3001/create-order", {items});
+    //     const { id } = response.data; // Obtener el ID de la preferencia
+    //     return id;
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    // const handleBuy = async () => {
+    //     const id = await createPreference()
+    //     if (id) {
+    //         setPreferenceId(id)
+    //     }
+    // }
     const createPreference = async () => {
         try {
             const response = await axios.post("http://localhost:3001/create-order", {items});
-        const { id } = response.data; // Obtener el ID de la preferencia
-        return id;
+        const { body } = response.data; // Obtiene el objeto body para luego poder usar la propiedad init_point
+        return body;
         } catch (error) {
             console.log(error);
         }
     }
 
     const handleBuy = async () => {
-        const id = await createPreference()
-        if (id) {
-            setPreferenceId(id)
+        const body = await createPreference()
+        console.log(body);
+        if(body){
+            //redirecciona al usuario a la URL de mercadopago
+            window.location.href = await body.init_point
+            setPreferenceId(body.id)
         }
     }
 

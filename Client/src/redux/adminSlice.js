@@ -25,7 +25,7 @@ const initialState = {
 // export const createProd = (input) => {
 //   return async (dispatch) => {
 //       try {
-//           const response = await axios.post("http://localhost:3001/productCreated", input)
+//           const response = await axios.post("/productCreated", input)
 //           return response; 
 //       } catch (error) {
 //           alert("Error al crear el producto", error);
@@ -35,7 +35,7 @@ const initialState = {
 
 export const createProd = createAsyncThunk('admin/createProduct',
   async (input) => {
-    const response = await axios.post("http://localhost:3001/productCreated", input)
+    const response = await axios.post("/productCreated", input)
     return response; 
   }
 )
@@ -44,7 +44,7 @@ export const getProducts = createAsyncThunk(
   'admin/getProducts',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('http://localhost:3001/allProducts');
+      const response = await axios.get('/allProducts');
       //console.log(response.data)
       return response.data;
     } catch (error) {
@@ -57,7 +57,7 @@ export const getProducts = createAsyncThunk(
 export const getAllUsers = createAsyncThunk('admin/getAllUsers',
     async (_, thunkAPI) => {
       try {
-        const response = await axios.get('http://localhost:3001/allUsers');
+        const response = await axios.get('/allUsers');
         return response.data;
       } catch (error) {
         console.error('Error al obtener los productos:', error);
@@ -70,7 +70,7 @@ export const searchByName = createAsyncThunk(
   'admin/searchByName',
   async (searchQuery) => {
     try {
-      const response = await axios.get(`http://localhost:3001/searchProduct?name=${searchQuery}`);
+      const response = await axios.get(`/searchProduct?name=${searchQuery}`);
       return [searchQuery, response.data];
     } catch (error) {
       console.error('Error obtaining filtered products', error);
@@ -111,18 +111,18 @@ export const filterProductCategory = createAsyncThunk(
         //console.log('hay stock y categoria',stock)
         if(filter === 'All'){
           //si el filtro es all en category es como solo hacer el de stock
-          const response = await axios.get(`http://localhost:3001/filteredProducts?stock=${stock}`);
+          const response = await axios.get(`/filteredProducts?stock=${stock}`);
           return [false, response.data];
         }
-        const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}&stock=${stock}`);
+        const response = await axios.get(`/filteredProducts?category=${filter}&stock=${stock}`);
         return [filter, response.data]
       }
       if(filter === 'All'){
-        const response = await axios.get('http://localhost:3001/allProducts');
+        const response = await axios.get('/allProducts');
         return [false, response.data];
       }
       //console.log('hay category', filter)
-      const response = await axios.get(`http://localhost:3001/filteredProducts?category=${filter}`);
+      const response = await axios.get(`/filteredProducts?category=${filter}`);
       return [filter, response.data];
     } catch (error) {
       console.error('Error obtaining filtered products', error);
@@ -142,19 +142,19 @@ export const filterStock = createAsyncThunk(
         //console.log('hay categoria y tmb stock', category, stock);
         if(stock === 'All'){
           //si me pide todos los de stock es lo mismo que traer solo category
-          const response = await axios.get(`http://localhost:3001/filteredProducts?category=${category}`);
+          const response = await axios.get(`/filteredProducts?category=${category}`);
           return ['', response.data]
         }
-        const response = await axios.get(`http://localhost:3001/filteredProducts?category=${category}&stock=${stock}`);
+        const response = await axios.get(`/filteredProducts?category=${category}&stock=${stock}`);
         return [stock, response.data]
       }
       //console.log('hay stock pero no categoria', stock);
       if(stock === 'All'){
         //si me pide todos los de stock y no hay categoria trae todos los productos
-        const response = await axios.get(`http://localhost:3001/allProducts`);
+        const response = await axios.get(`/allProducts`);
         return ['', response.data]
       }
-      const response = await axios.get(`http://localhost:3001/filteredProducts?stock=${stock}`);
+      const response = await axios.get(`/filteredProducts?stock=${stock}`);
       return [stock, response.data];
     } catch (error) {
       console.error('Error obtaining filtered products', error);
@@ -198,7 +198,7 @@ async (input) => {
 
 export const editProduct = createAsyncThunk('admin/editProduct',
 async (input) => {
-  const response = await axios.put(`http://localhost:3001/editProduct/${input.id}`, {name: input.name, price: input.price, description: input.description, stock: input.stock, categoryId:input.categoryId})
+  const response = await axios.put(`/editProduct/${input.id}`, {name: input.name, price: input.price, description: input.description, stock: input.stock, categoryId:input.categoryId})
   return response; 
 }
 )
@@ -206,13 +206,13 @@ async (input) => {
 export const editUserRole = createAsyncThunk(
   'admin/editUserRole',
   async (input) => {
-    const response = await axios.put(`http://localhost:3001/user_role/${input.userId}`, {roleId: Number(input.roleId), userId: input.userId})
+    const response = await axios.put(`/user_role/${input.userId}`, {roleId: Number(input.roleId), userId: input.userId})
   }
   )
 export const editUserData = createAsyncThunk(
   'admin/editUserData',
   async (input) => {
-    const response = await axios.put(`http://localhost:3001/user/${input.userId}`, {name: input.name, email: input.email, password: input.password})
+    const response = await axios.put(`/user/${input.userId}`, {name: input.name, email: input.email, password: input.password})
   }
   )
 
@@ -220,7 +220,7 @@ export const deleteProduct = createAsyncThunk(
   'admin/deleteProduct',
   async (productId) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/deleteProduct/${productId}`);
+      const response = await axios.delete(`/deleteProduct/${productId}`);
       return response.data;
     } catch (error) { 
       console.error('Error al eliminar el producto:', error);
@@ -233,7 +233,7 @@ export const deleteUser = createAsyncThunk(
   'admin/deleteUser',
   async (userId) => {
     try {
-      const response = await axios.put(`http://localhost:3001/user_deleteA/${userId}`);
+      const response = await axios.put(`/user_deleteA/${userId}`);
       return response.data;
     } catch (error) { 
       console.error('Error al eliminar el producto:', error);
