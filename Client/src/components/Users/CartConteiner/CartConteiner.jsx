@@ -54,7 +54,7 @@ import '../storeStyles.css';
               <h4>El carrito está vacío</h4> :
               <div className=''>
                 <h5>Total</h5>
-                <p>{<TotalPrice/>}</p>
+                <p>${<TotalPrice/>}</p>
                 <button onClick={handleGoCheckout} className={parsedProducts.length >= 1 ? 'bg-wwbrown text-wwwhite p-2 fontMarcellus hover:bg-wwmaroon' : 'bg-wwbrown text-wwwhite p-2 fontMarcellus opacity-50 disabled pointer-events-none'}>Pagar</button>
               </div>
             }

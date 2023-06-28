@@ -19,6 +19,7 @@ const initialState = {
   editUser: [],
   allUsers: [],
   refresh: 0,
+  allPurchases: []
 }
 
 // export const createProd = (input) => {
@@ -182,6 +183,13 @@ export const displayEditUser = createAsyncThunk(
   }
 )
 
+export const displayPurchases = createAsyncThunk(
+  'admin/displayPurchases',
+  async (_, thunkAPI) => {
+    return 'purchases';
+  }
+)
+
 export const setEditState = createAsyncThunk('admin/setEditState',
 async (input) => {
   return input; 
@@ -229,6 +237,35 @@ export const deleteUser = createAsyncThunk(
       return response.data;
     } catch (error) { 
       console.error('Error al eliminar el producto:', error);
+      throw error;
+    }
+  }
+);
+
+export const getAllPurchases = createAsyncThunk('admin/getAllPurchases',
+    async (_, thunkAPI) => {
+      try {
+        const response = await axios.get('http://localhost:3001/allPurchases');
+        return response.data;
+      } catch (error) {
+        console.error('Error obtaining purchases:', error);
+        throw error;
+      }
+    }
+)
+
+export const editStatus = createAsyncThunk(
+  'admin/editStatus',
+  async (statusAndId, thunkAPI) => {
+    try {
+      console.log(statusAndId[0], statusAndId[1])
+      const statuses = await axios.get('/allStatuses');
+      const newStatusObject = statuses.data.find((status)=> status.name === statusAndId[0]);
+      console.log(newStatusObject)
+      const response = await axios.put(`/editPurchase/${statusAndId[1]}?statusId=${newStatusObject.statusId}`);
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
       throw error;
     }
   }
@@ -355,6 +392,11 @@ export const adminSlice = createSlice({
       state.display = action.payload;
       console.log(action.payload)
     })
+    .addCase(displayPurchases.fulfilled, (state, action) => {
+      state.display = action.payload;
+      removeCookie('adminDisplay')
+      setCookie('adminDisplay', JSON.stringify(action.payload))
+    })
 
     //FILTER PRODUCT CATEGORY
     .addCase(filterProductCategory.fulfilled, (state, action) => {
@@ -440,6 +482,28 @@ export const adminSlice = createSlice({
       console.log(action.payload)
       state.refresh= state.refresh+1
       //state.products = state.products;
+    })
+    .addCase(getAllPurchases.fulfilled, (state, action) => {
+      state.loading = false;
+      state.allPurchases = action.payload;
+    })
+    .addCase(getAllPurchases.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error al obtener los usuarios:', action.error);
+    })
+    .addCase(getAllPurchases.pending, (state, action) => {
+      state.loading = true
+    })
+    .addCase(editStatus.fulfilled, (state, action) => {
+      state.loading = false;
+      state.refresh= state.refresh+1
+    })
+    .addCase(editStatus.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error al obtener los usuarios:', action.error);
+    })
+    .addCase(editStatus.pending, (state, action) => {
+      state.loading = true
     })
   },
 })
