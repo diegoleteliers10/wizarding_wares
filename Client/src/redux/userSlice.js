@@ -13,6 +13,7 @@ const initialState = {
   search: '',
   page: 1,
   price: 0,
+  purchases: [],
 };
 
 export const getProducts = createAsyncThunk(
@@ -117,6 +118,20 @@ export const decreaseQuantity = createAsyncThunk(
 export const clearCart = createAction('user/clearCart');
 
 export const updateTotalPrice = createAction('user/updateTotalPrice');
+
+export const getPurchases = createAsyncThunk(
+  'user/getPurchases', 
+  async(userId, thunkAPI) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/getAllPurchById/${userId}`)
+      console.log(response.data);
+      return response.data
+    } catch (error) {
+      console.error('Error obtaining Purchases', error);
+      throw error;
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: 'user',
@@ -227,6 +242,17 @@ export const userSlice = createSlice({
       })
       .addCase(changePage, (state, action) => {
         state.page = action.payload;
+      })
+      .addCase(getPurchases.fulfilled, (state, action) => {
+        state.purchases = action.payload;
+        state.loading = false;
+      })
+      .addCase(getPurchases.rejected, (state, action) => {
+        state.loading = false;
+        console.error("Error obtaining Purchases: ", action.error);
+      })
+      .addCase(getPurchases.pending, (state, action) => {
+        state.loading = true;
       });
   },
 });
