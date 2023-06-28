@@ -22,7 +22,11 @@ const Detail = () => {
   const [error, setError] = useState('');
 
   const handleIncreaseQuantity = () => {
+    if (quantity < product.stock){
     setQuantity(quantity + 1);
+    }else{
+      window.alert('La cantidad seleccionada no puede sobrepasar la cantidad en stock!')
+    }
   };
 
   const handleDecreaseQuantity = () => {
