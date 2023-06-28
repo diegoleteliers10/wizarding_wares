@@ -254,6 +254,23 @@ export const getAllPurchases = createAsyncThunk('admin/getAllPurchases',
     }
 )
 
+export const editStatus = createAsyncThunk(
+  'admin/editStatus',
+  async (statusAndId, thunkAPI) => {
+    try {
+      console.log(statusAndId[0], statusAndId[1])
+      const statuses = await axios.get('/allStatuses');
+      const newStatusObject = statuses.data.find((status)=> status.name === statusAndId[0]);
+      console.log(newStatusObject)
+      const response = await axios.put(`/editPurchase/${statusAndId[1]}?statusId=${newStatusObject.statusId}`);
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+      throw error;
+    }
+  }
+);
+
 export const sortByNameAscending = createAction('admin/sortByNameAscending');
 export const sortByNameDescending = createAction('admin/sortByNameDescending');
 export const sortByPriceAscending = createAction('admin/sortByPriceAscending');
@@ -377,7 +394,8 @@ export const adminSlice = createSlice({
     })
     .addCase(displayPurchases.fulfilled, (state, action) => {
       state.display = action.payload;
-      console.log(action.payload)
+      removeCookie('adminDisplay')
+      setCookie('adminDisplay', JSON.stringify(action.payload))
     })
 
     //FILTER PRODUCT CATEGORY
@@ -474,6 +492,17 @@ export const adminSlice = createSlice({
       console.error('Error al obtener los usuarios:', action.error);
     })
     .addCase(getAllPurchases.pending, (state, action) => {
+      state.loading = true
+    })
+    .addCase(editStatus.fulfilled, (state, action) => {
+      state.loading = false;
+      state.refresh= state.refresh+1
+    })
+    .addCase(editStatus.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error al obtener los usuarios:', action.error);
+    })
+    .addCase(editStatus.pending, (state, action) => {
       state.loading = true
     })
   },
