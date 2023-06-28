@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllPurchases, editStatus } from '../../../../redux/adminSlice';
 import { useState, useEffect } from 'react';
 import PopUp from '../../PopUp/PopUp';
+import PopUpDetail from '../../PopUpDetail/PopUpDetail';
 
 const Purchases = ({ purchase })=> {
     const dispatch = useDispatch();
@@ -13,10 +14,19 @@ const Purchases = ({ purchase })=> {
   const [popUp, setPopUp] = useState(false)
   const [popUpMessage, setPopUpMessage] = useState('')
 
+  //   ESTADOS POP UP DETAIL
+  const [popUpDetail, setPopUpDetail] = useState(false)
+  const [popUpDetailMessage, setPopUpDetailMessage] = useState('')
+
   const handleStatus = async (event) => {
     setStatusValue(event.target.value)
     dispatch(editStatus([event.target.value, purchase.purchaseId]))
     //dispatch(displayEditPurchase())
+  }
+
+  const handlePopUpDetail = ()=>{
+    setPopUpDetail(true);
+    setPopUpDetailMessage(`Detail purchase ${purchase.purchaseId}`)
   }
 
   
@@ -35,11 +45,19 @@ const Purchases = ({ purchase })=> {
         <h3>{popUpMessage}</h3>
       </PopUp>
     )}
-    <tr key={purchase.purchaseId} className={purchase.statusStatusId === "0ed5db51-11ae-49d8-a99c-adddafcdedfa" ? 'text-gray-400' : ''}>
-      <td><span>{purchase.purchaseId}</span> <br /> <span>Products: {purchase.products.length}</span> </td>
+    {popUpDetail === true && (
+      <PopUpDetail trigger={popUpDetail} setTrigger={setPopUpDetail} products={purchase.products} purchaseId={purchase.purchaseId}>
+        <h3>{popUpDetailMessage}</h3>
+      </PopUpDetail>
+    )}
+    <tr 
+    key={purchase.purchaseId} 
+    className={purchase.statusStatusId === "0ed5db51-11ae-49d8-a99c-adddafcdedfa" ? 'text-gray-400' : ''}
+    >
+      <td><button className='underline' onClick={handlePopUpDetail}>{purchase.purchaseId}</button> <br /> <span>Products: {purchase.products.length}</span> </td>
       <td className='text-center'> {purchase.user.name}</td>
       <td className='text-center'>
-      <select name="status" id="status" value={statusValue} className='appearance-none bg-white' onChange={handleStatus}>
+      <select name="status" id="status" value={statusValue} className='bg-white' onChange={handleStatus}>
         <option value="Confirmed">Confirmed</option>
         <option value="Shipment">Shipment</option>
         <option value="Delivered">Delivered</option>
@@ -47,22 +65,12 @@ const Purchases = ({ purchase })=> {
 
       </select>
       </td>
-      <td 
+      <td className='text-center'
         // className={purchase.isActive === false ? 'text-center' :`text-center font-medium`}
       >
         {purchasePlace && purchasePlace.street} {purchasePlace && purchasePlace.number}
       </td>
-      <td className='revert'>
-        <button className='button' onClick={() => handleEdit(purchase)}>
-          <FiEdit />
-        </button>
-        {/* <button value={purchase.userId} onClick={handleDelete} className={user.isActive === false ? 'text-lime-500' : 'button'}>
-          { purchase.isActive 
-          ? <FiTrash2 />
-          : <FaUndoAlt className='text-purple-600 hover:text-purple-800' title='Re-activate user'/>
-          }
-        </button> */}
-      </td>
+      
     </tr>
     </>
   )

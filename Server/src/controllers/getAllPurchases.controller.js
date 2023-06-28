@@ -19,7 +19,7 @@ const getAllPurchase= async (req,res)=>{
         },
         {
           model: Products,
-          attributes: ['name', 'description', 'image', 'price'],
+          attributes: ['productId','name', 'description', 'image', 'price'],
           through: {
             attributes: []
           }
