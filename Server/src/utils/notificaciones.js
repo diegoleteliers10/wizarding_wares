@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const {EMAIL_CREDENTIALS, PASSWORD_CREDENTIALS} = process.env;
 
 // Funcion para enviar notificaciones por email
 const enviarCorreo = async (destinatario, asunto, mensaje) => {
@@ -9,14 +10,14 @@ const enviarCorreo = async (destinatario, asunto, mensaje) => {
       port: 587,
       secure: false,
       auth: {
-        user: 'wizardingwaresstore@gmail.com',
-        pass: 'eqwldyiyrvxietqz'
+        user: `${EMAIL_CREDENTIALS}`,
+        pass: `${PASSWORD_CREDENTIALS}`
       },
     });
 
     // Declaramos las opciones de notificaciones
     const mailOptions = {
-      from:'"Wizarding Wares 👽" <wizardingwaresstore@gmail.com>',
+      from:`"Wizarding Wares 👽" <${EMAIL_CREDENTIALS}>`,
       to: destinatario,
       subject: asunto,
       text: mensaje,
