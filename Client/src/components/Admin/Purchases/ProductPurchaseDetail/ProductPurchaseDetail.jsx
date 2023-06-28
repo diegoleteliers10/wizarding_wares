@@ -4,7 +4,7 @@ return(
     <tr>
         <td>{product.name}</td>
         <td>{product.description}</td>
-        <td>{product.price}</td>
+        <td className="text-center">${product.price}</td>
     </tr>
     
 )

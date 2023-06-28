@@ -4,7 +4,15 @@ const PurchaseDetail = (props)=>{
 
     const {products, purchaseId} = props;
     console.log(products)
-
+    function sumPrices(items) {
+        let total = 0;
+      
+        items.forEach((product) => {
+          total += product.price;
+        });
+      
+        return total;
+      }
 return(
     <div>
         <h2>Detail purchase "{purchaseId}"</h2>
@@ -23,6 +31,9 @@ return(
                 ))}
             </tbody>
         </table>
+        <div>
+            <h6 className="text-end mt-4 mr-4">Total price: ${sumPrices(products)}</h6>
+        </div>
     </div>
 )
 }

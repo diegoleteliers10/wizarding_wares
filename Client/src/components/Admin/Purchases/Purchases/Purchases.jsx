@@ -18,16 +18,25 @@ const Purchases = ({ purchase })=> {
   const [popUpDetail, setPopUpDetail] = useState(false)
   const [popUpDetailMessage, setPopUpDetailMessage] = useState('')
 
-  const handleStatus = async (event) => {
-    setStatusValue(event.target.value)
-    dispatch(editStatus([event.target.value, purchase.purchaseId]))
-    //dispatch(displayEditPurchase())
-  }
-
   const handlePopUpDetail = ()=>{
     setPopUpDetail(true);
     setPopUpDetailMessage(`Detail purchase ${purchase.purchaseId}`)
   }
+
+  const handleStatus = async (event) => {
+    setStatusValue(event.target.value)
+    setPopUpMessage(`Change purchase status to "${event.target.value}"?`)
+    setPopUp(true)
+    //dispatch(editStatus([event.target.value, purchase.purchaseId]))
+    //dispatch(displayEditPurchase())
+  }
+
+  const handleConfirm = async () => {
+    const purchaseId = purchase.purchaseId;
+    const newStatus = statusValue;
+    await dispatch(editStatus([newStatus, purchaseId]));
+    setPopUp(false);    
+  };
 
   
   const purchasePlace = purchase.user.addresses.find((address) => address.User_Address.addressAddressId === purchase.addressAddressId)
@@ -54,7 +63,12 @@ const Purchases = ({ purchase })=> {
     key={purchase.purchaseId} 
     className={purchase.statusStatusId === "0ed5db51-11ae-49d8-a99c-adddafcdedfa" ? 'text-gray-400' : ''}
     >
-      <td><button className='underline' onClick={handlePopUpDetail}>{purchase.purchaseId}</button> <br /> <span>Products: {purchase.products.length}</span> </td>
+      <td>
+        <button className='underline text-purple-600 hover:text-purple-700 text-left' onClick={handlePopUpDetail}>
+          {purchase.purchaseId}
+          </button> <br /> 
+      <span className='ml-4'>Products: {purchase.products.length}</span> 
+      </td>
       <td className='text-center'> {purchase.user.name}</td>
       <td className='text-center'>
       <select name="status" id="status" value={statusValue} className='bg-white' onChange={handleStatus}>

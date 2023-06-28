@@ -6,7 +6,7 @@ function PopUpDetail(props){
     console.log(props.trigger)
     return props.trigger ? (
         <div className="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="relative p-8 w-3/4 h-1/2 bg-white flex flex-col rounded overflow-y-scroll">
+          <div className="relative p-8 w-3/4 h-2/3 bg-white flex flex-col rounded overflow-y-scroll">
             <button className="absolute top-8 right-8" onClick={() => props.setTrigger(false)}>
               <GrClose/>
             </button>
