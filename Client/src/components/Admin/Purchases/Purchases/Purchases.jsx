@@ -17,10 +17,10 @@ const Purchases = ({ purchase })=> {
     //dispatch(displayEditPurchase())
   }
 
-  console.log(purchase.user.addresses)
+  
   const purchasePlace = purchase.user.addresses.find((address) => address.User_Address.addressAddressId === purchase.addressAddressId)
 
-  console.log(purchasePlace && purchasePlace.street)
+  //console.log(purchasePlace && purchasePlace.street)
 
   useEffect(()=>{
     dispatch(getAllPurchases());
@@ -34,7 +34,7 @@ const Purchases = ({ purchase })=> {
       </PopUp>
     )}
     <tr key={purchase.purchaseId} className={purchase.statusStatusId === "0ed5db51-11ae-49d8-a99c-adddafcdedfa" ? 'text-gray-400' : ''}>
-      <td>{purchase.purchaseId}</td>
+      <td><span>{purchase.purchaseId}</span> <span>Products: {purchase.products.length}</span> </td>
       <td className='text-center'> {purchase.user.name}</td>
       <td className='text-center'>
       <span 

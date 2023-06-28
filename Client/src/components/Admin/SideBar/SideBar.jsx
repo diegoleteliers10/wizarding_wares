@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiUser, FiGrid, FiGift, FiPlus, FiUserPlus } from "react-icons/fi";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { useDispatch } from 'react-redux';
 import { displayProductList, displayCreate, displayUsers, displayCreateUser, displayPurchases } from '../../../redux/adminSlice';
 import { Link } from 'react-router-dom';
-
+import getCookie from '../../../hooks/getCookie';
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -27,6 +27,12 @@ const SideBar = () => {
     
     //setActiveButton('create');
   };
+
+  useEffect(()=>{
+    const currDisplay= getCookie('adminDisplay')
+    //console.log(currDisplay)
+    if (currDisplay) setActiveButton(JSON.parse(currDisplay))
+  }, [])
 
   return (
     <div className="border rounded py-4 px-3 bg-gray-100 flex flex-col items-center justify-start h-screen w-1/6">
