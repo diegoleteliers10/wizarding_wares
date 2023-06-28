@@ -133,6 +133,13 @@ export const getPurchases = createAsyncThunk(
   }
 );
 
+export const createAddress = createAsyncThunk('user/createAddress',
+  async (input) => {
+    const response = await axios.post("/userAddress", input)
+    return response; 
+  }
+)
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -253,7 +260,17 @@ export const userSlice = createSlice({
       })
       .addCase(getPurchases.pending, (state, action) => {
         state.loading = true;
-      });
+      })
+      .addCase(createAddress.fulfilled, (state, action) => {
+        state.loading = false 
+        //alert('Su usuario se ha creado correctamente!')
+      })
+      .addCase(createAddress.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(createAddress.pending, (state, action) => {
+        state.loading = true
+      })
   },
 });
 

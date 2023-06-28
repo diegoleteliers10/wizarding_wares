@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import axios from 'axios';
+import { createAddress } from '../../../redux/userSlice';
 
 const Checkout = () => {
     
@@ -59,7 +60,31 @@ const Checkout = () => {
         }
     }
 
-    const handleBuy = async () => {
+    
+    // console.log(cart);
+    
+    const [input, setInput] = useState({
+        phoneNumber: "",
+        detail:"",
+        zipCode: 0,
+        street: "",
+        number: "",
+        name: ""    
+    });
+    
+    const [errors, setErrors] = useState({
+        phoneNumber: "",
+        detail:"",
+        zipCode: 0,
+        street: "",
+        number: "",
+        name: ""    
+    });
+    
+    const handleBuy = async (event) => {
+        event.preventDefault();
+        await dispatch(createAddress(input))
+        console.log(input);
         const body = await createPreference()
         console.log(body);
         if(body){
@@ -68,26 +93,6 @@ const Checkout = () => {
             setPreferenceId(body.id)
         }
     }
-
-    // console.log(cart);
-
-    const [input, setInput] = useState({
-    phoneNumber: "",
-    detail:"",
-    zipCode: 0,
-    street: "",
-    number: "",
-    name: ""    
-    });
-
-    const [errors, setErrors] = useState({
-        phoneNumber: "",
-        detail:"",
-        zipCode: 0,
-        street: "",
-        number: "",
-        name: ""    
-        });
 
     const handleChange = (event) => {
         setInput({
