@@ -14,11 +14,13 @@ import { useLocation } from 'react-router-dom'
 import Login from './components/Users/Login/Login'
 import Register from './components/Users/Register/Register'
 import Checkout from './components/Users/Checkout/Checkout'
+import Purchases from './components/Users/Purchases/Purchases'
 import Success from './components/Users/BackUrls/Success/Success/Success'
 import Failure from './components/Users/BackUrls/Failure'
+// axios.defaults.baseURL = `http://wizardingwares-production.up.railway.app/`
 import axios from "axios";
 // axios.defaults.baseURL = `http://wizardingwares-production.up.railway.app/`;
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = `http://localhost:3001/`;
 
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
       <div className="flex-grow">
         <Routes>
           <Route path='/' element={<Home/>} />
+          <Route path='/purchases' element={<Purchases/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} />
           <Route path='/cart' element={<CartConteiner/>}/>

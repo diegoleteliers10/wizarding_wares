@@ -82,6 +82,11 @@ const NavBar = () => {
         localStorage.setItem('shoppingCart', ['']);
     }
 
+    const handleMyPurchases = () => {
+      navigate('/purchases')
+    }
+
+
     return(
         <div className="storeComponent">
         <Navbar expand="lg" className="navBar fixed top-0">
@@ -107,6 +112,7 @@ const NavBar = () => {
                 <span className="text-wwwhite fontEB">Hola de nuevo, {userName} </span>
                 <span className="text-wwwhite">|</span>
                 <button onClick={handleLogout} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Cerrar sesión</button>
+                <button onClick={handleMyPurchases}>Mis Compras</button>
                 </div>
                 }
                 
