@@ -6,6 +6,7 @@ import EditProduct from "../Products/Edit/EditProduct";
 import NavBar from "../NavBar/NavBar";
 import UserList from "../Users/UsersList/UsersList";
 import EditUser from "../Users/Edit/EditUser";
+import PurchasesList from "../Purchases/PurchasesList/PurchasesList";
 
 const DataDisplay = ()=> {
 
@@ -20,6 +21,7 @@ return(
         {display === "editProduct" && <EditProduct/>}
         {display === "users" && <UserList/>}
         {display === "editUser" && <EditUser/>}
+        {display === "purchases" && <PurchasesList/>}
     </div>
 )
 }

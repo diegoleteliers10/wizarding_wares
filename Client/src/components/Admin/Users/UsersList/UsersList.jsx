@@ -17,15 +17,15 @@ const UserList = () => {
 
 
   return (
-    <div className={`max-h-screen overflow-auto bg-white ${styles.productList}`}>
-      <table className={styles.table}>
+    <div className={`max-h-screen overflow-auto bg-white border border-black rounded-lg ${styles.productList}`}>
+      <table className={`w-full ${styles.table}`}>
         <thead>
           <tr>
-            <th>User</th>
-            <th className='text-center'>Email</th>
-            <th className='text-center'>Role</th>
-            <th className='text-center'>Status</th>
-            <th className=''>Actions</th>
+            <th className='p-4'>User</th>
+            <th className='p-4 text-center'>Email</th>
+            <th className='p-4 text-center'>Role</th>
+            <th className='p-4 text-center'>Status</th>
+            <th className='p-4'>Actions</th>
           </tr>
         </thead>
         <tbody>

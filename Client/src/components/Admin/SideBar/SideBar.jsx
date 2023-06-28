@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FiUser, FiGrid, FiGift, FiPlus, FiUserPlus } from "react-icons/fi";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { useDispatch } from 'react-redux';
-import { displayProductList, displayCreate, displayUsers, displayCreateUser } from '../../../redux/adminSlice';
+import { displayProductList, displayCreate, displayUsers, displayCreateUser, displayPurchases } from '../../../redux/adminSlice';
 import { Link } from 'react-router-dom';
 
 
@@ -15,7 +15,7 @@ const SideBar = () => {
     const id = event.currentTarget.id;
     if(id === 'products') dispatch(displayProductList());
     if(id === 'users') dispatch(displayUsers());
-    //if(id === 'purchases') dispatch(displayPurchases());
+    if(id === 'purchases') dispatch(displayPurchases());
     setActiveButton(id);
   };
 

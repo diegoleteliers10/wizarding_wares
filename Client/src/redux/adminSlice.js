@@ -19,6 +19,7 @@ const initialState = {
   editUser: [],
   allUsers: [],
   refresh: 0,
+  allPurchases: []
 }
 
 // export const createProd = (input) => {
@@ -182,6 +183,13 @@ export const displayEditUser = createAsyncThunk(
   }
 )
 
+export const displayPurchases = createAsyncThunk(
+  'admin/displayPurchases',
+  async (_, thunkAPI) => {
+    return 'purchases';
+  }
+)
+
 export const setEditState = createAsyncThunk('admin/setEditState',
 async (input) => {
   return input; 
@@ -233,6 +241,18 @@ export const deleteUser = createAsyncThunk(
     }
   }
 );
+
+export const getAllPurchases = createAsyncThunk('admin/getAllPurchases',
+    async (_, thunkAPI) => {
+      try {
+        const response = await axios.get('http://localhost:3001/allPurchases');
+        return response.data;
+      } catch (error) {
+        console.error('Error obtaining purchases:', error);
+        throw error;
+      }
+    }
+)
 
 export const sortByNameAscending = createAction('admin/sortByNameAscending');
 export const sortByNameDescending = createAction('admin/sortByNameDescending');
@@ -355,6 +375,10 @@ export const adminSlice = createSlice({
       state.display = action.payload;
       console.log(action.payload)
     })
+    .addCase(displayPurchases.fulfilled, (state, action) => {
+      state.display = action.payload;
+      console.log(action.payload)
+    })
 
     //FILTER PRODUCT CATEGORY
     .addCase(filterProductCategory.fulfilled, (state, action) => {
@@ -440,6 +464,17 @@ export const adminSlice = createSlice({
       console.log(action.payload)
       state.refresh= state.refresh+1
       //state.products = state.products;
+    })
+    .addCase(getAllPurchases.fulfilled, (state, action) => {
+      state.loading = false;
+      state.allPurchases = action.payload;
+    })
+    .addCase(getAllPurchases.rejected, (state, action) => {
+      state.loading = false;
+      console.error('Error al obtener los usuarios:', action.error);
+    })
+    .addCase(getAllPurchases.pending, (state, action) => {
+      state.loading = true
     })
   },
 })
