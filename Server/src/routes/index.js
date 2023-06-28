@@ -7,7 +7,7 @@ const deleteProduct = require('../controllers/deleteProduct.controller');
 const searchProductByName = require('../controllers/getProductByName.controller');
 const filteredProduct = require('../controllers/filteredProducts.controller');
 const getDetailProduct = require('../controllers/getDetailProduct.controller');
-const postUserAddress = require('../controllers/userAddress.controller');
+const { postUserAddress, getUserAddress} = require('../controllers/userAddress.controller');
 const userFinalDelete = require('../controllers/userFinalDelete.controller')
 const deleteAddress = require('../controllers/userDeleteAddress.controller')
 const createReview = require('../controllers/createReview.controller')
@@ -30,6 +30,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'tempUploads/' });
 
 //user routes
+router.get('/userAddress/:id', getUserAddress)
 router.post('/userAddress', postUserAddress)
 router.use("/", userRouter);
 router.post('/createReview/:productId',createReview)
