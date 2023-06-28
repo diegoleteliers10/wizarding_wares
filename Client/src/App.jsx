@@ -19,7 +19,8 @@ import Success from './components/Users/BackUrls/Success/Success/Success'
 import Failure from './components/Users/BackUrls/Failure'
 // axios.defaults.baseURL = `http://wizardingwares-production.up.railway.app/`
 import axios from "axios";
-axios.defaults.baseURL = `http://localhost:3001/`
+// axios.defaults.baseURL = `http://wizardingwares-production.up.railway.app/`;
+axios.defaults.baseURL = `http://localhost:3001/`;
 
 
 function App() {

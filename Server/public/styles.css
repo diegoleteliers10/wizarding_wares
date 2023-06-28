@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 20px;
+  border: solid 3px silver;
+  background-color: chocolate;
+  color: white;
+}
+
+.containerDatos {
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+.containerVerificacion {
+  border:solid 1px transparent;
+  display: flex;
+  justify-content: center;
+}

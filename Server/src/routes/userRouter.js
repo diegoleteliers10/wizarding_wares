@@ -1,6 +1,6 @@
 const {Router} = require("express");
 const userRouter = Router();
-const { createUserRegister, updateUser, logicalUserDeletion } = require("../controllers/UserControllers");
+const { createUserRegister, updateUser, logicalUserDeletion, verificarCuenta } = require("../controllers/UserControllers");
 
 // Ruta Para Crear Un Usuario
 userRouter.post("/user", async (req, res) => {
@@ -38,6 +38,21 @@ userRouter.put("/user_delete/:userId", async (req, res) => {
   } catch (error) {
     return res.status(404).json({
       "Error": res.message
+    });
+  }
+});
+
+
+// Ruta para verificar cuenta de usuario ( Para ver si no es un Robot ) Correo tipico de revisa tu email y verifica tu cuenta
+userRouter.get("/verificar-cuenta", async (req, res) => {
+  const token = req.query.token;
+  try {
+    const result = await verificarCuenta(token);
+    return res.status(200).send(result);
+  } catch (error) {
+    console.error(`Èrror al verificar cuenta: ${error}`);
+    res.status(500).json({
+      "Error": error.message
     });
   }
 });
