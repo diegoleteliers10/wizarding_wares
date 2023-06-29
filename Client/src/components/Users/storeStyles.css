@@ -2,18 +2,6 @@
     font-family: 'Marcellus', serif;
 }
 
-.storeComponent .titleDetail{
-    font-family: 'Marcellus', serif;
-    font-size: 3em;
-}
-
-.storeComponent .bigPrice{
-    font-family: 'EB Garamond', serif;
-    color: #5E503F;
-    font-size: 3em;
-    font-weight: bold;
-}
-
 .storeComponent .descriptionDetail {
     font-family: 'EB Garamond', serif;
     font-size: 1.3em;
@@ -70,13 +58,24 @@ opacity: 0.5;
     font-size: 1.2em;
 }
 
+.storeComponent .btmBorder{
+    border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
+}
+
 .storeComponent .fotoFondo{
     background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     scale: 1.4;
+    height: 30vh;
     margin-bottom: 30%;
+    display: flex;
+    align-items: center;
+}
+.storeComponent .fotoFondo img{
+    margin: auto;
+    
 }
 
 .storeComponent .fotoFondoDetail{
@@ -84,8 +83,29 @@ opacity: 0.5;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    scale: 1;
+    scale: 80%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
 }
+
+.storeComponent .fotoFondoDetail img{
+    width: 35rem;
+    padding: 10%;
+    margin: auto;
+}
+
+.storeComponent .fotoFondoCart {
+    background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.storeComponent .fotoFondoCart img {
+    padding: 10%;
+    margin: auto;
+}
+
 .fontEB{
     font-family: 'EB Garamond', serif;
 }
@@ -127,7 +147,6 @@ opacity: 0.5;
     background-color: #a88654;
     z-index: -1;
   }
-
   .storeLoginForm{
     height: 75vh;
   }
@@ -160,3 +179,6 @@ opacity: 0.5;
   .storeComponent input[type="radio"]:checked + label::before {
     background-color: #692323; /* Set your desired selected color */
   }
+
+  
+
