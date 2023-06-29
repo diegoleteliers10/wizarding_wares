@@ -53,7 +53,7 @@ const routes = require("./routes/index");
 
 // const Status = require("./models/Status.model")
 
-// const estados = ["en preparacion", "en camino", "entregado"]
+// const estados = ["En preparación", "En camino", "Entregado", "Cancelado"]
 
 // for(let i=0; i<estados.length; i++){
 // 	const estado = Status.create({
@@ -61,7 +61,13 @@ const routes = require("./routes/index");
 // 	})
 // }
 
-
+// const roles=["admin","user"]
+// const Roles = require('./models/Roles.model')
+// for(let i=0; i<roles.length; i++){
+// 	const role = Roles.create({
+// 			name:roles[i]
+// 	})
+// }
 
 //Config de Auth0
 const config = {
