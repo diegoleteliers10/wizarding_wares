@@ -72,11 +72,10 @@ const Purchases = ({ purchase })=> {
       <td className='text-center'> {purchase.user.name}</td>
       <td className='text-center'>
       <select name="status" id="status" value={statusValue} className='bg-white' onChange={handleStatus}>
-        <option value="Confirmed">Confirmed</option>
-        <option value="Shipment">Shipment</option>
-        <option value="Delivered">Delivered</option>
-        <option value="Cancelled">Cancelled</option>
-
+        <option value="En preparación">Confirmed</option>
+        <option value="En camino">Shipment</option>
+        <option value="Entregado">Delivered</option>
+        <option value="Cancelado">Cancelled</option>
       </select>
       </td>
       <td className='text-center'
