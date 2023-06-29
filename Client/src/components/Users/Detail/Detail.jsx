@@ -90,12 +90,13 @@ const Detail = () => {
         </div>
       </div>
       <div className="w-1/2 p-28">
-        <h2 className="titleDetail">{product.name}</h2>
-        <p className="bigPrice">${product.price}</p>
+        <h2 className="fontMarcellus text-left">{product.name}</h2>
+        <p className="bigPrice text-left text-wwbrown font-bold text-5xl fontEB">${product.price}</p>
         {product.categoryCategoryId === 3 || product.category === 'Indumentaria'? (
           <div>
-            <fieldset onChange={handleSizeChange}>
-              <div className="flex space-x-4 justify-center fontEB">
+            <p className="text-left fontEB text-xl">Talle:</p>
+            <fieldset onChange={handleSizeChange} className="ml-0">
+              <div className="flex space-x-4 fontEB text-xl">
                 <div>
                   <input type="radio" id="size1" name="contact" value="XS" />
                   <label htmlFor="size1">XS</label>
@@ -130,9 +131,9 @@ const Detail = () => {
             )}
           </div>
         ) : null}
-        <p className="descriptionDetail">{product.description}</p>
+        <p className="descriptionDetail mt-8 text-left fontEB">{product.description}</p>
         <div className="flex justify-between p-4">
-          <div >
+          <div className="">
             <label>
               Cantidad:
             </label>
@@ -144,7 +145,7 @@ const Detail = () => {
           </div>
           <button
             onClick={handleAddToCart}
-            className={`btn1 btn--svg-small ml-28 ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn ? ' disabled opacity-50 pointer-events-none' : ''}`}
+            className={`btn1 btn--svg-small mleft15 ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn ? ' disabled opacity-50 pointer-events-none' : ''}`}
             disabled={quantity === 0}
           >
             Añadir al carrito

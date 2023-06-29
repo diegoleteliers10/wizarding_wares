@@ -2,18 +2,6 @@
     font-family: 'Marcellus', serif;
 }
 
-.storeComponent .titleDetail{
-    font-family: 'Marcellus', serif;
-    font-size: 3em;
-}
-
-.storeComponent .bigPrice{
-    font-family: 'EB Garamond', serif;
-    color: #5E503F;
-    font-size: 3em;
-    font-weight: bold;
-}
-
 .storeComponent .descriptionDetail {
     font-family: 'EB Garamond', serif;
     font-size: 1.3em;
@@ -92,6 +80,14 @@ opacity: 0.5;
     background-position: center;
     background-repeat: no-repeat;
     scale: 80%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.storeComponent .fotoFondoDetail img{
+    width: 33rem;
+    margin: auto;
 }
 .fontEB{
     font-family: 'EB Garamond', serif;
@@ -134,7 +130,6 @@ opacity: 0.5;
     background-color: #a88654;
     z-index: -1;
   }
-
   .storeLoginForm{
     height: 75vh;
   }
