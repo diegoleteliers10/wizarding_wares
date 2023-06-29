@@ -79,12 +79,23 @@ opacity: 0.5;
     margin-bottom: 30%;
 }
 
+.storeComponent .fotoFondoDetail{
+    background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    scale: 1;
+}
 .fontEB{
     font-family: 'EB Garamond', serif;
 }
 
 .fontMarcellus {
     font-family: 'Marcellus', serif;
+}
+
+.storeComponent .buttonContainer{
+    align-self: baseline;
 }
 
 .buttonContainer {
@@ -119,4 +130,33 @@ opacity: 0.5;
 
   .storeLoginForm{
     height: 75vh;
+  }
+  .storeComponent input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  /* Style the custom radio button */
+  .storeComponent input[type="radio"] + label {
+    position: relative;
+    padding-left: 25px; /* Adjust as needed */
+    cursor: pointer;
+  }
+  
+  /* Style the custom radio button indicator */
+  .storeComponent input[type="radio"] + label::before {
+    content: "";
+    position: absolute;
+    top: 5px; /* Adjust as needed */
+    left: 0;
+    width: 14px; /* Adjust as needed */
+    height: 14px; /* Adjust as needed */
+    border-radius: 50%;
+    background-color: #ddd;
+    border: 1px solid #0A0908; /* Set your desired background color */
+  }
+  
+  /* Style the custom radio button when selected */
+  .storeComponent input[type="radio"]:checked + label::before {
+    background-color: #692323; /* Set your desired selected color */
   }

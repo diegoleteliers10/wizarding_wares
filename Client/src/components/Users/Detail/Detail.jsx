@@ -82,18 +82,20 @@ const Detail = () => {
   }, [product]);
 
   return (
-    <div className="flex storeComponent h-screen items-center p-8">
-      <div className="w-1/3">
+    <div className="flex storeComponent h-screen items-center p-8 storeComponent">
+      <div className="w-1/2 flex flex-col items-center">
         <BackButton />
-        <img src={product.image} alt={product.name} />
+        <div className="fotoFondoDetail">
+          <img src={product.image} alt={product.name} />
+        </div>
       </div>
-      <div className="w-2/3">
+      <div className="w-1/2 p-28">
         <h2 className="titleDetail">{product.name}</h2>
         <p className="bigPrice">${product.price}</p>
         {product.categoryCategoryId === 3 || product.category === 'Indumentaria'? (
           <div>
             <fieldset onChange={handleSizeChange}>
-              <div className="flex space-x-4 justify-center">
+              <div className="flex space-x-4 justify-center fontEB">
                 <div>
                   <input type="radio" id="size1" name="contact" value="XS" />
                   <label htmlFor="size1">XS</label>
@@ -129,20 +131,26 @@ const Detail = () => {
           </div>
         ) : null}
         <p className="descriptionDetail">{product.description}</p>
-        <label>
-          Cantidad:
-          <button onClick={handleDecreaseQuantity} className="btn1 btn--svg-small">-</button>
-          <span>{quantity}</span>
-          <button onClick={handleIncreaseQuantity} className="btn1 btn--svg-small">+</button>
-        </label>
-        <button
-          onClick={handleAddToCart}
-          className={`btn1 btn--svg-small ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn ? ' disabled opacity-50 pointer-events-none' : ''}`}
-          disabled={quantity === 0}
-        >
-          Añadir al carrito
-        </button>
-        <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
+        <div className="flex justify-between p-4">
+          <div >
+            <label>
+              Cantidad:
+            </label>
+            <div className="flex justify-between">
+              <button onClick={handleDecreaseQuantity} className="">-</button>
+              <span>{quantity}</span>
+              <button onClick={handleIncreaseQuantity} className="">+</button>
+            </div>
+          </div>
+          <button
+            onClick={handleAddToCart}
+            className={`btn1 btn--svg-small ml-28 ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn ? ' disabled opacity-50 pointer-events-none' : ''}`}
+            disabled={quantity === 0}
+          >
+            Añadir al carrito
+          </button>
+          <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
+        </div>
         <div className="mt-8">
           {
             !loggedIn && 
