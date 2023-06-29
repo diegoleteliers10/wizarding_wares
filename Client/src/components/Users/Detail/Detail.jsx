@@ -143,14 +143,16 @@ const Detail = () => {
               <button onClick={handleIncreaseQuantity} className="">+</button>
             </div>
           </div>
-          <button
-            onClick={handleAddToCart}
-            className={`btn1 btn--svg-small mleft15 ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn ? ' disabled opacity-50 pointer-events-none' : ''}`}
-            disabled={quantity === 0}
-          >
-            Añadir al carrito
-          </button>
-          <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
+          <div>
+            <button
+              onClick={handleAddToCart}
+              className={`btn1 btn--svg-small ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn ? ' disabled opacity-50 pointer-events-none ' : ''}`}
+              disabled={quantity === 0}
+            >
+              Añadir al carrito
+            </button>
+            <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
+          </div>
         </div>
         <div className="mt-8">
           {

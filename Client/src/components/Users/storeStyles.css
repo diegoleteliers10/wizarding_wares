@@ -86,7 +86,8 @@ opacity: 0.5;
 }
 
 .storeComponent .fotoFondoDetail img{
-    width: 33rem;
+    width: 35rem;
+    padding: 10%;
     margin: auto;
 }
 .fontEB{
