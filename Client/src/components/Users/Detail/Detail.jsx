@@ -91,7 +91,7 @@ const Detail = () => {
         <img src={product.image} alt={product.name} />
       </div>
       <div>
-        <Rating/>
+        <Rating productId={id}/>
       </div>
       </div>
       <div className="w-1/2 p-28">
@@ -169,7 +169,7 @@ const Detail = () => {
         </div>
       </div>
       <div>
-      <ReviewList/>
+      <ReviewList productId={id}/>
       </div>
     </div>
   );
