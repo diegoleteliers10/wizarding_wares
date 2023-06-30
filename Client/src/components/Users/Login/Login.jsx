@@ -51,6 +51,7 @@ const Login = () => {
     const handleGoogleLogin = (credentialResponse) => {
         const decoded = jwt_decode(credentialResponse.credential);
         const googleInfoLogin ={
+            name: decoded.name,
             email: decoded.email,
             email_verified: decoded.email_verified
         }

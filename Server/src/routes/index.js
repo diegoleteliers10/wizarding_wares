@@ -18,6 +18,8 @@ const editStatePurchase = require('../controllers/editStatePurchase.controller')
 const loginUser = require('../controllers/loginUser.controller')
 const getAllPurchById = require('../controllers/getAllPurchById.controller')
 const getAllStatuses = require('../controllers/getAllStatuses.controller')
+const jwt = require('express-jwt');
+const {SECRET} = process.env;
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
