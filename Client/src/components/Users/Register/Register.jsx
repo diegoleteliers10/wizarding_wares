@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createUser, getAllUsers } from "../../../redux/accountSlice";
+import { createUser } from "../../../redux/accountSlice";
 import { useSelector } from "react-redux";
-import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from "jwt-decode";
 import '../storeStyles.css';
 import { NavLink } from 'react-router-dom';
 
@@ -68,50 +66,6 @@ const Register = () => {
         //     confirmPassword: "",
         // })
         navigate('/login')
-      }
-      //funcion para crear password aleatoria para google
-      function generateRandomString() {
-        const length = Math.floor(Math.random() * 15) + 6; // Random length between 6 and 20
-        const numbers = '0123456789';
-        const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
-        
-        // que arranque con GL de "google-register"
-        let randomString = 'GR';
-      
-        // al menos 1 numero
-        const randomIndex = Math.floor(Math.random() * numbers.length);
-        randomString += numbers[randomIndex];
-      
-        // al menos una mayuscula
-        const uppercaseIndex = Math.floor(Math.random() * uppercaseLetters.length);
-        randomString += uppercaseLetters[uppercaseIndex];
-      
-        // al menos una minuscula
-        const lowercaseIndex = Math.floor(Math.random() * lowercaseLetters.length);
-        randomString += lowercaseLetters[lowercaseIndex];
-      
-        // el resto de los caracteres
-        const remainingChars = length - 5;
-        const allChars = numbers + uppercaseLetters + lowercaseLetters;
-      
-        for (let i = 0; i < remainingChars; i++) {
-          const charIndex = Math.floor(Math.random() * allChars.length);
-          randomString += allChars[charIndex];
-        }
-      
-        return randomString;
-      }
-
-      const handleGoogleRegister = async (credentialResponse)=>{
-        const decoded = jwt_decode(credentialResponse.credential);
-        const googleUserInfo = {
-            name: decoded.given_name,
-            email: decoded.email,
-            password: generateRandomString()
-        }
-        console.log(googleUserInfo)
-        await dispatch(createUser(googleUserInfo))
       }
 
     return(
@@ -208,16 +162,7 @@ const Register = () => {
                     <p className='mt-4'>¿Ya tienes cuenta? <span><NavLink to='/login' className='no-underline'>Iniciar Sesión</NavLink></span></p>
                 </div>
 
-                </form>
-                <div className="flex justify-center">
-                    <GoogleLogin
-                    onSuccess={handleGoogleRegister}
-                    onError={() => {
-                        console.log('Register Failed');
-                    }}
-                    />                
-                </div>
-
+                </form>                
             </div>
            </div>
 

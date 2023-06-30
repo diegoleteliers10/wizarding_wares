@@ -180,5 +180,16 @@ opacity: 0.5;
     background-color: #692323; /* Set your desired selected color */
   }
 
+  .storeComponent .customSelectArrow{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Add custom styles for the arrow */
+    background: transparent;
+    border: none;
+    padding-right: 0.5rem;
+    position: relative;
+  }
+
   
 
