@@ -18,9 +18,10 @@ const postUserAddress = async (req ,res) => {
 };
 
 const getUserAddress = async (req, res) => {
-    const { userId } = req.params
+    const { id } = req.params
+    console.log(id);
     try {
-        const response = await User.findByPk(userId, {
+        const response = await User.findByPk(id, {
             include: [{
                 model: Address,
                 attributes: ['street', 'number', 'zipCode', 'detail', 'phoneNumber'],

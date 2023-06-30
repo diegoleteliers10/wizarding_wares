@@ -82,7 +82,7 @@ export const accountSlice = createSlice({
       })
       //login
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.userInfo
+        state.user = action.payload
         removeCookie('userInfo');
         setCookie('userInfo', JSON.stringify(action.payload.userInfo))
         if(action.payload.userInfo.role === 1){

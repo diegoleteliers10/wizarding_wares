@@ -4,17 +4,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import axios from 'axios';
 import { createAddress } from '../../../redux/userSlice';
+import getCookie from '../../../hooks/getCookie';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
     
     const dispatch = useDispatch();
-
-    const user = useSelector(state => state.account.user)
-    const cart = useSelector(state => state.user.cartProducts)
+    const navigate = useNavigate()
     
+    const cart = useSelector(state => state.user.cartProducts)
+    let userInfo = []
+    
+    const userInfoUnparsed = getCookie('userInfo')
+    if(userInfoUnparsed !== ''){
+        userInfo = JSON.parse(userInfoUnparsed)
+    } 
+    console.log(userInfo.id);
 
     const shoppingCartProducts = localStorage.getItem('shoppingCart')
-    console.log(shoppingCartProducts);
+    // console.log(shoppingCartProducts);
     let parsedProducts = []
     if(shoppingCartProducts !== ''){
       // si hay productos los parseo
@@ -28,28 +36,12 @@ const Checkout = () => {
         unit_price: Number(product.price),
         quantity: Number(product.quantity)
     }))
-    console.log(items);
 
     const [preferenceId, setPreferenceId] = useState(null)
 
     initMercadoPago(import.meta.env.VITE_PUBLIC_KEY);
 
-    // const createPreference = async () => {
-    //     try {
-    //         const response = await axios.post("http://localhost:3001/create-order", {items});
-    //     const { id } = response.data; // Obtener el ID de la preferencia
-    //     return id;
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    // const handleBuy = async () => {
-    //     const id = await createPreference()
-    //     if (id) {
-    //         setPreferenceId(id)
-    //     }
-    // }
+ 
     const createPreference = async () => {
         try {
             const response = await axios.post("http://localhost:3001/create-order", {items});
@@ -60,8 +52,10 @@ const Checkout = () => {
         }
     }
 
-    
-    // console.log(cart);
+    const handleBack = () => {
+        navigate('/cart')
+    }
+   
     
     const [input, setInput] = useState({
         phoneNumber: "",
@@ -69,7 +63,8 @@ const Checkout = () => {
         zipCode: 0,
         street: "",
         number: "",
-        name: ""    
+        name: "",
+        userId: userInfo.id
     });
     
     const [errors, setErrors] = useState({
@@ -235,6 +230,7 @@ const Checkout = () => {
 
                     </div>
                 </form>
+                <button onClick={handleBack} className='bg-wwbrown text-wwwhite p-2 fontMarcellus hover:bg-wwmaroon'>Volver al carrito</button>
             </div>
 
             <div className={parsedProducts.length >= 1 ? "w-1/3 bg-white shadow-md" : "hidden"}>
