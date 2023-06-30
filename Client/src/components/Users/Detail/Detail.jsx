@@ -5,6 +5,8 @@ import { addToCart } from "../../../redux/userSlice";
 import BackButton from "../BackButton/BackButton";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import getCookie from "../../../hooks/getCookie";
+import ReviewList from '../ProductReview/ProductReview'
+import Rating from "../Rating/Rating";
 import '../storeStyles.css';
 
 const Detail = () => {
@@ -85,9 +87,12 @@ const Detail = () => {
     <div className="flex storeComponent h-screen items-center p-8 storeComponent">
       <div className="w-1/2 flex flex-col items-center">
         <BackButton />
-        <div className="fotoFondoDetail">
-          <img src={product.image} alt={product.name} />
-        </div>
+      <div className="fotoFondoDetail">
+        <img src={product.image} alt={product.name} />
+      </div>
+      <div>
+        <Rating/>
+      </div>
       </div>
       <div className="w-1/2 p-28">
         <h2 className="titleDetail">{product.name}</h2>
@@ -162,6 +167,9 @@ const Detail = () => {
             </div>
           }
         </div>
+      </div>
+      <div>
+      <ReviewList/>
       </div>
     </div>
   );

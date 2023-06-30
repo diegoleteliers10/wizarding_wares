@@ -7,6 +7,11 @@ const Purchase = (props) => {
         navigate(`/${props.id}`)
     }
 
+    const handlereview = () => {
+        sessionStorage.setItem("productId", props.id);
+        navigate(`/reviews/${props.id}`)
+    }
+
     return(
         <div className='flex h-1/2 gap-8 items-center'>
         <img src={props.image} alt={props.name} title={props.name} className='w-32'/>
@@ -19,7 +24,7 @@ const Purchase = (props) => {
             <button onClick={()=>handleShopNow()}>Volver a comprar</button>
         </div>
         <div>
-            <button>Calificar producto</button>
+            <button onClick={()=> handlereview()}>Calificar producto</button>
         </div>
     </div>
     )
