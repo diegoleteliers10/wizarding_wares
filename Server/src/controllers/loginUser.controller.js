@@ -28,7 +28,8 @@ const loginUser = async (req, res) => {
           name: userFound.name,
           email: userFound.email,
           id: userFound.userId,
-          role: userFound.roleRoleId
+          role: userFound.roleRoleId,
+          
         },
         message: 'Login Successful'
       });
@@ -51,7 +52,8 @@ const loginUser = async (req, res) => {
         name: userFound.name,
         email: userFound.email,
         id: userFound.userId,
-        role: userFound.roleRoleId
+        role: userFound.roleRoleId,
+        verified: userFound.verified
       },
       message: 'Login Successful'
     });

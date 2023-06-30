@@ -40,6 +40,7 @@ export const loginGoogle = createAsyncThunk('account/loginGoogle',
 export const login = createAsyncThunk('account/login',
   async (input) => {
     const response = await axios.post("/userLogin", input)
+    //console.log(response.data)
     return response.data;
   }
 )
@@ -89,6 +90,10 @@ export const accountSlice = createSlice({
           removeCookie('admin')
           setCookie('admin', JSON.stringify(true))
         }
+        if(action.payload.userInfo.verified === true){
+          removeCookie('userVerified');
+          setCookie('userVerified', JSON.stringify(true))
+        }
         state.loading = false
       })
       .addCase(login.rejected, (state, action) => {
@@ -117,6 +122,7 @@ export const accountSlice = createSlice({
         removeCookie('userInfo');
         removeCookie('admin')
         removeCookie('adminDisplay')
+        removeCookie('userVerified')
         state.user = ''
         //console.log('Nos vemos pronto!');
       })
