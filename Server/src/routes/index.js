@@ -20,6 +20,9 @@ const getAllPurchById = require('../controllers/getAllPurchById.controller')
 const getAllStatuses = require('../controllers/getAllStatuses.controller')
 const jwt = require('express-jwt');
 const {SECRET} = process.env;
+const filteredUsers = require('../controllers/filteredUsers.controller')
+const searchUserByName = require('../controllers/getUserByName.controller')
+
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
@@ -49,6 +52,8 @@ router.get('/filteredProducts', filteredProduct)
 router.get('/detailProduct/:id', getDetailProduct)
 
 //admins routes
+router.get('/searchUser', searchUserByName)
+router.get('/filteredUsers', filteredUsers)
 router.get('/allUsers', getAllUsers)
 router.get('/detailProduct/:id', getDetailProduct)
 router.get('/allStatuses', getAllStatuses)

@@ -13,7 +13,7 @@ const Purchase = (props) => {
         <div>
         <h5>{props.name}</h5>
         </div>   
-        <p>{props.price}</p>
+        <p>${props.price}</p>
         <p>{props.status}</p>
         <div>
             <button onClick={()=>handleShopNow()}>Volver a comprar</button>
