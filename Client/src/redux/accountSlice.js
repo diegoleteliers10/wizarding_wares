@@ -83,9 +83,12 @@ export const accountSlice = createSlice({
       })
       //login
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.userInfo
+        state.user = action.payload.userInfo;
+        //console.log(action.payload.userInfo)
         removeCookie('userInfo');
         setCookie('userInfo', JSON.stringify(action.payload.userInfo))
+        removeCookie('userToken');
+        setCookie('userToken', JSON.stringify(action.payload.userInfo.token))
         if(action.payload.userInfo.role === 1){
           removeCookie('admin')
           setCookie('admin', JSON.stringify(true))
@@ -104,8 +107,14 @@ export const accountSlice = createSlice({
       //LOGIN GOOGLE
       .addCase(loginGoogle.fulfilled, (state, action) => {
         state.user = action.payload.userInfo
+        console.log(action.payload.userInfo)
         removeCookie('userInfo');
-        setCookie('userInfo', JSON.stringify(action.payload.userInfo))
+        setCookie('userInfo', JSON.stringify(action.payload.userInfo));
+        removeCookie('userToken');
+        //los usuarios de google siempre estan verified
+        removeCookie('userVerified');
+        setCookie('userVerified', JSON.stringify(true))
+        setCookie('userToken', JSON.stringify(action.payload.userInfo.token));
         if(action.payload.userInfo.role === 1){
           removeCookie('admin')
           setCookie('admin', JSON.stringify(true))
@@ -123,6 +132,7 @@ export const accountSlice = createSlice({
         removeCookie('admin')
         removeCookie('adminDisplay')
         removeCookie('userVerified')
+        removeCookie('userToken');
         state.user = ''
         //console.log('Nos vemos pronto!');
       })
