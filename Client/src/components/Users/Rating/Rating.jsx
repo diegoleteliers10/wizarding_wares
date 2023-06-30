@@ -4,12 +4,12 @@ import { getProductReviews } from '../../../redux/userSlice'
 import { LuStars } from 'react-icons/lu';
 
 
-const Rating = () => {
+const Rating = ({productId}) => {
     const dispatch = useDispatch();
     const productReviews = useSelector((state) => state.user.reviews);
     console.log(productReviews);
   
-    const productId = sessionStorage.getItem('productId');
+    // const productId = sessionStorage.getItem('productId');
     // const rating = productReviews.reviews?.map((review) => {
     //     review.rating
     // })
@@ -34,11 +34,15 @@ const Rating = () => {
         return <LuStars key={index}  className={starClass} />;
     });
        
+ 
+
     return(
+        reviewCount > 0? 
         <div className="rating">
             <h3>{stars}</h3>
             <p>({reviewCount})</p>
         </div>
+        : null
     )
 
 }

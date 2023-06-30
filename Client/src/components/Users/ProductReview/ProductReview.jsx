@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProductReviews } from '../../../redux/userSlice';
 import { LuStars } from 'react-icons/lu';
 
-const ReviewList = () => {
+const ReviewList = ({productId}) => {
   const dispatch = useDispatch();
   const productReviews = useSelector((state) => state.user.reviews);
   const loading = useSelector((state) => state.user.loading);
   
-  const productId = sessionStorage.getItem('productId');
+  // const productId = sessionStorage.getItem('productId');
   const reviews = productReviews.reviews || [];
   const reviewCount = reviews.length;
 
@@ -21,6 +21,7 @@ const ReviewList = () => {
   }
   
   return (
+    reviews.length > 0?
     <div>
       <div>
         <p>Reviews: {reviewCount}</p>
@@ -38,6 +39,7 @@ const ReviewList = () => {
         </div>
       ))}
     </div>
+    :null
   );
 };
 
