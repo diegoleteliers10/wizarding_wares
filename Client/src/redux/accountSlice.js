@@ -84,7 +84,7 @@ export const accountSlice = createSlice({
       //login
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.userInfo;
-        //console.log(action.payload.userInfo)
+        
         removeCookie('userInfo');
         setCookie('userInfo', JSON.stringify(action.payload.userInfo))
         removeCookie('userToken');

@@ -14,6 +14,7 @@ const initialState = {
   page: 1,
   price: 0,
   purchases: [],
+  userAddress: null,
   reviews: []
 };
 
@@ -124,7 +125,7 @@ export const getPurchases = createAsyncThunk(
   'user/getPurchases', 
   async(userId, thunkAPI) => {
     try {
-      const response = await axios.get(`http://localhost:3001/getAllPurchById/${userId}`)
+      const response = await axios.get(`/getAllPurchById/${userId}`)
       console.log(response.data);
       return response.data
     } catch (error) {
@@ -165,6 +166,20 @@ export const createProductReview = createAsyncThunk(
     }
   }
 );
+
+export const getUserAddress = createAsyncThunk('user/getUserAddress',
+async (userId) => {
+  const response = await axios.get(`/userAddress/${userId}`)
+  return response.data; 
+}
+)
+
+export const createPurchase = createAsyncThunk('user/createPurchase',
+async (input) => {
+  const response = await axios.post(`/createPurchase`, input)
+  return response; 
+}
+) 
 
 export const userSlice = createSlice({
   name: 'user',
@@ -289,7 +304,6 @@ export const userSlice = createSlice({
       })
       .addCase(createAddress.fulfilled, (state, action) => {
         state.loading = false 
-        //alert('Su usuario se ha creado correctamente!')
       })
       .addCase(createAddress.rejected, (state, action) => {
         state.loading = false
@@ -297,6 +311,18 @@ export const userSlice = createSlice({
       .addCase(createAddress.pending, (state, action) => {
         state.loading = true
       })
+      .addCase(getUserAddress.fulfilled, (state, action) => {
+        state.loading = false
+        state.userAddress = action.payload
+        console.log(state.userAddress);
+      })
+      .addCase(getUserAddress.rejected, (state, action) => {
+        state.loading = false
+        console.log('getuseraddres rejected');
+      })
+      .addCase(getUserAddress.pending, (state, action) => {
+        state.loading = true
+
       .addCase(getProductReviews.fulfilled, (state, action) => {
         state.loading = false;
         state.reviews = action.payload;
@@ -311,6 +337,7 @@ export const userSlice = createSlice({
       .addCase(createProductReview.fulfilled, (state, action) => {
         const newReview = action.payload;
         state.reviews.push(newReview);
+
       })
   },
 });
