@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import '../storeStyles.css';
 import { NavLink } from 'react-router-dom';
+import { toast, Toaster } from 'react-hot-toast'
 
 const Login = () => {
 
@@ -16,11 +17,14 @@ const Login = () => {
 
     useEffect(() => {
         if(user.name && user.id && user.email && user.role){
-            setInput({
-                email: "",
-                password: "",
-            })
-            navigate('/')
+            toast.success('Inicio de sesión exitoso');
+            setTimeout(()=>{
+                setInput({
+                    email: "",
+                    password: "",
+                })
+                navigate('/')
+            },600)
         } 
     }, [user]);
     
@@ -61,6 +65,7 @@ const Login = () => {
 
     return (
         <>
+        <Toaster/>
         <div className='w-1/2 mx-auto flex items-center justify-center storeLoginForm'>
             <div>
                 <div>
