@@ -49,9 +49,9 @@ const ProductListContainer = () => {
       {
         (!products.length && (filterCategory || search || filterStock)) && 
         <div className='noProductos flex items-center justify-center'>
-            <h3 className='my-8'>No hay productos disponibles con esos criterios</h3>
+            <h3 className='my-8'>No products with the selected criteria</h3>
         </div>
-        }
+      }
     </div>
   );
 };
