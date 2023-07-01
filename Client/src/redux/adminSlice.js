@@ -292,6 +292,20 @@ export const editUserData = createAsyncThunk(
     }
   )
 
+  //search
+export const searchUserByName = createAsyncThunk(
+  'admin/searchUserByName',
+  async (searchQuery) => {
+    try {
+      const response = await axios.get(`/searchUser?name=${searchQuery}`);
+      return [searchQuery, response.data];
+    } catch (error) {
+      console.error('Error obtaining filtered products', error);
+      throw error;
+    }
+  }
+)
+
 
   //PURCHASES
 
@@ -592,6 +606,25 @@ export const adminSlice = createSlice({
       .addCase(filterUserActive.pending, (state, action) => {
         state.loading = true;
         //console.log(action);
+      })
+
+      //USER SEARCH
+      .addCase(searchUserByName.fulfilled, (state, action) => {
+        state.loading = false;
+        state.filterRole = false;
+        state.filterActive = '';
+        state.sort2 = ''
+        state.search = action.payload[0]
+        state.allUsers = action.payload[1];
+        console.log(action.payload[1])
+      })
+      .addCase(searchUserByName.rejected, (state, action) => {
+        state.loading = false;
+        console.error('Error obtaining searched users ', action.error);
+      })
+      .addCase(searchUserByName.pending, (state, action) => {
+        state.loading = true;
+        console.log(action);
       })
 
     //ORDENAMIENTOS

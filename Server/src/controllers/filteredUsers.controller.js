@@ -37,7 +37,6 @@ const filteredUsers = async (req, res) => {
                 isActive: isActive,
             },
         });
-console.log(response)
         const users = response.map(user => ({
             userId: user.userId,
             name: user.name,

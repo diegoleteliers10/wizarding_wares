@@ -16,7 +16,7 @@ const UserList = () => {
   }, [])
 
   const users  = useSelector((state) => state.admin.allUsers)
-  const {filterRole, filterActive, sort2} =useSelector(state=> state.admin)
+  const {filterRole, filterActive, sort2, search, allUsers} =useSelector(state=> state.admin)
 
   return (
     <div className={`max-h-screen overflow-auto bg-white border border-black rounded-lg ${styles.productList}`}>
@@ -36,7 +36,12 @@ const UserList = () => {
           ))}
         </tbody>
       </table>
-    
+      {
+        (!allUsers.length && (filterRole || search || filterActive)) && 
+        <div className='noProductos flex items-center justify-center'>
+            <h3 className='my-8'>No products with the selected criteria</h3>
+        </div>
+      }
     </div>
   );
 };

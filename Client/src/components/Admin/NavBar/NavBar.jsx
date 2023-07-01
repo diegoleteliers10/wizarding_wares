@@ -7,7 +7,7 @@ const NavBar = () => {
     const display = useSelector((state) => state.admin.display)
     return (
         <div>
-        {display === "productList" && <SearchBar/>}
+        {(display === "productList" || display === "users") && <SearchBar/>}
         {display === "productList" && <FilterProducts/>}
         {display === "users" && <FilterUsers/>}
         </div>
