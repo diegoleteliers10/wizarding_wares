@@ -191,6 +191,10 @@ opacity: 0.5;
     position: relative;
   }
 
+  .storeComponent.loginBg {
+    background-image: url('https://cdn.wallpaperdirect.com/shared-assets/images/products/187987full.jpg');
+  }
+
   
   .paginate button{
     width: 60px;
