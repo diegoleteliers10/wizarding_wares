@@ -1,5 +1,5 @@
 import TotalPrice from '../TotalPrice/TotalPrice';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import axios from 'axios';
@@ -13,6 +13,7 @@ const Checkout = () => {
     const navigate = useNavigate()
     
     const cart = useSelector(state => state.user.cartProducts)
+    console.log(cart)
     let userInfo = []
     
     const userInfoUnparsed = getCookie('userInfo')
@@ -40,6 +41,8 @@ const Checkout = () => {
     const [preferenceId, setPreferenceId] = useState(null)
 
     initMercadoPago(import.meta.env.VITE_PUBLIC_KEY);
+
+    const allItemsQuantity= items.reduce((acc, item) => acc + item.quantity, 0)
 
  
     const createPreference = async () => {
@@ -236,7 +239,8 @@ const Checkout = () => {
             <div className={parsedProducts.length >= 1 ? "w-1/3 bg-white shadow-md" : "hidden"}>
                 <label>Resumen de la compra</label>
                 <div className='mb-4'>
-                    <span>({cart?.length}) Items:</span>
+                    {/* <span>({cart?.length}) Items:</span> */}
+                    <span>({allItemsQuantity}) Items:</span>
                     <span> $<TotalPrice /> </span>
                 </div>
 
