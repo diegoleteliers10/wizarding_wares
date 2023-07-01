@@ -37,10 +37,19 @@ const Users = ({ user }) => {
   };
 
   let roleClass = ''; 
+  let role = ''
 
-  if (user.role.name === 'admin') {
+  //depende de como se traiga la propiedad del role
+  // cambia con search y getAllUsers
+  if (!user.role || !user.role.name) {    
+    role = user.roleRoleId;
+  } else {
+    role = user.role.name;
+  }
+  
+  if (role === 'admin' ) {
     roleClass = 'text-blue-700 bg-blue-100';
-  } else if (user.role.name === 'user') {
+  } else if (role === 'user') {
     roleClass = 'text-red-700 bg-red-100';
   }
 
@@ -61,7 +70,7 @@ const Users = ({ user }) => {
       <td className='text-center'> {user.email}</td>
       <td className='text-center'>
       <span className={user.isActive === false ? '' : `inline-flex px-2 text-xs font-medium leading-5 rounded-full ${roleClass}`}>
-        {user.role.name}
+        {role}
       </span>
       </td>
       <td className={user.isActive === false ? 'text-center' :`text-center font-medium`}>{user.isActive === true ? 'Active' : 'Inactive'}</td>
