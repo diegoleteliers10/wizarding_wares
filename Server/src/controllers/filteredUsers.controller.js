@@ -22,6 +22,7 @@ const filteredUsers = async (req, res) => {
                 password: user.password,
                 isActive: user.isActive,
                 verified: user.verified,
+                role: user.role,
             }));
         res.status(200).json(users)
         };
@@ -29,11 +30,14 @@ const filteredUsers = async (req, res) => {
         //Si llega isActive los filtra (por si estan activos o no).
     if(isActive && !role){
         const response = await User.findAll({
+            include:{
+                model: Role,
+            },
             where:{
                 isActive: isActive,
             },
         });
-
+console.log(response)
         const users = response.map(user => ({
             userId: user.userId,
             name: user.name,
@@ -41,6 +45,7 @@ const filteredUsers = async (req, res) => {
             password: user.password,
             isActive: user.isActive,
             verified: user.verified,
+            role: user.role
         }))
         res.status(200).json(users)
     };
@@ -66,6 +71,7 @@ const filteredUsers = async (req, res) => {
             password: user.password,
             isActive: user.isActive,
             verified: user.verified,
+            role: user.role
         }))
         res.status(200).json(users);
     }

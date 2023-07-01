@@ -1,6 +1,8 @@
 const {Router} = require("express");
 const userRouter = Router();
 const { createUserRegister, updateUser, logicalUserDeletion, verificarCuenta } = require("../controllers/UserControllers");
+const jwt = require('express-jwt');
+const {SECRET} = process.env;
 
 // Ruta Para Crear Un Usuario
 userRouter.post("/user", async (req, res) => {
@@ -16,7 +18,7 @@ userRouter.post("/user", async (req, res) => {
 });
 
 // Ruta Para Editar Un Usuario
-userRouter.put("/user/:userId", async (req, res) => {
+userRouter.put("/user/:userId", jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), async (req, res) => {
   const {name, email, password} = req.body;
   const { userId } = req.params;
   try {
@@ -30,7 +32,7 @@ userRouter.put("/user/:userId", async (req, res) => {
 });
 
 // Ruta Para Elimar Un Usuario ( Borrado Logico )
-userRouter.put("/user_delete/:userId", async (req, res) => {
+userRouter.put("/user_delete/:userId", jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), async (req, res) => {
   const { userId } = req.params;
   try {
     const result = await logicalUserDeletion(userId);

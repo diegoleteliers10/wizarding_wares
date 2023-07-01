@@ -5,6 +5,12 @@ import removeCookie from '../hooks/removeCookie';
 import getCookie from '../hooks/getCookie';
 
 const currDisplay = getCookie('adminDisplay');
+const tokenRaw = getCookie('userToken')
+let token = '';
+tokenRaw ? token = JSON.parse(tokenRaw) : token = '';
+const headers = {
+  Authorization: `Bearer ${token}`
+};
 
 const initialState = {
   products: [],
@@ -15,31 +21,19 @@ const initialState = {
   edit: [],
   filterCategory: false,
   filterStock:'',
+  filterRole: false,
+  filterActive: '',
   sort: '',
+  sort2:'',
   editUser: [],
   allUsers: [],
   refresh: 0,
   allPurchases: []
 }
 
-// export const createProd = (input) => {
-//   return async (dispatch) => {
-//       try {
-//           const response = await axios.post("/productCreated", input)
-//           return response; 
-//       } catch (error) {
-//           alert("Error al crear el producto", error);
-//       }
-//   }
-// } 
+//PRODUCTOS
 
-export const createProd = createAsyncThunk('admin/createProduct',
-  async (input) => {
-    const response = await axios.post("/productCreated", input)
-    return response; 
-  }
-)
-
+//get
 export const getProducts = createAsyncThunk(
   'admin/getProducts',
   async (_, thunkAPI) => {
@@ -54,18 +48,7 @@ export const getProducts = createAsyncThunk(
   }
 );
 
-export const getAllUsers = createAsyncThunk('admin/getAllUsers',
-    async (_, thunkAPI) => {
-      try {
-        const response = await axios.get('/allUsers');
-        return response.data;
-      } catch (error) {
-        console.error('Error al obtener los productos:', error);
-        throw error;
-      }
-    }
-)
-
+//search
 export const searchByName = createAsyncThunk(
   'admin/searchByName',
   async (searchQuery) => {
@@ -79,27 +62,44 @@ export const searchByName = createAsyncThunk(
   }
 )
 
-export const displayCreate = createAsyncThunk(
-  'admin/displayCreate',
-  async (_, thunkAPI) => {
-    return 'createProduct';
+//post
+export const createProd = createAsyncThunk('admin/createProduct',
+  async (input) => {
+    const response = await axios.post("/productCreated", input,{
+      headers: headers
+      })
+    return response; 
   }
 )
 
-export const displayCreateUser = createAsyncThunk(
-  'admin/displayCreateUser',
-  async (_, thunkAPI) => {
-    return 'createUser';
-  }
+//put
+export const editProduct = createAsyncThunk('admin/editProduct',
+async (input) => {
+  const response = await axios.put(`/editProduct/${input.id}`, {name: input.name, price: input.price, description: input.description, stock: input.stock, categoryId:input.categoryId},{
+    headers: headers
+  });
+  return response; 
+}
 )
 
-export const displayProductList = createAsyncThunk(
-  'admin/displayProductList',
-  async (_, thunkAPI) => {
-    return 'productList';
-  }
-)
+//delete
 
+export const deleteProduct = createAsyncThunk(
+  'admin/deleteProduct',
+  async (productId) => {
+    try {
+      const response = await axios.delete(`/deleteProduct/${productId}`,{
+        headers: headers
+        });
+      return response.data;
+    } catch (error) { 
+      console.error('Error al eliminar el producto:', error);
+      throw error;
+    }
+  }
+);
+
+//PRODUCTS: filters
 export const filterProductCategory = createAsyncThunk(
   'admin/filterProductCategory',
   async (filter, { getState }) => {
@@ -163,6 +163,200 @@ export const filterStock = createAsyncThunk(
   }
 )
 
+//USERS
+
+//get
+export const getAllUsers = createAsyncThunk('admin/getAllUsers',
+    async (_, thunkAPI) => {
+      try {
+        const response = await axios.get('/allUsers',{
+          headers: headers
+          })
+        return response.data;
+      } catch (error) {
+        console.error('Error al obtener los productos:', error);
+        throw error;
+      }
+    }
+)
+
+//put
+export const editUserRole = createAsyncThunk(
+  'admin/editUserRole',
+  async (input) => {
+    const response = await axios.put(`/user_role/${input.userId}`, {roleId: Number(input.roleId), userId: input.userId})
+    }
+  )
+export const editUserData = createAsyncThunk(
+  'admin/editUserData',
+  async (input) => {
+    const response = await axios.put(`/user/${input.userId}`, {name: input.name, email: input.email, password: input.password},{
+      headers: headers
+      })
+    }
+  )
+
+  //delete (logico)
+  export const deleteUser = createAsyncThunk(
+    'admin/deleteUser',
+    async (userId) => {
+      try {
+        const response = await axios.put(`/user_deleteA/${userId}`, {}, {
+          headers: headers
+          });
+        return response.data;
+      } catch (error) { 
+        console.error('Error al eliminar el usuario:', error);
+        throw error;
+      }
+    }
+  );
+
+  //USERS: filters
+
+  export const filterUserRole = createAsyncThunk(
+    'admin/filterUserRole',
+    async (role, { getState }) => {
+      try {
+        const state = getState();
+        if(state.admin.filterActive !== ''){
+          //si ademas de role, hay isActive
+          const active = state.admin.filterActive
+          
+          if(role === 'All'){
+            //si el filtro es all en role es como solo hacer el de isActive
+            const response = await axios.get(`/filteredUsers?isActive=${active}`,{
+              headers: headers
+              })
+            return [false, response.data];
+          }
+          const response = await axios.get(`/filteredUsers?role=${role}&isActive=${active}`,{
+            headers: headers
+            })
+          return [role, response.data]
+        }
+        if(role === 'All'){
+          const response = await axios.get('/allUsers',{
+            headers: headers
+            })
+          return [false, response.data];
+        }
+        
+        const response = await axios.get(`/filteredUsers?role=${role}`,{
+          headers: headers
+          })
+        return [role, response.data];
+      } catch (error) {
+        console.error('Error obtaining filtered user', error);
+        throw error;
+      }
+    }
+  )
+  
+  export const filterUserActive = createAsyncThunk(
+    'admin/filterUserActive',
+    async (active, {getState}) =>{
+      try {
+        const state = getState();
+        if(state.admin.filterRole){
+          //si hay role ademas de isActive
+          const role = state.admin.filterRole;
+          //console.log('hay categoria y tmb stock', category, stock);
+          if(active === 'All'){
+            //si me pide todos los de isActive es lo mismo que traer solo role
+            const response = await axios.get(`/filteredUsers?role=${role}`,{
+              headers: headers
+              })
+            return ['', response.data]
+          }
+          const response = await axios.get(`/filteredUsers?role=${role}&isActive=${active}`,{
+            headers: headers
+            });
+          return [active, response.data]
+        }
+        if(active === 'All'){
+          //si me pide todos los de active y no hay categoria trae todos los users
+          const response = await axios.get(`/allUsers`,{
+            headers: headers
+            });
+          return ['', response.data]
+        }
+        const response = await axios.get(`/filteredUsers?isActive=${active}`,{
+          headers: headers
+          });
+        return [active, response.data];
+      } catch (error) {
+        console.error('Error obtaining filtered products', error);
+        throw error;
+      }
+    }
+  )
+
+
+  //PURCHASES
+
+  //get
+  export const getAllPurchases = createAsyncThunk('admin/getAllPurchases',
+    async (_, thunkAPI) => {
+      try {
+        const response = await axios.get('/allPurchases',{
+          headers: headers
+          });
+        return response.data;
+      } catch (error) {
+        console.error('Error obtaining purchases:', error);
+        throw error;
+      }
+    }
+)
+
+//put
+export const editStatus = createAsyncThunk(
+  'admin/editStatus',
+  async (statusAndId, thunkAPI) => {
+    try {
+      console.log(statusAndId[0], statusAndId[1])
+      console.log(token)
+      const statuses = await axios.get('/allStatuses',{
+            headers: headers
+            });
+      const newStatusObject = statuses.data.find((status)=> status.name === statusAndId[0]);
+      console.log(newStatusObject.statusId)
+      const response = await axios.put(`/editPurchase/${statusAndId[1]}?statusId=${newStatusObject.statusId}`,{},{
+        headers: headers
+        })
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+      throw error;
+    }
+  }
+);
+
+
+//DISPLAYS
+
+export const displayCreate = createAsyncThunk(
+  'admin/displayCreate',
+  async (_, thunkAPI) => {
+    return 'createProduct';
+  }
+)
+
+export const displayCreateUser = createAsyncThunk(
+  'admin/displayCreateUser',
+  async (_, thunkAPI) => {
+    return 'createUser';
+  }
+)
+
+export const displayProductList = createAsyncThunk(
+  'admin/displayProductList',
+  async (_, thunkAPI) => {
+    return 'productList';
+  }
+)
+
 export const displayEditProduct = createAsyncThunk(
   'admin/displayEditProduct',
   async (_, thunkAPI) => {
@@ -190,87 +384,14 @@ export const displayPurchases = createAsyncThunk(
   }
 )
 
+//set
 export const setEditState = createAsyncThunk('admin/setEditState',
 async (input) => {
   return input; 
-}
+  }
 )
 
-export const editProduct = createAsyncThunk('admin/editProduct',
-async (input) => {
-  const response = await axios.put(`/editProduct/${input.id}`, {name: input.name, price: input.price, description: input.description, stock: input.stock, categoryId:input.categoryId})
-  return response; 
-}
-)
-
-export const editUserRole = createAsyncThunk(
-  'admin/editUserRole',
-  async (input) => {
-    const response = await axios.put(`/user_role/${input.userId}`, {roleId: Number(input.roleId), userId: input.userId})
-  }
-  )
-export const editUserData = createAsyncThunk(
-  'admin/editUserData',
-  async (input) => {
-    const response = await axios.put(`/user/${input.userId}`, {name: input.name, email: input.email, password: input.password})
-  }
-  )
-
-export const deleteProduct = createAsyncThunk(
-  'admin/deleteProduct',
-  async (productId) => {
-    try {
-      const response = await axios.delete(`/deleteProduct/${productId}`);
-      return response.data;
-    } catch (error) { 
-      console.error('Error al eliminar el producto:', error);
-      throw error;
-    }
-  }
-);
-
-export const deleteUser = createAsyncThunk(
-  'admin/deleteUser',
-  async (userId) => {
-    try {
-      const response = await axios.put(`/user_deleteA/${userId}`);
-      return response.data;
-    } catch (error) { 
-      console.error('Error al eliminar el producto:', error);
-      throw error;
-    }
-  }
-);
-
-export const getAllPurchases = createAsyncThunk('admin/getAllPurchases',
-    async (_, thunkAPI) => {
-      try {
-        const response = await axios.get('http://localhost:3001/allPurchases');
-        return response.data;
-      } catch (error) {
-        console.error('Error obtaining purchases:', error);
-        throw error;
-      }
-    }
-)
-
-export const editStatus = createAsyncThunk(
-  'admin/editStatus',
-  async (statusAndId, thunkAPI) => {
-    try {
-      console.log(statusAndId[0], statusAndId[1])
-      const statuses = await axios.get('/allStatuses');
-      const newStatusObject = statuses.data.find((status)=> status.name === statusAndId[0]);
-      console.log(newStatusObject)
-      const response = await axios.put(`/editPurchase/${statusAndId[1]}?statusId=${newStatusObject.statusId}`);
-      console.log(response.data)
-    } catch (error) {
-      console.error('Error al obtener los productos:', error);
-      throw error;
-    }
-  }
-);
-
+// SORT PRODUCTS
 export const sortByNameAscending = createAction('admin/sortByNameAscending');
 export const sortByNameDescending = createAction('admin/sortByNameDescending');
 export const sortByPriceAscending = createAction('admin/sortByPriceAscending');
@@ -333,6 +454,9 @@ export const adminSlice = createSlice({
     .addCase(getAllUsers.fulfilled, (state, action) => {
       state.loading = false;
       state.allUsers = action.payload;
+      state.filterRole = false;
+      state.filterActive = ''
+      state.sort2= '';
     })
     .addCase(getAllUsers.rejected, (state, action) => {
       state.loading = false;
@@ -343,16 +467,20 @@ export const adminSlice = createSlice({
     })
 
     //EDITAR USUARIOS
+
+    //role
     .addCase(editUserRole.fulfilled, (state, action) => {
       state.loading = false
+    })
+    .addCase(editUserRole.pending, (state, action) => {
+      state.loading = true
     })
     .addCase(editUserRole.rejected, (state, action) => {
       state.loading = false
       // console.log(('error al editar el rol del usuario'));
     })
-    .addCase(editUserRole.pending, (state, action) => {
-      state.loading = true
-    })
+
+    //data general
     .addCase(editUserData.fulfilled, (state, action) => {
       state.loading = false
     })
@@ -397,6 +525,13 @@ export const adminSlice = createSlice({
       removeCookie('adminDisplay')
       setCookie('adminDisplay', JSON.stringify(action.payload))
     })
+    .addCase(displayEditProduct.fulfilled, (state, action) => {
+      state.display = action.payload;
+    })
+    .addCase(displayProductList.pending, (state, action) => {
+      state.loading = true;
+      //console.log(state.display);
+    })
 
     //FILTER PRODUCT CATEGORY
     .addCase(filterProductCategory.fulfilled, (state, action) => {
@@ -427,16 +562,59 @@ export const adminSlice = createSlice({
       state.loading = true;
       //console.log(action);
     })
+    
+      //FILTER USER ROLE
+      .addCase(filterUserRole.fulfilled, (state, action) => {
+        console.log(action.payload[1])
+        state.loading = false;
+        state.allUsers = action.payload[1];
+        state.filterRole = action.payload[0];
+      })
+      .addCase(filterUserRole.rejected, (state, action) => {
+        state.loading = false;
+        console.error('Error obtaining filtered products ', action.error);
+      })
+      .addCase(filterUserRole.pending, (state, action) => {
+        state.loading = true;
+        //console.log(action);
+      })
+  
+      //FILTER USER ISACTIVE
+      .addCase(filterUserActive.fulfilled, (state, action) => {
+        state.loading = false;
+        state.allUsers = action.payload[1];
+        state.filterActive = action.payload[0];
+      })
+      .addCase(filterUserActive.rejected, (state, action) => {
+        state.loading = false;
+        console.error('Error obtaining filtered products ', action.error);
+      })
+      .addCase(filterUserActive.pending, (state, action) => {
+        state.loading = true;
+        //console.log(action);
+      })
 
     //ORDENAMIENTOS
     //NOMBRE
     .addCase(sortByNameAscending, (state) => {
-      state.products.sort((a, b) => a.name.localeCompare(b.name));
-      state.sort = 'nameDescending'
+      if(state.display === 'productList') {
+        state.products.sort((a, b) => a.name.localeCompare(b.name));
+        state.sort = 'nameAscending'
+      }
+      if(state.display === 'users'){
+        state.allUsers.sort((a, b) => a.name.localeCompare(b.name));
+        state.sort2 = 'nameAscending'
+      } 
     })
     .addCase(sortByNameDescending, (state) => {
-      state.products.sort((a, b) => b.name.localeCompare(a.name));
-      state.sort = 'nameAscending'
+      if(state.display === 'productList'){
+        state.products.sort((a, b) => b.name.localeCompare(a.name));
+        state.sort = 'nameDescending'
+      } 
+      if(state.display === 'users'){
+        state.allUsers.sort((a, b) => b.name.localeCompare(a.name));
+        state.sort2 = 'nameDescending'
+      } 
     })
     //PRECIO
     .addCase(sortByPriceAscending, (state) => {
@@ -447,16 +625,13 @@ export const adminSlice = createSlice({
       state.products.sort((a, b) => a.price-b.price);
       state.sort = 'priceLowToHigh'
     })
-    .addCase(displayEditProduct.fulfilled, (state, action) => {
-      state.display = action.payload;
-    })
+    
+    //SET EDIT
     .addCase(setEditState.fulfilled, (state, action) => {
       state.edit = action.payload
     })
-    .addCase(displayProductList.pending, (state, action) => {
-      state.loading = true;
-      //console.log(state.display);
-    })
+    
+    //SEARCH PRODUCTS
     .addCase(searchByName.fulfilled, (state, action) => {
       state.loading = false;
       state.filterCategory = false
@@ -483,6 +658,8 @@ export const adminSlice = createSlice({
       state.refresh= state.refresh+1
       //state.products = state.products;
     })
+
+    //GET TODAS LAS COMPRAS
     .addCase(getAllPurchases.fulfilled, (state, action) => {
       state.loading = false;
       state.allPurchases = action.payload;
@@ -494,6 +671,8 @@ export const adminSlice = createSlice({
     .addCase(getAllPurchases.pending, (state, action) => {
       state.loading = true
     })
+
+    //EDIT STATUS COMPRA  
     .addCase(editStatus.fulfilled, (state, action) => {
       state.loading = false;
       state.refresh= state.refresh+1
