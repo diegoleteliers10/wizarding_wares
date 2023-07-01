@@ -17,14 +17,21 @@ const Login = () => {
 
     useEffect(() => {
         if(user.name && user.id && user.email && user.role){
-            toast.success('Inicio de sesión exitoso');
+            toast.success('Inicio de sesión exitoso',{
+                style: {
+                    border: '1px solid #692323',
+                    padding: '16px',
+                    color: '#692323',
+                }
+            });
             setTimeout(()=>{
                 setInput({
                     email: "",
                     password: "",
                 })
                 navigate('/')
-            },600)
+                toast.dismiss()
+            },800)
         } 
     }, [user]);
     
