@@ -8,7 +8,7 @@ const Product = ({ product }) => {
 
   const dispatch = useDispatch();
 
-  const products = useSelector((state) => state.admin.products)
+  const {products, display} = useSelector((state) => state.admin)
   const editState = useSelector((state) => state.admin.edit)
   const {filterCategory, filterStock} = useSelector((state) => state.admin)
   const [refresh, setRefresh] = useState(false)
@@ -43,7 +43,7 @@ const Product = ({ product }) => {
         dispatch(getProducts());
         setRefresh(false);
       }
-  }, [refresh, dispatch]);
+  }, [refresh, dispatch, display]);
 
   
   let category;

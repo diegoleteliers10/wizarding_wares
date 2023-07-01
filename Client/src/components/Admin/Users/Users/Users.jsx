@@ -10,7 +10,7 @@ const Users = ({ user }) => {
   const dispatch = useDispatch();
 
   const users = useSelector((state) => state.admin.allUsers)
-  const {refresh} = useSelector((state)=> state.admin)
+  const {refresh, filterRole, sort2, filterActive} = useSelector((state)=> state.admin)
 
 //   ESTADOS POP UP
   const [popUp, setPopUp] = useState(false)
@@ -45,7 +45,7 @@ const Users = ({ user }) => {
   }
 
   useEffect(()=>{
-    dispatch(getAllUsers());
+    if(!filterRole && filterActive === '' && sort2 === '') dispatch(getAllUsers())
   }, [refresh]);
 
 

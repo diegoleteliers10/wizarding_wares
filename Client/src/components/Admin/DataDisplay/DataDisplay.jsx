@@ -14,7 +14,7 @@ const DataDisplay = ()=> {
 
 return(
     <div className="w-5/6  bg-white">
-        {display === "productList" && <NavBar/>}
+        {(display === "productList" || display === "users") && <NavBar/>}
         {display === "productList" && <ProductList/>}
         {display === "createProduct" && <CreateProduct/>}
         {display === "createUser" && <CreateUser/>}
