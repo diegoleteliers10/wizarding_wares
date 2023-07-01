@@ -45,8 +45,10 @@ const NavBar = () => {
         if (shoppingCart) {
           try {
             const parsedCart = JSON.parse(shoppingCart);
-            const uniqueItemCount = parsedCart.length;
-            setCartItemCount(uniqueItemCount);
+            // const uniqueItemCount = parsedCart.length;
+            // setCartItemCount(uniqueItemCount);
+            const allItemsQuantity= parsedCart.reduce((acc, item) => acc + item.quantity, 0)
+            setCartItemCount(allItemsQuantity);
           } catch (error) {
             console.error('Invalid JSON format for shoppingCart:', error);
             setCartItemCount(0);
