@@ -30,7 +30,12 @@ const loginUser = async (req, res) => {
           roleId: roleId
         }
       });
-      userCreateGoogle[0].setRole(isExistsRole);
+    
+      //si el usuario que se encuentra tiene role, no se le asigna nada, si se crea el usuario se le asigna
+      if(!userCreateGoogle[0].roleRoleId){
+        userCreateGoogle[0].setRole(isExistsRole);
+      }
+
       await User.update({verified: true},{  //  <--- Agregue esta linea "KailyKinG"
         where:{
           email: email,
