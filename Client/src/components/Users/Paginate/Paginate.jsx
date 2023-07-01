@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changePage } from "../../../redux/userSlice"
+import "../../../index.css"
 
 const Paginate = () => {
     const dispatch = useDispatch();
