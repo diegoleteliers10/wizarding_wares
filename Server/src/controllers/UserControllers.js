@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const { User, Role } = require("../models/relationship/relationship");
 const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
-const {enviarCorreo} = require("../utils/notificaciones");
+const {enviarNotificacion} = require("../utils/notificaciones");
 const {SECRET, EMAIL_CREDENTIALS} = process.env;
 
 
@@ -72,10 +72,10 @@ const createUserRegister = async (name, email, password) => {
   const mensaje = `http://localhost:3001/verificar-cuenta?token=${token}`;
 
   // Enviar correo al administrador
-  enviarCorreo(2, name, email, null);
+  enviarNotificacion(2, name, email, null);
 
   // Enviar correo al usuario
-  enviarCorreo(3, name, email, mensaje);
+  enviarNotificacion(3, name, email, mensaje);
 
   // return newUser;
   // return {
