@@ -5,6 +5,7 @@ import { createUser } from "../../../redux/accountSlice";
 import { useSelector } from "react-redux";
 import '../storeStyles.css';
 import { NavLink } from 'react-router-dom';
+import { toast, Toaster } from 'react-hot-toast'
 
 const Register = () => {
 
@@ -56,19 +57,28 @@ const Register = () => {
         return errors;
       };
 
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        await dispatch(createUser(input))
-        // setInput({
-        //     name: "",
-        //     email: "",
-        //     password: "",
-        //     confirmPassword: "",
-        // })
-        navigate('/login')
-      }
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  
+  const userDispatch = await dispatch(createUser(input));
+
+    if(userDispatch){
+        toast.success('Usuario creado exitosamente',{
+            style: {
+                border: '1px solid #692323',
+                padding: '16px',
+                color: '#692323',
+            }
+        });
+        navigate('/login');
+    }else{
+        toast.error('Error al registrarse')
+    }
+}
 
     return(
+        <>
+        <Toaster/>
         <div className="storeComponent h-screen flex">
            <div className="w-full mx-auto flex items-center justify-center my-8">
             <div>
@@ -163,6 +173,7 @@ const Register = () => {
            </div>
 
         </div>
+        </>
     )
 }
 
