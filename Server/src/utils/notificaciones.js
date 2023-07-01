@@ -1,6 +1,9 @@
 const nodemailer = require("nodemailer");
 const {EMAIL_CREDENTIALS, PASSWORD_CREDENTIALS} = process.env;
 
+// const baseNotificationURL = `http://wizardingwares-production.up.railway.app`;
+const baseNotificationURL = `http://localhost:3001`;
+
 // // Funcion para enviar notificaciones por email
 // const enviarCorreo = async (destinatario, asunto, mensaje) => {
 //   try {
@@ -309,6 +312,7 @@ const enviarEmail = (email, asunto, titulo, mensaje) => {
 module.exports = {
   enviarNotificacion,
   enviarEmail,
+  baseNotificationURL,
 };
 
 
