@@ -5,6 +5,8 @@ import { addToCart } from "../../../redux/userSlice";
 import BackButton from "../BackButton/BackButton";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import getCookie from "../../../hooks/getCookie";
+import ReviewList from '../ProductReview/ProductReview'
+import Rating from "../Rating/Rating";
 import '../storeStyles.css';
 
 const Detail = () => {
@@ -14,6 +16,7 @@ const Detail = () => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const loggedIn = getCookie('userInfo')
+  const verifiedUser = getCookie('userVerified')
 
   // LOCALSTORAGE
   const [addCart, setAddCart] = useLocalStorage('shoppingCart', []);
@@ -85,17 +88,21 @@ const Detail = () => {
     <div className="flex storeComponent h-screen items-center p-8 storeComponent">
       <div className="w-1/2 flex flex-col items-center">
         <BackButton />
-        <div className="fotoFondoDetail">
-          <img src={product.image} alt={product.name} />
-        </div>
+      <div className="fotoFondoDetail">
+        <img src={product.image} alt={product.name} />
+      </div>
+      <div>
+        <Rating productId={id}/>
+      </div>
       </div>
       <div className="w-1/2 p-28">
-        <h2 className="titleDetail">{product.name}</h2>
-        <p className="bigPrice">${product.price}</p>
+        <h2 className="fontMarcellus text-left">{product.name}</h2>
+        <p className="bigPrice text-left text-wwbrown font-bold text-5xl fontEB">${product.price}</p>
         {product.categoryCategoryId === 3 || product.category === 'Indumentaria'? (
           <div>
-            <fieldset onChange={handleSizeChange}>
-              <div className="flex space-x-4 justify-center fontEB">
+            <p className="text-left fontEB text-xl">Talle:</p>
+            <fieldset onChange={handleSizeChange} className="ml-0">
+              <div className="flex space-x-4 fontEB text-xl">
                 <div>
                   <input type="radio" id="size1" name="contact" value="XS" />
                   <label htmlFor="size1">XS</label>
@@ -130,9 +137,9 @@ const Detail = () => {
             )}
           </div>
         ) : null}
-        <p className="descriptionDetail">{product.description}</p>
+        <p className="descriptionDetail mt-8 text-left fontEB">{product.description}</p>
         <div className="flex justify-between p-4">
-          <div >
+          <div className="">
             <label>
               Cantidad:
             </label>
@@ -142,26 +149,39 @@ const Detail = () => {
               <button onClick={handleIncreaseQuantity} className="">+</button>
             </div>
           </div>
-          <button
-            onClick={handleAddToCart}
-            className={`btn1 btn--svg-small ml-28 ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn ? ' disabled opacity-50 pointer-events-none' : ''}`}
-            disabled={quantity === 0}
-          >
-            Añadir al carrito
-          </button>
-          <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
+          <div>
+            <button
+              onClick={handleAddToCart}
+              className={`btn1 btn--svg-small ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn || !verifiedUser ? ' disabled opacity-50 pointer-events-none ' : ''}`}
+              disabled={quantity === 0}
+            >
+              Añadir al carrito
+            </button>
+            <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
+          </div>
         </div>
         <div className="mt-8">
           {
             !loggedIn && 
             <div>
               <h5 className="font-medium text-wwmaroon">
-                ¡Debes iniciar sesión para poder agregar artículos al carrito!
+                ¡Debes iniciar sesión para agregar artículos al carrito!
               </h5>
               <p><NavLink to='/register'>Regístrate</NavLink></p>
             </div>
           }
+          {
+            (!verifiedUser && loggedIn) &&
+            <div>
+              <h5 className="font-medium text-wwmaroon">
+                ¡Debes verificar tu cuenta para agregar artículos al carrito!
+              </h5>
+            </div>
+          }
         </div>
+      </div>
+      <div>
+      <ReviewList productId={id}/>
       </div>
     </div>
   );

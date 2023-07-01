@@ -14,7 +14,7 @@ import { useEffect } from "react";
 
 function FilterProducts() {
   const dispatch = useDispatch();
-  const {filterCategory, sort} = useSelector(state => state.admin)
+  const {filterCategory, sort, display} = useSelector(state => state.admin)
   const stock = useSelector((state)=> state.admin.filterStock)
 
   const handleFilterChange = (event) => {
@@ -106,7 +106,7 @@ function FilterProducts() {
           onChange={handleSortChange}
         >
           <option value="SortP" hidden>
-            Precio
+            Price
           </option>
           <option value="priceHighToLow">Higher price</option>
           <option value="priceLowToHigh">Lower price</option>
@@ -121,7 +121,7 @@ function FilterProducts() {
           onChange={handleSortChange}
         >
           <option value="SortN" hidden>
-            Orden
+            Order
           </option>
           <option value="nameAscending">Name (A-Z)</option>
           <option value="nameDescending">Name (Z-A)</option>

@@ -18,6 +18,11 @@ const editStatePurchase = require('../controllers/editStatePurchase.controller')
 const loginUser = require('../controllers/loginUser.controller')
 const getAllPurchById = require('../controllers/getAllPurchById.controller')
 const getAllStatuses = require('../controllers/getAllStatuses.controller')
+const jwt = require('express-jwt');
+const {SECRET} = process.env;
+const filteredUsers = require('../controllers/filteredUsers.controller')
+const searchUserByName = require('../controllers/getUserByName.controller')
+
 
 const categoryRouter = require("./categoryRouter");
 const userRouter = require("./userRouter");
@@ -47,19 +52,21 @@ router.get('/filteredProducts', filteredProduct)
 router.get('/detailProduct/:id', getDetailProduct)
 
 //admins routes
-router.get('/allUsers', getAllUsers)
+router.get('/searchUser', searchUserByName)
+router.get('/filteredUsers', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), filteredUsers)
+router.get('/allUsers', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), getAllUsers)
 router.get('/detailProduct/:id', getDetailProduct)
-router.get('/allStatuses', getAllStatuses)
+router.get('/allStatuses', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), getAllStatuses)
 router.delete('/userDelete/:id', userFinalDelete)
 router.post('/productCreated',upload.single('image'),createProduct)
-router.put('/editProduct/:id', editProduct)
+router.put('/editProduct/:id', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), editProduct)
 router.delete('/deleteProduct/:id', deleteProduct)
 router.use("/", categoryRouter);
-router.use("/", roleRouter);
+router.use("/", jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), roleRouter);
 router.use("/", userRouterAdmin);
 router.use('/', statusRoutes);
-router.get('/allPurchases', getAllPurchase)
-router.put('/editPurchase/:purchaseId',editStatePurchase)
+router.get('/allPurchases', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), getAllPurchase)
+router.put('/editPurchase/:purchaseId', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), editStatePurchase)
 
 
 module.exports = router;

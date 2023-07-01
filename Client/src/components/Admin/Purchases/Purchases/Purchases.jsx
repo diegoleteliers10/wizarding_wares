@@ -61,7 +61,7 @@ const Purchases = ({ purchase })=> {
     )}
     <tr 
     key={purchase.purchaseId} 
-    className={purchase.statusStatusId === "0ed5db51-11ae-49d8-a99c-adddafcdedfa" ? 'text-gray-400' : ''}
+    className={purchase.statusStatusId === 4 ? 'text-gray-400' : ''}
     >
       <td>
         <button className='underline text-purple-600 hover:text-purple-700 text-left' onClick={handlePopUpDetail}>

@@ -15,6 +15,7 @@ const initialState = {
   price: 0,
   purchases: [],
   userAddress: null,
+  reviews: []
 };
 
 export const getProducts = createAsyncThunk(
@@ -140,6 +141,31 @@ export const createAddress = createAsyncThunk('user/createAddress',
     return response; 
   }
 )
+export const getProductReviews = createAsyncThunk(
+  'user/getProductReviews',
+  async (productId) => {
+    try {
+      const response = await axios.get(`/detailProduct/${productId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener las reviews del producto:', error);
+      throw error;
+    }
+  }
+)
+export const createProductReview = createAsyncThunk(
+  'user/createProductReview',
+  async ({productId, userId, comment, rating} ) => {
+    try {
+      const response = await axios.post(`/createReview/${productId}?userId=${userId}`, {comment, rating });
+      console.log(response.data)
+      return response.data;
+    } catch (error) {
+      console.error('Error al crear la review:', error);
+      throw error;
+    }
+  }
+);
 
 export const getUserAddress = createAsyncThunk('user/getUserAddress',
 async (userId) => {
@@ -296,6 +322,22 @@ export const userSlice = createSlice({
       })
       .addCase(getUserAddress.pending, (state, action) => {
         state.loading = true
+
+      .addCase(getProductReviews.fulfilled, (state, action) => {
+        state.loading = false;
+        state.reviews = action.payload;
+      })
+      .addCase(getProductReviews.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getProductReviews.rejected, (state, action) => {
+        state.loading = false;
+        state.reviews = action.error.message;
+      })
+      .addCase(createProductReview.fulfilled, (state, action) => {
+        const newReview = action.payload;
+        state.reviews.push(newReview);
+
       })
   },
 });

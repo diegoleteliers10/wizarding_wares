@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const { User, Role } = require("../models/relationship/relationship");
 const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
-const {enviarCorreo} = require("../utils/notificaciones");
-const {SECRET} = process.env;
+const {enviarNotificacion} = require("../utils/notificaciones");
+const {SECRET, EMAIL_CREDENTIALS} = process.env;
 
 
 // *** CREAR UN USUARIO **
@@ -63,10 +63,19 @@ const createUserRegister = async (name, email, password) => {
   const token = jwt.sign({userId: newUser.userId, name, email, roleId}, SECRET);
 
   // Enviamos el correo de verificacion
-  const destinatario = newUser.email;
-  const asunto = 'Verificacion de Cuenta';
-  const mensaje = `Bienvenido a nuestra plataforma. Por favor haz clic en el siguiente enlace para verificar tu cuenta: http://localhost:3001/verificar-cuenta?token=${token}`;
-  enviarCorreo(destinatario, asunto, mensaje);
+  // ----------------------------------
+  // const destinatario = newUser.email;
+  // const asunto = 'Verificacion de Cuenta';
+  // const mensaje = `Bienvenido a nuestra plataforma. Por favor haz clic en el siguiente enlace para verificar tu cuenta: http://localhost:3001/verificar-cuenta?token=${token}`;
+  // enviarCorreo(destinatario, asunto, mensaje);
+
+  const mensaje = `http://localhost:3001/verificar-cuenta?token=${token}`;
+
+  // Enviar correo al administrador
+  enviarNotificacion(2, name, email, null);
+
+  // Enviar correo al usuario
+  enviarNotificacion(3, name, email, mensaje);
 
   // return newUser;
   // return {

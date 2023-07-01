@@ -9,12 +9,14 @@ const UserList = () => {
 
   const dispatch = useDispatch()
 
+
   useEffect(() =>{
-      dispatch(getAllUsers())
+    dispatch(getAllUsers())
+    console.log(users)
   }, [])
 
   const users  = useSelector((state) => state.admin.allUsers)
-
+  const {filterRole, filterActive, sort2} =useSelector(state=> state.admin)
 
   return (
     <div className={`max-h-screen overflow-auto bg-white border border-black rounded-lg ${styles.productList}`}>
