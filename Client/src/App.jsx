@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import '../src/components/Users/storeStyles.css'
 import Home from './views/home/Home'
 import NavBar from './components/Users/NavBar/NavBar'
 import Footer from './components/Users/Footer/Footer'
@@ -26,13 +27,14 @@ axios.defaults.baseURL = `http://localhost:3001/`;
 
 function App() {
   const { pathname } = useLocation()
+  console.log(pathname)
   return (
     <div className='App flex flex-col min-h-screen bg-wwwhite'>
       {
         pathname !== '/admin' &&
         <NavBar className='fixed top-0 w-screen z-50'/>
       }
-      <div className="flex-grow">
+      <div className={(pathname === '/register' || pathname === '/login' ) ? 'storeComponent loginBg' : 'flex-grow '}>
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/purchases' element={<Purchases/>} />

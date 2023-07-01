@@ -69,104 +69,100 @@ const Register = () => {
       }
 
     return(
-        <>
-           <div className="w-1/2 mx-auto flex items-center justify-center m-8 storeLoginForm">
+        <div className="storeComponent h-screen flex">
+           <div className="w-full mx-auto flex items-center justify-center my-8">
             <div>
-                <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md">
-                    <h2>Crear usuario</h2>
-                    <div className="formBox">
+                <form onSubmit={handleSubmit} className="bg-white p-12 rounded shadow-md max-w-sm">
+                    <h4 className="fontMarcellus text-2xl uppercase font-bold">Crear usuario</h4>
+                    <div className="formBox fontEB">
 
-                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                        <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
                             <label htmlFor="name">
-                                <span>Nombre</span>
                                 <input 
                                 type="text" 
                                 name="name"
                                 placeholder="Nombre completo"
                                 onChange={handleChange}
                                 value={input.name}
-                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 shadow-sm w-full bg-white"
                                 required
                                 />
                             </label>
                             
                         </div>
                         <div>
-                            {errors.name && (<span className="flex text-brown-600">{errors.name}</span>)}
+                            {errors.name && (<span className="flex text-brown-600 w-2/3 mx-auto text-red-400">{errors.name}</span>)}
                         </div>
                         
-                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                        <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
                             <label htmlFor="email">
-                                <span>Email</span>
                                 <input 
                                 type="email"
                                 name="email" 
                                 placeholder="Ingrese un email..."
                                 value={input.email}
                                 onChange={handleChange}
-                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 shadow-sm w-full bg-white"
                                 required
                                 />
                             </label>
                         </div>
                         <div>
-                            {errors.email && (<span className="flex text-brown-600">{errors.email}</span>)}
+                            {errors.email && (<span className="flex text-brown-600 w-2/3 mx-auto   text-red-400">{errors.email}</span>)}
                         </div>
                         
-                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                        <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
                             <label htmlFor="password">
-                                <span>Contraseña</span>
                                 <input 
                                 type="password" 
                                 name="password"
                                 placeholder="Contraseña"
                                 onChange={handleChange}
                                 value={input.password}
-                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 shadow-sm w-full bg-white"
                                 required
                                 />
                             </label>
                         </div>
                         <div>
-                            {errors.password && (<span className="flex text-brown-600">{errors.password}</span>)}
+                            {errors.password && (<span className="flex text-brown-600 w-2/3 mx-auto   text-red-400">{errors.password}</span>)}
                         </div>
                         
-                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                        <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
                             <label htmlFor="confirmPassword">
-                                <span>Confirmar Contraseña</span>
                                 <input 
                                 type="password" 
                                 name="confirmPassword"
                                 placeholder="Confirme su contraseña"
                                 onChange={handleChange}
                                 value={input.confirmPassword}
-                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 shadow-sm w-full bg-white"
                                 required
                                 />
                             </label>
                         </div>
                         <div>
-                            {errors.confirmPassword && (<span className="flex text-brown-600">{errors.confirmPassword}</span>)}
+                            {errors.confirmPassword && (<span className="text-brown-600 w-2/3 mx-auto   text-red-400">{errors.confirmPassword}</span>)}
                         </div>
                         
                     </div>
 
                     <div className="boton">
                     <button
-                    className="bg-wwbrown rounded hover:bg-wwmaroon active:bg-brown-800 focus:outline-2 focus:ring focus:ring-purple-300 w-40 h-10 shadow text-white"
+                    className="btn1 btn--svg-small mt-4"
                     type="submit"
                     disabled={!input.name || errors.name || !input.email || errors.email || !input.password || errors.password || !input.confirmPassword || errors.confirmPassword}
                     >
                     Registrarse
                     </button>
-                    <p className='mt-4'>¿Ya tienes cuenta? <span><NavLink to='/login' className='no-underline'>Iniciar Sesión</NavLink></span></p>
+                    <p className='mt-4 fontEB'>¿Ya tienes cuenta? <span><NavLink to='/login' className='no-underline font-semibold text-wwbrown hover:text-wwmaroon'>Iniciar Sesión</NavLink></span></p>
                 </div>
 
                 </form>                
             </div>
            </div>
 
-        </>
+        </div>
     )
 }
 

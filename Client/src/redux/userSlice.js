@@ -322,7 +322,7 @@ export const userSlice = createSlice({
       })
       .addCase(getUserAddress.pending, (state, action) => {
         state.loading = true
-
+      })
       .addCase(getProductReviews.fulfilled, (state, action) => {
         state.loading = false;
         state.reviews = action.payload;
