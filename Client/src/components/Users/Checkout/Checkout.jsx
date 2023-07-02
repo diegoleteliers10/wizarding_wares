@@ -28,6 +28,7 @@ const Checkout = () => {
     if(shoppingCartProducts !== ''){
       // si hay productos los parseo
       parsedProducts = JSON.parse(shoppingCartProducts);
+      console.log(parsedProducts);
       
     }   
 
