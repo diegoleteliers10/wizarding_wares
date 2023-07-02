@@ -126,7 +126,6 @@ export const getPurchases = createAsyncThunk(
   async(userId, thunkAPI) => {
     try {
       const response = await axios.get(`/getAllPurchById/${userId}`)
-      console.log(response.data);
       return response.data
     } catch (error) {
       console.error('Error obtaining Purchases', error);
@@ -314,7 +313,6 @@ export const userSlice = createSlice({
       .addCase(getUserAddress.fulfilled, (state, action) => {
         state.loading = false
         state.userAddress = action.payload
-        console.log(state.userAddress);
       })
       .addCase(getUserAddress.rejected, (state, action) => {
         state.loading = false

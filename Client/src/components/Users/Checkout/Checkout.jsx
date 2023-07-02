@@ -13,22 +13,19 @@ const Checkout = () => {
     const navigate = useNavigate()
     
     const cart = useSelector(state => state.user.cartProducts)
-    console.log(cart)
     let userInfo = []
     
     const userInfoUnparsed = getCookie('userInfo')
     if(userInfoUnparsed !== ''){
         userInfo = JSON.parse(userInfoUnparsed)
     } 
-    console.log(userInfo.id);
 
     const shoppingCartProducts = localStorage.getItem('shoppingCart')
     // console.log(shoppingCartProducts);
     let parsedProducts = []
     if(shoppingCartProducts !== ''){
       // si hay productos los parseo
-      parsedProducts = JSON.parse(shoppingCartProducts);
-      console.log(parsedProducts);
+      parsedProducts = JSON.parse(shoppingCartProducts);    
       
     }   
 
@@ -120,9 +117,13 @@ const Checkout = () => {
       };
 
     return(
+            
+        <div className="flex m-10 storeComponent items-center ">
+            <div className="w-1/2 text-left flex-col ml-4">
 
-        <div className="flex mt-10">
-            <div className="w-2/3">
+            <a href="#" className="no-underline text-sm font-semibold text-gray-900" onClick={handleBack}
+                >Volver al carrito <span aria-hidden="true">&larr;</span></a>
+
                 <h2>Datos de envío</h2>
 
                 <form>
@@ -149,7 +150,7 @@ const Checkout = () => {
                         </div>
 
                         <div className="mb-4 md:mt-6 lg:mt-8">
-                            <label htmlFor="name">
+                            <label>
                             <span>Número de telefono</span>
                             <input
                             type="tel"
@@ -168,8 +169,8 @@ const Checkout = () => {
                         {errors.phoneNumber && (<span className="flex text-red-600 justify-center items-center">{errors.phoneNumber}</span>)}
                         </div>
 
-                        <div className=''>
-                            <label htmlFor="name">
+                        <div className="mb-4 md:mt-6 lg:mt-8">
+                            <label>
                             <span>Calle</span>
                             <input
                             type="text"
@@ -184,10 +185,8 @@ const Checkout = () => {
                                 {errors.street && (<span className="flex text-red-600 justify-center items-center">{errors.street}</span>)}
                             </div>
                             </label>
-
-                            
-
-                            <label htmlFor="name">
+                        
+                            <label className="w-40 m-4">
                             <span>Altura</span>
                             <input
                             type="number"
@@ -203,11 +202,11 @@ const Checkout = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="name">
+                            <label className="w-40">
                             <span>Departamento</span>
                             <input
                             type="text"
-                            name="detail"
+                            name="detail"   
                             placeholder="Ej. 4c"
                             onChange={handleChange}
                             value={input.detail}
@@ -216,8 +215,8 @@ const Checkout = () => {
                             />
 
                             </label>
-
-                            <label htmlFor="name">
+                        
+                            <label className="w-40 m-4">
                             <span>Código postal</span>
                             <input
                             type="number"
@@ -234,46 +233,41 @@ const Checkout = () => {
 
                     </div>
                 </form>
-                <button onClick={handleBack} className='bg-wwbrown text-wwwhite p-2 fontMarcellus hover:bg-wwmaroon'>Volver al carrito</button>
+                
             </div>
 
-            <div className={parsedProducts.length >= 1 ? "w-1/3 bg-white shadow-md" : "hidden"}>
-                <label>Resumen de la compra</label>
-                <div className='mb-4'>
-                    {/* <span>({cart?.length}) Items:</span> */}
+            <div className={parsedProducts.length >= 1 ? "w-1/3 h-1/3 rounded-lg p-6 flex flex-col justify-center bg-neutral-50 shadow" : "hidden"}>
+                <label className="font-bold text-lg">Resumen de la compra</label>
+                <div className="mb-4">
                     <span>({allItemsQuantity}) Items:</span>
-                    <span> $<TotalPrice /> </span>
+                    <span className="font-bold">$<TotalPrice /></span>
+                </div>
+                
+                <div className="mb-4">
+                    <span className="font-bold">TOTAL:</span>
+                    <span className="font-bold">$ <TotalPrice /></span>
                 </div>
 
-                <div className='mb-4'>
-                    <span>Subtotal:</span>
-                    <span> $<TotalPrice /> </span>
-                </div>
-
-                <br />
-
-                <div className='mb-4'>
-                    <span>Envio:</span>
-                </div>    
-
-                <div className='mb-4'>
-                    <span>(Correo Argentino):</span>
-                    <span> $ </span>
-                </div>
-
-                <div className='mb-4'>
-                    <span>TOTAL: </span>
-                    <span>$ {}</span>
-                </div>
-
-                <div>
-                    <button onClick={handleBuy} type='submit' className={parsedProducts.length >= 1 ? "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :"bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded disabled pointer-events-none" }>
-                        Pagar con Mercado Pago    
+                <div className="flex items-center justify-center mt-6">
+                    <button
+                    onClick={handleBuy}
+                    type="submit"
+                    className={
+                        parsedProducts.length >= 1
+                        ? "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        : "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded disabled pointer-events-none"
+                    }
+                    >
+                    Pagar con Mercado Pago
                     </button>
-                    {preferenceId && <Wallet initialization={{ preferenceId }} />}                   
+                    {preferenceId && <Wallet initialization={{ preferenceId }} />}
                 </div>
+
+                
             </div>
+
         </div>
+        
         
     )
 }
