@@ -1,4 +1,5 @@
 const mercadopago = require('mercadopago');
+const {baseURLFront} = require("../utils/urlBases");
 
 const createOrder = async (req, res) => {
     const items = req.body.items;
@@ -8,8 +9,8 @@ const createOrder = async (req, res) => {
 
         back_urls: {
             //aca las URLS que redireccionan dependiendo como haya salido la transaccion
-            success: 'http://localhost:5173/success',
-            failure: 'http://localhost:5173/failure',
+            success: `${baseURLFront}/success`,
+            failure: `${baseURLFront}/failure`,
             pending: ''
         },
         statement_descriptor: 'Wizarding Wares',
