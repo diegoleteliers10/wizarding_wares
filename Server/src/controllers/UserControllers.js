@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const { User, Role } = require("../models/relationship/relationship");
 const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
-const {enviarNotificacion, baseNotificationURL} = require("../utils/notificaciones");
+const {enviarNotificacion} = require("../utils/notificaciones");
+const {baseURLBack} = require("../utils/urlBases");
 const {SECRET} = process.env;
 
 
@@ -69,7 +70,7 @@ const createUserRegister = async (name, email, password) => {
   // const mensaje = `Bienvenido a nuestra plataforma. Por favor haz clic en el siguiente enlace para verificar tu cuenta: http://localhost:3001/verificar-cuenta?token=${token}`;
   // enviarCorreo(destinatario, asunto, mensaje);
 
-  const mensaje = `${baseNotificationURL}/verificar-cuenta?token=${token}`;
+  const mensaje = `${baseURLBack}/verificar-cuenta?token=${token}`;
 
   // Enviar correo al administrador
   enviarNotificacion(2, name, email, null);
