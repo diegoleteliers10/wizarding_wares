@@ -184,7 +184,9 @@ export const getAllUsers = createAsyncThunk('admin/getAllUsers',
 export const editUserRole = createAsyncThunk(
   'admin/editUserRole',
   async (input) => {
-    const response = await axios.put(`/user_role/${input.userId}`, {roleId: Number(input.roleId), userId: input.userId})
+    const response = await axios.put(`/user_role/${input.userId}`, {roleId: Number(input.roleId), userId: input.userId},{
+      headers: headers
+      })
     }
   )
 export const editUserData = createAsyncThunk(
