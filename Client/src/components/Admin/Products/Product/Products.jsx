@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteProduct, displayEditProduct, filterProductCategory, getProducts, setEditState } from '../../../../redux/adminSlice';
 import { useState, useEffect } from 'react';
 import PopUp from '../../PopUp/PopUp';
+import {toast, Toaster} from 'react-hot-toast';
 
 const Product = ({ product }) => {
 
@@ -34,7 +35,7 @@ const Product = ({ product }) => {
     await dispatch(deleteProduct(productId));
     setPopUp(false);
     await dispatch(getProducts());
-    
+    toast.success('Product deleted successfully');
   };
 
   useEffect(()=>{
@@ -79,6 +80,7 @@ const Product = ({ product }) => {
 
   return (
     <>
+    <Toaster/>
     {popUp === true && (
       <PopUp trigger={popUp} setTrigger={setPopUp} handleConfirm={handleConfirm}>
         <h3>{popUpMessage}</h3>

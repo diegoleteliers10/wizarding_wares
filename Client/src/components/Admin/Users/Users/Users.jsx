@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { displayEditUser, getAllUsers, setEditState, deleteUser } from '../../../../redux/adminSlice';
 import { useState, useEffect } from 'react';
 import PopUp from '../../PopUp/PopUp';
+import {toast, Toaster} from 'react-hot-toast'
 
 const Users = ({ user }) => {
 
@@ -32,6 +33,9 @@ const Users = ({ user }) => {
     const userId = user.userId;
     await dispatch(deleteUser(userId));
     setPopUp(false);
+    //si es para eliminar al usuario que aparezca un toast con usuario eliminado con exito
+    if(user.isActive) toast.success('Usuario eliminado con exito')
+    if(!user.isActive) toast.success('Usuario re-activado con exito')
     //await dispatch(getallUsers());
     
   };
@@ -60,11 +64,13 @@ const Users = ({ user }) => {
 
   return (
     <>
+
     {popUp === true && (
       <PopUp trigger={popUp} setTrigger={setPopUp} handleConfirm={handleConfirm}>
         <h3>{popUpMessage}</h3>
       </PopUp>
     )}
+    <Toaster/>
     <tr key={user.userId} className={user.isActive === false ? 'text-gray-400' : ''}>
       <td>{user.name}</td>
       <td className='text-center'> {user.email}</td>
@@ -80,7 +86,7 @@ const Users = ({ user }) => {
         </button>
         <button value={user.userId} onClick={handleDelete} className={user.isActive === false ? 'text-lime-500' : 'button'}>
           { user.isActive 
-          ? <FiTrash2 />
+          ? <FiTrash2/>
           : <FaUndoAlt className='text-purple-600 hover:text-purple-800' title='Re-activate user'/>
           }
         </button>
