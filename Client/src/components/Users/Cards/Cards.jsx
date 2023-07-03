@@ -25,7 +25,7 @@ const Cards = () => {
 
     return (
         <div className='storeComponent p-8'>
-        <Row xs={1} md={2} className="g-4 my-4">
+        <Row xs={1} md={2} className="g-4">
             <FilterStore/>
         </Row>
         <Row xs={1} md={2} className="g-4 justify-center">

@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { createProductReview } from '../../../redux/userSlice';
 import { LuStars } from 'react-icons/lu';
 import getCookie from "../../../hooks/getCookie";
+import '../storeStyles.css';
 
 const ReviewForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [comment, setComment] = useState('');
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState(3);
 
   const user = getCookie('userInfo');
   const userId = JSON.parse(user).id;
@@ -32,12 +35,31 @@ const ReviewForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
-        <label htmlFor="comment" className="block mb-2">
+        <h3 className='mt-4 fontMarcellus'>Cuéntanos qué te parecio el producto:</h3>
+        <h5 className='fontEB'>¡Tu opinión nos ayuda a mejorar!</h5>
+        <div className="mb-4 storeComponent">
+        <label htmlFor="rating" className="block mb-2 mt-4 fontMarcellus text-xl">
+          Calificación:
+        </label>
+        <div className="flex items-center justify-center">
+          {[1, 2, 3, 4, 5].map((value) => (
+            <LuStars
+              key={value}
+              className={
+                value <= rating ? 'fill-current text-wwmaroon text-3xl' : 'text-gray-500 cursor-pointer text-3xl'
+              }
+              onClick={() => handleRatingChange(value)}
+            />
+          ))}
+        </div>
+      </div>
+
+        <label htmlFor="comment" className="block mt-4 mb-2 fontMarcellus text-xl">
           Comentario:
         </label>
         <textarea
           id="comment"
-          className="w-full px-4 py-2 border border-gray-300 rounded"
+          className="w-1/3 px-4 py-2 border border-gray-300 rounded-lg bg-white fontEB"
           rows="3"
           value={comment}
           placeholder= 'Ej: Me encantó este producto!!'
@@ -46,26 +68,10 @@ const ReviewForm = () => {
         />
       </div>
 
-      <div className="mb-4">
-        <label htmlFor="rating" className="block mb-2">
-          Calificación:
-        </label>
-        <div className="flex items-center">
-          {[1, 2, 3, 4, 5].map((value) => (
-            <LuStars
-              key={value}
-              className={
-                value <= rating ? 'text-black-400 text-xl' : 'fill-current text-gray-500 cursor-pointer'
-              }
-              onClick={() => handleRatingChange(value)}
-            />
-          ))}
-        </div>
-      </div>
-
+      
       <button
         type="submit"
-        className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+        className="btn1 btn--svg-small"
       >
         Enviar
       </button>

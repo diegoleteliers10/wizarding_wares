@@ -7,7 +7,6 @@ import { LuStars } from 'react-icons/lu';
 const Rating = ({productId}) => {
     const dispatch = useDispatch();
     const productReviews = useSelector((state) => state.user.reviews);
-    console.log(productReviews);
   
     // const productId = sessionStorage.getItem('productId');
     // const rating = productReviews.reviews?.map((review) => {
@@ -28,8 +27,8 @@ const Rating = ({productId}) => {
     const stars = Array.from({ length: 5 }, (_, index) => {
         const starClass =
           index <= roundedAverage
-            ? 'text-black-400'
-            : 'text-gray-500 text-xl fill-current ';
+            ? 'text-wwmaroon fill-current'
+            : 'text-gray-500';
     
         return <LuStars key={index}  className={starClass} />;
     });
@@ -38,9 +37,9 @@ const Rating = ({productId}) => {
 
     return(
         reviewCount > 0? 
-        <div className="rating">
-            <h3>{stars}</h3>
-            <p>({reviewCount})</p>
+        <div className="rating flex items-center">
+            <h3 className='flex'>{stars}</h3>
+            <p className='mr-8 text-xl'><span className='ml-4'> ({reviewCount}) </span></p>
         </div>
         : null
     )

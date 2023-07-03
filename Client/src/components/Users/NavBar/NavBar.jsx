@@ -114,7 +114,7 @@ const NavBar = () => {
                 <span className="text-wwwhite fontEB">Hola de nuevo, {userName} </span>
                 <span className="text-wwwhite">|</span>
                 <button onClick={handleLogout} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Cerrar sesión</button>
-                <button onClick={handleMyPurchases}>Mis Compras</button>
+                <button onClick={handleMyPurchases} className="font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Mis Compras</button>
                 </div>
                 }
                 

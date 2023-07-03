@@ -31,6 +31,13 @@ const MyPurchases = () => {
           />
         ))
       }
+      {
+        !purchases.length &&
+        <div>
+          <img className="mx-auto w-40" src="https://harrypottershop.co.uk/cdn/shop/products/Gringotts_Bank_Three_Coin_Box006_800x.png?v=1679956785" alt="" />
+          <h4 className="fontEB italic">No has realizado ninguna compra aún</h4>
+        </div>
+      }
     </div>
   );
 };
