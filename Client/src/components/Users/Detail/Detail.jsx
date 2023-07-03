@@ -85,17 +85,18 @@ const Detail = () => {
   }, [product]);
 
   return (
+    <div>
+
+    
     <div className="flex storeComponent h-screen items-center p-8 storeComponent">
       <div className="w-1/2 flex flex-col items-center">
         <BackButton />
       <div className="fotoFondoDetail">
         <img src={product.image} alt={product.name} />
       </div>
-      <div>
-        <Rating productId={id}/>
-      </div>
       </div>
       <div className="w-1/2 p-28">
+        <Rating productId={id}/>
         <h2 className="fontMarcellus text-left">{product.name}</h2>
         <p className="bigPrice text-left text-wwbrown font-bold text-5xl fontEB">${product.price}</p>
         {product.categoryCategoryId === 3 || product.category === 'Indumentaria'? (
@@ -179,7 +180,9 @@ const Detail = () => {
             </div>
           }
         </div>
+        
       </div>
+    </div>
       <div>
       <ReviewList productId={id}/>
       </div>
