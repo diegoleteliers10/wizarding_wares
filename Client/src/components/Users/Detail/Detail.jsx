@@ -165,7 +165,7 @@ const Detail = () => {
           {
             !loggedIn && 
             <div>
-              <h5 className="font-medium text-wwmaroon">
+              <h5 className="font-medium text-wwmaroon fontEB">
                 ¡Debes iniciar sesión para agregar artículos al carrito!
               </h5>
               <p><NavLink to='/register'>Regístrate</NavLink></p>
@@ -174,7 +174,7 @@ const Detail = () => {
           {
             (!verifiedUser && loggedIn) &&
             <div>
-              <h5 className="font-medium text-wwmaroon">
+              <h5 className="font-medium text-wwmaroon fontEB">
                 ¡Debes verificar tu cuenta para agregar artículos al carrito!
               </h5>
             </div>
