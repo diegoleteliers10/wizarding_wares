@@ -27,7 +27,7 @@ const Rating = ({productId}) => {
     
     const stars = Array.from({ length: 5 }, (_, index) => {
         const starClass =
-          index < roundedAverage
+          index <= roundedAverage
             ? 'text-black-400'
             : 'text-gray-500 text-xl fill-current ';
     

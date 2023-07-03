@@ -38,6 +38,7 @@ import '../storeStyles.css';
                 <h2 className='fontMarcellus text-left'>Carrito de compras</h2>
                 <p className='fontEB text-left'>¿Aún no quieres finalizar tu compra? <span><NavLink to='/' className={'no-underline text-wwbrown font-bold'}>Sigue explorando</NavLink></span></p>
                 {/* Renderiza los productos en el carrito */}
+                <div className="cart-list-container" style={{ height: '24em', overflow: 'auto' }}>
                 <table className='w-full text-left mt-8'>
                   <thead>
                     <tr className='btmBorder'>
@@ -61,6 +62,7 @@ import '../storeStyles.css';
                   </tbody>
                 
                 </table>
+                </div>
             {
               parsedProducts.length < 1 ?
               <h4 className='fontMarcellus'>El carrito está vacío</h4> :
