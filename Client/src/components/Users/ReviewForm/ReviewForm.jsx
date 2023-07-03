@@ -5,6 +5,7 @@ import { createProductReview } from '../../../redux/userSlice';
 import { LuStars } from 'react-icons/lu';
 import getCookie from "../../../hooks/getCookie";
 import '../storeStyles.css';
+import {toast, Toaster} from 'react-hot-toast';
 
 const ReviewForm = () => {
   const dispatch = useDispatch();
@@ -30,9 +31,16 @@ const ReviewForm = () => {
     dispatch(createProductReview({ productId, userId, comment, rating}));
     setComment('');
     setRating(0);
+    toast.dismiss()
+    toast.success('Gracias por tu opinión!')
+    setTimeout(()=>{
+      navigate('/')
+    },2000)
   };
 
   return (
+    <>
+    <Toaster/>
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <h3 className='mt-4 fontMarcellus'>Cuéntanos qué te parecio el producto:</h3>
@@ -76,6 +84,7 @@ const ReviewForm = () => {
         Enviar
       </button>
     </form>
+    </>
   );
 };
 
