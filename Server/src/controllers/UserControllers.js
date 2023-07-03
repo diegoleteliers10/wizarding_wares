@@ -5,7 +5,8 @@ const { User, Role } = require("../models/relationship/relationship");
 const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
 const {enviarNotificacion} = require("../utils/notificaciones");
 const {baseURLBack} = require("../utils/urlBases");
-const {SECRET} = process.env;
+const {diasSemana, fecha} = require("../utils/fechas");
+const {SECRET, EMAIL_CREDENTIALS} = process.env;
 
 
 // *** CREAR UN USUARIO **
@@ -245,16 +246,36 @@ const logicalUserDeletion = async (userId) => {
   (!isExitsUser.length) && arrojarError(`Usuario Con El userId: ${userId}; No existe`);
   
   // Caso contrario procedemos a realizar el borrado logico del usuario
-  await User.update({isActive: !isExitsUser[0].isActive}, {
+  await User.update({isActive: false}, {
     where: {
       userId: userId
     }
   });
 
+
+  // Buscamos el usuario Desactivado
+  const userDeactivated = User.findAll({
+    where: {
+      userId: userId
+    }
+  });
+
+  // Definimos las opciones en mensaje
+  const mensaje = {
+    userId: userDeactivated[0].userId,
+    date: `${diasSemana[fecha.getDay()]}, ${fecha.toLocaleDateString()}, a las ${fecha.toLocaleTimeString()}`,
+    mailWW: EMAIL_CREDENTIALS,
+  };
+
+  // Enviamos una notificacion al administrador
+  enviarNotificacion(12, userDeactivated[0].name, userDeactivated[0].email, mensaje);
+  // Enviamos una notificacion al usuario
+  enviarNotificacion(13, userDeactivated[0].name, userDeactivated[0].email, mensaje);
+
   // return isExitsUser;
   return {
     "Perfect": `User ${isExitsUser[0].name}; Successfully Deleted`
-  }
+  };
 };
 
 

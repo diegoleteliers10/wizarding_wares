@@ -1,6 +1,9 @@
 const { User, Role } = require("../models/relationship/relationship");
 const {arrojarError} = require("../utils/utils");
 const {enviarNotificacion, enviarEmail} = require("../utils/notificaciones");
+const {diasSemana, fecha} = require("../utils/fechas");
+const {EMAIL_CREDENTIALS} = process.env;
+
 
 
 // *** CAMBIAR EL ROLE DEL USUARIO ***
@@ -35,9 +38,22 @@ const updateRoleUser = async (roleId, userId) => {
 
   // Caso contrario modificamos el role del usuario
   isExitsUser[0].setRole(isExitsRoleId[0]);
+
+  // Definiendo las opciones en mensaje
+  const mensaje = {
+    userId: isExitsUser[0].userId,
+    role: isExitsRoleId[0].name,
+    mailWW: EMAIL_CREDENTIALS,
+  };
+  
+  // Enviamos una notificacion del cambio de role hecho; al administrador
+  enviarNotificacion(6, isExitsUser[0].name, isExitsUser[0].email, mensaje);
+  // Enviamos una notificacion del cambio de role hecho; al usuario
+  enviarNotificacion(7, isExitsUser[0].name, isExitsUser[0].email, mensaje);
+  
   // return isExitsUser;
   return {
-    "Perfect": `role successfully updated`
+    Perfect: `role successfully updated`
   };
 };
 
@@ -65,12 +81,41 @@ const userLogicalDeletionAdmin = async (userId) => {
   (!isExitsUser.length) && arrojarError("Usuario No Existe");
 
 
-  // Caso contrario procedemos a realizar el Borrado Logico del Usuario
+  // Caso contrario procedemos a realizar el Cambio en "isActive"
   await User.update({isActive: !isExitsUser[0].isActive},{where: {userId: userId}});
+  
+  // Consultamos el nuevo estado del usuario
+  let isActiveU;
+  const newState = await User.findAll({where: {userId: userId}});
 
-  return {
-    "Perfect": `User ${isExitsUser[0].name}; Successfully Deleted`
+  // Definiendo las opciones en mensaje
+  const mensaje = {
+    userId: newState[0].userId,
+    state: `isActive: ${newState[0].isActive}`,
+    date: `${diasSemana[fecha.getDay()]}, ${fecha.toLocaleDateString()}, a las ${fecha.toLocaleTimeString()}`,
+    mailWW: EMAIL_CREDENTIALS,
   };
+  
+  // Decidimos que hacer segun corresponda
+  if(newState[0].isActive == true){
+    // Enviamos una notificacion del cambio de "isActive" hecho; al administrador
+    enviarNotificacion(10, newState[0].name, newState[0].email, mensaje);
+    // Enviamos una notificacion del cambio de "isActive" hecho; al usuario
+    enviarNotificacion(11, newState[0].name, newState[0].email, mensaje);
+    isActiveU = {
+      Perfect: `User ${newState[0].name}; Successfully Reactivated.`
+    };
+  }else {
+    // Enviamos una notificacion del cambio de "isActive" hecho; al administrador
+    enviarNotificacion(8, newState[0].name, newState[0].email, mensaje);
+    // Enviamos una notificacion del cambio de "isActive" hecho; al usuario
+    enviarNotificacion(9, newState[0].name, newState[0].email, mensaje);
+    isActiveU = {
+      Perfect: `User ${newState[0].name}; Successfully Deleted`
+    };
+  }
+
+  return isActiveU;
 };
 
 

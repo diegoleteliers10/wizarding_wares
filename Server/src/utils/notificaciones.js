@@ -62,7 +62,7 @@ const transporter = nodemailer.createTransport({
 // --------------------------------------
 const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
 
-  const indicesAdmin = [0, 2, 4, 5];
+  const indicesAdmin = [0, 2, 4, 5, 6, 8, 10, 12];
 
 
   let receptor;
@@ -117,7 +117,101 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
       subject: "Correo Enviado",
       titulo: `Se envio un Email al usuario ${name}`,
       notificacion: `Hola administrador. Se envio un Email al correo electronico: ${email}, Con el dato: ${mensaje}`
-    }
+    },
+    {
+      indice: 6,
+      role: "admin",
+      subject: "Change Role",
+      titulo: `Se notifico al usuari@ ${name}; Sobre Su cambio de role`,
+      notificacion: `<span>Hola administrador, Se envio una notificacion al correo: ${email}; Concerniente al cambio de role que desde ahora tendra.<br>
+                     Desde hoy al usuari@ ${name}, con userId: ${mensaje.userId} usara el Role: ${mensaje.role}</span>`,
+    },
+    {
+      indice: 7,
+      role: "user",
+      subject: "Change Role",
+      titulo: "Notificacion De Cambio De Role",
+      notificacion: `<span>Hola ${name} <br />
+                     Esperando que te encuentres bien. 
+                     Nos estamos comunicando contigo por la decision tomada por nuestro equipo.<br />
+                     Sobre el cambio de role que ha sido realizado a tu cuenta en la plataforma.<br/>
+                     El Role: ${mensaje.role}, manejaras desde hoy.<br/>
+                     Si tienes alguna duda o consulta, sobre el cambio efectuado a tu role, te pedidos que te contactes con nosotros a travez del<br /> 
+                     Email: ${mensaje.mailWW}.   
+                     </span>`,
+    },
+    {
+      indice: 8,
+      role: "admin",
+      subject: "User account suspended",
+      titulo: `Se notifico al usuari@ ${name}; Sobre la Suspensión de su cuenta`,
+      notificacion: `<span>Hola Administrador, Se envio una notificacion al correo: ${email}; Concerniente a la Suspension temporal de la cuenta.<br>
+                     Desde hoy al usuari@ ${name}, con userId: ${mensaje.userId}. Tendra el Estado: ${mensaje.state}</span>`,
+    },
+    {
+      indice: 9,
+      role: "user",
+      subject: "User account suspended",
+      titulo: "Notificacion De Suspension Temporal De Cuenta",
+      notificacion: `<span>Hola ${name} <br />
+                     Esperando que te encuentres bien. 
+                     Nos estamos comunicando contigo por la decision tomada por nuestro equipo.<br />
+                     Sobre la suspension temporal que ha sido realizado a tu cuenta en la plataforma.<br/>
+                     A la fecha de: ${mensaje.date}, tu cuenta esta supendida.<br/>
+                     Si tienes alguna duda o consulta, sobre el cambio efectuado a tu cuenta, te pedidos que te contactes con nosotros a travez del<br /> 
+                     Email: ${mensaje.mailWW}.   
+                     </span>`,
+    },
+    {
+      indice: 10,
+      role: "admin",
+      subject: "User account reactivated",
+      titulo: `Se notifico al usuari@ ${name}; Sobre la Reactivación de su cuenta`,
+      notificacion: `<span>Hola Administrador, Se envio una notificacion al correo: ${email}; Concerniente a la Reactivación de la cuenta.<br>
+                     Desde hoy al usuari@ ${name}, con userId: ${mensaje.userId}. Tendra el Estado: ${mensaje.state}</span>`,
+    },
+    {
+      indice: 11,
+      role: "user",
+      subject: "User account reactivated",
+      titulo: "Notificacion De Reactivación De Tu Cuenta",
+      notificacion: `<span>Hola ${name} <br />
+                     Esperando que te encuentres bien. 
+                     Nos estamos comunicando contigo por la decision tomada por nuestro equipo.<br />
+                     Sobre la Reactivación que ha sido realizada a tu cuenta en la plataforma.<br/>
+                     A la fecha de: ${mensaje.date}, tu cuenta esta Reactiva.<br/>
+                     Si tienes alguna duda o consulta, te pedidos que te contactes con nosotros a travez del<br /> 
+                     Email: ${mensaje.mailWW}.   
+                     </span>`,
+    },
+    {
+      indice: 12,
+      role: "admin",
+      subject: "Cancel Account",
+      titulo: "Peticion Cancelacion de Cuenta",
+      notificacion: `<span>Hola Administrador. te informamos que el usario ${name}<br />
+                    con userId: ${mensaje.userId}, a la fecha de hoy: ${mensaje.date}, a pulsado el boton de cancelar cuenta<br/>
+                    Se le envio una notificacion que su cuenta ${email} sera pasada a suspension temporal por 30 días.<br/>
+                    Esto en caso de que Reconsiderara su desicion. Y que pasado ese tiempo<br/>
+                    su cuenta seria eliminada completamente del sistema</span>`,
+    },
+    {
+      indice: 13,
+      role: "user",
+      subject: "Cancel Account",
+      titulo: "Cancelacion de Cuenta",
+      notificacion: `<span>Hola ${name} <br />
+                     Esperando que te encuentres bien. 
+                     Nos estamos comunicando contigo por la decision tomada por tu parte.<br />
+                     De Cancelar u Eliminar tu cuenta de nuestra plataforma. Creemos que tuvistes tus razones<br/>
+                     para tomar esta dura y extrema desicion. Te informamos que por lo pronto<br/>
+                     la cuenta: ${email}; A la fecha de: ${mensaje.date}, sera pasada a suspension temporal por 30 días...<br/>
+                     Esto en caso de que Reconsideres tu desicion. Pasado ese tiempo<br/>
+                     tu cuenta sera eliminada completamente del sistema<br/>
+                     Si tienes alguna duda o consulta, te pedidos que te contactes con nosotros a travez del<br /> 
+                     Email: ${mensaje.mailWW}.   
+                     </span>`,
+    },
   ];
 
   // Plantilla de correo
