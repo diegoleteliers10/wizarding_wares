@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductReviews } from '../../../redux/userSlice';
 import { LuStars } from 'react-icons/lu';
+import { GiMagicBroom } from 'react-icons/gi';
+
 import '../storeStyles.css';
 
 const ReviewList = ({productId}) => {
@@ -52,7 +54,11 @@ const ReviewList = ({productId}) => {
         </div>
       ))}
     </div>
-    :null
+    : 
+    <div className='-mt-20 btmBorder px-44 mb-8 border-none'>
+      
+      <h5 className='flex fontMarcellus text-left text-wwmaroon opacity-80'><GiMagicBroom className='mr-2'/>El producto aún no ha sido calificado </h5>
+    </div>
   );
 };
 
