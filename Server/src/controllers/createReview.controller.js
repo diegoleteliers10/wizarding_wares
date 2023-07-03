@@ -18,13 +18,14 @@ const createReview = async(req,res)=>{
 
       //si el usuario ya tiene una review hecha, no se permite crear otra
       const reviewFound = await Review.findOne({
-        where:{
-          userUserId:userId
+        where: {
+          userUserId: userId,
+          productProductId: productId
         }
-      })
+      });
 
       if(reviewFound){
-        res.status(400).send('El usuario ya tiene una review creada')
+        res.status(400).send('El usuario ya ha realizado una review para este producto')
       }else{
         //Si los datos son correctos creamos la review
         const review = await Review.create({

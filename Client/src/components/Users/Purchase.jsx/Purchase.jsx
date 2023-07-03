@@ -1,33 +1,66 @@
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getProductReviews } from "../../../redux/userSlice";
+import getCookie from "../../../hooks/getCookie";
+import '../storeStyles.css';
 
-const Purchase = (props) => {
+
+const Purchase = ({ id, image, name, price, status }) => {
+  
+    const user = getCookie('userInfo');
+    const userId = JSON.parse(user).id;
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [reviewed, setReviewed] = useState(false)
 
-    const handleShopNow = () => {
-        navigate(`/${props.id}`)
+    const {reviews} = useSelector((state)=> state.user)
+
+  const handleShopNow = () => {
+    navigate(`/${id}`);
+  };
+
+  const handleReview = () => {
+    sessionStorage.setItem("productId", id);
+    navigate(`/reviews/${id}`);
+  };
+
+ useEffect(() => {
+    dispatch(getProductReviews(id));
+  }, [id]);
+
+  useEffect(() => {
+    //console.log(reviews.reviews);
+    if(reviews.reviews && reviews.reviews.length > 0) {
+        const userReviewFound = reviews.reviews.find(userReview => userReview.userUserId === userId && userReview.productProductId == id)
+        //console.log(name, userReviewFound)
+        if(userReviewFound) setReviewed(true)
     }
+    //console.log(reviews)
+  }, [reviews]);
 
-    const handlereview = () => {
-        sessionStorage.setItem("productId", props.id);
-        navigate(`/reviews/${props.id}`)
-    }
-
-    return(
-        <div className='flex h-1/2 gap-8 items-center'>
-        <img src={props.image} alt={props.name} title={props.name} className='w-32'/>
-        <div>
-        <h5>{props.name}</h5>
-        </div>   
-        <p>${props.price}</p>
-        <p>{props.status}</p>
-        <div>
-            <button onClick={()=>handleShopNow()}>Volver a comprar</button>
-        </div>
-        <div>
-            <button onClick={()=> handlereview()}>Calificar producto</button>
-        </div>
+  return (
+    <div className='flex h-1/2 gap-8 items-center'>
+      <img src={image} alt={name} title={name} className='w-32' />
+      <div>
+        <h5>{name}</h5>
+      </div>   
+      <p>${price}</p>
+      <div>
+        <button onClick={handleShopNow} className="text-wwbrown hover:text-wwmaroon font-semibold">Volver a comprar</button>
+      </div>
+      <div>
+      <button
+  onClick={handleReview}
+  disabled={status === 'Cancelado' || reviewed ? 'disabled' : ''}
+  className={(status !== 'Cancelado' && !reviewed) ? `btn1 btn--svg-small` : 'btn1 btn--svg-small pointer-events-none opacity-50'}
+>
+  Calificar producto
+</button>
+      </div>
     </div>
-    )
-}
+  );
+};
 
-export default Purchase
+export default Purchase;
