@@ -18,7 +18,7 @@ const createOrder = async (req, res) => {
         auto_return: "approved",
 
         //URL del webhook, donde recibe las notificaciones del back de MP(debe ser una url HTTPS por lo que MP va a tirar un error al pagar)
-        // notification_url: 'http://localhost:3001/webhook'
+        notification_url: 'https://4c77-2800-810-505-83af-a82b-c8c3-ace3-b798.ngrok-free.app/webhook'
         })
         .then(function (response) {
             res.json({
@@ -36,9 +36,11 @@ const receiveWebhook = async (req, res) => {
         //aca utilizo los datos que me manda el webhook para buscar el pago hecho anteriormente y ver su info en este caso por consola
         if(payment.type === 'payment'){
             const data = await mercadopago.payment.findById(payment['data.id'])
-            console.log(data);
+            console.log(data, "hola juan");
+            const status = data.body.status
+            console.log(status, "juancho gamba")
+            res.sendStatus(204).json(status)
         }
-        res.sendStatus(204)
     } catch (error) {
         return res.status(500).json({error: error.message})
     } 
