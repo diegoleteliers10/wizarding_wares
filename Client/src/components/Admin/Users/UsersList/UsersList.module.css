@@ -1,9 +1,7 @@
 .productList table {
-    width: 100%;
     border-collapse: collapse;
   }
   .productList{
-    border:0.1em solid black;
     border-radius: 0.2em;
   }
   .productList thead{
@@ -16,10 +14,6 @@
     padding: 1em;
     text-align: left;
     border-bottom: 1px solid #ddd;
-  }
-  .productList th{
-    padding: 1em;
-    text-align: left;
   }
   .productList tbody tr:hover {
     background-color: #f5f5f5;

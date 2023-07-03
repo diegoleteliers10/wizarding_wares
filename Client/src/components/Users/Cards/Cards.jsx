@@ -15,11 +15,9 @@ const Cards = () => {
         //si el estado global de products no tiene nada aun, dispatch
         // de la accion que trae todos los productos
         (!products.length && !filterPrice.length && !filterCategory && !search) && dispatch(getProducts());
-        //console.log(products)
     }, [products])
 
     const page = useSelector((state) => state.user.page);
-    console.log(page)
     const itemsPerPage = 10;
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
@@ -27,7 +25,7 @@ const Cards = () => {
 
     return (
         <div className='storeComponent p-8'>
-        <Row xs={1} md={2} className="g-4 my-4">
+        <Row xs={1} md={2} className="g-4">
             <FilterStore/>
         </Row>
         <Row xs={1} md={2} className="g-4 justify-center">

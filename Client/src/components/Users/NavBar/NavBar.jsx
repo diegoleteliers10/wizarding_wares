@@ -37,16 +37,17 @@ const NavBar = () => {
         }
       }, [user]);
     
-  
+      const shoppingCart = localStorage.getItem('shoppingCart');
     // actualizar cantidad de carrito
     useEffect(() => {
-        const shoppingCart = localStorage.getItem('shoppingCart');
         
         if (shoppingCart) {
           try {
             const parsedCart = JSON.parse(shoppingCart);
-            const uniqueItemCount = parsedCart.length;
-            setCartItemCount(uniqueItemCount);
+            // const uniqueItemCount = parsedCart.length;
+            // setCartItemCount(uniqueItemCount);
+            const allItemsQuantity= parsedCart.reduce((acc, item) => acc + item.quantity, 0)
+            setCartItemCount(allItemsQuantity);
           } catch (error) {
             console.error('Invalid JSON format for shoppingCart:', error);
             setCartItemCount(0);
@@ -54,7 +55,7 @@ const NavBar = () => {
         } else {
           setCartItemCount(0);
         }
-      }, [cartProducts, price, user]);
+      }, [cartProducts, price, user, shoppingCart]);
 
     const handleGoToCart = () => {
         navigate('/cart');
@@ -82,6 +83,11 @@ const NavBar = () => {
         localStorage.setItem('shoppingCart', ['']);
     }
 
+    const handleMyPurchases = () => {
+      navigate('/purchases')
+    }
+
+
     return(
         <div className="storeComponent">
         <Navbar expand="lg" className="navBar fixed top-0">
@@ -107,6 +113,7 @@ const NavBar = () => {
                 <span className="text-wwwhite fontEB">Hola de nuevo, {userName} </span>
                 <span className="text-wwwhite">|</span>
                 <button onClick={handleLogout} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Cerrar sesión</button>
+                <button onClick={handleMyPurchases} className="font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Mis Compras</button>
                 </div>
                 }
                 
@@ -114,7 +121,7 @@ const NavBar = () => {
             <div>
                 <button onClick={handleGoToCart} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">
                 <RiLuggageCartLine className="text-3xl" />
-                {cartItemCount > 0 && <span className="cart-item-count">{cartItemCount}</span>}
+                {cartItemCount !== 0  && <span className="cart-item-count">{cartItemCount}</span>}
                 </button>
             </div>
         </Navbar>

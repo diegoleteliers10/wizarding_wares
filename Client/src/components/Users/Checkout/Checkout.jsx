@@ -1,23 +1,31 @@
 import TotalPrice from '../TotalPrice/TotalPrice';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import axios from 'axios';
+import { createAddress } from '../../../redux/userSlice';
+import getCookie from '../../../hooks/getCookie';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
     
     const dispatch = useDispatch();
-
-    const user = useSelector(state => state.account.user)
-    const cart = useSelector(state => state.user.cartProducts)
+    const navigate = useNavigate()
     
+    const cart = useSelector(state => state.user.cartProducts)
+    let userInfo = []
+    
+    const userInfoUnparsed = getCookie('userInfo')
+    if(userInfoUnparsed !== ''){
+        userInfo = JSON.parse(userInfoUnparsed)
+    } 
 
     const shoppingCartProducts = localStorage.getItem('shoppingCart')
-    console.log(shoppingCartProducts);
+    // console.log(shoppingCartProducts);
     let parsedProducts = []
     if(shoppingCartProducts !== ''){
       // si hay productos los parseo
-      parsedProducts = JSON.parse(shoppingCartProducts);
+      parsedProducts = JSON.parse(shoppingCartProducts);    
       
     }   
 
@@ -27,40 +35,39 @@ const Checkout = () => {
         unit_price: Number(product.price),
         quantity: Number(product.quantity)
     }))
-    console.log(items);
 
     const [preferenceId, setPreferenceId] = useState(null)
 
-    initMercadoPago("TEST-df383afa-303e-4bbe-aa65-ca3ad2c76fca");
+    initMercadoPago(import.meta.env.VITE_PUBLIC_KEY);
 
+    const allItemsQuantity= items.reduce((acc, item) => acc + item.quantity, 0)
+
+ 
     const createPreference = async () => {
         try {
             const response = await axios.post("http://localhost:3001/create-order", {items});
-        const { id } = response.data; // Obtener el ID de la preferencia
-        return id;
+        const { body } = response.data; // Obtiene el objeto body para luego poder usar la propiedad init_point
+        return body;
         } catch (error) {
             console.log(error);
         }
     }
 
-    const handleBuy = async () => {
-        const id = await createPreference()
-        if (id) {
-            setPreferenceId(id)
-        }
+    const handleBack = () => {
+        navigate('/cart')
     }
-
-    // console.log(cart);
-
+   
+    
     const [input, setInput] = useState({
-    phoneNumber: "",
-    detail:"",
-    zipCode: 0,
-    street: "",
-    number: "",
-    name: ""    
+        phoneNumber: "",
+        detail:"",
+        zipCode: 0,
+        street: "",
+        number: "",
+        name: "",
+        userId: userInfo.id
     });
-
+    
     const [errors, setErrors] = useState({
         phoneNumber: "",
         detail:"",
@@ -68,7 +75,20 @@ const Checkout = () => {
         street: "",
         number: "",
         name: ""    
-        });
+    });
+    
+    const handleBuy = async (event) => {
+        event.preventDefault();
+        await dispatch(createAddress(input))
+        console.log(input);
+        const body = await createPreference()
+        console.log(body);
+        if(body){
+            //redirecciona al usuario a la URL de mercadopago
+            window.location.href = await body.init_point
+            setPreferenceId(body.id)
+        }
+    }
 
     const handleChange = (event) => {
         setInput({
@@ -97,9 +117,13 @@ const Checkout = () => {
       };
 
     return(
+            
+        <div className="flex m-10 storeComponent items-center ">
+            <div className="w-1/2 text-left flex-col ml-4">
 
-        <div className="flex mt-10">
-            <div className="w-2/3 border border-gray-500">
+            <a href="#" className="no-underline text-sm font-semibold text-gray-900" onClick={handleBack}
+                >Volver al carrito <span aria-hidden="true">&larr;</span></a>
+
                 <h2>Datos de envío</h2>
 
                 <form>
@@ -126,7 +150,7 @@ const Checkout = () => {
                         </div>
 
                         <div className="mb-4 md:mt-6 lg:mt-8">
-                            <label htmlFor="name">
+                            <label>
                             <span>Número de telefono</span>
                             <input
                             type="tel"
@@ -145,8 +169,8 @@ const Checkout = () => {
                         {errors.phoneNumber && (<span className="flex text-red-600 justify-center items-center">{errors.phoneNumber}</span>)}
                         </div>
 
-                        <div className=''>
-                            <label htmlFor="name">
+                        <div className="mb-4 md:mt-6 lg:mt-8">
+                            <label>
                             <span>Calle</span>
                             <input
                             type="text"
@@ -161,10 +185,8 @@ const Checkout = () => {
                                 {errors.street && (<span className="flex text-red-600 justify-center items-center">{errors.street}</span>)}
                             </div>
                             </label>
-
-                            
-
-                            <label htmlFor="name">
+                        
+                            <label className="w-40 m-4">
                             <span>Altura</span>
                             <input
                             type="number"
@@ -180,11 +202,11 @@ const Checkout = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="name">
+                            <label className="w-40">
                             <span>Departamento</span>
                             <input
                             type="text"
-                            name="detail"
+                            name="detail"   
                             placeholder="Ej. 4c"
                             onChange={handleChange}
                             value={input.detail}
@@ -193,8 +215,8 @@ const Checkout = () => {
                             />
 
                             </label>
-
-                            <label htmlFor="name">
+                        
+                            <label className="w-40 m-4">
                             <span>Código postal</span>
                             <input
                             type="number"
@@ -211,44 +233,41 @@ const Checkout = () => {
 
                     </div>
                 </form>
+                
             </div>
 
-            <div className="w-1/3 bg-white shadow-md">
-                <label>Resumen de la compra</label>
-                <div className='mb-4'>
-                    <span>({cart?.length}) Items:</span>
-                    <span> $<TotalPrice /> </span>
+            <div className={parsedProducts.length >= 1 ? "w-1/3 h-1/3 rounded-lg p-6 flex flex-col justify-center bg-neutral-50 shadow" : "hidden"}>
+                <label className="font-bold text-lg">Resumen de la compra</label>
+                <div className="mb-4">
+                    <span>({allItemsQuantity}) Items:</span>
+                    <span className="font-bold">$<TotalPrice /></span>
+                </div>
+                
+                <div className="mb-4">
+                    <span className="font-bold">TOTAL:</span>
+                    <span className="font-bold">$ <TotalPrice /></span>
                 </div>
 
-                <div className='mb-4'>
-                    <span>Subtotal:</span>
-                    <span> $<TotalPrice /> </span>
-                </div>
-
-                <br />
-
-                <div className='mb-4'>
-                    <span>Envio:</span>
-                </div>    
-
-                <div className='mb-4'>
-                    <span>(Correo Argentino):</span>
-                    <span> $ 900 </span>
-                </div>
-
-                <div className='mb-4'>
-                    <span>TOTAL: </span>
-                    <span>$ {84000    +900}</span>
-                </div>
-
-                <div>
-                    <button onClick={handleBuy} type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Pagar con Mercado Pago    
+                <div className="flex items-center justify-center mt-6">
+                    <button
+                    onClick={handleBuy}
+                    type="submit"
+                    className={
+                        parsedProducts.length >= 1
+                        ? "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        : "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded disabled pointer-events-none"
+                    }
+                    >
+                    Pagar con Mercado Pago
                     </button>
-                    {preferenceId && <Wallet initialization={{ preferenceId }} />}                   
+                    {preferenceId && <Wallet initialization={{ preferenceId }} />}
                 </div>
+
+                
             </div>
+
         </div>
+        
         
     )
 }

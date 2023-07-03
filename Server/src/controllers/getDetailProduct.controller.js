@@ -10,7 +10,7 @@ const getDetailProduct = async (req, res) => {
             attributes: ['name', 'description', 'image', 'price', 'stock'],
             include: {
                 model: Review,
-                attributes: ['rating', 'comment'],
+                attributes: ['userUserId', 'productProductId','rating', 'comment'],
                 include: {
                     model: Users,
                     attributes: ['name']

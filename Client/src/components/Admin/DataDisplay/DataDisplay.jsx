@@ -6,6 +6,7 @@ import EditProduct from "../Products/Edit/EditProduct";
 import NavBar from "../NavBar/NavBar";
 import UserList from "../Users/UsersList/UsersList";
 import EditUser from "../Users/Edit/EditUser";
+import PurchasesList from "../Purchases/PurchasesList/PurchasesList";
 
 const DataDisplay = ()=> {
 
@@ -13,13 +14,14 @@ const DataDisplay = ()=> {
 
 return(
     <div className="w-5/6  bg-white">
-        {display === "productList" && <NavBar/>}
+        {(display === "productList" || display === "users") && <NavBar/>}
         {display === "productList" && <ProductList/>}
         {display === "createProduct" && <CreateProduct/>}
         {display === "createUser" && <CreateUser/>}
         {display === "editProduct" && <EditProduct/>}
         {display === "users" && <UserList/>}
         {display === "editUser" && <EditUser/>}
+        {display === "purchases" && <PurchasesList/>}
     </div>
 )
 }

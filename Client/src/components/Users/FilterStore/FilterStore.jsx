@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { startTransition, useEffect } from "react";
-import { RxCaretSort } from 'react-icons/rx';
+import { TbListSearch } from 'react-icons/tb';
 import styles from "./FilterStore.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -87,9 +87,9 @@ function FilterStore(props) {
   }
 
   return (
-    <div className={`mx-auto flex justify-center gap-1 storeComponent ${styles.filterContainer}`}>
+    <div className={`mx-auto w-full flex justify-center items-center gap-1 storeComponent mb-4`}>
       <div className={`inline-block ${styles.filterItem}`}>
-        <button className="bg-red-100 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-l" onClick={handleReset}>
+        <button className="bg-wwbrown rounded-md hover:bg-wwmaroon transition-all text-wwwhite py-2 px-4" onClick={handleReset}>
           Reset
         </button>
       </div>
@@ -99,26 +99,26 @@ function FilterStore(props) {
         <select
           name="orderByRating"
           id="orderByRating"
-          className={`bg-white ${styles.customSelect}`} // Use the imported class name
+          className={`bg-white appearance-none ${styles.customSelect}`} // Use the imported class name
         >
           <option value="SortR" hidden>
-            Calificación
+            Calificación ↕️
           </option>
           <option value="rateHighToLow">Mejor puntuación</option>
           <option value="rateLowToHigh">Peor puntuación</option>
         </select>
       </div>
       {(pathname === '/' || pathname === 'search') && (
-        <div className={`inline-block ${styles.filterItem}`}>
+        <div className={`inline-block appearance-none ${styles.filterItem}`}>
           {/* Filtro categoria */}
           <select
             name="filterCategory"
             id="filterCategory"
-            className={`bg-white ${styles.customSelect}`}
+            className={`bg-transparent text-center border-none appearance-none ${styles.customSelect}`}
             onChange={handleFilterChange}
           >
             <option value="Categoría" hidden>
-              Categoría
+              Categoría ↕️
             </option>
             <option value="Golosinas">Golosinas</option>
             <option value="Indumentaria">Indumentaria</option>
@@ -129,41 +129,42 @@ function FilterStore(props) {
           </select>
         </div>
       )}
-      <div className={`inline-block ${styles.filterItem}`}>
+      <div className={`inline-block appearance-none ${styles.filterItem}`}>
         {/* Orden por precio */}
         <select
           name="orderByPrice"
           id="orderByPrice"
-          className={`bg-white ${styles.customSelect}`} // Use the imported class name
+          className={`bg-transparent text-center border-none appearance-none ${styles.customSelect}`} // Use the imported class name
           onChange={handleSortChange}
         >
           <option value="SortP" hidden>
-            Precio
+            Precio ↕️
           </option>
           <option value="priceHighToLow">Mayor precio</option>
           <option value="priceLowToHigh">Menor precio</option>
         </select>
       </div>
-      <div className={`inline-block ${styles.filterItem}`}>
+      <div className={`inline-block appearance-none ${styles.filterItem}`}>
         {/* Orden por nombre */}
         <select
           name="orderByName"
           id="orderByName"
-          className={`bg-white ${styles.customSelect}`} // Use the imported class name
+          className={`bg-transparent text-center border-none appearance-none my-auto ${styles.customSelect}`} // Use the imported class name
           onChange={handleSortChange}
         >
           <option value="SortN" hidden>
-            Orden
-          </option>
+            Orden ↕️
+          </option>          
           <option value="nameAscending">Nombre (A-Z)</option>
           <option value="nameDescending">Nombre (Z-A)</option>
         </select>
       </div>
+      
       <div className={`${styles.dInherit}`}>
-        <input type="number" placeholder="Min" className="bg-white" id="minPrice" />
-        <input type="number" placeholder="Max" className="bg-white" id="maxPrice" />
-        <button className="bg-gray-100 h-1/2" onClick={handlePriceFilter}>
-          Buscar
+        <input type="number" placeholder="Min" className={`p-2 ${styles.bgInput}`} id="minPrice" />
+        <input type="number" placeholder="Max" className={`p-2 ${styles.bgInput}`} id="maxPrice" />
+        <button className="flex items-center my-auto text-2xl h-1/2" onClick={handlePriceFilter}>
+          <TbListSearch/>
         </button>
       </div>
     </div>

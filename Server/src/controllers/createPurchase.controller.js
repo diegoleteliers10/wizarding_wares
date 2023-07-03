@@ -16,8 +16,9 @@ const createPurchase = async(req,res)=> {
     })
 
     purchaseItems.forEach(async(e)=>{
-    const purchaseProduct= await Product.findByPk(e.productId)
-    purchase.addProduct(purchaseProduct)
+      const purchaseProduct= await Product.findByPk(e.productId)
+      purchaseProduct.update({stock:purchaseProduct.stock-e.quantity})
+      purchase.addProduct(purchaseProduct)
     })
 
     res.status(201).json({message:"Purchase created",purchase:purchase})

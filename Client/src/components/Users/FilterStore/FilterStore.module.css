@@ -1,16 +1,3 @@
-.custom-select {
-    appearance: none;
-    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBMaWNlbnNlOiBNSVQuIE1hZGUgYnkgcmFkaXgtdWk6IGh0dHBzOi8vZ2l0aHViLmNvbS9yYWRpeC11aS9pY29ucyAtLT4KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAxNSAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aAogICAgZmlsbC1ydWxlPSJldmVub2RkIgogICAgY2xpcC1ydWxlPSJldmVub2RkIgogICAgZD0iTTQuOTMxNzkgNS40MzE3OUM0Ljc1NjA1IDUuNjA3NTMgNC43NTYwNSA1Ljg5MjQ1IDQuOTMxNzkgNi4wNjgxOUM1LjEwNzUzIDYuMjQzOTIgNS4zOTI0NSA2LjI0MzkyIDUuNTY4MTkgNi4wNjgxOUw3LjQ5OTk5IDQuMTM2MzhMOS40MzE3OSA2LjA2ODE5QzkuNjA3NTMgNi4yNDM5MiA5Ljg5MjQ1IDYuMjQzOTIgMTAuMDY4MiA2LjA2ODE5QzEwLjI0MzkgNS44OTI0NSAxMC4yNDM5IDUuNjA3NTMgMTAuMDY4MiA1LjQzMTc5TDcuODE4MTkgMy4xODE3OUM3LjczMzc5IDMuMDk3NCA3LjYxOTMzIDMuMDQ5OTkgNy40OTk5OSAzLjA0OTk5QzcuMzgwNjQgMy4wNDk5OSA3LjI2NjE4IDMuMDk3NCA3LjE4MTc5IDMuMTgxNzlMNC45MzE3OSA1LjQzMTc5Wk0xMC4wNjgyIDkuNTY4MTlDMTAuMjQzOSA5LjM5MjQ1IDEwLjI0MzkgOS4xMDc1MyAxMC4wNjgyIDguOTMxNzlDOS44OTI0NSA4Ljc1NjA2IDkuNjA3NTMgOC43NTYwNiA5LjQzMTc5IDguOTMxNzlMNy40OTk5OSAxMC44NjM2TDUuNTY4MTkgOC45MzE3OUM1LjM5MjQ1IDguNzU2MDYgNS4xMDc1MyA4Ljc1NjA2IDQuOTMxNzkgOC45MzE3OUM0Ljc1NjA1IDkuMTA3NTMgNC43NTYwNSA5LjM5MjQ1IDQuOTMxNzkgOS41NjgxOUw3LjE4MTc5IDExLjgxODJDNy4zNTc1MyAxMS45OTM5IDcuNjQyNDUgMTEuOTkzOSA3LjgxODE5IDExLjgxODJMMTAuMDY4MiA5LjU2ODE5WiIKICAgIGZpbGw9IiMwMDAwMDAiCiAgLz4KPC9zdmc+);
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-    padding-right: 25px; /* Adjust the padding as needed */
-  }
-  .filterContainer {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-  
   .filterItem {
     display: inline-block;
   }
@@ -27,4 +14,18 @@
 
   .dInherit button{
     margin: 0 5%;
+  }
+
+  .caretIcon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 1.1rem; /* Adjust the margin as needed */
+  }
+
+  .customSelect option:not(:checked) {
+    font-size: 0.8em;
+    text-align: left;
+  }
+  .bgInput{
+    background-color:#f2ece6 ;
   }

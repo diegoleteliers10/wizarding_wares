@@ -13,6 +13,9 @@ const initialState = {
   search: '',
   page: 1,
   price: 0,
+  purchases: [],
+  userAddress: null,
+  reviews: []
 };
 
 export const getProducts = createAsyncThunk(
@@ -117,6 +120,65 @@ export const decreaseQuantity = createAsyncThunk(
 export const clearCart = createAction('user/clearCart');
 
 export const updateTotalPrice = createAction('user/updateTotalPrice');
+
+export const getPurchases = createAsyncThunk(
+  'user/getPurchases', 
+  async(userId, thunkAPI) => {
+    try {
+      const response = await axios.get(`/getAllPurchById/${userId}`)
+      return response.data
+    } catch (error) {
+      console.error('Error obtaining Purchases', error);
+      throw error;
+    }
+  }
+);
+
+export const createAddress = createAsyncThunk('user/createAddress',
+  async (input) => {
+    const response = await axios.post("/userAddress", input)
+    return response; 
+  }
+)
+export const getProductReviews = createAsyncThunk(
+  'user/getProductReviews',
+  async (productId) => {
+    try {
+      const response = await axios.get(`/detailProduct/${productId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener las reviews del producto:', error);
+      throw error;
+    }
+  }
+)
+export const createProductReview = createAsyncThunk(
+  'user/createProductReview',
+  async ({productId, userId, comment, rating} ) => {
+    try {
+      const response = await axios.post(`/createReview/${productId}?userId=${userId}`, {comment, rating });
+      console.log(response.data)
+      return response.data;
+    } catch (error) {
+      console.error('Error al crear la review:', error);
+      throw error;
+    }
+  }
+);
+
+export const getUserAddress = createAsyncThunk('user/getUserAddress',
+async (userId) => {
+  const response = await axios.get(`/userAddress/${userId}`)
+  return response.data; 
+}
+)
+
+export const createPurchase = createAsyncThunk('user/createPurchase',
+async (input) => {
+  const response = await axios.post(`/createPurchase`, input)
+  return response; 
+}
+) 
 
 export const userSlice = createSlice({
   name: 'user',
@@ -227,7 +289,54 @@ export const userSlice = createSlice({
       })
       .addCase(changePage, (state, action) => {
         state.page = action.payload;
-      });
+      })
+      .addCase(getPurchases.fulfilled, (state, action) => {
+        state.purchases = action.payload;
+        state.loading = false;
+      })
+      .addCase(getPurchases.rejected, (state, action) => {
+        state.loading = false;
+        console.error("Error obtaining Purchases: ", action.error);
+      })
+      .addCase(getPurchases.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(createAddress.fulfilled, (state, action) => {
+        state.loading = false 
+      })
+      .addCase(createAddress.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(createAddress.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getUserAddress.fulfilled, (state, action) => {
+        state.loading = false
+        state.userAddress = action.payload
+      })
+      .addCase(getUserAddress.rejected, (state, action) => {
+        state.loading = false
+        console.log('getuseraddres rejected');
+      })
+      .addCase(getUserAddress.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getProductReviews.fulfilled, (state, action) => {
+        state.loading = false;
+        state.reviews = action.payload;
+      })
+      .addCase(getProductReviews.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getProductReviews.rejected, (state, action) => {
+        state.loading = false;
+        state.reviews = action.error.message;
+      })
+      .addCase(createProductReview.fulfilled, (state, action) => {
+        const newReview = action.payload;
+        state.reviews.push(newReview);
+
+      })
   },
 });
 

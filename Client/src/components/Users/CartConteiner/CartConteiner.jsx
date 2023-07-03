@@ -33,29 +33,45 @@ import '../storeStyles.css';
 
       let key = 1;
     return (
-        <div className='p-8 flex'>
-          <div className='w-2/3'>
-                <h2>Carrito de compras</h2>
-                <p>Aún no quieres finalizar tu compra <span className='font-bold'><NavLink to='/'>Sigue explorando</NavLink></span></p>
+        <div className='p-8 flex h-screen storeComponent'>
+          <div className='w-2/3 mt-10 pr-12'>
+                <h2 className='fontMarcellus text-left'>Carrito de compras</h2>
+                <p className='fontEB text-left'>¿Aún no quieres finalizar tu compra? <span><NavLink to='/' className={'no-underline text-wwbrown font-bold'}>Sigue explorando</NavLink></span></p>
                 {/* Renderiza los productos en el carrito */}
-                {parsedProducts?.map(product => (
-                  <Cart
-                  key={key++}
-                  id={product.productId}
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                  quantity={product.quantity}
-                  product={product}
-                />
-                ))}
+                <div className="cart-list-container" style={{ height: '24em', overflow: 'auto' }}>
+                <table className='w-full text-left mt-8'>
+                  <thead>
+                    <tr className='btmBorder'>
+                      <th className='fontMarcellus uppercase'>Productos</th>
+                      <th className='fontMarcellus uppercase'>Cantidad</th>
+                      <th className='fontMarcellus uppercase'>Precio</th>
+                    </tr>
+                  </thead>
+                  <tbody className=''>
+                      {parsedProducts?.map(product => (
+                        <Cart
+                        key={key++}
+                        id={product.productId}
+                        image={product.image}
+                        name={product.name}
+                        price={product.price}
+                        quantity={product.quantity}
+                        product={product}
+                      />
+                      ))}
+                  </tbody>
+                
+                </table>
+                </div>
             {
               parsedProducts.length < 1 ?
-              <h4>El carrito está vacío</h4> :
-              <div className=''>
-                <h5>Total</h5>
-                <p>{<TotalPrice/>}</p>
-                <button onClick={handleGoCheckout} className={parsedProducts.length >= 1 ? 'bg-wwbrown text-wwwhite p-2 fontMarcellus hover:bg-wwmaroon' : 'bg-wwbrown text-wwwhite p-2 fontMarcellus opacity-50 disabled pointer-events-none'}>Pagar</button>
+              <h4 className='fontMarcellus'>El carrito está vacío</h4> :
+              <div className='mt-8 text-end'>
+                <div className='flex justify-end items-center'>
+                <h5 className='mr-24 fontMarcellus text-wwbrown'>Total:</h5>
+                <p className='fontEB text-xl font-semibold text-wwbrown'>${<TotalPrice/>}</p>
+                </div>
+                <button onClick={handleGoCheckout} className={parsedProducts.length >= 1 ? 'bg-wwbrown text-wwwhite p-2 btn1 btn--svg-small' : 'bg-wwbrown text-wwwhite p-2 fontMarcellus btn1 btn--svg-small opacity-50 disabled pointer-events-none'}>Pagar</button>
               </div>
             }
           </div>

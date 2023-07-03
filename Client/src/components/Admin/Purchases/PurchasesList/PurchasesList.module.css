@@ -1,0 +1,25 @@
+.purchaseList table {
+    border-collapse: collapse;
+  }
+  .purchaseList{
+    border-radius: 0.2em;
+  }
+  .purchaseList thead{
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;    
+  }
+  
+  .purchaseList td {
+    padding: 1em;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  .purchaseList tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  .purchaseList button{
+    --space-x-reverse: 0;
+    margin-right: calc(1rem*var(--space-x-reverse));
+    margin-left: calc(1rem*(1 - var(--space-x-reverse)));
+    color: black;
+  }

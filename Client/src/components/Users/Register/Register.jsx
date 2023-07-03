@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createUser, getAllUsers } from "../../../redux/accountSlice";
+import { createUser } from "../../../redux/accountSlice";
 import { useSelector } from "react-redux";
-import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from "jwt-decode";
 import '../storeStyles.css';
 import { NavLink } from 'react-router-dom';
+import { toast, Toaster } from 'react-hot-toast'
 
 const Register = () => {
 
@@ -58,169 +57,122 @@ const Register = () => {
         return errors;
       };
 
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        await dispatch(createUser(input))
-        // setInput({
-        //     name: "",
-        //     email: "",
-        //     password: "",
-        //     confirmPassword: "",
-        // })
-        navigate('/login')
-      }
-      //funcion para crear password aleatoria para google
-      function generateRandomString() {
-        const length = Math.floor(Math.random() * 15) + 6; // Random length between 6 and 20
-        const numbers = '0123456789';
-        const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
-        
-        // que arranque con GL de "google-register"
-        let randomString = 'GR';
-      
-        // al menos 1 numero
-        const randomIndex = Math.floor(Math.random() * numbers.length);
-        randomString += numbers[randomIndex];
-      
-        // al menos una mayuscula
-        const uppercaseIndex = Math.floor(Math.random() * uppercaseLetters.length);
-        randomString += uppercaseLetters[uppercaseIndex];
-      
-        // al menos una minuscula
-        const lowercaseIndex = Math.floor(Math.random() * lowercaseLetters.length);
-        randomString += lowercaseLetters[lowercaseIndex];
-      
-        // el resto de los caracteres
-        const remainingChars = length - 5;
-        const allChars = numbers + uppercaseLetters + lowercaseLetters;
-      
-        for (let i = 0; i < remainingChars; i++) {
-          const charIndex = Math.floor(Math.random() * allChars.length);
-          randomString += allChars[charIndex];
-        }
-      
-        return randomString;
-      }
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  
+  const userDispatch = await dispatch(createUser(input));
 
-      const handleGoogleRegister = async (credentialResponse)=>{
-        const decoded = jwt_decode(credentialResponse.credential);
-        const googleUserInfo = {
-            name: decoded.given_name,
-            email: decoded.email,
-            password: generateRandomString()
-        }
-        console.log(googleUserInfo)
-        await dispatch(createUser(googleUserInfo))
-      }
+    if(userDispatch){
+        toast.success('Usuario creado exitosamente',{
+            style: {
+                border: '1px solid #692323',
+                padding: '16px',
+                color: '#692323',
+            }
+        });
+        navigate('/login');
+    }else{
+        toast.error('Error al registrarse')
+    }
+}
 
     return(
         <>
-           <div className="w-1/2 mx-auto flex items-center justify-center m-8 storeLoginForm">
+        <Toaster/>
+        <div className="storeComponent h-screen flex">
+           <div className="w-full mx-auto flex items-center justify-center my-8">
             <div>
-                <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md">
-                    <h2>Crear usuario</h2>
-                    <div className="formBox">
+                <form onSubmit={handleSubmit} className="bg-white p-12 rounded shadow-md max-w-sm">
+                    <h4 className="fontMarcellus text-2xl uppercase font-bold">Crear usuario</h4>
+                    <div className="formBox fontEB">
 
-                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                        <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
                             <label htmlFor="name">
-                                <span>Nombre</span>
                                 <input 
                                 type="text" 
                                 name="name"
                                 placeholder="Nombre completo"
                                 onChange={handleChange}
                                 value={input.name}
-                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 shadow-sm w-full bg-white"
                                 required
                                 />
                             </label>
                             
                         </div>
                         <div>
-                            {errors.name && (<span className="flex text-brown-600">{errors.name}</span>)}
+                            {errors.name && (<span className="flex text-brown-600 w-2/3 mx-auto text-red-400">{errors.name}</span>)}
                         </div>
                         
-                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                        <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
                             <label htmlFor="email">
-                                <span>Email</span>
                                 <input 
                                 type="email"
                                 name="email" 
                                 placeholder="Ingrese un email..."
                                 value={input.email}
                                 onChange={handleChange}
-                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 shadow-sm w-full bg-white"
                                 required
                                 />
                             </label>
                         </div>
                         <div>
-                            {errors.email && (<span className="flex text-brown-600">{errors.email}</span>)}
+                            {errors.email && (<span className="flex text-brown-600 w-2/3 mx-auto   text-red-400">{errors.email}</span>)}
                         </div>
                         
-                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                        <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
                             <label htmlFor="password">
-                                <span>Contraseña</span>
                                 <input 
                                 type="password" 
                                 name="password"
                                 placeholder="Contraseña"
                                 onChange={handleChange}
                                 value={input.password}
-                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 shadow-sm w-full bg-white"
                                 required
                                 />
                             </label>
                         </div>
                         <div>
-                            {errors.password && (<span className="flex text-brown-600">{errors.password}</span>)}
+                            {errors.password && (<span className="flex text-brown-600 w-2/3 mx-auto   text-red-400">{errors.password}</span>)}
                         </div>
                         
-                        <div className="mb-4 md:mt-6 lg:mt-8 w-5/6 mx-auto">
+                        <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
                             <label htmlFor="confirmPassword">
-                                <span>Confirmar Contraseña</span>
                                 <input 
                                 type="password" 
                                 name="confirmPassword"
                                 placeholder="Confirme su contraseña"
                                 onChange={handleChange}
                                 value={input.confirmPassword}
-                                className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 shadow-sm w-full bg-white"
                                 required
                                 />
                             </label>
                         </div>
                         <div>
-                            {errors.confirmPassword && (<span className="flex text-brown-600">{errors.confirmPassword}</span>)}
+                            {errors.confirmPassword && (<span className="text-brown-600 w-2/3 mx-auto   text-red-400">{errors.confirmPassword}</span>)}
                         </div>
                         
                     </div>
 
                     <div className="boton">
                     <button
-                    className="bg-wwbrown rounded hover:bg-wwmaroon active:bg-brown-800 focus:outline-2 focus:ring focus:ring-purple-300 w-40 h-10 shadow text-white"
+                    className="btn1 btn--svg-small mt-4"
                     type="submit"
                     disabled={!input.name || errors.name || !input.email || errors.email || !input.password || errors.password || !input.confirmPassword || errors.confirmPassword}
                     >
                     Registrarse
                     </button>
-                    <p className='mt-4'>¿Ya tienes cuenta? <span><NavLink to='/login' className='no-underline'>Iniciar Sesión</NavLink></span></p>
+                    <p className='mt-4 fontEB'>¿Ya tienes cuenta? <span><NavLink to='/login' className='no-underline font-semibold text-wwbrown hover:text-wwmaroon'>Iniciar Sesión</NavLink></span></p>
                 </div>
 
-                </form>
-                <div className="flex justify-center">
-                    <GoogleLogin
-                    onSuccess={handleGoogleRegister}
-                    onError={() => {
-                        console.log('Register Failed');
-                    }}
-                    />                
-                </div>
-
+                </form>                
             </div>
            </div>
 
+        </div>
         </>
     )
 }
