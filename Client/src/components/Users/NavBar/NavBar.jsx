@@ -37,10 +37,9 @@ const NavBar = () => {
         }
       }, [user]);
     
-  
+      const shoppingCart = localStorage.getItem('shoppingCart');
     // actualizar cantidad de carrito
     useEffect(() => {
-        const shoppingCart = localStorage.getItem('shoppingCart');
         
         if (shoppingCart) {
           try {
@@ -56,7 +55,7 @@ const NavBar = () => {
         } else {
           setCartItemCount(0);
         }
-      }, [cartProducts, price, user]);
+      }, [cartProducts, price, user, shoppingCart]);
 
     const handleGoToCart = () => {
         navigate('/cart');
@@ -122,7 +121,7 @@ const NavBar = () => {
             <div>
                 <button onClick={handleGoToCart} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">
                 <RiLuggageCartLine className="text-3xl" />
-                {cartItemCount > 0 && <span className="cart-item-count">{cartItemCount}</span>}
+                {cartItemCount !== 0  && <span className="cart-item-count">{cartItemCount}</span>}
                 </button>
             </div>
         </Navbar>
