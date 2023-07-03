@@ -4,6 +4,7 @@ import { getAllPurchases, editStatus } from '../../../../redux/adminSlice';
 import { useState, useEffect } from 'react';
 import PopUp from '../../PopUp/PopUp';
 import PopUpDetail from '../../PopUpDetail/PopUpDetail';
+import {toast, Toaster} from 'react-hot-toast';
 
 const Purchases = ({ purchase })=> {
     const dispatch = useDispatch();
@@ -35,7 +36,8 @@ const Purchases = ({ purchase })=> {
     const purchaseId = purchase.purchaseId;
     const newStatus = statusValue;
     await dispatch(editStatus([newStatus, purchaseId]));
-    setPopUp(false);    
+    setPopUp(false);
+    toast.success('Status changed successfully');
   };
 
   
@@ -59,6 +61,7 @@ const Purchases = ({ purchase })=> {
         <h3>{popUpDetailMessage}</h3>
       </PopUpDetail>
     )}
+    <Toaster/>
     <tr 
     key={purchase.purchaseId} 
     className={purchase.statusStatusId === 4 ? 'text-gray-400' : ''}
