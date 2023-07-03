@@ -15,7 +15,7 @@ import { useLocation } from 'react-router-dom'
 import Login from './components/Users/Login/Login'
 import Register from './components/Users/Register/Register'
 import Checkout from './components/Users/Checkout/Checkout'
-import Purchases from './components/Users/Purchases/Purchases'
+import MyPurchases from './components/Users/MyPurchases/MyPurchases'
 import Success from './components/Users/BackUrls/Success/Success/Success'
 import Failure from './components/Users/BackUrls/Failure'
 import ReviewForm from './components/Users/ReviewForm/ReviewForm'
@@ -37,7 +37,7 @@ function App() {
       <div className={(pathname === '/register' || pathname === '/login' ) ? 'storeComponent loginBg' : 'flex-grow '}>
         <Routes>
           <Route path='/' element={<Home/>} />
-          <Route path='/purchases' element={<Purchases/>} />
+          <Route path='/purchases' element={<MyPurchases/>} />
           <Route path='/reviews/:id' element={<ReviewForm/>}/>
           <Route path='/login' element={<Login/>} />
           <Route path='/register' element={<Register/>} />
