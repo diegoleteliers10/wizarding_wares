@@ -19,7 +19,7 @@ const SearchBar = () => {
         event.preventDefault();
         dispatch(searchByName(search));
         setSearch('');
-        navigate('/');
+        navigate('/home');
     }
 
     const handleKeyPress = (event) => {
@@ -27,7 +27,7 @@ const SearchBar = () => {
             event.preventDefault();
             dispatch(searchByName(search));
             setSearch('');
-            navigate('/')
+            navigate('/home')
         }
     }
 
