@@ -36,7 +36,7 @@ import '../storeStyles.css';
         <div className='p-8 flex h-screen storeComponent'>
           <div className='w-2/3 mt-10 pr-12'>
                 <h2 className='fontMarcellus text-left'>Carrito de compras</h2>
-                <p className='fontEB text-left'>¿Aún no quieres finalizar tu compra? <span><NavLink to='/' className={'no-underline text-wwbrown font-bold'}>Sigue explorando</NavLink></span></p>
+                {parsedProducts.length >= 1 ? <p className='fontEB text-left'>¿Aún no quieres finalizar tu compra? <span><NavLink to='/' className={'no-underline text-wwbrown font-bold'}>Sigue explorando</NavLink></span></p>:<p className='fontEB text-left'>¿Aún no tienes productos en tu carrito? <span><NavLink to='/' className={'no-underline text-wwbrown font-bold'}>Sigue explorando</NavLink></span></p>}
                 {/* Renderiza los productos en el carrito */}
                 <div className="cart-list-container" style={{ height: '24em', overflow: 'auto' }}>
                 <table className='w-full text-left mt-8'>

@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { startTransition, useEffect } from "react";
+import { useEffect } from "react";
 import { TbListSearch } from 'react-icons/tb';
 import styles from "./FilterStore.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import {
   sortByPriceDescending,
 } from '../../../redux/userSlice';
 import '../storeStyles.css'; 
+import { setSearchTerm } from '../../../redux/userSlice';
 
 
 function FilterStore(props) {
@@ -22,36 +23,89 @@ function FilterStore(props) {
   const currPrice = useSelector(state => state.user.filterPrice);
   const currSort = useSelector(state => state.user.sort)
   const {search} = useSelector(state => state.user)
-  //console.log(pathname);
+  const categoryName = useSelector(state => state.user.filterCategory) || '';
 
-  useEffect(()=> {
-    if(currCategory) document.getElementById('filterCategory').value = currCategory;
-    if(currPrice.length){
-      console.log(currPrice)
-       document.getElementById('minPrice').value = currPrice[0];
-       document.getElementById('maxPrice').value = currPrice[1];
+  useEffect(() => {
+    if (currCategory.length > 0) {
+      const filterCategoryElement = document.getElementById('filterCategory');
+      if (filterCategoryElement) {
+        filterCategoryElement.value = currCategory;
+      }
     }
-    if(currSort[1] !== 'SortP') document.getElementById('orderByPrice').value = currSort[1];
-    if(currSort[2] !== 'SortN') document.getElementById('orderByName').value = currSort[2];
-  }, [])
+    if (currPrice.length > 0) {
+      const minPriceElement = document.getElementById('minPrice');
+      const maxPriceElement = document.getElementById('maxPrice');
+      if (minPriceElement && maxPriceElement) {
+        minPriceElement.value = currPrice[0];
+        maxPriceElement.value = currPrice[1];
+      }
+    }
+    if (currSort[1] !== 'SortP') {
+      const orderByPriceElement = document.getElementById('orderByPrice');
+      if (orderByPriceElement) {
+        orderByPriceElement.value = currSort[1];
+      }
+    }
+    if (currSort[2] !== 'SortN') {
+      const orderByNameElement = document.getElementById('orderByName');
+      if (orderByNameElement) {
+        orderByNameElement.value = currSort[2];
+      }
+    }
+  }, []);
 
-  useEffect(()=>{
-    // cuando se hace una search se resetean todos los filtros
-    document.getElementById('filterCategory').value = 'Categoría';
-    document.getElementById('orderByPrice').value = 'SortP';
-    document.getElementById('orderByRating').value = 'SortR';
-    document.getElementById('orderByName').value = 'SortN';
-    document.getElementById('minPrice').value = '';
-    document.getElementById('maxPrice').value = '';
-  }, [search])
+ 
+  useEffect(() => {
+    if (categoryName === '') {
+      const filterCategoryElement = document.getElementById('filterCategory');
+      if (filterCategoryElement) {
+        filterCategoryElement.value = 'Categoría';
+      }
+      const orderByPriceElement = document.getElementById('orderByPrice');
+      if (orderByPriceElement) {
+        orderByPriceElement.value = 'SortP';
+      }
+      const orderByRatingElement = document.getElementById('orderByRating');
+      if (orderByRatingElement) {
+        orderByRatingElement.value = 'SortR';
+      }
+      const orderByNameElement = document.getElementById('orderByName');
+      if (orderByNameElement) {
+        orderByNameElement.value = 'SortN';
+      }
+      const minPriceElement = document.getElementById('minPrice');
+      if (minPriceElement) {
+        minPriceElement.value = '';
+      }
+      const maxPriceElement = document.getElementById('maxPrice');
+      if (maxPriceElement) {
+        maxPriceElement.value = '';
+      }
+    }
+  }, [categoryName, search]);
+  
 
   function handleFilterChange(event) {
     const filter = event.target.value;
-      dispatch(filterCategory(filter));
-      document.getElementById('orderByPrice').value = 'SortP';
-    document.getElementById('orderByRating').value = 'SortR';
-    document.getElementById('orderByName').value = 'SortN';
+    dispatch(filterCategory(filter));
+  
+    // Verificar si el elemento existe antes de establecer su valor
+    const orderByPriceElement = document.getElementById('orderByPrice');
+    if (orderByPriceElement) {
+      orderByPriceElement.value = 'SortP';
+    }
+  
+    const orderByRatingElement = document.getElementById('orderByRating');
+    if (orderByRatingElement) {
+      orderByRatingElement.value = 'SortR';
+    }
+  
+    const orderByNameElement = document.getElementById('orderByName');
+    if (orderByNameElement) {
+      orderByNameElement.value = 'SortN';
+    }
   }
+  
   function handleSortChange(event) {
     const sort = event.target.value;
     if (sort === 'nameAscending') {
@@ -77,7 +131,8 @@ function FilterStore(props) {
   }
 
   function handleReset() {
-    dispatch(getProducts());
+    dispatch(getProducts())
+    dispatch(setSearchTerm(''));
     document.getElementById('filterCategory').value = 'Categoría';
     document.getElementById('orderByPrice').value = 'SortP';
     document.getElementById('orderByRating').value = 'SortR';
@@ -85,14 +140,20 @@ function FilterStore(props) {
     document.getElementById('minPrice').value = '';
     document.getElementById('maxPrice').value = '';
   }
+  
+  
 
   return (
     <div className={`mx-auto w-full flex justify-center items-center gap-1 storeComponent mb-4`}>
+      {categoryName === '' ? 
       <div className={`inline-block ${styles.filterItem}`}>
         <button className="bg-wwbrown rounded-md hover:bg-wwmaroon transition-all text-wwwhite py-2 px-4" onClick={handleReset}>
           Reset
         </button>
       </div>
+      :null
+      }
+      
       <div className={`hidden ${styles.filterItem}`}>
         {/* Orden por calificacion */}
         {/* <RxCaretSort /> */}
@@ -108,7 +169,7 @@ function FilterStore(props) {
           <option value="rateLowToHigh">Peor puntuación</option>
         </select>
       </div>
-      {(pathname === '/home' || pathname === 'search') && (
+      {(pathname === '/home' || pathname === 'search') && categoryName === '' && (
         <div className={`inline-block appearance-none ${styles.filterItem}`}>
           {/* Filtro categoria */}
           <select
@@ -159,14 +220,15 @@ function FilterStore(props) {
           <option value="nameDescending">Nombre (Z-A)</option>
         </select>
       </div>
-      
+      {categoryName === '' &&
       <div className={`${styles.dInherit}`}>
-        <input type="number" placeholder="Min" className={`p-2 ${styles.bgInput}`} id="minPrice" />
-        <input type="number" placeholder="Max" className={`p-2 ${styles.bgInput}`} id="maxPrice" />
-        <button className="flex items-center my-auto text-2xl h-1/2" onClick={handlePriceFilter}>
-          <TbListSearch/>
-        </button>
-      </div>
+      <input type="number" placeholder="Min" className={`p-2 ${styles.bgInput}`} id="minPrice" />
+      <input type="number" placeholder="Max" className={`p-2 ${styles.bgInput}`} id="maxPrice" />
+      <button className="flex items-center my-auto text-2xl h-1/2" onClick={handlePriceFilter}>
+        <TbListSearch/>
+      </button>
+    </div>}
+      
     </div>
   );
 }

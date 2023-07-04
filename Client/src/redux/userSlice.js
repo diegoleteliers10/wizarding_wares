@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const initialState = {
   cartProducts: null,
@@ -15,7 +16,9 @@ const initialState = {
   price: 0,
   purchases: [],
   userAddress: null,
-  reviews: []
+  reviews: [],
+  selectedCategory: Cookies.get('selectedCategory') || '',
+  searchTerm: ''
 };
 
 export const getProducts = createAsyncThunk(
@@ -180,6 +183,9 @@ async (input) => {
 }
 ) 
 
+export const setSearchTerm = createAction('user/setSearchTerm')
+
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -206,6 +212,7 @@ export const userSlice = createSlice({
         state.page = 1;
         state.products = action.payload[1];
         state.filterCategory = action.payload[0];
+        state.searchTerm = ''
       })
       .addCase(filterCategory.rejected, (state, action) => {
         state.loading = false;
@@ -244,8 +251,10 @@ export const userSlice = createSlice({
       .addCase(searchByName.fulfilled, (state, action) => {
         state.loading = false;
         state.page = 1;
-        state.search = action.payload[0]
+        state.search = action.payload[0];
         state.products = action.payload[1];
+        state.filterCategory = '';
+        state.searchTerm = action.payload[0]; // Establecer el término de búsqueda en el estado
       })
       .addCase(searchByName.rejected, (state, action) => {
         state.loading = false;
@@ -269,6 +278,9 @@ export const userSlice = createSlice({
       })
       .addCase(clearCart, (state) => {
         state.cartProducts = [];
+      })
+      .addCase(setSearchTerm, (state) => {
+        state.searchTerm = ''
       })
       .addCase(increaseQuantity.fulfilled, (state, action) => {
         state.loading = false

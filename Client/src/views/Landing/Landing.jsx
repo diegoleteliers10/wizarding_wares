@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useState,useEffect } from 'react';
-import { filterCategory, getProducts } from '../../redux/userSlice';
+import { filterCategory, getProducts, setSearchTerm } from '../../redux/userSlice';
 import Slider from "react-slick";
+import Cookies from 'js-cookie';
 import { BiSolidRightArrow } from 'react-icons/bi';
 
 import '../../components/Users/storeStyles.css'
@@ -34,15 +35,17 @@ const Landing = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleFilterCategory = (category) => {
-      dispatch(filterCategory(category));
-      setSelectedCategory(category);
-      navigate('/home');
-    
+    dispatch(filterCategory(category));
+    setSelectedCategory(category);
+    navigate('/home');
+    Cookies.set('selectedCategory', category); // Guarda la categoría seleccionada en las cookies
   };
   const handleAllProducts = () => {
     dispatch(getProducts());
-      navigate('/home');
-  }
+    dispatch(setSearchTerm(''));
+    navigate('/home');
+    Cookies.remove('selectedCategory'); // Elimina la categoría seleccionada de las cookies
+  };
 
   function SamplePrevArrow(props) {
     const { className, style, onClick } = props;

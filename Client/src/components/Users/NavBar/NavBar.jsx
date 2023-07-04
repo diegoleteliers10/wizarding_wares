@@ -108,12 +108,11 @@ const NavBar = () => {
               </PopUpSession>, document.body)
           )}
         <Navbar expand="lg" className="navBar fixed top-0">
-     
-            <div className="mr-auto ml-8">
-            {pathname !== '/' && <SearchBar />}
+           
+             <div className="mr-auto ml-8">
+              <SearchBar />
             </div>
            
-            
             <div className="buttons">
                 <button onClick={handleAdmin} className="text-wwwhite">{isAdmin && 'Admin'}</button>
             </div>

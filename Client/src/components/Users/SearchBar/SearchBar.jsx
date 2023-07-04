@@ -2,11 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SlMagicWand } from 'react-icons/sl';
 import { searchByName } from "../../../redux/userSlice";
-import { useDispatch } from "react-redux";
+import { setSearchTerm } from "../../../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const SearchBar = () => {
     const dispatch = useDispatch();
     const [search, setSearch] = useState('');
+
+    
 
     const navigate = useNavigate();
 
@@ -20,17 +23,18 @@ const SearchBar = () => {
         dispatch(searchByName(search));
         setSearch('');
         navigate('/home');
-    }
+        dispatch(setSearchTerm(search)); // Establecer el término de búsqueda en el estado
+      };
 
-    const handleKeyPress = (event) => {
+      const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            event.preventDefault();
-            dispatch(searchByName(search));
-            setSearch('');
-            navigate('/home')
+          event.preventDefault();
+          dispatch(searchByName(search));
+          setSearch('');
+          navigate('/home');
+          dispatch(setSearchTerm(search)); // Establecer el término de búsqueda en el estado;
         }
     }
-
     return (
         <div className="relative">
             <input
