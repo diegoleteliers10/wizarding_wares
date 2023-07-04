@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Footer = () => {
   const navigate = useNavigate()
   const handleGoHome = ()=> {
-    navigate('/')
+    navigate('/home')
 }
   return (
     <div className='bg-wwbrown w-screen footerWw text-wwwhite'>

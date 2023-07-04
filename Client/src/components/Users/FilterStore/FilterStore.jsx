@@ -108,7 +108,7 @@ function FilterStore(props) {
           <option value="rateLowToHigh">Peor puntuación</option>
         </select>
       </div>
-      {(pathname === '/' || pathname === 'search') && (
+      {(pathname === '/home' || pathname === 'search') && (
         <div className={`inline-block appearance-none ${styles.filterItem}`}>
           {/* Filtro categoria */}
           <select

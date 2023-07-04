@@ -61,13 +61,13 @@ const routes = require("./routes/index");
 // 	})
 // }
 
-const roles=["admin","user"]
-const Roles = require('./models/Roles.model')
-for(let i=0; i<roles.length; i++){
-	const role = Roles.create({
-			name:roles[i]
-	})
-}
+// const roles=["admin","user"]
+// const Roles = require('./models/Roles.model')
+// for(let i=0; i<roles.length; i++){
+// 	const role = Roles.create({
+// 			name:roles[i]
+// 	})
+// }
 
 //Config de Auth0
 const config = {
@@ -98,7 +98,15 @@ server.use(paymentRoutes)
 
 
 server.use((req, res, next) => {
-	res.header("Access-Control-Allow-Origin", "*");
+  const allowedOrigins = [
+    `http://localhost:${PORT}`,
+    'https://wizardingwaresserver.onrender.com'
+  ];
+
+  const origin = req.headers.origin;
+  if(allowedOrigins.includes(origin)){
+    res.header('Access-Control-Allow-Origin', origin); // update to match the domain you will make the request from
+  }
 	res.header("Access-Control-Allow-Credentials", "true")
 	res.header(
 		"Access-Control-Allow-Headers",

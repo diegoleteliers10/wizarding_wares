@@ -1,10 +1,10 @@
 .storeComponent .title{
-    font-family: 'Marcellus', serif;
+  font-family: 'Marcellus', serif;
 }
 
 .storeComponent .descriptionDetail {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.3em;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.3em;
 }
 
 .storeComponentCard {
@@ -18,220 +18,295 @@ opacity: 0.5;
 }
 
 .storeComponentOutOfStock .customLink{
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 .storeComponentCard .customLink{
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 .storeComponent .noProductos {
-    height: 70vh;
+  height: 70vh;
 }
 
 .storeComponent h2{
-    font-family: 'Marcellus', serif;
+  font-family: 'Marcellus', serif;
 }
 
 .storeComponent h3 {
-    font-family: 'EB Garamond', serif;
+  font-family: 'EB Garamond', serif;
 }
 
 .storeComponent .navBar{
-    background-color: #692323;
+  background-color: #692323;
 }
 
 .storeComponent .card{
-    background-color: #EAE0D5;
-    border: none;
+  background-color: #EAE0D5;
+  border: none;
 }
 
 .storeComponent .buttons button{
-    font-family: 'EB Garamond', serif;
-    font-size: 1em;
+  font-family: 'EB Garamond', serif;
+  font-size: 1em;
 }
 
 .storeComponent select {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.2em;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2em;
 }
 
 .storeComponent .btmBorder{
-    border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
-}
-
-.btmBorder{
   border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
 }
 
+.btmBorder{
+border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
+}
+
 .storeComponent .fotoFondo{
-    background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    scale: 1.4;
-    height: 30vh;
-    margin-bottom: 30%;
-    display: flex;
-    align-items: center;
+  background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  scale: 1.4;
+  height: 30vh;
+  margin-bottom: 30%;
+  display: flex;
+  align-items: center;
 }
 .storeComponent .fotoFondo img{
-    margin: auto;
-    
+  margin: auto;
+  
 }
 
 .storeComponent .fotoFondoDetail{
-    background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    scale: 80%;
-    height: 80vh;
-    display: flex;
-    align-items: center;
+  background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  scale: 80%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
 }
 
 .storeComponent .fotoFondoDetail img{
-    width: 35rem;
-    padding: 10%;
-    margin: auto;
+  width: 35rem;
+  padding: 10%;
+  margin: auto;
 }
 
 .storeComponent .fotoFondoCart {
-    background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-image: url('https://images2.imgbox.com/9a/a6/MvEgMCRU_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .storeComponent .fotoFondoCart img {
-    padding: 10%;
-    margin: auto;
+  padding: 10%;
+  margin: auto;
+}
+
+.storeComponent .landingBg {
+  background-image: url('https://www.memo.com.ar/tools/image.php?id=48113&p=/files/image/48/48113/63e28677f172e.jpg&w=905&h=510&s=a1253ec242a346fd9ee6daa977684950&d=1688426472');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.storeComponent .landingBg img{
+  width: 350px; 
+  height: 100px; 
+  object-fit: cover;
+}
+
+.storeComponent .imgGolosinas{
+  background-image: url('https://images2.imgbox.com/7c/9e/HaTwJfCA_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 270px;
+}
+.storeComponent .imgIndumentaria{
+  background-image: url('https://images2.imgbox.com/38/e8/lEYFAoPD_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 270px;
+}
+.storeComponent .imgLibros{
+  background-image: url('https://images2.imgbox.com/f7/a9/5AfBCbES_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 270px;
+}
+
+.storeComponent .imgVaritas{
+  background-image: url('https://images2.imgbox.com/df/0e/nXjFuAv2_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 270px;
+}
+
+.storeComponent .imgQuidditch{
+  background-image: url('https://images2.imgbox.com/4e/b3/ChhyXjw6_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 270px;
+}
+
+.storeComponent .imgMiscelaneas{
+  background-image: url('https://images2.imgbox.com/b9/f0/4fQTaw4I_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 270px;
+}
+
+.shadowText{
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
 
 .fontEB{
-    font-family: 'EB Garamond', serif;
+  font-family: 'EB Garamond', serif;
 }
 
 .fontMarcellus {
-    font-family: 'Marcellus', serif;
+  font-family: 'Marcellus', serif;
 }
 
 .storeComponent .buttonContainer{
-    align-self: baseline;
+  align-self: baseline;
 }
 
 .buttonContainer {
-    display: inline-block;
-    position: relative;
-  }
-  
-  .buttonContainer button {
-    background-color: #a88654;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .buttonContainer button:hover {
-    background-color: #5e503f;
-  }
-  
-  .square {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
-    width: 50px;
-    height: 50px;
-    background-color: #a88654;
-    z-index: -1;
-  }
-  .storeLoginForm{
-    height: 75vh;
-  }
-  .storeComponent input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-  }
-  
-  /* Style the custom radio button */
-  .storeComponent input[type="radio"] + label {
-    position: relative;
-    padding-left: 25px; /* Adjust as needed */
-    cursor: pointer;
-  }
-  
-  /* Style the custom radio button indicator */
-  .storeComponent input[type="radio"] + label::before {
-    content: "";
-    position: absolute;
-    top: 5px; /* Adjust as needed */
-    left: 0;
-    width: 14px; /* Adjust as needed */
-    height: 14px; /* Adjust as needed */
-    border-radius: 50%;
-    background-color: #ddd;
-    border: 1px solid #0A0908; /* Set your desired background color */
-  }
-  
-  /* Style the custom radio button when selected */
-  .storeComponent input[type="radio"]:checked + label::before {
-    background-color: #692323; /* Set your desired selected color */
-  }
+  display: inline-block;
+  position: relative;
+}
 
-  .storeComponent .customSelectArrow{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    /* Add custom styles for the arrow */
-    background: transparent;
-    border: none;
-    padding-right: 0.5rem;
-    position: relative;
-  }
+.buttonContainer button {
+  background-color: #a88654;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  .storeComponent.loginBg {
-    background-image: url('https://cdn.wallpaperdirect.com/shared-assets/images/products/187987full.jpg');
-  }
+.buttonContainer button:hover {
+  background-color: #5e503f;
+}
 
-  
-  .paginate button{
-    width: 60px;
-    height: 35px;
-    margin: 30px 20px 30px 20px;
-    border-radius: 10px;
-    font-size: 20px;
-    background-color: #692323;
-    color: #ffffff;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+.square {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 50px;
+  height: 50px;
+  background-color: #a88654;
+  z-index: -1;
+}
+.storeLoginForm{
+  height: 75vh;
+}
+.storeComponent input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Style the custom radio button */
+.storeComponent input[type="radio"] + label {
+  position: relative;
+  padding-left: 25px; /* Adjust as needed */
+  cursor: pointer;
+}
+
+/* Style the custom radio button indicator */
+.storeComponent input[type="radio"] + label::before {
+  content: "";
+  position: absolute;
+  top: 5px; /* Adjust as needed */
+  left: 0;
+  width: 14px; /* Adjust as needed */
+  height: 14px; /* Adjust as needed */
+  border-radius: 50%;
+  background-color: #ddd;
+  border: 1px solid #0A0908; /* Set your desired background color */
+}
+
+/* Style the custom radio button when selected */
+.storeComponent input[type="radio"]:checked + label::before {
+  background-color: #692323; /* Set your desired selected color */
+}
+
+.storeComponent .customSelectArrow{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add custom styles for the arrow */
+  background: transparent;
+  border: none;
+  padding-right: 0.5rem;
+  position: relative;
+}
+
+.storeComponent.loginBg {
+  background-image: url('https://cdn.wallpaperdirect.com/shared-assets/images/products/187987full.jpg');
+}
+
+
+.paginate button{
+  width: 60px;
+  height: 35px;
+  margin: 30px 20px 30px 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  background-color: #692323;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.paginate button:hover {
+  box-shadow: 3px 3px 0px 0px rgb(162, 162, 162);
+}
+
+.prev {
+  font-size: 21px;
+  color: #692323;
+  font-weight: 500;
+}
+
+.in {
+  font-size: 30px;
+  margin: 0px 10px 0px 10px;
+  font-weight: 600;
+  color: #692323;
+}
+
+.next {
+  font-size: 21px;
+  color: #692323;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .storeComponent .fotoFondoDetail {
+    height: 40vh;
   }
-  
-  .paginate button:hover {
-    box-shadow: 3px 3px 0px 0px rgb(162, 162, 162);
+  .storeComponent .fotoFondoDetail img{
+    width: 20rem;
   }
-  
-  .prev {
-    font-size: 21px;
-    color: #692323;
-    font-weight: 500;
+  .storeComponent .landingBg {
+    display: none;
   }
-  
-  .in {
-    font-size: 30px;
-    margin: 0px 10px 0px 10px;
-    font-weight: 600;
-    color: #692323;
-  }
-  
-  .next {
-    font-size: 21px;
-    color: #692323;
-    font-weight: 500;
-  }
+}
