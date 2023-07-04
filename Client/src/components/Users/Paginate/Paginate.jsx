@@ -12,6 +12,10 @@ const Paginate = () => {
         dispatch(changePage(pageNumber));
     }
 
+    if (products.length === 0) {
+        return null;
+    }
+
     return (
         <div className="paginate">
             { page > 1 ? 
