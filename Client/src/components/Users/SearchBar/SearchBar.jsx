@@ -40,7 +40,7 @@ const SearchBar = () => {
                 placeholder="Buscar..."
                 onChange={event => onChangeHandler(event)}
                 onKeyPress={event => handleKeyPress(event)}
-                className="bg-wwmaroon pr-12 pl-4 py-2 rounded border border-wwwhite"          
+                className="bg-wwmaroon pr-12 pl-4 py-2 rounded border border-wwwhite text-wwwhite"          
                   />
 
             <button
