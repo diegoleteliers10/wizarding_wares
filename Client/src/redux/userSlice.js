@@ -18,7 +18,8 @@ const initialState = {
   userAddress: null,
   reviews: [],
   selectedCategory: Cookies.get('selectedCategory') || '',
-  searchTerm: ''
+  searchTerm: '',
+  clientId: null,
 };
 
 export const getProducts = createAsyncThunk(
@@ -160,7 +161,7 @@ export const createProductReview = createAsyncThunk(
   async ({productId, userId, comment, rating} ) => {
     try {
       const response = await axios.post(`/createReview/${productId}?userId=${userId}`, {comment, rating });
-      console.log(response.data)
+      // console.log(response.data)
       return response.data;
     } catch (error) {
       console.error('Error al crear la review:', error);
@@ -176,12 +177,37 @@ async (userId) => {
 }
 )
 
+export const createPreference = createAsyncThunk('user/createPreference', 
+  async (items) => {
+    try {
+        const response = await axios.post("/create-order", {items});
+    const { body } = response.data;
+    
+    if(body){
+      //redirecciona al usuario a la URL de mercadopago
+      window.location.href = await body.init_point
+    }
+    return body;
+    } catch (error) {
+        console.log(error);
+    }
+  }
+)
+
 export const createPurchase = createAsyncThunk('user/createPurchase',
 async (input) => {
   const response = await axios.post(`/createPurchase`, input)
   return response; 
 }
 ) 
+
+export const getWebhook = createAsyncThunk(
+  'user/getWebhook',
+  async () => {
+    const response = await axios.get('/recievewebhook')
+    return response
+  }
+);
 
 export const setSearchTerm = createAction('user/setSearchTerm')
 
@@ -220,7 +246,7 @@ export const userSlice = createSlice({
       })
       .addCase(filterCategory.pending, (state, action) => {
         state.loading = true;
-        console.log(action);
+        // console.log(action);
       })
       .addCase(filterPrice.fulfilled, (state, action) => {
         state.loading = false;
@@ -262,7 +288,7 @@ export const userSlice = createSlice({
       })
       .addCase(searchByName.pending, (state, action) => {
         state.loading = true;
-        console.log(action);
+        // console.log(action);
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         const product = action.payload;
@@ -272,9 +298,9 @@ export const userSlice = createSlice({
         state.cartProducts = [...state.cartProducts, product];
       })
       .addCase(removeFromCart.fulfilled, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         state.cartProducts = state.cartProducts.filter(p => p.productId !== action.payload);
-        console.log(state.products);
+        // console.log(state.products);
       })
       .addCase(clearCart, (state) => {
         state.cartProducts = [];
@@ -328,7 +354,7 @@ export const userSlice = createSlice({
       })
       .addCase(getUserAddress.rejected, (state, action) => {
         state.loading = false
-        console.log('getuseraddres rejected');
+        // console.log('getuseraddres rejected');
       })
       .addCase(getUserAddress.pending, (state, action) => {
         state.loading = true
@@ -348,6 +374,37 @@ export const userSlice = createSlice({
         const newReview = action.payload;
         state.reviews.push(newReview);
 
+      })
+      .addCase(createPurchase.fulfilled, (state, action) => {
+        state.paymentStatus = action.payload;
+        // console.log(action.payload);
+
+      })
+      .addCase(getWebhook.fulfilled, (state, action) => {
+        // console.log(action.payload);
+        // state.paymentStatus = action.payload;
+
+      })
+      .addCase(getWebhook.rejected, (state, action) => {
+        // console.log('rejected');
+
+      })
+      .addCase(getWebhook.pending, (state, action) => {
+        // console.log('pending');
+      })
+      .addCase(createPreference.fulfilled, (state, action) => {
+        state.clientId = action.payload.client_id
+        // console.log(action.payload.client_id);
+        // console.log('funciono');
+        // state.paymentStatus = action.payload;
+
+      })
+      .addCase(createPreference.rejected, (state, action) => {
+        // console.log('rejected');
+
+      })
+      .addCase(createPreference.pending, (state, action) => {
+        // console.log('pending');
       })
   },
 });
