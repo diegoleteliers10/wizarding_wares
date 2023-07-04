@@ -74,6 +74,14 @@ const Landing = () => {
       <div className='px-24'>
         <Slider {...settings} className='my-4'>
             <div>
+              <div className='imgTodos flex items-center justify-center hover:saturate-50 hover:scale-105 hover:cursor-pointer transition-all ease-in'
+                onClick={() => handleAllProducts()}
+              >
+                <h5 
+                className='fontMarcellus text-2xl text-wwwhite shadowText font-bold max-w-min'>Todos los productos</h5>
+              </div>
+            </div>
+            <div>
               <div className='imgGolosinas flex items-center justify-center hover:saturate-50 hover:scale-105 hover:cursor-pointer transition-all ease-in'
                 onClick={() => handleFilterCategory('Golosinas')}
               >
