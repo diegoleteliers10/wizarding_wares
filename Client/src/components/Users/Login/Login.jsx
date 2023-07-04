@@ -76,19 +76,19 @@ const Login = () => {
         <div className='storeComponent'>
             <div className='z-10 mx-auto flex items-center justify-center storeLoginForm'>
                 <div className='w-1/2 mx-auto flex items-center justify-center storeLoginForm'>
-                    <div>
+                    <div className='w-72 formLogin'>
                         <div className='absolute right-40 -scale-50 flex justify-end'>
-                            <img src="https://miro.medium.com/v2/resize:fit:602/1*2hvodzPPjdPcXpOY-2_IwA.gif" alt="" />
+                            <img src="https://miro.medium.com/v2/resize:fit:602/1*2hvodzPPjdPcXpOY-2_IwA.gif" alt="Huellas" className='patas' />
                         </div>
                         <div className='absolute left-40 -z-0 scale-50 flex justify-end'>
-                            <img src="https://miro.medium.com/v2/resize:fit:602/1*2hvodzPPjdPcXpOY-2_IwA.gif" alt="" />
+                            <img src="https://miro.medium.com/v2/resize:fit:602/1*2hvodzPPjdPcXpOY-2_IwA.gif" alt="Huellas" className='patas' />
                         </div>
                         
-                        <form className="bg-white p-8 rounded shadow-xl max-w-min max-h-max" onSubmit={handleSubmit}>
+                        <form className="bg-white p-8 rounded shadow-xl" onSubmit={handleSubmit}>
                             <div>
                                 {
                                     message && 
-                                    <p className='italic text-red-500'>{message}</p>
+                                    <p className='italic text-red-500 text-xs'>{message}</p>
                                 }
                             </div>
                             <div className='grid fontEB'>
