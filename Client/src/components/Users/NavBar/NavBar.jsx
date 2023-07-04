@@ -108,10 +108,12 @@ const NavBar = () => {
               </PopUpSession>, document.body)
           )}
         <Navbar expand="lg" className="navBar fixed top-0">
-     
-            <div className="mr-auto ml-8">
-            {pathname !== '/' && <SearchBar />}
-            </div>
+           
+            {pathname !== '/' ? <div className="mr-auto ml-8">
+              <SearchBar />
+            </div>:<div className="mr-auto ml-8 invisible">
+              <SearchBar />
+            </div>}
            
             
             <div className="buttons">
