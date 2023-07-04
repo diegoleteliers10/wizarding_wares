@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import axios from 'axios';
-import { createAddress } from '../../../redux/userSlice';
+import { createAddress, createPreference } from '../../../redux/userSlice';
 import getCookie from '../../../hooks/getCookie';
 import { useNavigate } from 'react-router-dom';
 
@@ -43,14 +43,8 @@ const Checkout = () => {
     const allItemsQuantity= items.reduce((acc, item) => acc + item.quantity, 0)
 
  
-    const createPreference = async () => {
-        try {
-            const response = await axios.post("http://localhost:3001/create-order", {items});
-        const { body } = response.data; // Obtiene el objeto body para luego poder usar la propiedad init_point
-        return body;
-        } catch (error) {
-            console.log(error);
-        }
+    const handleCreatePreference = async () => {
+      await dispatch(createPreference(items))
     }
 
     const handleBack = () => {
@@ -80,14 +74,10 @@ const Checkout = () => {
     const handleBuy = async (event) => {
         event.preventDefault();
         await dispatch(createAddress(input))
-        console.log(input);
-        const body = await createPreference()
-        console.log(body);
-        if(body){
-            //redirecciona al usuario a la URL de mercadopago
-            window.location.href = await body.init_point
-            setPreferenceId(body.id)
-        }
+        // console.log(input);
+        const body = await handleCreatePreference()
+        // console.log(body);
+        
     }
 
     const handleChange = (event) => {
@@ -232,6 +222,10 @@ const Checkout = () => {
                         </div>
 
                     </div>
+                    {!input.name || !input.phoneNumber || !input.street || !input.number || !input.zipCode ? 
+                        <span>Se debe completar todo el formulario de envío!</span>
+                        : ""
+                    }
                 </form>
                 
             </div>
@@ -251,11 +245,12 @@ const Checkout = () => {
                 <div className="flex items-center justify-center mt-6">
                     <button
                     onClick={handleBuy}
+                    disabled={!input.name || !input.phoneNumber || !input.street || !input.number || !input.zipCode}
                     type="submit"
                     className={
-                        parsedProducts.length >= 1
+                        parsedProducts.length >= 1 && input.name && input.phoneNumber && input.street && input.number && input.zipCode
                         ? "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        : "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded disabled pointer-events-none"
+                        : "bg-blue-500  text-white font-bold py-1 px-2 rounded disabled pointer-events-none"
                     }
                     >
                     Pagar con Mercado Pago

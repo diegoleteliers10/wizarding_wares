@@ -29,7 +29,7 @@ import Landing from './views/Landing/Landing'
 
 function App() {
   const { pathname } = useLocation()
-  console.log(pathname)
+  
   return (
     <div className='App flex flex-col min-h-screen bg-wwwhite'>
       {

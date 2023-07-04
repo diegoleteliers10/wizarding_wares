@@ -2,15 +2,18 @@ import SuccessCard from "../SuccessCard/SuccessCard";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getCookie from "../../../../../hooks/getCookie";
-import { getUserAddress, createPurchase } from "../../../../../redux/userSlice";
+import { getUserAddress, createPurchase, getWebhook } from "../../../../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Success = () => {
     const { userAddress } = useSelector((state) => state.user);
+    const clientId  = useSelector((state) => state.user.clientId)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const userInfoUnparsed = getCookie('userInfo');
     const [myOrder, setOrder] = useState();
     const [userId, setUserId] = useState();
+    const [hasClientId, setHasClientId] = useState("");
     const [user, setUser] = useState({
         name: "",
         email: "", 
@@ -21,7 +24,6 @@ const Success = () => {
         detail: "",
         zipCode: "",
     });
-    const navigate = useNavigate();
 
     //para poder obtener el total del precio
     let shoppingCartProducts = localStorage.getItem('shoppingCart');
@@ -31,6 +33,12 @@ const Success = () => {
     let totalPrice = parsedProducts.reduce((acc, product) => {
         return acc + Number(product.price) * Number(product.quantity);
     }, 0);
+
+    useEffect(() => {
+      // if(!clientId) {
+        //     navigate('/')
+        // }  
+    }, [])
 
     useEffect(() => {
         if (userInfoUnparsed) {
@@ -46,6 +54,7 @@ const Success = () => {
 
     useEffect(() => {
         if (userId) {
+            // console.log(clientId);
             dispatch(getUserAddress(userId));
         }
     }, [userId]);
@@ -83,8 +92,14 @@ const Success = () => {
                 purchaseItems: order
             };
             dispatch(createPurchase(purchase));
+            
         }
+        
     }, [userAddress, userId,]);
+
+    // if(!clientId){
+    //     return null
+    // }
 
     return (
         <div className="p-4">
