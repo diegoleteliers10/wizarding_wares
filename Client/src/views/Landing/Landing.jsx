@@ -27,7 +27,18 @@ const Landing = () => {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", background: "green" }}
+        style={{ ...style, display: "block", filter: 'drop-shadow(2px 4px 6px black)' }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", filter: 'drop-shadow(2px 4px 6px black)' }}
         onClick={onClick}
       />
     );
@@ -42,7 +53,9 @@ const Landing = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3500,
-    pauseOnHover: true
+    pauseOnHover: true,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />
   };
 
   return (
