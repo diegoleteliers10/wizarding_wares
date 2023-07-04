@@ -109,13 +109,10 @@ const NavBar = () => {
           )}
         <Navbar expand="lg" className="navBar fixed top-0">
            
-            {pathname !== '/' ? <div className="mr-auto ml-8">
+             <div className="mr-auto ml-8">
               <SearchBar />
-            </div>:<div className="mr-auto ml-8 invisible">
-              <SearchBar />
-            </div>}
+            </div>
            
-            
             <div className="buttons">
                 <button onClick={handleAdmin} className="text-wwwhite">{isAdmin && 'Admin'}</button>
             </div>
