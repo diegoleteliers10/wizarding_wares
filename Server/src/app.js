@@ -13,53 +13,53 @@ const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_
 const routes = require("./routes/index");
 
 
-const Product = require("./models/Product.model")
-const Category = require("./models/Category.model")
-const data = require("../assets/data.json")
-const categorieData = ["Libros","Varitas","Indumentaria","Golosinas","Quidditch","Misceláneas"]
-for (let i = 0; i < categorieData.length; i++) {
-  Category.create({
-      name: categorieData[i],
-      isActive: true
-  })
-    .then((categorie) => {
-      console.log("Categorie created:", categorie);
-    })
-    .catch((error) => {
-      console.error("Error creating categorie:", error);
-    })
-}
-setTimeout(() => {
+// const Product = require("./models/Product.model")
+// const Category = require("./models/Category.model")
+// const data = require("../assets/data.json")
+// const categorieData = ["Libros","Varitas","Indumentaria","Golosinas","Quidditch","Misceláneas"]
+// for (let i = 0; i < categorieData.length; i++) {
+//   Category.create({
+//       name: categorieData[i],
+//       isActive: true
+//   })
+//     .then((categorie) => {
+//       console.log("Categorie created:", categorie);
+//     })
+//     .catch((error) => {
+//       console.error("Error creating categorie:", error);
+//     })
+// }
+// setTimeout(() => {
   
-for (let i = 0; i < data.length; i++) {
-    Product.create({ 
-    name: data[i].name,
-    description: data[i].description,
-    image: data[i].image,
-    price: data[i].price,
-    stock: data[i].stock,
-    categoryCategoryId: data[i].categoryId
-  })
-    .then((product) => {
-      console.log("Product created:", product);
-    })
-    .catch((error) => {
-      console.error("Error creating product:", error);
-    });
-  }
-}, 2000);
+// for (let i = 0; i < data.length; i++) {
+//     Product.create({ 
+//     name: data[i].name,
+//     description: data[i].description,
+//     image: data[i].image,
+//     price: data[i].price,
+//     stock: data[i].stock,
+//     categoryCategoryId: data[i].categoryId
+//   })
+//     .then((product) => {
+//       console.log("Product created:", product);
+//     })
+//     .catch((error) => {
+//       console.error("Error creating product:", error);
+//     });
+//   }
+// }, 2000);
 
 
 
-const Status = require("./models/Status.model")
+// const Status = require("./models/Status.model")
 
-const estados = ["En preparación", "En camino", "Entregado", "Cancelado"]
+// const estados = ["En preparación", "En camino", "Entregado", "Cancelado"]
 
-for(let i=0; i<estados.length; i++){
-	const estado = Status.create({
-		name:estados[i]
-	})
-}
+// for(let i=0; i<estados.length; i++){
+// 	const estado = Status.create({
+// 		name:estados[i]
+// 	})
+// }
 
 const roles=["admin","user"]
 const Roles = require('./models/Roles.model')
