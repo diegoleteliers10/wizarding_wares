@@ -14,6 +14,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const {user, message} = useSelector((state) => state.account)
+    const [failMessage, setFailMessage] = useState('');
 
     useEffect(() => {
         if(user.name && user.id && user.email && user.role){
@@ -51,6 +52,7 @@ const Login = () => {
         event.preventDefault()
         dispatch(login(input))
         .then (()=>{
+            setFailMessage(message)
             
         })
         .catch((error)=>{
@@ -87,7 +89,7 @@ const Login = () => {
                         <form className="bg-white p-8 rounded shadow-xl" onSubmit={handleSubmit}>
                             <div>
                                 {
-                                    message && 
+                                    failMessage && 
                                     <p className='italic text-red-500 text-xs'>{message}</p>
                                 }
                             </div>
