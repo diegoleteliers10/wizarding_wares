@@ -5,6 +5,7 @@ const createOrder = async (req, res) => {
     const items = req.body.items;
     try {
         await mercadopago.preferences.create({
+            
         items: items,
 
         back_urls: {
@@ -18,7 +19,7 @@ const createOrder = async (req, res) => {
         auto_return: "approved",
 
         //URL del webhook, donde recibe las notificaciones del back de MP(debe ser una url HTTPS por lo que MP va a tirar un error al pagar)
-        notification_url: 'https://4c77-2800-810-505-83af-a82b-c8c3-ace3-b798.ngrok-free.app/webhook'
+        notification_url: 'https://ca5c-152-169-250-55.ngrok-free.app/webhook'
         })
         .then(function (response) {
             res.json({
@@ -30,24 +31,33 @@ const createOrder = async (req, res) => {
     }
 };
 
+let respuesta = null;
 const receiveWebhook = async (req, res) => {
     const payment = req.query
     try {
         //aca utilizo los datos que me manda el webhook para buscar el pago hecho anteriormente y ver su info en este caso por consola
         if(payment.type === 'payment'){
             const data = await mercadopago.payment.findById(payment['data.id'])
-            console.log(data, "hola juan");
-            const status = data.body.status
-            console.log(status, "juancho gamba")
-            res.sendStatus(204).json(status)
+            // const status = data.body.status
+            respuesta = data
+            res.sendStatus(201)
         }
     } catch (error) {
         return res.status(500).json({error: error.message})
     } 
 };
 
+const getReceiveWebhook = async (req, res) => {
+    try {
+        res.status(200).json({respuesta})
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
 
 module.exports = {
     createOrder,
-    receiveWebhook
+    receiveWebhook,
+    getReceiveWebhook
 };
