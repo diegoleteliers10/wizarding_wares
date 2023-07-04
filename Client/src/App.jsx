@@ -19,9 +19,9 @@ import MyPurchases from './components/Users/MyPurchases/MyPurchases'
 import Success from './components/Users/BackUrls/Success/Success/Success'
 import Failure from './components/Users/BackUrls/Failure'
 import ReviewForm from './components/Users/ReviewForm/ReviewForm'
-// axios.defaults.baseURL = `http://wizardingwares-production.up.railway.app/`
+
 import axios from "axios";
-// axios.defaults.baseURL = `http://wizardingwares-production.up.railway.app/`;
+// axios.defaults.baseURL = `https://wizardingwaresserver.onrender.com/`;
 axios.defaults.baseURL = `http://localhost:3001/`;
 
 
