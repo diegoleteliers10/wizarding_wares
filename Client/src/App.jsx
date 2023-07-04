@@ -20,6 +20,8 @@ import Success from './components/Users/BackUrls/Success/Success/Success'
 import Failure from './components/Users/BackUrls/Failure'
 import ReviewForm from './components/Users/ReviewForm/ReviewForm'
 import axios from "axios";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 // axios.defaults.baseURL = `https://wizardingwaresserver.onrender.com/`;
 axios.defaults.baseURL = `http://localhost:3001/`;
 import Landing from './views/Landing/Landing'
