@@ -90,115 +90,112 @@ const Detail = () => {
     }
     sessionStorage.setItem(sessionStorageKey, JSON.stringify(product));
   }, [product, addCart, id, navigate, sessionStorageKey]);
-  
 
   return (
-    <div>
+    <div>    
+      <div className="md:flex storeComponent md:h-screen items-center p-8 storeComponent">
+        <div className="w-full md:w-1/2 flex flex-col items-center">
+          <BackButton />
+          <div className="fotoFondoDetail">
+            <img src={product.image} alt={product.name} />
+          </div>
+        </div>
+        <div className="w-full md:w-1/2 p-10 md:p-28">
+          <Rating productId={id}/>
+          <h2 className="fontMarcellus text-left">{product.name}</h2>
+          <p className="bigPrice text-left text-wwbrown font-bold text-5xl fontEB">${product.price}</p>
+          {product.categoryCategoryId === 3 || product.category === 'Indumentaria'? (
+            <div>
+              <p className="text-left fontEB text-xl">Talle:</p>
+              <fieldset onChange={handleSizeChange} className="ml-0">
+                <div className="flex space-x-4 fontEB text-xl">
+                  <div>
+                    <input type="radio" id="size1" name="contact" value="XS" />
+                    <label htmlFor="size1">XS</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="size2" name="contact" value="S" />
+                    <label htmlFor="size2">S</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="size3" name="contact" value="M" />
+                    <label htmlFor="size3">M</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="size4" name="contact" value="L" />
+                    <label htmlFor="size4">L</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="size5" name="contact" value="XL" />
+                    <label htmlFor="size5">XL</label>
+                  </div>
 
-    
-    <div className="flex storeComponent h-screen items-center p-8 storeComponent">
-      <div className="w-1/2 flex flex-col items-center">
-        <BackButton />
-      <div className="fotoFondoDetail">
-        <img src={product.image} alt={product.name} />
-      </div>
-      </div>
-      <div className="w-1/2 p-28">
-        <Rating productId={id}/>
-        <h2 className="fontMarcellus text-left">{product.name}</h2>
-        <p className="bigPrice text-left text-wwbrown font-bold text-5xl fontEB">${product.price}</p>
-        {product.categoryCategoryId === 3 || product.category === 'Indumentaria'? (
-          <div>
-            <p className="text-left fontEB text-xl">Talle:</p>
-            <fieldset onChange={handleSizeChange} className="ml-0">
-              <div className="flex space-x-4 fontEB text-xl">
-                <div>
-                  <input type="radio" id="size1" name="contact" value="XS" />
-                  <label htmlFor="size1">XS</label>
+                  <div>
+                    <input type="radio" id="size6" name="contact" value="XXL" />
+                    <label htmlFor="size6">XXL</label>
+                  </div>
                 </div>
+              </fieldset>
+              {error !== '' && (
                 <div>
-                  <input type="radio" id="size2" name="contact" value="S" />
-                  <label htmlFor="size2">S</label>
+                  <p className="text-wwmaroon font-medium">{error}</p>
                 </div>
-                <div>
-                  <input type="radio" id="size3" name="contact" value="M" />
-                  <label htmlFor="size3">M</label>
-                </div>
-                <div>
-                  <input type="radio" id="size4" name="contact" value="L" />
-                  <label htmlFor="size4">L</label>
-                </div>
-                <div>
-                  <input type="radio" id="size5" name="contact" value="XL" />
-                  <label htmlFor="size5">XL</label>
-                </div>
-
-                <div>
-                  <input type="radio" id="size6" name="contact" value="XXL" />
-                  <label htmlFor="size6">XXL</label>
-                </div>
+              )}
+            </div>
+          ) : null}
+          <p className="descriptionDetail mt-8 text-left fontEB">{product.description}</p>
+          <div className="sm:flex justify-between p-4">
+            <div className="flex justify-center mb-4 sm:block sm:mb-2">
+              <label>
+                Cantidad:
+              </label>
+              <div className="flex justify-between">
+                <button onClick={handleDecreaseQuantity} className="">-</button>
+                <span>{quantity}</span>
+                <button onClick={handleIncreaseQuantity} className="">+</button>
               </div>
-            </fieldset>
-            {error !== '' && (
+            </div>
+            <div>
+              <button
+                onClick={handleAddToCart}
+                className={`btn1 btn--svg-small ${isProductInCart || (size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn || !verifiedUser ? 'disabled opacity-50 pointer-events-none' : ''}`}
+                disabled={quantity === 0}
+              >
+                Añadir al carrito
+              </button>
+              {
+                isProductInCart && showProductInCartMessage && (
+                  <p className="product-in-cart-message">¡Tu producto te esta esperando en el carrito!</p>
+                )
+              }
+              <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
+            </div>
+          </div>
+          <div className="mt-8">
+            {
+              !loggedIn && 
               <div>
-                <p className="text-wwmaroon font-medium">{error}</p>
+                <h5 className="font-medium text-wwmaroon fontEB">
+                  ¡Debes iniciar sesión para agregar artículos al carrito!
+                </h5>
+                <p><NavLink to='/register'>Regístrate</NavLink></p>
               </div>
-            )}
+            }
+            {
+              (!verifiedUser && loggedIn) &&
+              <div>
+                <h5 className="font-medium text-wwmaroon fontEB">
+                  ¡Debes verificar tu cuenta para agregar artículos al carrito!
+                </h5>
+              </div>
+            }
           </div>
-        ) : null}
-        <p className="descriptionDetail mt-8 text-left fontEB">{product.description}</p>
-        <div className="flex justify-between p-4">
-          <div className="">
-            <label>
-              Cantidad:
-            </label>
-            <div className="flex justify-between">
-              <button onClick={handleDecreaseQuantity} className="">-</button>
-              <span>{quantity}</span>
-              <button onClick={handleIncreaseQuantity} className="">+</button>
-            </div>
-          </div>
-          <div>
-          <button
-              onClick={handleAddToCart}
-              className={`btn1 btn--svg-small ${isProductInCart || (size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn || !verifiedUser ? 'disabled opacity-50 pointer-events-none' : ''}`}
-              disabled={quantity === 0}
-          >
-           Añadir al carrito
-          </button>
-          {
-            isProductInCart && showProductInCartMessage && (
-              <p className="product-in-cart-message">¡Tu producto te esta esperando en el carrito!</p>
-            )
-          }
-          <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
-          </div>
+          
         </div>
-        <div className="mt-8">
-          {
-            !loggedIn && 
-            <div>
-              <h5 className="font-medium text-wwmaroon fontEB">
-                ¡Debes iniciar sesión para agregar artículos al carrito!
-              </h5>
-              <p><NavLink to='/register'>Regístrate</NavLink></p>
-            </div>
-          }
-          {
-            (!verifiedUser && loggedIn) &&
-            <div>
-              <h5 className="font-medium text-wwmaroon fontEB">
-                ¡Debes verificar tu cuenta para agregar artículos al carrito!
-              </h5>
-            </div>
-          }
+      </div>
+        <div>
+        <ReviewList productId={id}/>
         </div>
-        
-      </div>
-    </div>
-      <div>
-      <ReviewList productId={id}/>
-      </div>
     </div>
   );
 };
