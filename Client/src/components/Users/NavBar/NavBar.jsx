@@ -2,7 +2,7 @@ import SearchBar from "../SearchBar/SearchBar"
 import Navbar from 'react-bootstrap/Navbar';
 import '../storeStyles.css';
 import { useState, useEffect } from "react"; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../../redux/accountSlice";
 import {RiLuggageCartLine} from "react-icons/ri";
@@ -18,6 +18,7 @@ const NavBar = () => {
     //const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     const [cartItemCount, setCartItemCount] = useState(0);
     const [userName, setUserName] = useState('')
+    const { pathname } = useLocation();
     //PopUp cierre de sesión.
     const [popUp, setPopUp] = useState(false)
     const [popUpMessage, setPopUpMessage] = useState('');
@@ -107,9 +108,12 @@ const NavBar = () => {
               </PopUpSession>, document.body)
           )}
         <Navbar expand="lg" className="navBar fixed top-0">
+     
             <div className="mr-auto ml-8">
-            <SearchBar/>
+            {pathname !== '/' && <SearchBar />}
             </div>
+           
+            
             <div className="buttons">
                 <button onClick={handleAdmin} className="text-wwwhite">{isAdmin && 'Admin'}</button>
             </div>

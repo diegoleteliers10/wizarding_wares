@@ -22,6 +22,7 @@ import ReviewForm from './components/Users/ReviewForm/ReviewForm'
 import axios from "axios";
 // axios.defaults.baseURL = `https://wizardingwaresserver.onrender.com/`;
 axios.defaults.baseURL = `http://localhost:3001/`;
+import Landing from './views/Landing/Landing'
 
 
 function App() {
@@ -35,7 +36,8 @@ function App() {
       }
       <div className={(pathname === '/register' || pathname === '/login' ) ? 'storeComponent loginBg' : 'flex-grow '}>
         <Routes>
-          <Route path='/' element={<Home/>} />
+          <Route path='/' element={<Landing/>} />
+          <Route path='/home' element={<Home/>} />
           <Route path='/purchases' element={<MyPurchases/>} />
           <Route path='/reviews/:id' element={<ReviewForm/>}/>
           <Route path='/login' element={<Login/>} />

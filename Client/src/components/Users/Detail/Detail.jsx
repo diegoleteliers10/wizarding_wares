@@ -86,7 +86,7 @@ const Detail = () => {
     setShowProductInCartMessage(!!foundProduct);
     
     if (product && product.isActive === false) {
-      navigate('/');
+      navigate('/home');
     }
     sessionStorage.setItem(sessionStorageKey, JSON.stringify(product));
   }, [product, addCart, id, navigate, sessionStorageKey]);
