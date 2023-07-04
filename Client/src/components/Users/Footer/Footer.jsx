@@ -19,15 +19,15 @@ const Footer = () => {
         </div>
         <div className='w-1/3'>
           <h4>Información</h4>
-          <Link to="/nosotros" className="footer-link">Nosotros</Link>
+          <Link to="/nosotros" className="text-wwwhite hover:text-wwmaroon transition-all ease-in no-underline">Nosotros</Link>
           <br />
-          <Link to="/faq" className="footer-link">FAQ</Link>
+          <Link to="/faq" className="text-wwwhite hover:text-wwmaroon transition-all ease-in no-underline">Preguntas Frecuentes</Link>
         </div>
         <div className='w-1/3'>
           <h4>Legal</h4>
-          <Link to="/terminosYCondiciones" className="footer-link">Términos y Condiciones</Link>
+          <Link to="/terminosYCondiciones" className="text-wwwhite hover:text-wwmaroon transition-all ease-in no-underline">Términos y Condiciones</Link>
           <br />
-          <Link to="/politicaDePrivacidad" className="footer-link">Política de Privacidad</Link>
+          <Link to="/politicaDePrivacidad" className="text-wwwhite hover:text-wwmaroon transition-all ease-in no-underline">Política de Privacidad</Link>
         </div>
       </div>
       <div>

@@ -169,6 +169,14 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
   height: 270px;
 }
 
+.storeComponent .imgTodos{
+  background-image: url('https://images2.imgbox.com/12/9a/xXJ7jmTr_o.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 270px;
+}
+
 .shadowText{
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
@@ -299,6 +307,7 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
   font-weight: 500;
 }
 
+
 @media (max-width: 768px) {
   .storeComponent .fotoFondoDetail {
     height: 40vh;
@@ -306,7 +315,9 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
   .storeComponent .fotoFondoDetail img{
     width: 20rem;
   }
-  .storeComponent .landingBg {
-    display: none;
+  .storeComponent .landingBg img {
+    width: 250px; 
+    height: 70px; 
+    object-fit: cover;
   }
 }
