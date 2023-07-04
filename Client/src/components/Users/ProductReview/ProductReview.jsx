@@ -34,7 +34,7 @@ const ReviewList = ({productId}) => {
       {reviews.map((review, index) => (
         <div key={index}>
           <div className='flex items-baseline'>
-            <h6 className='fontEB text-2xl'>{review.user.name}</h6>
+            <h6 className='fontEB text-2xl'>{review.userUserId!==null?review.user.name:'Anonimo'}</h6>
             <div className='flex justify-center ml-4 text-2xl'>
               {[...Array(5)].map((_, starIndex) => {
                 const starClass =

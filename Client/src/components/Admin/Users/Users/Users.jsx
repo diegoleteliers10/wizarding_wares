@@ -1,7 +1,7 @@
 import { FiTrash2, FiEdit } from 'react-icons/fi';
 import {FaUndoAlt} from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux';
-import { displayEditUser, getAllUsers, setEditState, deleteUser } from '../../../../redux/adminSlice';
+import { displayEditUser, getAllUsers, setEditState, deleteUser, finalDeleteUser } from '../../../../redux/adminSlice';
 import { useState, useEffect } from 'react';
 import PopUp from '../../PopUp/PopUp';
 import {toast, Toaster} from 'react-hot-toast'
@@ -28,6 +28,10 @@ const Users = ({ user }) => {
     setPopUp(true);
     //dispatch(deleteUser(user.userId))
   };
+
+  const handleFinalDelete =()=>{
+    dispatch(finalDeleteUser(user.userId))
+  }
 
   const handleConfirm = async () => {
     const userId = user.userId;
@@ -68,6 +72,13 @@ const Users = ({ user }) => {
     {popUp === true && (
       <PopUp trigger={popUp} setTrigger={setPopUp} handleConfirm={handleConfirm}>
         <h3>{popUpMessage}</h3>
+        {
+          user.isActive === true &&
+          <div className='mt-2 w-1/2 mx-auto'>
+            <p>You can also permanently delete the user and all their information. This action <b>cannot</b> de undone </p>
+            <button className="bg-red-500 hover:bg-red-600 font-medium rounded-lg border-none px-4 py-2.5 text-sm text-white ease-in-out transition-colors" onClick={handleFinalDelete}>Delete permanently</button>
+          </div>
+        }
       </PopUp>
     )}
     <Toaster/>

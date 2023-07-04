@@ -5,7 +5,7 @@ const { User, Role } = require("../models/relationship/relationship");
 const { arrojarError, validadorDeEmails, validateString, validadorDePassword } = require("../utils/utils");
 const {enviarNotificacion} = require("../utils/notificaciones");
 const {baseURLBack} = require("../utils/urlBases");
-const {diasSemana, fecha} = require("../utils/fechas");
+const {diasSemana} = require("../utils/fechas");
 const {SECRET, EMAIL_CREDENTIALS} = process.env;
 
 
@@ -74,10 +74,10 @@ const createUserRegister = async (name, email, password) => {
   const mensaje = `${baseURLBack}/verificar-cuenta?token=${token}`;
 
   // Enviar correo al administrador
-  enviarNotificacion(2, name, email, null);
+  enviarNotificacion(2, newUser.name, newUser.email, mensaje);
 
   // Enviar correo al usuario
-  enviarNotificacion(3, name, email, mensaje);
+  enviarNotificacion(3, newUser.name, newUser.email, mensaje);
 
   // return newUser;
   // return {
@@ -260,6 +260,9 @@ const logicalUserDeletion = async (userId) => {
     }
   });
 
+
+
+  const fecha = new Date;
   // Definimos las opciones en mensaje
   const mensaje = {
     userId: userDeactivated[0].userId,

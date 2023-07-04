@@ -184,7 +184,9 @@ export const getAllUsers = createAsyncThunk('admin/getAllUsers',
 export const editUserRole = createAsyncThunk(
   'admin/editUserRole',
   async (input) => {
-    const response = await axios.put(`/user_role/${input.userId}`, {roleId: Number(input.roleId), userId: input.userId})
+    const response = await axios.put(`/user_role/${input.userId}`, {roleId: Number(input.roleId), userId: input.userId},{
+      headers: headers
+      })
     }
   )
 export const editUserData = createAsyncThunk(
@@ -202,6 +204,22 @@ export const editUserData = createAsyncThunk(
     async (userId) => {
       try {
         const response = await axios.put(`/user_deleteA/${userId}`, {}, {
+          headers: headers
+          });
+        return response.data;
+      } catch (error) { 
+        console.error('Error al eliminar el usuario:', error);
+        throw error;
+      }
+    }
+  );
+
+  //delete (definitivo)
+  export const finalDeleteUser = createAsyncThunk(
+    'admin/finalDeleteUser',
+    async (userId) => {
+      try {
+        const response = await axios.delete(`/userDelete/${userId}`, {
           headers: headers
           });
         return response.data;
@@ -686,6 +704,13 @@ export const adminSlice = createSlice({
     })
     //DELETE USER (borrado logico)
     .addCase(deleteUser.fulfilled, (state, action) => {
+      state.loading = false;
+      console.log(action.payload)
+      state.refresh= state.refresh+1
+      //state.products = state.products;
+    })
+    //DELETE USER FINAL (borrado definitivo)
+    .addCase(finalDeleteUser.fulfilled, (state, action) => {
       state.loading = false;
       console.log(action.payload)
       state.refresh= state.refresh+1

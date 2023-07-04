@@ -57,7 +57,7 @@ router.get('/filteredUsers', jwt.expressjwt({ secret: SECRET, algorithms: ['HS25
 router.get('/allUsers', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), getAllUsers)
 router.get('/detailProduct/:id', getDetailProduct)
 router.get('/allStatuses', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), getAllStatuses)
-router.delete('/userDelete/:id', userFinalDelete)
+router.delete('/userDelete/:id', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), userFinalDelete)
 router.post('/productCreated',upload.single('image'),createProduct)
 router.put('/editProduct/:id', jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), editProduct)
 router.delete('/deleteProduct/:id', deleteProduct)

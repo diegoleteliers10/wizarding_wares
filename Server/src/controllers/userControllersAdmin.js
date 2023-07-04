@@ -1,7 +1,7 @@
 const { User, Role } = require("../models/relationship/relationship");
 const {arrojarError} = require("../utils/utils");
 const {enviarNotificacion, enviarEmail} = require("../utils/notificaciones");
-const {diasSemana, fecha} = require("../utils/fechas");
+const {diasSemana} = require("../utils/fechas");
 const {EMAIL_CREDENTIALS} = process.env;
 
 
@@ -88,6 +88,7 @@ const userLogicalDeletionAdmin = async (userId) => {
   let isActiveU;
   const newState = await User.findAll({where: {userId: userId}});
 
+  const fecha = new Date;
   // Definiendo las opciones en mensaje
   const mensaje = {
     userId: newState[0].userId,
