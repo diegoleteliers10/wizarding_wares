@@ -62,7 +62,7 @@ const transporter = nodemailer.createTransport({
 // --------------------------------------
 const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
 
-  const indicesAdmin = [0, 2, 4, 5, 6, 8, 10, 12];
+  const indicesAdmin = [0, 2, 4, 5, 6, 8, 10, 12, 14];
 
 
   let receptor;
@@ -136,7 +136,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
                      Nos estamos comunicando contigo por la decision tomada por nuestro equipo.<br />
                      Sobre el cambio de role que ha sido realizado a tu cuenta en la plataforma.<br/>
                      El Role: ${mensaje.role}, manejaras desde hoy.<br/>
-                     Si tienes alguna duda o consulta, sobre el cambio efectuado a tu role, te pedidos que te contactes con nosotros a travez del<br /> 
+                     Si tienes alguna duda o consulta, sobre el cambio efectuado a tu role, te pedimos que te contactes con nosotros a travez del<br /> 
                      Email: ${mensaje.mailWW}.   
                      </span>`,
     },
@@ -158,7 +158,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
                      Nos estamos comunicando contigo por la decision tomada por nuestro equipo.<br />
                      Sobre la suspension temporal que ha sido realizado a tu cuenta en la plataforma.<br/>
                      A la fecha de: ${mensaje.date}, tu cuenta esta supendida.<br/>
-                     Si tienes alguna duda o consulta, sobre el cambio efectuado a tu cuenta, te pedidos que te contactes con nosotros a travez del<br /> 
+                     Si tienes alguna duda o consulta, sobre el cambio efectuado a tu cuenta, te pedimos que te contactes con nosotros a travez del<br /> 
                      Email: ${mensaje.mailWW}.   
                      </span>`,
     },
@@ -180,7 +180,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
                      Nos estamos comunicando contigo por la decision tomada por nuestro equipo.<br />
                      Sobre la Reactivación que ha sido realizada a tu cuenta en la plataforma.<br/>
                      A la fecha de: ${mensaje.date}, tu cuenta esta Reactiva.<br/>
-                     Si tienes alguna duda o consulta, te pedidos que te contactes con nosotros a travez del<br /> 
+                     Si tienes alguna duda o consulta, te pedimos que te contactes con nosotros a travez del<br /> 
                      Email: ${mensaje.mailWW}.   
                      </span>`,
     },
@@ -208,7 +208,30 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
                      la cuenta: ${email}; A la fecha de: ${mensaje.date}, sera pasada a suspension temporal por 30 días...<br/>
                      Esto en caso de que Reconsideres tu desicion. Pasado ese tiempo<br/>
                      tu cuenta sera eliminada completamente del sistema<br/>
-                     Si tienes alguna duda o consulta, te pedidos que te contactes con nosotros a travez del<br /> 
+                     Si tienes alguna duda o consulta, te pedimos que te contactes con nosotros a travez del<br /> 
+                     Email: ${mensaje.mailWW}.   
+                     </span>`,
+    },
+    {
+      indice: 14,
+      role: "admin",
+      subject: "Account Deletion",
+      titulo: "Notificacion de Eliminacion de Cuenta",
+      notificacion: `<span>Hola Administrador. te informamos que el usario ${name}<br />
+                    con userId: ${mensaje.userId}, a la fecha de hoy: ${mensaje.date}, ya no es parte de nuestro sistema<br/>
+                    Se le envio una notificacion que su cuenta ${email} a sido borrada definitivamente de nuestra base de datos.<br/></span>`,
+    },
+    {
+      indice: 15,
+      role: "user",
+      subject: "Account Deletion",
+      titulo: "Notificacion de Cuenta Eliminada",
+      notificacion: `<span>Hola ${name} <br />
+                     Esperando que te encuentres bien. 
+                     Nos estamos comunicando contigo para contarte que tu cuenta.<br />
+                     a sido Eliminada de nuestra plataforma. Y ademas por lo pronto<br/>
+                     la cuenta: ${email}; A la fecha de: ${mensaje.date}, a iniciado el proceso de borrado de toda informacion en nuestras base de datos<br/>
+                     Si tienes alguna duda o consulta, te pedimos que te contactes con nosotros a travez del<br /> 
                      Email: ${mensaje.mailWW}.   
                      </span>`,
     },
