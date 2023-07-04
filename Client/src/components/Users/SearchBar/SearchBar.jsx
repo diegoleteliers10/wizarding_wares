@@ -40,15 +40,15 @@ const SearchBar = () => {
                 placeholder="Buscar..."
                 onChange={event => onChangeHandler(event)}
                 onKeyPress={event => handleKeyPress(event)}
-                className="bg-white pr-12 pl-4 py-2 rounded"
-            />
+                className="bg-wwmaroon pr-12 pl-4 py-2 rounded border border-wwwhite"          
+                  />
 
             <button
                 type="submit"
                 onClick={(event) => submitHandler(event)}
                 className="absolute right-0 top-0 h-full w-12 flex items-center justify-center"
             >
-                <SlMagicWand className="transform scale-x-[-1]" />
+                <SlMagicWand className="transform scale-x-[-1] text-wwwhite"  />
             </button>
         </div>
     )

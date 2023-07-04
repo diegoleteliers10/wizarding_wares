@@ -15,6 +15,8 @@ const Detail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+  const [isProductInCart, setIsProductInCart] = useState(false);
+  const [showProductInCartMessage, setShowProductInCartMessage] = useState(false);
   const loggedIn = getCookie('userInfo')
   const verifiedUser = getCookie('userVerified')
 
@@ -78,11 +80,17 @@ const Detail = () => {
   }
 
   useEffect(() => {
+    // Verificar si el producto está en el carrito
+    const foundProduct = addCart.find((item) => item.productId === id);
+    setIsProductInCart(!!foundProduct);
+    setShowProductInCartMessage(!!foundProduct);
+    
     if (product && product.isActive === false) {
       navigate('/');
     }
     sessionStorage.setItem(sessionStorageKey, JSON.stringify(product));
-  }, [product]);
+  }, [product, addCart, id, navigate, sessionStorageKey]);
+  
 
   return (
     <div>
@@ -151,14 +159,19 @@ const Detail = () => {
             </div>
           </div>
           <div>
-            <button
+          <button
               onClick={handleAddToCart}
-              className={`btn1 btn--svg-small ${(size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn || !verifiedUser ? ' disabled opacity-50 pointer-events-none ' : ''}`}
+              className={`btn1 btn--svg-small ${isProductInCart || (size === '' && product.categoryCategoryId === 3) || (size === '' && product.category === 'Indumentaria') || !loggedIn || !verifiedUser ? 'disabled opacity-50 pointer-events-none' : ''}`}
               disabled={quantity === 0}
-            >
-              Añadir al carrito
-            </button>
-            <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
+          >
+           Añadir al carrito
+          </button>
+          {
+            isProductInCart && showProductInCartMessage && (
+              <p className="product-in-cart-message">¡Tu producto te esta esperando en el carrito!</p>
+            )
+          }
+          <button onClick={handleGoToCart} className="btn1 btn--svg-small">Ir al carrito</button>
           </div>
         </div>
         <div className="mt-8">
