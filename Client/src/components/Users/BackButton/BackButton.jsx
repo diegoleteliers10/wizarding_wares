@@ -7,7 +7,7 @@ function BackButton() {
     const navigate = useNavigate()
 
     const handleGoHome = ()=> {
-        navigate('/home')
+        navigate('/')
     }
     return (
       <div className="buttonContainer">

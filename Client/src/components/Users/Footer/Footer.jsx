@@ -21,7 +21,7 @@ const Footer = () => {
           <h4>Información</h4>
           <Link to="/nosotros" className="text-wwwhite hover:text-wwmaroon transition-all ease-in no-underline">Nosotros</Link>
           <br />
-          <Link to="/faq" className="text-wwwhite hover:text-wwmaroon transition-all ease-in no-underline">FAQ</Link>
+          <Link to="/faq" className="text-wwwhite hover:text-wwmaroon transition-all ease-in no-underline">Preguntas Frecuentes</Link>
         </div>
         <div className='w-1/3'>
           <h4>Legal</h4>
