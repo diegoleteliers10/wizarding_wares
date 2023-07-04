@@ -5,17 +5,8 @@ const createOrder = async (req, res) => {
     const items = req.body.items;
     try {
         await mercadopago.preferences.create({
-        // items: items,
-
-        items: [
-            {
-                title: 'hola',
-                quantity: 1,
-                description: 'laaaaaaaaaa',
-                unit_price: 1000
-            }
-        ],
-
+            
+        items: items,
 
         back_urls: {
             //aca las URLS que redireccionan dependiendo como haya salido la transaccion
