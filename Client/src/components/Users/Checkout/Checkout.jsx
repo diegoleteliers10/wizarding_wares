@@ -6,6 +6,8 @@ import axios from 'axios';
 import { createAddress, createPreference } from '../../../redux/userSlice';
 import getCookie from '../../../hooks/getCookie';
 import { useNavigate } from 'react-router-dom';
+import {SiMercadopago} from 'react-icons/si';
+
 
 const Checkout = () => {
     
@@ -108,15 +110,15 @@ const Checkout = () => {
 
     return(
             
-        <div className="md:flex m-10 storeComponent items-center ">
-            <div className="md:w-1/2 text-left flex-col ml-4">
+        <div className="md:flex m-10 storeComponent items-center">
+            <div className="md:w-1/2 text-left flex-col ml-4 formCheckout">
 
             <a href="#" className="no-underline text-sm font-semibold text-gray-900" onClick={handleBack}
                 >Volver al carrito <span aria-hidden="true">&larr;</span></a>
 
                 <h2>Datos de envío</h2>
 
-                <form>
+                <form className='fontMarcellus'>
                     <div className="formBox">
 
                         <div className="mb-4 md:mt-6 lg:mt-8">
@@ -128,7 +130,7 @@ const Checkout = () => {
                             placeholder="Nombre completo"
                             onChange={handleChange}
                             value={input.name}
-                            className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
+                            className="border rounded py-2 px-4 my-2 shadow w-full bg-wwwhite"
                             required
                             />
 
@@ -148,7 +150,7 @@ const Checkout = () => {
                             placeholder="Ej. 11 2345 6789"
                             onChange={handleChange}
                             value={input.phoneNumber}
-                            className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
+                            className="border rounded py-2 px-4 my-2 shadow w-full bg-wwwhite"
                             required
                             />
 
@@ -169,7 +171,7 @@ const Checkout = () => {
                                 placeholder="Ej. Av. Santa Fe"
                                 onChange={handleChange}
                                 value={input.street}
-                                className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 my-2 shadow w-full bg-wwwhite"
                                 required
                                 />
                                 </label>
@@ -184,7 +186,7 @@ const Checkout = () => {
                                 placeholder="Ej. 16548"
                                 onChange={handleChange}
                                 value={input.number}
-                                className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
+                                className="border rounded py-2 px-4 my-2 shadow w-full bg-wwwhite"
                                 required
                                 />
 
@@ -204,7 +206,7 @@ const Checkout = () => {
                             placeholder="Ej. 4c"
                             onChange={handleChange}
                             value={input.detail}
-                            className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
+                            className="border rounded py-2 px-4 my-2 shadow w-full bg-wwwhite"
                             required
                             />
 
@@ -218,7 +220,7 @@ const Checkout = () => {
                             placeholder="Ej. 1645"
                             onChange={handleChange}
                             value={input.zipCode}
-                            className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
+                            className="border rounded py-2 px-4 my-2 shadow w-full bg-wwwhite"
                             required
                             />
 
@@ -237,15 +239,15 @@ const Checkout = () => {
             </div>
 
             <div className={parsedProducts.length >= 1 ? "md:w-1/3 h-1/3 rounded-lg p-6 flex flex-col justify-center bg-neutral-50 shadow" : "hidden"}>
-                <label className="font-bold text-lg">Resumen de la compra</label>
-                <div className="mb-4">
-                    <span>({allItemsQuantity}) Items:</span>
-                    <span className="font-bold">$<TotalPrice /></span>
+                <label className="font-bold text-lg fontMarcellus">Resumen de la compra</label>
+                <div className="my-4 fontEB">
+                    <span> Items ({allItemsQuantity}): </span>
+                    <span className="font-semibold">$<TotalPrice /></span>
                 </div>
                 
-                <div className="mb-4">
-                    <span className="font-bold">TOTAL:</span>
-                    <span className="font-bold">$ <TotalPrice /></span>
+                <div className="fontEB text-wwbrown text-xl">
+                    <span className="font-semibold uppercase">Total: </span>
+                    <span className="font-semibold">$<TotalPrice /></span>
                 </div>
 
                 <div className="flex items-center justify-center mt-6">
@@ -255,11 +257,11 @@ const Checkout = () => {
                     type="submit"
                     className={
                         parsedProducts.length >= 1 && input.name && input.phoneNumber && input.street && input.number && input.zipCode
-                        ? "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        : "bg-blue-500  text-white font-bold py-1 px-2 rounded disabled pointer-events-none"
+                        ? "bg-blue-500 hover:bg-blue-700 transition-all ease-in text-white font-bold py-2 px-4 rounded scale- md:scale-100"
+                        : "bg-blue-500  text-white font-bold py-1 px-2 rounded disabled pointer-events-none scale- md:scale-100"
                     }
                     >
-                    Pagar con Mercado Pago
+                    Pagar con Mercado Pago <img src="https://logospng.org/download/mercado-pago/logo-mercado-pago-icone-1024.png" alt="Mercado Pago" className='w-8 mx-auto' />
                     </button>
                     {preferenceId && <Wallet initialization={{ preferenceId }} />}
                 </div>
