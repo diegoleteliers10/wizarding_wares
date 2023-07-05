@@ -93,8 +93,8 @@ const Cart = (props) => {
             <button value={props.productId} onClick={handleDelete} className='button'>
               <FiTrash2 />
             </button>
-            <div className='fotoFondoCart mr-4 my-2'>
-              <img src={props.image} alt={props.name} title={props.name} className='w-32' />
+            <div className='fotoFondoCart mr-4 my-2 flex items-center'>
+              <img src={props.image} alt={props.name} title={props.name} className='md:w-32' />
             </div>
             <div>
               <h5>{props.name}</h5>
@@ -104,12 +104,12 @@ const Cart = (props) => {
         </td>
 
         <td>
-          <div className='flex items-center fontEB text-center'>
-            <div>
+          <div className='flex items-center fontEB text-center text-lg md:text-xl'>
+            <div className='flex items-center'>
               <button onClick={handleDecreaseQuantity} className='btn'>
                 -
               </button>
-              <span className='text-xl'>{productFound && productFound.quantity}</span>
+              <span className=''>{productFound && productFound.quantity}</span>
               <button onClick={() => handleIncreaseQuantity(product)} className='btn'>
                 +
               </button>
