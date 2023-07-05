@@ -18,17 +18,18 @@ const editStatePurchase= async (req, res)=>{
     //editamos el estado de la compra
     purchase.update({statusStatusId:statusId})
 
+
     // *** SECCION PARA ENVIAR LAS NOTIFICACIONES ***
 
     // Buscamos al usuario
-    const user = await User.findAll({where:{userId: purchase.userUserId}});
-    const direccion = await Address.findAll({where:{addressId: purchase.addressAddressId}});
+    const user = await User.findAll({where:{userId: purchase.dataValues.userUserId}});
+    const direccion = await Address.findAll({where:{addressId: purchase.dataValues.addressAddressId}});
 
     const fecha = new Date;
     const name = user[0].name;
     const email = user[0].email;
     const mensaje = {
-      purchaseId: purchase.purchaseId,
+      purchaseId: purchase.dataValues.purchaseId,
       userId: user[0].userId,
       status: estados[statusId - 1],
       date: `${diasSemana[fecha.getDay()]}, ${fecha.toLocaleDateString()} a las ${fecha.toLocaleTimeString()}`,
@@ -38,12 +39,15 @@ const editStatePurchase= async (req, res)=>{
 
 
     // Envio de notificaciones
-    if(mensaje.status == "En camino"){
-      enviarNotificacion(18, name, email, mensaje);
+    (mensaje.status == "En camino") && enviarNotificacion(18, name, email, mensaje);
+    if(mensaje.status == "Entregado"){
+      enviarNotificacion(19, name, email, mensaje);
+      enviarNotificacion(20, name, email, mensaje);
     }
-
-
-
+    if(mensaje.status == "Cancelado"){
+      enviarNotificacion(21, name, email, mensaje);
+      enviarNotificacion(22, name, email, mensaje);
+    }
 
     res.status(200).json({message:"The status of the purchase has been updated succesfully", newStatus:statusId})
   } catch (error) {

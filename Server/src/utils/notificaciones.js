@@ -302,17 +302,15 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
       indice: 19,
       role: "admin",
       subject: "Product Delivered",
-      titulo: "Notificacion de Cuenta Eliminada",
+      titulo: "Notificacion de Producto Entregado",
       notificacion: `<span>Hola Administrador. te informamos que se realizo la entrega de los productos al usuario <strong>${name}</strong><br />
                     con userId: <strong>${mensaje.userId}</strong>. A la fecha de hoy: <strong>${mensaje.date}</strong><br/>
                     El id de la compra es: <strong>${mensaje.purchaseId}</strong>.<br/> 
-                    La cantidad de productos<br/> 
-                    entregados entre distintos articulos es: <strong>${mensaje.cantProductos} productos</strong><br /> 
                 
                     La direccion en que se entrego es:<br/> 
                     <strong> Calle ${mensaje.address.street}: ${mensaje.address.number}, Codigo Postal: ${mensaje.address.zipCode}<br/>
                     Telefono: ${mensaje.address.phoneNumber}</strong>.<br /> 
-                    El estado de la entrega esta: <strong>${mensaje.status}</strong></span>`,
+                    El estado de la entrega es: <strong>${mensaje.status}</strong></span>`,
     },
     {
       indice: 20,
@@ -321,9 +319,9 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
       titulo: "Notificacion de Producto Entregado",
       notificacion: `<span>Hola ${name} <br />
                      Esperando que te encuentres bien.<br/> 
-                     Nos estamos comunicando contigo para confirmar que recibistes tus productos.<br />
+                     Nos estamos comunicando contigo para confirmar que recibistes tu(s) producto(s).<br />
                      Estado de entrega: <strong>${mensaje.status}</strong><br />
-                     fecha productos entregados: <strong>${mensaje.date}</strong>.<br/>
+                     fecha producto(s) entregado(s): <strong>${mensaje.date}</strong>.<br/>
                      Direccion de entrega:<br/>
                      - Calle: ${mensaje.address.street}<br/>
                      - Numero: ${mensaje.address.number}<br/>
@@ -340,7 +338,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
       titulo: "Notificacion de Cancelacion de Entrega",
       notificacion: `<span>Hola administrador se le notifico al usuario: ${name} <br />
                      La cancelacion de la entrega de su(s) Producto(s).<br />
-                     A la fecha: ${mensaje.date}, queda en estado: ${mensaje.status} la entrega de lo(s) producto(s)<br/>
+                     A la fecha: ${mensaje.date}, queda en estado: ${mensaje.status}; la entrega de lo(s) producto(s)<br/>
                      al usuario con id: <strong>${mensaje.userId}</strong><br/>
                      Id de la compra: ${mensaje.purchaseId}   
                      </span>`,
@@ -355,7 +353,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
                      Nos estamos comunicando contigo para contarte que por decisión de nuestro equipo.<br />
                      La fecha programada para la entrega de tu(s) producto(s) <br/>
                      A sido cancelada hoy: ${mensaje.date}<br />
-                     El Estado de Entrega se modifico a face: ${mensaje.status}<br/>
+                     El Estado de Entrega se modifico a fase: ${mensaje.status}<br/>
                      <br/>
                      Si tienes alguna duda o consulta, sobre lo que a pasado, te pedimos que te contactes con nosotros a travez del<br /> 
                      Email: ${mensaje.mailWW}.   
