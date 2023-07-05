@@ -233,7 +233,7 @@ const EditProduct = () => {
                       <select
                         name="isActive"
                         className="border rounded py-2 px-4 m-2 shadow bg-white"
-                        value={input.value}
+                        value={input.isActive}
                         onChange={handleSelect}
                         required
                       >
