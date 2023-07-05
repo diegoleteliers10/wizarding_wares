@@ -313,6 +313,13 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
   .patas{
     display: none;
   }
+  .storeComponentCard {
+    width: 30% !important;
+    }
+    
+    .storeComponentOutOfStock{   
+    width: 30% !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -333,7 +340,28 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
   .formLogin{
     scale: 0.9
   }
+  .storeComponentCard .card {
+    padding: 10%;
+  }
   .storeComponent .formRegister{
     width: 19rem;
   }
+  .storeComponent .fotoFondo{
+    height: 100%;
+  }
+}
+@media (max-width: 590px) {
+  .storeComponentCard {
+    width: 50% !important;
+    padding: 0;
+    }
+    .storeComponentCard .card {
+      padding: 10%;
+    }
+    
+    .storeComponentOutOfStock{   
+    width: 50% !important;
+    padding: 0;
+    }
+
 }
