@@ -34,7 +34,7 @@ const ReviewForm = () => {
     toast.dismiss()
     toast.success('Gracias por tu opinión!')
     setTimeout(()=>{
-      navigate('/')
+      navigate('/purchases')
     },2000)
   };
 
@@ -43,7 +43,7 @@ const ReviewForm = () => {
     <Toaster/>
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
-        <h3 className='mt-4 fontMarcellus'>Cuéntanos qué te parecio el producto:</h3>
+        <h3 className='mt-4 fontMarcellus'>Cuéntanos qué te pareció el producto:</h3>
         <h5 className='fontEB'>¡Tu opinión nos ayuda a mejorar!</h5>
         <div className="mb-4 storeComponent">
         <label htmlFor="rating" className="block mb-2 mt-4 fontMarcellus text-xl">

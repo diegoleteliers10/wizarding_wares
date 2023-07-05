@@ -11,7 +11,7 @@ const Card = (props) => {
                 <div className='fotoFondo'>
                 <img src={props.image} alt={props.name} title={props.name} className='scale-75'/>
                 </div>
-                <h2 className='mt-4 text-2xl'>{props.name}</h2>
+                <h2 className='mt-0 md:mt-4 text-sm sm:text-2xl'>{props.name}</h2>
                 <h3 className='text-wwbrown'>${props.price}</h3>
                 {props.stock === 0 ? <p>Sin stock!</p> : ""}
                 </Link>

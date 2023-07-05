@@ -108,8 +108,8 @@ const Checkout = () => {
 
     return(
             
-        <div className="flex m-10 storeComponent items-center ">
-            <div className="w-1/2 text-left flex-col ml-4">
+        <div className="md:flex m-10 storeComponent items-center ">
+            <div className="md:w-1/2 text-left flex-col ml-4">
 
             <a href="#" className="no-underline text-sm font-semibold text-gray-900" onClick={handleBack}
                 >Volver al carrito <span aria-hidden="true">&larr;</span></a>
@@ -128,7 +128,7 @@ const Checkout = () => {
                             placeholder="Nombre completo"
                             onChange={handleChange}
                             value={input.name}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                            className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
                             required
                             />
 
@@ -136,7 +136,7 @@ const Checkout = () => {
                         </div>
 
                         <div>
-                            {errors.name && (<span className="flex text-red-600 justify-center items-center">{errors.name}</span>)}
+                            {errors.name && (<span className="text-red-600 text-xs">{errors.name}</span>)}
                         </div>
 
                         <div className="mb-4 md:mt-6 lg:mt-8">
@@ -148,7 +148,7 @@ const Checkout = () => {
                             placeholder="Ej. 11 2345 6789"
                             onChange={handleChange}
                             value={input.phoneNumber}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                            className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
                             required
                             />
 
@@ -156,40 +156,44 @@ const Checkout = () => {
                         </div>
 
                         <div>
-                        {errors.phoneNumber && (<span className="flex text-red-600 justify-center items-center">{errors.phoneNumber}</span>)}
+                        {errors.phoneNumber && (<span className="text-red-600 text-xs">{errors.phoneNumber}</span>)}
                         </div>
 
-                        <div className="mb-4 md:mt-6 lg:mt-8">
-                            <label>
-                            <span>Calle</span>
-                            <input
-                            type="text"
-                            name="street"
-                            placeholder="Ej. Av. Santa Fe"
-                            onChange={handleChange}
-                            value={input.street}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                            required
-                            />
-                            <div>
-                                {errors.street && (<span className="flex text-red-600 justify-center items-center">{errors.street}</span>)}
+                        <div className="flex items-center">
+                            <div className='w-1/2'>
+                                <label>
+                                <span>Calle</span>
+                                <input
+                                type="text"
+                                name="street"
+                                placeholder="Ej. Av. Santa Fe"
+                                onChange={handleChange}
+                                value={input.street}
+                                className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
+                                required
+                                />
+                                </label>
                             </div>
-                            </label>
-                        
-                            <label className="w-40 m-4">
-                            <span>Altura</span>
-                            <input
-                            type="number"
-                            name="number"
-                            placeholder="Ej. 16548"
-                            onChange={handleChange}
-                            value={input.number}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
-                            required
-                            />
+                                
+                            <div className='w-1/2'>
+                                <label className="w-40 m-4">
+                                <span>Altura</span>
+                                <input
+                                type="number"
+                                name="number"
+                                placeholder="Ej. 16548"
+                                onChange={handleChange}
+                                value={input.number}
+                                className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
+                                required
+                                />
 
-                            </label>
+                                </label>
+                            </div>
                         </div>
+                            <div className='w-1/2'>
+                                    {errors.street && (<span className="text-red-600 text-xs">{errors.street}</span>)}
+                            </div>
 
                         <div>
                             <label className="w-40">
@@ -200,7 +204,7 @@ const Checkout = () => {
                             placeholder="Ej. 4c"
                             onChange={handleChange}
                             value={input.detail}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                            className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
                             required
                             />
 
@@ -214,7 +218,7 @@ const Checkout = () => {
                             placeholder="Ej. 1645"
                             onChange={handleChange}
                             value={input.zipCode}
-                            className="border rounded py-2 px-4 m-2 shadow w-full bg-white"
+                            className="border rounded py-2 px-4 my-2 shadow w-full bg-white"
                             required
                             />
 
@@ -223,14 +227,16 @@ const Checkout = () => {
 
                     </div>
                     {!input.name || !input.phoneNumber || !input.street || !input.number || !input.zipCode ? 
-                        <span>Se debe completar todo el formulario de envío!</span>
+                        <div className='mb-4 md:mb-0'>
+                            <span className='text-red-600'>Se debe completar todo el formulario de envío!</span>
+                        </div>
                         : ""
                     }
                 </form>
                 
             </div>
 
-            <div className={parsedProducts.length >= 1 ? "w-1/3 h-1/3 rounded-lg p-6 flex flex-col justify-center bg-neutral-50 shadow" : "hidden"}>
+            <div className={parsedProducts.length >= 1 ? "md:w-1/3 h-1/3 rounded-lg p-6 flex flex-col justify-center bg-neutral-50 shadow" : "hidden"}>
                 <label className="font-bold text-lg">Resumen de la compra</label>
                 <div className="mb-4">
                     <span>({allItemsQuantity}) Items:</span>
