@@ -398,20 +398,20 @@ export const userSlice = createSlice({
       .addCase(getWebhook.pending, (state, action) => {
         // console.log('pending');
       })
-      .addCase(createPreference.fulfilled, (state, action) => {
-        state.clientId = action.payload.client_id
-        // console.log(action.payload.client_id);
-        // console.log('funciono');
-        // state.paymentStatus = action.payload;
+      // .addCase(createPreference.fulfilled, (state, action) => {
+      //   state.clientId = action.payload.client_id
+      //   // console.log(action.payload.client_id);
+      //   // console.log('funciono');
+      //   // state.paymentStatus = action.payload;
 
-      })
-      .addCase(createPreference.rejected, (state, action) => {
-        // console.log('rejected');
+      // })
+      // .addCase(createPreference.rejected, (state, action) => {
+      //   // console.log('rejected');
 
-      })
-      .addCase(createPreference.pending, (state, action) => {
-        // console.log('pending');
-      })
+      // })
+      // .addCase(createPreference.pending, (state, action) => {
+      //   // console.log('pending');
+      // })
   },
 });
 
