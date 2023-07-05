@@ -88,7 +88,7 @@ const userLogicalDeletionAdmin = async (userId) => {
   let isActiveU;
   const newState = await User.findAll({where: {userId: userId}});
 
-  const fecha = new Date;
+  const fecha = new Date();
   // Definiendo las opciones en mensaje
   const mensaje = {
     userId: newState[0].userId,
