@@ -262,7 +262,7 @@ const logicalUserDeletion = async (userId) => {
 
 
 
-  const fecha = new Date;
+  const fecha = new Date();
   // Definimos las opciones en mensaje
   const mensaje = {
     userId: userDeactivated[0].userId,

@@ -13,8 +13,7 @@ const editStatePurchase= async (req, res)=>{
   const {statusId}=req.query
   try {
     //encontramos la compra que queremos editar
-    const purchase= await Purchase.findByPk(purchaseId)
-    console.log("Que es purchase:", purchase);
+    const purchase= await Purchase.findByPk(purchaseId);
     //editamos el estado de la compra
     purchase.update({statusStatusId:statusId})
 
@@ -24,8 +23,10 @@ const editStatePurchase= async (req, res)=>{
     // Buscamos al usuario
     const user = await User.findAll({where:{userId: purchase.dataValues.userUserId}});
     const direccion = await Address.findAll({where:{addressId: purchase.dataValues.addressAddressId}});
+    console.log("user es:", user);
+    console.log("direccion es:", direccion);
 
-    const fecha = new Date;
+    const fecha = new Date();
     const name = user[0].name;
     const email = user[0].email;
     const mensaje = {
@@ -33,9 +34,14 @@ const editStatePurchase= async (req, res)=>{
       userId: user[0].userId,
       status: estados[statusId - 1],
       date: `${diasSemana[fecha.getDay()]}, ${fecha.toLocaleDateString()} a las ${fecha.toLocaleTimeString()}`,
-      address: direccion[0],
+      street: direccion[0].street,
+      number: direccion[0].number,
+      zipCode: direccion[0].zipCode,
+      phoneNumber: direccion[0].phoneNumber,
       mailWW: EMAIL_CREDENTIALS,
     };
+
+    console.log("mensjae es:", mensaje);
 
 
     // Envio de notificaciones

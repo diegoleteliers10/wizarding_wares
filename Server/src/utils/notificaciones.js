@@ -121,21 +121,21 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 6,
       role: "admin",
-      subject: "Change Role",
+      subject: "Cambio de role",
       titulo: `Se notifico al usuari@ ${name}; Sobre Su cambio de role`,
       notificacion: `<span>Hola administrador, Se envio una notificacion al correo: ${email}; Concerniente al cambio de role que desde ahora tendra.<br>
-                     Desde hoy al usuari@ ${name}, con userId: ${mensaje.userId} usara el Role: ${mensaje.role}</span>`,
+                     Desde hoy al usuari@ ${name}, con userId: ${mensaje.userId} usara el Role: <strong>${mensaje.role}</strong></span>`,
     },
     {
       indice: 7,
       role: "user",
-      subject: "Change Role",
+      subject: "Cambio de role",
       titulo: "Notificacion De Cambio De Role",
       notificacion: `<span>Hola ${name} <br />
                      Esperando que te encuentres bien. 
                      Nos estamos comunicando contigo por la decision tomada por nuestro equipo.<br />
                      Sobre el cambio de role que ha sido realizado a tu cuenta en la plataforma.<br/>
-                     El Role: ${mensaje.role}, manejaras desde hoy.<br/>
+                     El Role: <strong>${mensaje.role}</strong>, manejaras desde hoy.<br/>
                      Si tienes alguna duda o consulta, sobre el cambio efectuado a tu role, te pedimos que te contactes con nosotros a travez del<br /> 
                      Email: ${mensaje.mailWW}.   
                      </span>`,
@@ -143,7 +143,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 8,
       role: "admin",
-      subject: "User account suspended",
+      subject: "Suspensión de su cuenta",
       titulo: `Se notifico al usuari@ ${name}; Sobre la Suspensión de su cuenta`,
       notificacion: `<span>Hola Administrador, Se envio una notificacion al correo: ${email}; Concerniente a la Suspension temporal de la cuenta.<br>
                      Desde hoy al usuari@ ${name}, con userId: ${mensaje.userId}. Tendra el Estado: ${mensaje.state}</span>`,
@@ -151,7 +151,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 9,
       role: "user",
-      subject: "User account suspended",
+      subject: "Suspensión de su cuenta",
       titulo: "Notificacion De Suspension Temporal De Cuenta",
       notificacion: `<span>Hola ${name} <br />
                      Esperando que te encuentres bien. 
@@ -165,7 +165,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 10,
       role: "admin",
-      subject: "User account reactivated",
+      subject: "Reactivación de cuenta",
       titulo: `Se notifico al usuari@ ${name}; Sobre la Reactivación de su cuenta`,
       notificacion: `<span>Hola Administrador, Se envio una notificacion al correo: ${email}; Concerniente a la Reactivación de la cuenta.<br>
                      Desde hoy al usuari@ ${name}, con userId: ${mensaje.userId}. Tendra el Estado: ${mensaje.state}</span>`,
@@ -173,13 +173,13 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 11,
       role: "user",
-      subject: "User account reactivated",
+      subject: "Reactivación de cuenta",
       titulo: "Notificacion De Reactivación De Tu Cuenta",
       notificacion: `<span>Hola ${name} <br />
                      Esperando que te encuentres bien. 
                      Nos estamos comunicando contigo por la decision tomada por nuestro equipo.<br />
                      Sobre la Reactivación que ha sido realizada a tu cuenta en la plataforma.<br/>
-                     A la fecha de: ${mensaje.date}, tu cuenta esta Reactiva.<br/>
+                     A la fecha de: ${mensaje.date}, tu cuenta esta Activa.<br/>
                      Si tienes alguna duda o consulta, te pedimos que te contactes con nosotros a travez del<br /> 
                      Email: ${mensaje.mailWW}.   
                      </span>`,
@@ -187,7 +187,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 12,
       role: "admin",
-      subject: "Cancel Account",
+      subject: "Cancelacion de Cuenta",
       titulo: "Peticion Cancelacion de Cuenta",
       notificacion: `<span>Hola Administrador. te informamos que el usario ${name}<br />
                     con userId: ${mensaje.userId}, a la fecha de hoy: ${mensaje.date}, a pulsado el boton de cancelar cuenta<br/>
@@ -198,7 +198,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 13,
       role: "user",
-      subject: "Cancel Account",
+      subject: "Cancelacion de Cuenta",
       titulo: "Cancelacion de Cuenta",
       notificacion: `<span>Hola ${name} <br />
                      Esperando que te encuentres bien. 
@@ -215,7 +215,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 14,
       role: "admin",
-      subject: "Account Deletion",
+      subject: "Eliminacion de Cuenta",
       titulo: "Notificacion de Eliminacion de Cuenta",
       notificacion: `<span>Hola Administrador. te informamos que el usario ${name}<br />
                     con userId: ${mensaje.userId}, a la fecha de hoy: ${mensaje.date}, ya no es parte de nuestro sistema<br/>
@@ -224,7 +224,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 15,
       role: "user",
-      subject: "Account Deletion",
+      subject: "Eliminacion de Cuenta",
       titulo: "Notificacion de Cuenta Eliminada",
       notificacion: `<span>Hola ${name} <br />
                      Esperando que te encuentres bien. 
@@ -238,7 +238,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 16,
       role: "admin",
-      subject: "Purchase made at Wizarding Wares",
+      subject: "Venta Realizada en Wizarding Wares",
       titulo: "Notificacion De Venta Realizada Satisfactoriamente",
       notificacion: `<span>Hola Administrador. te informamos que el usario <strong>${name}</strong><br />
                     con userId: <strong>${mensaje.userUserId}</strong>, a la fecha de hoy: <strong>${mensaje.date}</strong>, realizo una compra en la plataforma<br/>
@@ -249,14 +249,14 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
                     entre los distintos articulos es: <strong>${mensaje.precioU}</strong>. <br/>
                     Total de la venta es: <strong>${mensaje.totalCompra}</strong><br/>
                     La direccion ingresada para la entrega es:<br/> 
-                    <strong> Calle ${mensaje.address.street}: ${mensaje.address.number}, Codigo Postal: ${mensaje.address.zipCode}<br/>
-                    Telefono: ${mensaje.address.phoneNumber}</strong>.<br /> 
+                    <strong> Calle ${mensaje.street}: ${mensaje.number}, Codigo Postal: ${mensaje.zipCode}<br/>
+                    Telefono: ${mensaje.phoneNumber}</strong>.<br /> 
                     El estado de la entrega esta: <strong>${mensaje.status}</strong></span>`,
     },
     {
       indice: 17,
       role: "user",
-      subject: "Purchase made at Wizarding Wares",
+      subject: "Compra Realizada en Wizarding Wares",
       titulo: "Notificacion de Compra Realizada Satisfactoriamente",
       notificacion: `<span>Hola <strong>${name}</strong> <br />
                      Esperando que te encuentres bien. 
@@ -269,10 +269,10 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
                      direferentes articulos es: ${mensaje.precioU}<br/>
                      Direccion de correo electronico: ${email}<br />
                      Direccion acordada para la entrega es:<br/> 
-                     - Calle: ${mensaje.address.street}<br>
-                     - Numero: ${mensaje.address.number}<br/>
-                     - Codigo Postal: ${mensaje.address.zipCode}<br/>
-                     - Telefono: ${mensaje.address.phoneNumber}.<br/>
+                     - Calle: ${mensaje.street}<br>
+                     - Numero: ${mensaje.number}<br/>
+                     - Codigo Postal: ${mensaje.zipCode}<br/>
+                     - Telefono: ${mensaje.phoneNumber}.<br/>
                     <br/>
                     <br/>
                     TOTAL CANCELADO: <strong>${mensaje.totalCompra}</strong><br/>
@@ -285,7 +285,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 18,
       role: "user",
-      subject: "Product on the Way",
+      subject: "Producto en Camino",
       titulo: "Notificacion 'Producto en Camino'",
       notificacion: `<span>Hola ${name} <br />
                      Esperando que te encuentres bien.<br/> 
@@ -301,21 +301,21 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 19,
       role: "admin",
-      subject: "Product Delivered",
+      subject: "Producto Entregado",
       titulo: "Notificacion de Producto Entregado",
       notificacion: `<span>Hola Administrador. te informamos que se realizo la entrega de los productos al usuario <strong>${name}</strong><br />
                     con userId: <strong>${mensaje.userId}</strong>. A la fecha de hoy: <strong>${mensaje.date}</strong><br/>
                     El id de la compra es: <strong>${mensaje.purchaseId}</strong>.<br/> 
                 
                     La direccion en que se entrego es:<br/> 
-                    <strong> Calle ${mensaje.address.street}: ${mensaje.address.number}, Codigo Postal: ${mensaje.address.zipCode}<br/>
-                    Telefono: ${mensaje.address.phoneNumber}</strong>.<br /> 
+                    <strong> Calle ${mensaje.street}: ${mensaje.number}, Codigo Postal: ${mensaje.zipCode}<br/>
+                    Telefono: ${mensaje.phoneNumber}</strong>.<br /> 
                     El estado de la entrega es: <strong>${mensaje.status}</strong></span>`,
     },
     {
       indice: 20,
       role: "user",
-      subject: "Product Delivered",
+      subject: "Producto Entregado",
       titulo: "Notificacion de Producto Entregado",
       notificacion: `<span>Hola ${name} <br />
                      Esperando que te encuentres bien.<br/> 
@@ -323,9 +323,9 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
                      Estado de entrega: <strong>${mensaje.status}</strong><br />
                      fecha producto(s) entregado(s): <strong>${mensaje.date}</strong>.<br/>
                      Direccion de entrega:<br/>
-                     - Calle: ${mensaje.address.street}<br/>
-                     - Numero: ${mensaje.address.number}<br/>
-                     - Codigo Postal: ${mensaje.address.zipCode}<br/>
+                     - Calle: ${mensaje.street}<br/>
+                     - Numero: ${mensaje.number}<br/>
+                     - Codigo Postal: ${mensaje.zipCode}<br/>
                     
                      Si tienes alguna duda o consulta, te pedimos que te contactes con nosotros a travez del<br /> 
                      Email: ${mensaje.mailWW}.   
@@ -334,7 +334,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 21,
       role: "admin",
-      subject: "Product Delivery Cancelled",
+      subject: "Cancelacion de Entrega",
       titulo: "Notificacion de Cancelacion de Entrega",
       notificacion: `<span>Hola administrador se le notifico al usuario: ${name} <br />
                      La cancelacion de la entrega de su(s) Producto(s).<br />
@@ -346,7 +346,7 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
     {
       indice: 22,
       role: "user",
-      subject: "Product Delivery Cancelled",
+      subject: "Cancelacion de Entrega",
       titulo: "Notificacion de Cancelacion de Entrega",
       notificacion: `<span>Hola ${name} <br />
                      Esperando que te encuentres bien. 
