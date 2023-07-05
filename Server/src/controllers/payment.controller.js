@@ -19,7 +19,7 @@ const createOrder = async (req, res) => {
         auto_return: "approved",
 
         //URL del webhook, donde recibe las notificaciones del back de MP(debe ser una url HTTPS por lo que MP va a tirar un error al pagar)
-        notification_url: 'https://ca5c-152-169-250-55.ngrok-free.app/webhook'
+        notification_url: `${baseURLFront}/webhook`
         })
         .then(function (response) {
             res.json({
