@@ -12,7 +12,6 @@ const { CLIENT_ID, ISSUER_BASE_URL, SECRET, PORT, CLOUD_NAME, KEY_CLOUD, SECRET_
 
 const routes = require("./routes/index");
 
-
 // const Product = require("./models/Product.model")
 // const Category = require("./models/Category.model")
 // const data = require("../assets/data.json")
