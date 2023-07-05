@@ -23,8 +23,6 @@ const editStatePurchase= async (req, res)=>{
     // Buscamos al usuario
     const user = await User.findAll({where:{userId: purchase.dataValues.userUserId}});
     const direccion = await Address.findAll({where:{addressId: purchase.dataValues.addressAddressId}});
-    console.log("user es:", user);
-    console.log("direccion es:", direccion);
 
     const fecha = new Date();
     const name = user[0].name;
