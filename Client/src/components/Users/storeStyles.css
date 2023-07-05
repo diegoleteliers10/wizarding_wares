@@ -349,6 +349,9 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
   .storeComponent .fotoFondo{
     height: 100%;
   }
+  .filterContainer{
+    scale: 0.9;
+  }
 }
 @media (max-width: 590px) {
   .storeComponentCard {

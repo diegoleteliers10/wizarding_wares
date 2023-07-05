@@ -144,7 +144,7 @@ function FilterStore(props) {
   
 
   return (
-    <div className={`mx-auto w-full flex justify-center items-center gap-1 storeComponent mb-4`}>
+    <div className={`mx-auto w-full sm:flex justify-center items-center gap-1 storeComponent mb-4 filterContainer`}>
       {categoryName === '' && search === '' ? 
       <div className={`inline-block ${styles.filterItem}`}>
         <button className="bg-wwbrown rounded-md hover:bg-wwmaroon transition-all text-wwwhite py-2 px-4" onClick={handleReset}>
@@ -221,7 +221,7 @@ function FilterStore(props) {
         </select>
       </div>
       {search === '' &&
-      <div className={`${styles.dInherit}`}>
+      <div className={`flex justify-center mt-2 ml-0 sm:mt-0 sm:ml-8 ${styles.dInherit}`}>
       <input type="number" placeholder="Min" className={`p-2 ${styles.bgInput}`} id="minPrice" />
       <input type="number" placeholder="Max" className={`p-2 ${styles.bgInput}`} id="maxPrice" />
       <button className="flex items-center my-auto text-2xl h-1/2" onClick={handlePriceFilter}>
