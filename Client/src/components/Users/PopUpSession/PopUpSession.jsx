@@ -1,6 +1,5 @@
-import React from "react";
 import { GrClose } from "react-icons/gr";
-import styles from './PopUpSession.module.css'
+import styles from './popUpSession.module.css'
 
 function PopUpSession(props) {
 
