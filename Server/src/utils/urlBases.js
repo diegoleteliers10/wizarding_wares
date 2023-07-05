@@ -4,7 +4,7 @@
 
 const baseURLBack = `https://wizardingwaresserver.onrender.com`;
 // const baseURLBack = `http://localhost:3001`;
-const baseURLFront = `wizarding-wares-red.vercel.app`;
+const baseURLFront = `https://wizarding-wares-red.vercel.app`;
 // const baseURLFront = `http://localhost:5173`;
 
 module.exports = {
