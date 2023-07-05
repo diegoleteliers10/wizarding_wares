@@ -3,10 +3,10 @@ const sequelize = require("../db");
 
 const Status = sequelize.define("status", {
 	statusId: {
-		type: DataTypes.UUID,
+		type: DataTypes.INTEGER,
 		primaryKey: true,
 		allowNull: false,
-		defaultValue: DataTypes.UUIDV4,
+		autoIncrement: true,
 	},
 	name: {
 		type: DataTypes.STRING,

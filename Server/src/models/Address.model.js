@@ -11,9 +11,6 @@ const Address = sequelize.define('address', {
     street: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            isAlphanumeric: true
-        }
     },
     number: {
         type: DataTypes.INTEGER,

@@ -2,11 +2,13 @@ import SearchBar from "../SearchBar/SearchBar"
 import Navbar from 'react-bootstrap/Navbar';
 import '../storeStyles.css';
 import { useState, useEffect } from "react"; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../../redux/accountSlice";
 import {RiLuggageCartLine} from "react-icons/ri";
 import getCookie from "../../../hooks/getCookie";
+import PopUpSession from "../PopUpSession/PopUpSession";
+import { createPortal } from "react-dom";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 const NavBar = () => {
@@ -16,6 +18,10 @@ const NavBar = () => {
     //const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     const [cartItemCount, setCartItemCount] = useState(0);
     const [userName, setUserName] = useState('')
+    const { pathname } = useLocation();
+    //PopUp cierre de sesión.
+    const [popUp, setPopUp] = useState(false)
+    const [popUpMessage, setPopUpMessage] = useState('');
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -37,16 +43,17 @@ const NavBar = () => {
         }
       }, [user]);
     
-  
+      const shoppingCart = localStorage.getItem('shoppingCart');
     // actualizar cantidad de carrito
     useEffect(() => {
-        const shoppingCart = localStorage.getItem('shoppingCart');
         
         if (shoppingCart) {
           try {
             const parsedCart = JSON.parse(shoppingCart);
-            const uniqueItemCount = parsedCart.length;
-            setCartItemCount(uniqueItemCount);
+            // const uniqueItemCount = parsedCart.length;
+            // setCartItemCount(uniqueItemCount);
+            const allItemsQuantity= parsedCart.reduce((acc, item) => acc + item.quantity, 0)
+            setCartItemCount(allItemsQuantity);
           } catch (error) {
             console.error('Invalid JSON format for shoppingCart:', error);
             setCartItemCount(0);
@@ -54,7 +61,7 @@ const NavBar = () => {
         } else {
           setCartItemCount(0);
         }
-      }, [cartProducts, price, user]);
+      }, [cartProducts, price, user, shoppingCart]);
 
     const handleGoToCart = () => {
         navigate('/cart');
@@ -76,18 +83,36 @@ const NavBar = () => {
         navigate('/admin')
     }
 
-    const handleLogout = () => {
-        dispatch(logOut())
-        navigate("/")
-        localStorage.setItem('shoppingCart', ['']);
+    const handleConfirm = () => {
+      dispatch(logOut())
+      navigate("/")
+      localStorage.setItem('shoppingCart', ['']);
+      setPopUp(false)
     }
 
+    const handleLogOut = () => {
+      setPopUpMessage('¿Seguro quieres cerrar la sesión?');
+      setPopUp(true);
+    }
+    
+    const handleMyPurchases = () => {
+      navigate('/purchases')
+    }
+
+
     return(
-        <div className="storeComponent">
+      <div className="storeComponent">
+          {popUp === true && (
+            createPortal(<PopUpSession trigger={popUp} setTrigger={setPopUp} handleConfirm={handleConfirm}>
+              <h3 className='w-1/2 mx-auto text-3xl'>{popUpMessage}</h3>
+              </PopUpSession>, document.body)
+          )}
         <Navbar expand="lg" className="navBar fixed top-0">
-            <div className="mr-auto ml-8">
-            <SearchBar/>
+           
+             <div className="mr-auto ml-8">
+              <SearchBar />
             </div>
+           
             <div className="buttons">
                 <button onClick={handleAdmin} className="text-wwwhite">{isAdmin && 'Admin'}</button>
             </div>
@@ -106,7 +131,8 @@ const NavBar = () => {
                 <div>
                 <span className="text-wwwhite fontEB">Hola de nuevo, {userName} </span>
                 <span className="text-wwwhite">|</span>
-                <button onClick={handleLogout} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Cerrar sesión</button>
+                <button onClick={handleLogOut} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Cerrar sesión</button>
+                <button onClick={handleMyPurchases} className="font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">Mis Compras</button>
                 </div>
                 }
                 
@@ -114,7 +140,7 @@ const NavBar = () => {
             <div>
                 <button onClick={handleGoToCart} className="mx-4 font-semibold text-wwwhite hover:text-wwbeige transition-colors duration-300">
                 <RiLuggageCartLine className="text-3xl" />
-                {cartItemCount > 0 && <span className="cart-item-count">{cartItemCount}</span>}
+                {cartItemCount !== 0  && <span className="cart-item-count">{cartItemCount}</span>}
                 </button>
             </div>
         </Navbar>

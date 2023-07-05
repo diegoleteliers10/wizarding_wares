@@ -33,29 +33,55 @@ import '../storeStyles.css';
 
       let key = 1;
     return (
-        <div className='p-8 flex'>
-          <div className='w-2/3'>
-                <h2>Carrito de compras</h2>
-                <p>Aún no quieres finalizar tu compra <span className='font-bold'><NavLink to='/'>Sigue explorando</NavLink></span></p>
+        <div className='p-8 flex h-screen storeComponent'>
+          <div className='w-full md:w-2/3 md:mt-10 md:pr-12'>
+                <h2 className='fontMarcellus text-center'>Carrito de compras</h2>
+                {
+                parsedProducts.length >= 1 
+                ? 
+                <p className='fontEB text-center'>¿Aún no quieres finalizar tu compra? <span><NavLink to='/' className={'no-underline text-wwbrown font-bold'}>Sigue explorando</NavLink></span></p>
+                :
+                <p className='fontEB text-center'>¿Aún no tienes productos en tu carrito? <span><NavLink to='/' className={'no-underline text-wwbrown font-bold'}>Sigue explorando</NavLink></span></p>
+                }
                 {/* Renderiza los productos en el carrito */}
-                {parsedProducts?.map(product => (
-                  <Cart
-                  key={key++}
-                  id={product.productId}
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                  quantity={product.quantity}
-                  product={product}
-                />
-                ))}
+                {
+                  parsedProducts.length >= 1 &&
+                    <div className="cart-list-container" style={{ height: '24em', overflow: 'auto' }}>
+                    <table className='w-full text-left mt-8'>
+                      <thead>
+                        <tr className='btmBorder'>
+                          <th className='fontMarcellus uppercase text-sm'>Productos</th>
+                          <th className='fontMarcellus uppercase text-sm'>Cantidad</th>
+                          <th className='fontMarcellus uppercase text-sm'>Precio</th>
+                        </tr>
+                      </thead>
+                      <tbody className=''>
+                          {parsedProducts?.map(product => (
+                            <Cart
+                            key={key++}
+                            id={product.productId}
+                            image={product.image}
+                            name={product.name}
+                            price={product.price}
+                            quantity={product.quantity}
+                            product={product}
+                          />
+                          ))}
+                      </tbody>
+                    
+                    </table>
+                    </div>
+
+                }
             {
               parsedProducts.length < 1 ?
-              <h4>El carrito está vacío</h4> :
-              <div className=''>
-                <h5>Total</h5>
-                <p>{<TotalPrice/>}</p>
-                <button onClick={handleGoCheckout} className={parsedProducts.length >= 1 ? 'bg-wwbrown text-wwwhite p-2 fontMarcellus hover:bg-wwmaroon' : 'bg-wwbrown text-wwwhite p-2 fontMarcellus opacity-50 disabled pointer-events-none'}>Pagar</button>
+              <h4 className='fontMarcellus text-wwmaroon'>El carrito está vacío</h4> :
+              <div className='md:mt-8 text-end'>
+                <div className='flex justify-end items-center'>
+                <h5 className='mr-24 fontMarcellus text-wwbrown'>Total:</h5>
+                <p className='fontEB text-xl font-semibold text-wwbrown'>${<TotalPrice/>}</p>
+                </div>
+                <button onClick={handleGoCheckout} className={parsedProducts.length >= 1 ? 'bg-wwbrown text-wwwhite p-2 btn1 btn--svg-small' : 'bg-wwbrown text-wwwhite p-2 fontMarcellus btn1 btn--svg-small opacity-50 disabled pointer-events-none'}>Pagar</button>
               </div>
             }
           </div>
@@ -63,7 +89,7 @@ import '../storeStyles.css';
       {/* Botón para limpiar el carrito */}
       {/* <button onClick={handleClearCart}>Limpiar carrito</button> */}
 
-      <div className='w-1/4 flex items-center justify-center'>
+      <div className='w-1/4 flex items-center justify-center trunkCheckout'>
         <img src="https://images2.imgbox.com/fd/6c/G7RaQ7gq_o.png" alt="Trunk" />
       </div>
     </div>

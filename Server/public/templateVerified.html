@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="./styles.css"> -->
+  <title>Account verification</title>
+  <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    p, a, h1, h2, h3, h4, h5, h6 {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    h1 {font-size: 40px !important;}
+    h2 {font-size: 25px !important;}
+    h3 {font-size: 18px !important;}
+    h4 {font-size: 16px !important;}
+    p, a {font-size: 15px !important;}
+
+    .containerDatos {
+      font-size: 1.1rem;
+      font-weight: bolder;
+    }
+    .containerVerificacion {
+      border:solid 1px transparent;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body style="background-color: rgb(234,224,213); display: flex; flex-direction: column; flex-wrap: wrap;">
+  <header style="background-color: rgb(105,35,35); color: white; padding: 10px 20px; width: 100%; text-align: center; display: flex; justify-content: space-between; flex-wrap: wrap;">
+    <h1 class="h1">Account verification</h1>
+    <img src="https://res.cloudinary.com/dl6khxkkb/image/upload/v1688067068/MisPruebas/LogoWizardingWares.png" alt="Logo Wizarding Wares" style="width: 100px;">
+    <div style="border: solid 1px transparent; width: 18.75rem;"></div>
+  </header>
+  <div class="containerDatos">
+    <p>{email}</p>
+    <p>{fechaActual}</p>
+  </div>
+  <hr />
+  <div class="containerVerificacion">
+    <h2>{verificacion}</h2>
+  </div>
+</body>
+</html>

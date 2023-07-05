@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changePage } from "../../../redux/userSlice"
+import "../../../index.css"
 
 const Paginate = () => {
     const dispatch = useDispatch();
@@ -9,6 +10,10 @@ const Paginate = () => {
 
     const handleChange = (pageNumber) => {
         dispatch(changePage(pageNumber));
+    }
+
+    if (products.length === 0) {
+        return null;
     }
 
     return (
