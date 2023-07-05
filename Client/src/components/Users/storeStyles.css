@@ -225,6 +225,8 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
 .storeLoginForm{
   height: 75vh;
 }
+
+
 .storeComponent input[type="radio"] {
   position: absolute;
   opacity: 0;
@@ -307,6 +309,11 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
   font-weight: 500;
 }
 
+@media (max-width: 900px) {
+  .patas{
+    display: none;
+  }
+}
 
 @media (max-width: 768px) {
   .storeComponent .fotoFondoDetail {
@@ -319,5 +326,14 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
     width: 250px; 
     height: 70px; 
     object-fit: cover;
+  }
+  .infoPurchIndivBig{
+    display: none;
+  }
+  .formLogin{
+    scale: 0.9
+  }
+  .storeComponent .formRegister{
+    width: 19rem;
   }
 }

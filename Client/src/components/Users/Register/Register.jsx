@@ -42,7 +42,7 @@ const Register = () => {
         let errors = {};
         const { name, email, password, confirmPassword } = input;
         if (!/^[a-zA-Z áéíóúÁÉÍÓÚñÑ\s]*$/.test(name)) {
-          errors.name = 'El nombre no puede contener carácteres especiales';
+          errors.name = 'El nombre no puede contener caracteres especiales';
         } else if (name.length < 3) {
           errors.name = 'El nombre debe tener al menos tres letras de longitud!';
         } else if(!email.trim() || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
@@ -82,7 +82,7 @@ const handleSubmit = async (event) => {
         <div className="storeComponent h-screen flex">
            <div className="w-full mx-auto flex items-center justify-center my-8">
             <div>
-                <form onSubmit={handleSubmit} className="bg-white p-12 rounded shadow-md max-w-sm">
+                <form onSubmit={handleSubmit} className="bg-white p-12 rounded shadow-md w-96 formRegister">
                     <h4 className="fontMarcellus text-2xl uppercase font-bold">Crear usuario</h4>
                     <div className="formBox fontEB">
 
@@ -101,7 +101,7 @@ const handleSubmit = async (event) => {
                             
                         </div>
                         <div>
-                            {errors.name && (<span className="flex text-brown-600 w-2/3 mx-auto text-red-400">{errors.name}</span>)}
+                            {errors.name && (<span className="flex text-brown-600 w-2/3 mx-auto text-red-400 text-xs">{errors.name}</span>)}
                         </div>
                         
                         <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
@@ -118,7 +118,7 @@ const handleSubmit = async (event) => {
                             </label>
                         </div>
                         <div>
-                            {errors.email && (<span className="flex text-brown-600 w-2/3 mx-auto   text-red-400">{errors.email}</span>)}
+                            {errors.email && (<span className="flex text-brown-600 w-2/3 mx-auto text-red-400 text-xs">{errors.email}</span>)}
                         </div>
                         
                         <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
@@ -135,7 +135,7 @@ const handleSubmit = async (event) => {
                             </label>
                         </div>
                         <div>
-                            {errors.password && (<span className="flex text-brown-600 w-2/3 mx-auto   text-red-400">{errors.password}</span>)}
+                            {errors.password && (<span className="flex text-brown-600 w-2/3 mx-auto text-red-400 text-xs">{errors.password}</span>)}
                         </div>
                         
                         <div className="mb-2 md:mt-6 lg:mt-4 w-5/6 mx-auto">
@@ -152,7 +152,7 @@ const handleSubmit = async (event) => {
                             </label>
                         </div>
                         <div>
-                            {errors.confirmPassword && (<span className="text-brown-600 w-2/3 mx-auto   text-red-400">{errors.confirmPassword}</span>)}
+                            {errors.confirmPassword && (<span className="text-brown-600 w-2/3 mx-auto text-red-400 text-xs">{errors.confirmPassword}</span>)}
                         </div>
                         
                     </div>
