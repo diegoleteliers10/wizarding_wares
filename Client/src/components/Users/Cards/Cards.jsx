@@ -28,11 +28,6 @@ const Cards = () => {
 
     return (
         <div className='storeComponent p-8'>
-           {searchTerm && (
-        <h2 className="fontMarcellus">
-          Se muestran resultados de búsqueda de: " {searchTerm} "
-        </h2>
-      )}
             {categoryName != '' ?
             <h2 className='fontMarcellus'>{categoryName}</h2>
             :null
@@ -45,6 +40,12 @@ const Cards = () => {
             <Row xs={1} md={2} className="g-4">
                 <FilterStore/>
             </Row>
+            {searchTerm && (
+                <h3 className="fontMarcellus">
+                 Se muestran resultados de búsqueda de: " {searchTerm} "
+                </h3>
+            )}
+            <br />
             <Row xs={1} md={2} className="g-4 justify-center">
                 {pageItems.map((product) => (
                     <Card
@@ -63,8 +64,8 @@ const Cards = () => {
             </div>
             {
                 (!products.length && (filterPrice.length || filterCategory || search)) && 
-                <div className='noProductos flex items-center justify-center'>
-                    <h1>No hay productos disponibles con esos criterios</h1>
+                <div className='noProductos flex items-center justify-center fontMarcellus'>
+                    <h2>No hay productos disponibles con esos criterios</h2>
                 </div>
             }
         </div>
