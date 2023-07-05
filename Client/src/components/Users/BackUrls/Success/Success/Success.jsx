@@ -3,17 +3,20 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getCookie from "../../../../../hooks/getCookie";
 import { getUserAddress, createPurchase, getWebhook } from "../../../../../redux/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Success = () => {
     const { userAddress } = useSelector((state) => state.user);
-    const clientId  = useSelector((state) => state.user.clientId)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const status = searchParams.get("status");
+    const merchant_order_id = searchParams.get("merchant_order_id");
     const userInfoUnparsed = getCookie('userInfo');
+    const [paymentApproved, setPaymentApproved] = useState(false);
     const [myOrder, setOrder] = useState();
     const [userId, setUserId] = useState();
-    const [hasClientId, setHasClientId] = useState("");
     const [user, setUser] = useState({
         name: "",
         email: "", 
@@ -35,10 +38,19 @@ const Success = () => {
     }, 0);
 
     useEffect(() => {
-      // if(!clientId) {
-        //     navigate('/')
-        // }  
-    }, [])
+        
+    
+        if (status === "approved" && merchant_order_id) {
+          // El estado es aprobado, realizar acciones adicionales aquí
+          setPaymentApproved(true);
+        } else {
+          // El estado no es aprobado, realizar acciones adicionales aquí
+          setPaymentApproved(false);
+          navigate('/')
+        }
+        
+      }, [location.search]);
+    
 
     useEffect(() => {
         if (userInfoUnparsed) {
@@ -60,7 +72,7 @@ const Success = () => {
     }, [userId]);
 
     useEffect(() => {
-        if (userAddress && userId) {
+        if (userAddress && userId && paymentApproved) {
             const addressId = userAddress?.addresses?.[0]?.User_Address?.addressAddressId;
             setAddress({
                 ...address,
@@ -91,15 +103,17 @@ const Success = () => {
                 addressId: addressId,
                 purchaseItems: order
             };
-            dispatch(createPurchase(purchase));
+
+                dispatch(createPurchase(purchase));
+
             
         }
         
     }, [userAddress, userId,]);
 
-    // if(!clientId){
-    //     return null
-    // }
+    if(!paymentApproved){
+        return null
+    }
 
     return (
         <div className="p-4">
