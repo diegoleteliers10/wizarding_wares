@@ -2,13 +2,13 @@ const { Product } = require('../models/relationship/relationship');
 
 const editProduct = async (req, res) => {
     const { id } = req.params;
-    const { name, description, price, stock, categoryId } = req.body;
+    const { name, description, price, stock, categoryId, isActive } = req.body;
    
     try {
         const product = await Product.findByPk(id);
         if (product) {
 
-            const propertiesToUpdate = { name, description, price, stock, categoryCategoryId: categoryId };
+            const propertiesToUpdate = { name, description, price, stock, categoryCategoryId: categoryId, isActive };
             // Actualizar SOLO las propiedades proporcionadas en la solicitud
         for (const key in propertiesToUpdate) {
             if (propertiesToUpdate[key] !== undefined) {
