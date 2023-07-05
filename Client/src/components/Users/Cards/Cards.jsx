@@ -40,14 +40,7 @@ const Cards = () => {
 
     return (
         <div className='storeComponent p-8'>
-           {searchTerm && (
-            <div>
-                <h2 className="fontMarcellus mb-2">
-                  Se muestran resultados de búsqueda de: " {searchTerm} "
-                </h2>
-                <p className='fontMarcellus mb-4'> Ver <span className='hover:text-wwmaroon transition-all ease-in underline cursor-pointer' onClick={handleAllProducts}>todos los productos</span></p>
-            </div>
-      )}
+           
             {categoryName != '' ?
             <h2 className='fontMarcellus'>{categoryName}</h2>
             :null
@@ -66,8 +59,19 @@ const Cards = () => {
             }
             
             <Row xs={1} md={2} className="g-4">
-                <FilterStore/>
+                {
+                    products.length &&
+                    <FilterStore/>                    
+                }
             </Row>
+            {searchTerm && (
+            <div>
+                <h2 className="fontMarcellus mb-2">
+                  Se muestran resultados de búsqueda de: " {searchTerm} "
+                </h2>
+                <p className='fontMarcellus mb-4'> Ver <span className='hover:text-wwmaroon transition-all ease-in underline cursor-pointer' onClick={handleAllProducts}>todos los productos</span></p>
+            </div>
+            )}
             <Row xs={1} md={2} className="g-4 justify-center">
                 {pageItems.map((product) => (
                     <Card
