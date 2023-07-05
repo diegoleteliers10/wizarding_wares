@@ -31,7 +31,7 @@ export const getProducts = createAsyncThunk(
       const response = await axios.get('/allProducts');
       return response.data;
     } catch (error) {
-      console.error('Error al obtener los productos:', error);
+      //console.error('Error al obtener los productos:', error);
       throw error;
     }
   }
@@ -51,7 +51,7 @@ export const filterCategory = createAsyncThunk(
       const response = await axios.get(`/filteredProducts?category=${filter}`);
       return [filter, response.data];
     } catch (error) {
-      console.error('Error obtaining filtered products', error);
+      //console.error('Error obtaining filtered products', error);
       throw error;
     }
   }
@@ -72,7 +72,7 @@ export const filterPrice = createAsyncThunk(
     const response = await axios.get(`/filteredProducts?minPrice=${minPrice}&maxPrice=${maxPrice}`);
     return [minPrice, maxPrice, response.data];
   } catch (error) {
-    console.error('Error obtaining filtered products', error);
+    //console.error('Error obtaining filtered products', error);
     throw error;
   }
 });
@@ -84,7 +84,7 @@ export const searchByName = createAsyncThunk(
       const response = await axios.get(`/searchProduct?name=${searchQuery}`);
       return [searchQuery, response.data];
     } catch (error) {
-      console.error('Error obtaining filtered products', error);
+      //console.error('Error obtaining filtered products', error);
       throw error;
     }
   }
@@ -134,7 +134,7 @@ export const getPurchases = createAsyncThunk(
       const response = await axios.get(`/getAllPurchById/${userId}`)
       return response.data
     } catch (error) {
-      console.error('Error obtaining Purchases', error);
+      //console.error('Error obtaining Purchases', error);
       throw error;
     }
   }
@@ -153,7 +153,7 @@ export const getProductReviews = createAsyncThunk(
       const response = await axios.get(`/detailProduct/${productId}`);
       return response.data;
     } catch (error) {
-      console.error('Error al obtener las reviews del producto:', error);
+      //console.error('Error al obtener las reviews del producto:', error);
       throw error;
     }
   }
@@ -166,7 +166,7 @@ export const createProductReview = createAsyncThunk(
       // console.log(response.data)
       return response.data;
     } catch (error) {
-      console.error('Error al crear la review:', error);
+      //console.error('Error al crear la review:', error);
       throw error;
     }
   }
@@ -191,7 +191,7 @@ export const createPreference = createAsyncThunk('user/createPreference',
     }
     return body;
     } catch (error) {
-        console.log(error);
+        //console.log(error);
     }
   }
 )
@@ -232,7 +232,7 @@ export const userSlice = createSlice({
       })
       .addCase(getProducts.rejected, (state, action) => {
         state.loading = false;
-        console.error('Error al obtener los productos:', action.error);
+        //console.error('Error al obtener los productos:', action.error);
       })
       .addCase(getProducts.pending, (state, action) => {
         state.loading = true;
@@ -248,7 +248,7 @@ export const userSlice = createSlice({
       })
       .addCase(filterCategory.rejected, (state, action) => {
         state.loading = false;
-        console.error('Error obtaining filtered products ', action.error);
+        //console.error('Error obtaining filtered products ', action.error);
       })
       .addCase(filterCategory.pending, (state, action) => {
         state.loading = true;
@@ -262,7 +262,7 @@ export const userSlice = createSlice({
       })
       .addCase(filterPrice.rejected, (state, action) => {
         state.loading = false;
-        console.error('Error obtaining filtered products ', action.error);
+        //console.error('Error obtaining filtered products ', action.error);
       })
       .addCase(sortByNameAscending, (state) => {
         state.products.sort((a, b) => a.name.localeCompare(b.name));
@@ -286,11 +286,12 @@ export const userSlice = createSlice({
         state.search = action.payload[0];
         state.products = action.payload[1];
         state.filterCategory = '';
+        //console.log(action.payload[0])
         state.searchTerm = action.payload[0]; // Establecer el término de búsqueda en el estado
       })
       .addCase(searchByName.rejected, (state, action) => {
         state.loading = false;
-        console.error('Error obtaining searched products ', action.error);
+        //console.error('Error obtaining searched products ', action.error);
       })
       .addCase(searchByName.pending, (state, action) => {
         state.loading = true;
@@ -312,7 +313,8 @@ export const userSlice = createSlice({
         state.cartProducts = [];
       })
       .addCase(setSearchTerm, (state) => {
-        state.searchTerm = ''
+        state.searchTerm = '';
+        state.filterCategory= '';
       })
       .addCase(increaseQuantity.fulfilled, (state, action) => {
         state.loading = false
@@ -340,7 +342,7 @@ export const userSlice = createSlice({
       })
       .addCase(getPurchases.rejected, (state, action) => {
         state.loading = false;
-        console.error("Error obtaining Purchases: ", action.error);
+        //console.error("Error obtaining Purchases: ", action.error);
       })
       .addCase(getPurchases.pending, (state, action) => {
         state.loading = true;

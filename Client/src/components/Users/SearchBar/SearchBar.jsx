@@ -23,16 +23,15 @@ const SearchBar = () => {
         dispatch(searchByName(search));
         setSearch('');
         navigate('/home');
-        dispatch(setSearchTerm(search)); // Establecer el término de búsqueda en el estado
       };
 
       const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
           event.preventDefault();
+          console.log(search)
           dispatch(searchByName(search));
           setSearch('');
           navigate('/home');
-          dispatch(setSearchTerm(search)); // Establecer el término de búsqueda en el estado;
         }
     }
     return (
