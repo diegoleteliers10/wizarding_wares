@@ -309,6 +309,11 @@ border-bottom: 0.5px solid rgba(34, 51, 59, 0.5);
   font-weight: 500;
 }
 
+.storeComponent .formBox input{
+  font-family: 'EB Garamond', serif;
+  border: 1px solid rgba(128, 128, 128, 0.635) !important;
+}
+
 @media (max-width: 900px) {
   .patas{
     display: none;
