@@ -62,7 +62,7 @@ const transporter = nodemailer.createTransport({
 // --------------------------------------
 const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
 
-  const indicesAdmin = [0, 2, 4, 5, 6, 8, 10, 12, 14];
+  const indicesAdmin = [0, 2, 4, 5, 6, 8, 10, 12, 14, 16, 19, 21];
 
 
   let receptor;
@@ -232,6 +232,132 @@ const enviarNotificacion = (cualNotificacion, name, email, mensaje) => {
                      a sido Eliminada de nuestra plataforma. Y ademas por lo pronto<br/>
                      la cuenta: ${email}; A la fecha de: ${mensaje.date}, a iniciado el proceso de borrado de toda informacion en nuestras base de datos<br/>
                      Si tienes alguna duda o consulta, te pedimos que te contactes con nosotros a travez del<br /> 
+                     Email: ${mensaje.mailWW}.   
+                     </span>`,
+    },
+    {
+      indice: 16,
+      role: "admin",
+      subject: "Purchase made at Wizarding Wares",
+      titulo: "Notificacion De Venta Realizada Satisfactoriamente",
+      notificacion: `<span>Hola Administrador. te informamos que el usario <strong>${name}</strong><br />
+                    con userId: <strong>${mensaje.userUserId}</strong>, a la fecha de hoy: <strong>${mensaje.date}</strong>, realizo una compra en la plataforma<br/>
+                    El id de la compra es: <strong>${mensaje.purchaseId}</strong>.<br/> 
+                    La cantidad de productos<br/> 
+                    vendidos entre distintos articulos es: <strong>${mensaje.cantProductos}</strong><br /> 
+                    Y el precio unitario<br/>
+                    entre los distintos articulos es: <strong>${mensaje.precioU}</strong>. <br/>
+                    Total de la venta es: <strong>${mensaje.totalCompra}</strong><br/>
+                    La direccion ingresada para la entrega es:<br/> 
+                    <strong> Calle ${mensaje.address.street}: ${mensaje.address.number}, Codigo Postal: ${mensaje.address.zipCode}<br/>
+                    Telefono: ${mensaje.address.phoneNumber}</strong>.<br /> 
+                    El estado de la entrega esta: <strong>${mensaje.status}</strong></span>`,
+    },
+    {
+      indice: 17,
+      role: "user",
+      subject: "Purchase made at Wizarding Wares",
+      titulo: "Notificacion de Compra Realizada Satisfactoriamente",
+      notificacion: `<span>Hola <strong>${name}</strong> <br />
+                     Esperando que te encuentres bien. 
+                     Nos estamos comunicando contigo para contarte que tu compra se realizo satisfactoriamente.<br />
+                     El id de tu compra es: <strong>${mensaje.purchaseId}</strong>.<br/>
+                     Fecha de compra: ${mensaje.date}.<br/>
+                     Cantidad de articulos<br/> 
+                     entre diferentes productos es: ${mensaje.cantProductos}<br/>
+                     Precio unitario entre<br/>
+                     direferentes articulos es: ${mensaje.precioU}<br/>
+                     Direccion de correo electronico: ${email}<br />
+                     Direccion acordada para la entrega es:<br/> 
+                     - Calle: ${mensaje.address.street}<br>
+                     - Numero: ${mensaje.address.number}<br/>
+                     - Codigo Postal: ${mensaje.address.zipCode}<br/>
+                     - Telefono: ${mensaje.address.phoneNumber}.<br/>
+                    <br/>
+                    <br/>
+                    TOTAL CANCELADO: <strong>${mensaje.totalCompra}</strong><br/>
+                    Estado actual de la entrega: <strong>${mensaje.status}</strong><br /> 
+                    <br />
+                     Si tienes alguna duda o consulta, te pedimos que te contactes con nosotros a travez del<br /> 
+                     Email: ${mensaje.mailWW}.   
+                     </span>`,
+    },
+    {
+      indice: 18,
+      role: "user",
+      subject: "Product on the Way",
+      titulo: "Notificacion 'Producto en Camino'",
+      notificacion: `<span>Hola ${name} <br />
+                     Esperando que te encuentres bien.<br/> 
+                     Nos estamos comunicando contigo para contarte que el estado actual de tus productos.<br />
+                     paso a fase de: <strong>${mensaje.status}</strong><br />
+                     Este proceso comenzo hoy <strong>${mensaje.date}</strong>.<br/>
+                     Tiempo estimado para la entrega 3 horas.
+                    
+                     Si tienes alguna duda o consulta, te pedimos que te contactes con nosotros a travez del<br /> 
+                     Email: ${mensaje.mailWW}.   
+                     </span>`,
+    },
+    {
+      indice: 19,
+      role: "admin",
+      subject: "Product Delivered",
+      titulo: "Notificacion de Cuenta Eliminada",
+      notificacion: `<span>Hola Administrador. te informamos que se realizo la entrega de los productos al usuario <strong>${name}</strong><br />
+                    con userId: <strong>${mensaje.userId}</strong>. A la fecha de hoy: <strong>${mensaje.date}</strong><br/>
+                    El id de la compra es: <strong>${mensaje.purchaseId}</strong>.<br/> 
+                    La cantidad de productos<br/> 
+                    entregados entre distintos articulos es: <strong>${mensaje.cantProductos} productos</strong><br /> 
+                
+                    La direccion en que se entrego es:<br/> 
+                    <strong> Calle ${mensaje.address.street}: ${mensaje.address.number}, Codigo Postal: ${mensaje.address.zipCode}<br/>
+                    Telefono: ${mensaje.address.phoneNumber}</strong>.<br /> 
+                    El estado de la entrega esta: <strong>${mensaje.status}</strong></span>`,
+    },
+    {
+      indice: 20,
+      role: "user",
+      subject: "Product Delivered",
+      titulo: "Notificacion de Producto Entregado",
+      notificacion: `<span>Hola ${name} <br />
+                     Esperando que te encuentres bien.<br/> 
+                     Nos estamos comunicando contigo para confirmar que recibistes tus productos.<br />
+                     Estado de entrega: <strong>${mensaje.status}</strong><br />
+                     fecha productos entregados: <strong>${mensaje.date}</strong>.<br/>
+                     Direccion de entrega:<br/>
+                     - Calle: ${mensaje.address.street}<br/>
+                     - Numero: ${mensaje.address.number}<br/>
+                     - Codigo Postal: ${mensaje.address.zipCode}<br/>
+                    
+                     Si tienes alguna duda o consulta, te pedimos que te contactes con nosotros a travez del<br /> 
+                     Email: ${mensaje.mailWW}.   
+                     </span>`,
+    },
+    {
+      indice: 21,
+      role: "admin",
+      subject: "Product Delivery Cancelled",
+      titulo: "Notificacion de Cancelacion de Entrega",
+      notificacion: `<span>Hola administrador se le notifico al usuario: ${name} <br />
+                     La cancelacion de la entrega de su(s) Producto(s).<br />
+                     A la fecha: ${mensaje.date}, queda en estado: ${mensaje.status} la entrega de lo(s) producto(s)<br/>
+                     al usuario con id: <strong>${mensaje.userId}</strong><br/>
+                     Id de la compra: ${mensaje.purchaseId}   
+                     </span>`,
+    },
+    {
+      indice: 22,
+      role: "user",
+      subject: "Product Delivery Cancelled",
+      titulo: "Notificacion de Cancelacion de Entrega",
+      notificacion: `<span>Hola ${name} <br />
+                     Esperando que te encuentres bien. 
+                     Nos estamos comunicando contigo para contarte que por decisión de nuestro equipo.<br />
+                     La fecha programada para la entrega de tu(s) producto(s) <br/>
+                     A sido cancelada hoy: ${mensaje.date}<br />
+                     El Estado de Entrega se modifico a face: ${mensaje.status}<br/>
+                     <br/>
+                     Si tienes alguna duda o consulta, sobre lo que a pasado, te pedimos que te contactes con nosotros a travez del<br /> 
                      Email: ${mensaje.mailWW}.   
                      </span>`,
     },
