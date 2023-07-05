@@ -31,6 +31,7 @@ const Users = ({ user }) => {
 
   const handleFinalDelete =()=>{
     dispatch(finalDeleteUser(user.userId))
+    toast.success('Usuario eliminado con exito')
   }
 
   const handleConfirm = async () => {
@@ -38,7 +39,7 @@ const Users = ({ user }) => {
     await dispatch(deleteUser(userId));
     setPopUp(false);
     //si es para eliminar al usuario que aparezca un toast con usuario eliminado con exito
-    if(user.isActive) toast.success('Usuario eliminado con exito')
+    if(user.isActive) toast.success('Usuario desactivado con exito')
     if(!user.isActive) toast.success('Usuario re-activado con exito')
     //await dispatch(getallUsers());
     

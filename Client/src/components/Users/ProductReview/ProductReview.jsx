@@ -27,14 +27,14 @@ const ReviewList = ({productId}) => {
   
   return (
     reviews.length > 0?
-    <div className='-mt-20 btmBorder px-44'>
+    <div className='-mt-20 btmBorder text-center px-10 md:px-44 md:text-left'>
       <div>
-        <h3 className='fontMarcellus text-left font-bold text-4xl mb-8'>Reviews ({reviewCount})</h3>
+        <h3 className='fontMarcellus text-left font-bold text-2xl md:text-4xl mb-2 md:mb-8'>Reviews ({reviewCount})</h3>
       </div>
       {reviews.map((review, index) => (
         <div key={index}>
           <div className='flex items-baseline'>
-            <h6 className='fontEB text-2xl'>{review.user.name}</h6>
+          <h6 className='fontEB text-xl md:text-2xl'>{review.user.name}</h6>
             <div className='flex justify-center ml-4 text-2xl'>
               {[...Array(5)].map((_, starIndex) => {
                 const starClass =
@@ -55,7 +55,7 @@ const ReviewList = ({productId}) => {
       ))}
     </div>
     : 
-    <div className='-mt-20 btmBorder px-44 mb-8 border-none'>
+    <div className='-mt-20 btmBorder text-center px-10 md:px-44 md:text-left  mb-8 border-none'>
       
       <h5 className='flex fontMarcellus text-left text-wwmaroon opacity-80'><GiMagicBroom className='mr-2'/>El producto aún no ha sido calificado </h5>
     </div>

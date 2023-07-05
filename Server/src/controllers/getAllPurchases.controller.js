@@ -30,7 +30,14 @@ const getAllPurchase= async (req,res)=>{
         }
       ]
     });
-    res.status(200).json(purchases);
+
+    let existedPurchases = []
+    purchases.forEach(purchase => {
+      if(purchase.userUserId!==null){
+        existedPurchases.push(purchase)
+      }
+    })
+    res.status(200).json(existedPurchases);
   } catch (error) {
     res.status(500).json({message:error.message});
   }
