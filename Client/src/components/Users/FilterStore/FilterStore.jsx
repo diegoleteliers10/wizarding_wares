@@ -26,7 +26,7 @@ function FilterStore(props) {
   const categoryName = useSelector(state => state.user.filterCategory) || '';
 
   useEffect(() => {
-    if (currCategory.length > 0) {
+    if (currCategory.length > 0 || search !== '') {
       const filterCategoryElement = document.getElementById('filterCategory');
       if (filterCategoryElement) {
         filterCategoryElement.value = currCategory;
@@ -145,7 +145,7 @@ function FilterStore(props) {
 
   return (
     <div className={`mx-auto w-full flex justify-center items-center gap-1 storeComponent mb-4`}>
-      {categoryName === '' ? 
+      {categoryName === '' && search === '' ? 
       <div className={`inline-block ${styles.filterItem}`}>
         <button className="bg-wwbrown rounded-md hover:bg-wwmaroon transition-all text-wwwhite py-2 px-4" onClick={handleReset}>
           Reset
@@ -169,7 +169,7 @@ function FilterStore(props) {
           <option value="rateLowToHigh">Peor puntuación</option>
         </select>
       </div>
-      {(pathname === '/home' || pathname === 'search') && categoryName === '' && (
+      {(pathname === '/home' || pathname === 'search') && categoryName === '' && search === '' && (
         <div className={`inline-block appearance-none ${styles.filterItem}`}>
           {/* Filtro categoria */}
           <select
@@ -220,7 +220,7 @@ function FilterStore(props) {
           <option value="nameDescending">Nombre (Z-A)</option>
         </select>
       </div>
-      {categoryName === '' &&
+      {search === '' &&
       <div className={`${styles.dInherit}`}>
       <input type="number" placeholder="Min" className={`p-2 ${styles.bgInput}`} id="minPrice" />
       <input type="number" placeholder="Max" className={`p-2 ${styles.bgInput}`} id="maxPrice" />
