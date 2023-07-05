@@ -4,6 +4,7 @@ import { useState,useEffect } from 'react';
 import { filterCategory, getProducts, setSearchTerm } from '../../redux/userSlice';
 import Slider from "react-slick";
 import Cookies from 'js-cookie';
+import setCookie from '../../hooks/setCookie';
 import { BiSolidRightArrow } from 'react-icons/bi';
 
 import '../../components/Users/storeStyles.css'

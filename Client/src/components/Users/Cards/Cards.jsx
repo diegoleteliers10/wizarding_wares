@@ -31,6 +31,7 @@ const Cards = () => {
         //console.log(selectedCategory)
         if(selectedCategory) {
             dispatch(filterCategory(selectedCategory))
+            return;
         } else if (searchTerm){
             return;
         }

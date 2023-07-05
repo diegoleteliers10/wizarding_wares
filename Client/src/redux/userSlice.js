@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import removeCookie from '../hooks/removeCookie';
+import setCookie from '../hooks/setCookie';
 
 const initialState = {
   cartProducts: null,
@@ -242,6 +243,8 @@ export const userSlice = createSlice({
         state.products = action.payload[1];
         state.filterCategory = action.payload[0];
         state.searchTerm = ''
+        removeCookie('selectedCategory');
+        setCookie('selectedCategory', action.payload[0])
       })
       .addCase(filterCategory.rejected, (state, action) => {
         state.loading = false;
