@@ -23,20 +23,19 @@ const SearchBar = () => {
         dispatch(searchByName(search));
         setSearch('');
         navigate('/home');
-        dispatch(setSearchTerm(search)); // Establecer el término de búsqueda en el estado
       };
 
       const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
           event.preventDefault();
+          console.log(search)
           dispatch(searchByName(search));
           setSearch('');
           navigate('/home');
-          dispatch(setSearchTerm(search)); // Establecer el término de búsqueda en el estado;
         }
     }
     return (
-        <div className="relative">
+        <div className="relative scale-75 sm:scale-100" >
             <input
                 type="text"
                 name="search"

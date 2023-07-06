@@ -32,7 +32,7 @@ userRouter.put("/user/:userId", jwt.expressjwt({ secret: SECRET, algorithms: ['H
 });
 
 // Ruta Para Elimar Un Usuario ( Borrado Logico )
-userRouter.put("/user_delete/:userId", jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), async (req, res) => {
+userRouter.put("/user_delete/:userId", jwt.expressjwt({ secret: SECRET, algorithms: ['HS256'] }), async (req, res) => { 
   const { userId } = req.params;
   try {
     const result = await logicalUserDeletion(userId);

@@ -44,7 +44,7 @@ const createPurchase = async(req,res)=> {
      totalCompra += (elem.quantity * elem.price);
     });
 
-    const fecha = new Date;
+    const fecha = new Date();
     let name = user[0].name;
     let email = user[0].email;
     // Definimos las opciones de mensaje
@@ -53,7 +53,10 @@ const createPurchase = async(req,res)=> {
       purchaseId: purchase.dataValues.purchaseId,
       userUserId: purchase.dataValues.userUserId,
       addressAddressId: purchase.dataValues.addressAddressId,
-      address: direccion[0],
+      street: direccion[0].street,
+      number: direccion[0].number,
+      zipCode: direccion[0].zipCode,
+      phoneNumber: direccion[0].phoneNumber,
       date: `${diasSemana[fecha.getDate()]}, ${fecha.toLocaleDateString()} a las ${fecha.toLocaleTimeString()}`,
       status: estados[purchase.dataValues.statusStatusId - 1],
       cantProductos: cantProductos,

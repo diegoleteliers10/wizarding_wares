@@ -9,7 +9,7 @@ const userFinalDelete = async (req, res) => {
         // Buscamos el usuario por su userId
         const user = await User.findAll({where:{userId: id,}});
 
-        const fecha = new Date;
+        const fecha = new Date();
         // Definimos las opciones de mensaje
         const mensaje = {
             userId: user[0].userId,
