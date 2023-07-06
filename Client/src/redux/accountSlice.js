@@ -107,7 +107,7 @@ export const accountSlice = createSlice({
       //LOGIN GOOGLE
       .addCase(loginGoogle.fulfilled, (state, action) => {
         state.user = action.payload.userInfo
-        console.log(action.payload.userInfo)
+        //console.log(action.payload.userInfo)
         removeCookie('userInfo');
         setCookie('userInfo', JSON.stringify(action.payload.userInfo));
         removeCookie('userToken');
@@ -122,7 +122,7 @@ export const accountSlice = createSlice({
         state.loading = false
       })
       .addCase(loginGoogle.rejected, (state, action) => {
-        console.log(action)
+        //console.log(action)
         state.message= 'No hay una cuenta de Wizarding Wares con ese email'
         state.loading = false
       })

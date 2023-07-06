@@ -10,7 +10,7 @@ const Footer = () => {
     navigate('/home')
 }
   return (
-    <div className='bg-wwbrown w-screen footerWw text-wwwhite'>
+    <div className='bg-wwbrown w-screen footerWw text-wwwhite text-xs sm:text-lg'>
       <div className='flex'>
         <div className='flex w-1/3 items-center justify-center'>
         <div>
