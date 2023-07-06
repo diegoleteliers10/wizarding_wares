@@ -25,18 +25,21 @@ const Detail = () => {
   const sessionStorageKey = `product_${id}`;
   const [size, setSize] = useState('');
   const [error, setError] = useState('');
+  const [stockLimit, setStockLimit] = useState('')
 
   const handleIncreaseQuantity = () => {
     if (quantity < product.stock){
     setQuantity(quantity + 1);
     }else{
-      window.alert('La cantidad seleccionada no puede sobrepasar la cantidad en stock!')
+      setStockLimit('1')
+      //window.alert('La cantidad seleccionada no puede sobrepasar la cantidad en stock!')
     }
   };
 
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
+      setStockLimit('')
     }
   };
 
@@ -163,6 +166,7 @@ const Detail = () => {
               >
                 Añadir al carrito
               </button>
+              
               {
                 isProductInCart && showProductInCartMessage && (
                   <p className="product-in-cart-message">¡Tu producto te esta esperando en el carrito!</p>
@@ -172,6 +176,14 @@ const Detail = () => {
             </div>
           </div>
           <div className="mt-8">
+          {
+                stockLimit !== '' &&
+                <div>
+                <h5 className="font-medium text-wwmaroon fontEB text-sm">
+                ¡La cantidad seleccionada no puede sobrepasar la cantidad en stock!
+                </h5>
+              </div>
+              }
             {
               !loggedIn && 
               <div>
