@@ -35,7 +35,7 @@ const SearchBar = () => {
         }
     }
     return (
-        <div className="relative">
+        <div className="relative scale-75 sm:scale-100" >
             <input
                 type="text"
                 name="search"
