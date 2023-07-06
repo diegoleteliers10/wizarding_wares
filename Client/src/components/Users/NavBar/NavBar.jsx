@@ -23,7 +23,8 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAdmin = getCookie("admin");
-
+  console.log(isAdmin);
+  
   useEffect(() => {
     const userInfo = getCookie("userInfo");
 
@@ -77,6 +78,7 @@ const NavBar = () => {
   };
 
   const handleAdmin = () => {
+    console.log('admin')
     navigate("/admin");
   };
 
@@ -119,7 +121,10 @@ const NavBar = () => {
             alt="Wizarding Wares"
             className="cursor-pointer w-12"
           />
-          <button onClick={handleAdmin} className="text-wwwhite text-sm">{isAdmin && 'Admin'}</button>
+          {
+            isAdmin &&
+            <button className="text-wwwhite text-sm z-10"><a href="/admin" className="text-wwwhite hover:text-wwwhite no-underline">Admin</a></button>
+          }
         </div>
         </Navbar.Brand>
         <div className="mr-auto ml-8">
