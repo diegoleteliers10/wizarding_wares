@@ -4,7 +4,7 @@ import FilterStore from '../FilterStore/FilterStore';
 import { useSelector, useDispatch } from 'react-redux';
 import '../storeStyles.css'; 
 import Paginate from '../Paginate/Paginate';
-import { getProducts, filterCategory } from '../../../redux/userSlice';
+import { getProducts, filterCategory, searchByName } from '../../../redux/userSlice';
 import { useEffect } from 'react';
 import getCookie from '../../../hooks/getCookie';
 
@@ -28,14 +28,18 @@ const Cards = () => {
     };
 
     useEffect(()=>{
-        //console.log(selectedCategory)
-        if(selectedCategory) {
+        //console.log('refresh')
+        //console.log(search);
+        if(searchTerm) {
+            //console.log(searchTerm)
+            searchByName(searchTerm)
+            return;
+        } else if (selectedCategory){
             dispatch(filterCategory(selectedCategory))
             return;
-        } else if (searchTerm){
-            return;
+        } else if(products.length === 0){
+            dispatch(getProducts());
         }
-        dispatch(getProducts());
         
     }, [])
 
