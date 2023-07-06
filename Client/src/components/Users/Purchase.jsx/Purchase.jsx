@@ -53,8 +53,8 @@ const Purchase = ({ id, image, name, price, status }) => {
       <div>
       <button
   onClick={handleReview}
-  disabled={status === 'Cancelado' || reviewed ? 'disabled' : ''}
-  className={(status !== 'Cancelado' && !reviewed) ? `btn1 btn--svg-small` : 'btn1 btn--svg-small pointer-events-none opacity-50'}
+  disabled={status !== 'Entregado' || reviewed ? 'disabled' : ''}
+  className={(status === 'Entregado' && !reviewed) ? `btn1 btn--svg-small` : 'btn1 btn--svg-small pointer-events-none opacity-50'}
 >
   Calificar producto
 </button>
